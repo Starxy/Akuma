@@ -116,15 +116,15 @@
 <meta property="og:site_name" content="Starxy&#39;s Blog">
 <meta property="og:description" content="Git 基础 首先理解以下概念对之后的版本和分支管理有很大的帮助该部分内容来自 git-scm 中文手册  直接记录快照，而非差异比较Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ddns.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
-<meta property="og:image" content="http://ddns.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png">
-<meta property="og:image" content="http://ddns.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png">
-<meta property="og:image" content="http://ddns.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png">
-<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta property="og:image" content="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png">
+<meta property="og:updated_time" content="2019-07-09T02:43:25.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Git 进行有效的项目管理">
 <meta name="twitter:description" content="Git 基础 首先理解以下概念对之后的版本和分支管理有很大的帮助该部分内容来自 git-scm 中文手册  直接记录快照，而非差异比较Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和">
-<meta name="twitter:image" content="http://ddns.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
+<meta name="twitter:image" content="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
 
 
 
@@ -417,7 +417,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Starxy">
       <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
-      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+      <meta itemprop="image" content="http://app.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -471,7 +471,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+                <time title="修改时间：2019-07-09 10:43:25" itemprop="dateModified" datetime="2019-07-09T10:43:25+08:00">2019-07-09</time>
               
             
           </span>
@@ -536,9 +536,9 @@
 <p>首先理解以下概念对之后的版本和分支管理有很大的帮助<br>该部分内容来自 <a href="https://git-scm.com/book/zh" target="_blank" rel="noopener">git-scm 中文手册</a></p>
 </blockquote>
 <h2 id="直接记录快照，而非差异比较"><a href="#直接记录快照，而非差异比较" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h2><p>Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。<br>除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。</p>
-<p><img src="http://ddns.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png" alt="deltas"></p>
+<p><img src="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png" alt="deltas"></p>
 <p>Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 Git 对待数据更像是一个<strong>快照流</strong>。</p>
-<p><img src="http://ddns.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png" alt="snapshots"></p>
+<p><img src="http://app.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png" alt="snapshots"></p>
 <p>在之后讨论分支管理的时候，就能体会到这种管理方式带来的益处</p>
 <a id="more"></a>
 <h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><p>Git 有三种状态，：已提交（committed）、已修改（modified）和已暂存（staged）。 已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
@@ -546,8 +546,8 @@
 <p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。是中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。<br>你可以试着复制一个项目的 .git 文件夹到一个空文件夹中，执行 <code>git checkout *</code> 你就能发现 git 的版本控制带来的便利</p>
 <p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。</p>
 <p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域。</p>
-<h2 id="Git-的分支"><a href="#Git-的分支" class="headerlink" title="Git 的分支"></a>Git 的分支</h2><p>上面提到了 Git 保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。在提交时，Git 会保存一个提交对象（commit object），该提交对象会存放一个指向暂存内容的指针。当然该对象还包含了作者信息、commit 信息、以及指向其父对象的指针。在经过了多次提交之后，每次的提交对象会根据其父对象指针链在一起形成一个链表结构。<br><img src="http://ddns.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png" alt="commits-and-parents"></p>
-<p>而我们所用创建的新的分支其实就是创建了一个指向当前提交状态的指针。具体我们在哪个分支上。是由一个叫做 <code>HEAD</code> 的特殊指针来指向对应当前分支的分支指针。<br><img src="http://ddns.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png" alt="branch-and-history"></p>
+<h2 id="Git-的分支"><a href="#Git-的分支" class="headerlink" title="Git 的分支"></a>Git 的分支</h2><p>上面提到了 Git 保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。在提交时，Git 会保存一个提交对象（commit object），该提交对象会存放一个指向暂存内容的指针。当然该对象还包含了作者信息、commit 信息、以及指向其父对象的指针。在经过了多次提交之后，每次的提交对象会根据其父对象指针链在一起形成一个链表结构。<br><img src="http://app.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png" alt="commits-and-parents"></p>
+<p>而我们所用创建的新的分支其实就是创建了一个指向当前提交状态的指针。具体我们在哪个分支上。是由一个叫做 <code>HEAD</code> 的特殊指针来指向对应当前分支的分支指针。<br><img src="http://app.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png" alt="branch-and-history"></p>
 <p>当在两个不同的分支上进行工作时，当前的分支指针和 <code>HEAD</code> 指针会向前移动，而相对应的，其他分支（指针）会落后于该分支（指针）。在此时当我们进行 <code>merge</code> 合并操作时，实际上是把要合并的分支指针指向要对应的分支指针即可。</p>
 <p>而进行检出操作时，也同样是将当前指针指向对应的分支，然后将工作区恢复成对应分支所指向的快照内容<br>所以说，由于 Git 的分支本质上是包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符），如此的简单能不快吗？</p>
 <h1 id="Git-的分支管理最佳实践"><a href="#Git-的分支管理最佳实践" class="headerlink" title="Git 的分支管理最佳实践"></a>Git 的分支管理最佳实践</h1><h2 id="主干分支"><a href="#主干分支" class="headerlink" title="主干分支"></a>主干分支</h2><blockquote>
@@ -674,7 +674,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+              <img class="site-author-image" itemprop="image" src="http://app.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
             
               <p class="site-author-name" itemprop="name">Starxy</p>
               <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
