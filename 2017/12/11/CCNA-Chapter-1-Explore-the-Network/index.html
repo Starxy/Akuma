@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基础网络概念在计算机网络中，设备之间通过数据链路交换数据，节点之间的链接由网线或者无线来建立。简单的说计算机网络连接两台或多台计算机进行通信的系统。 计算机网络可以按照覆盖范围分类也可按照不同节点之间的功能关系（网络架构）分类。 计算机网络可以看作成一个拓扑结构，分为星型、环形等等 相关的概念内容还有，网络性能，其中包括：服务质量（QoS），网络阻塞，网络恢复能力；组成硬件，传输媒介，网络协议等等">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 1: Explore the Network">
+<meta property="og:url" content="http://starxy.cc/2017/12/11/CCNA-Chapter-1-Explore-the-Network/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="基础网络概念在计算机网络中，设备之间通过数据链路交换数据，节点之间的链接由网线或者无线来建立。简单的说计算机网络连接两台或多台计算机进行通信的系统。 计算机网络可以按照覆盖范围分类也可按照不同节点之间的功能关系（网络架构）分类。 计算机网络可以看作成一个拓扑结构，分为星型、环形等等 相关的概念内容还有，网络性能，其中包括：服务质量（QoS），网络阻塞，网络恢复能力；组成硬件，传输媒介，网络协议等等">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCNA Chapter 1: Explore the Network">
+<meta name="twitter:description" content="基础网络概念在计算机网络中，设备之间通过数据链路交换数据，节点之间的链接由网线或者无线来建立。简单的说计算机网络连接两台或多台计算机进行通信的系统。 计算机网络可以按照覆盖范围分类也可按照不同节点之间的功能关系（网络架构）分类。 计算机网络可以看作成一个拓扑结构，分为星型、环形等等 相关的概念内容还有，网络性能，其中包括：服务质量（QoS），网络阻塞，网络恢复能力；组成硬件，传输媒介，网络协议等等">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2017/12/11/CCNA-Chapter-1-Explore-the-Network/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CCNA Chapter 1: Explore the Network | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/11/CCNA-Chapter-1-Explore-the-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CCNA Chapter 1: Explore the Network
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-11 14:05:20" itemprop="dateCreated datePublished" datetime="2017-12-11T14:05:20+08:00">2017-12-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index"><span itemprop="name">CCNA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础网络概念"><a href="#基础网络概念" class="headerlink" title="基础网络概念"></a>基础网络概念</h1><p>在计算机网络中，设备之间通过数据链路交换数据，节点之间的链接由网线或者无线来建立。简单的说计算机网络连接两台或多台计算机进行通信的系统。</p>
+<p>计算机网络可以按照覆盖范围分类也可按照不同节点之间的功能关系（网络架构）分类。</p>
+<p>计算机网络可以看作成一个拓扑结构，分为星型、环形等等</p>
+<p>相关的概念内容还有，网络性能，其中包括：服务质量（QoS），网络阻塞，网络恢复能力；组成硬件，传输媒介，网络协议等等。</p>
+<p>本章只介绍网络分类和网络的基础部分，硬件和传输媒介在后几章中会提到</p>
+<a id="more"></a>
+<h1 id="网络组件（Network-Components）"><a href="#网络组件（Network-Components）" class="headerlink" title="网络组件（Network Components）"></a>网络组件（Network Components）</h1><p>网络基础设施包含三类网络组件：设备，介质和服务。</p>
+<ul>
+<li>终端设备（End Devices）</li>
+<li>中间网络设备（Intermediary Network Devices）<ul>
+<li>重新生成和重新传输数据信号</li>
+<li>维护有关网络和网际网络中存在哪些通道的信息。</li>
+<li>将错误和通信故障通知其它设备</li>
+<li>发生链路故障时按照备用路径转发数据</li>
+<li>根据优先级别分类和转发消息</li>
+<li>根据安全设置允许或拒绝数据的通行</li>
+</ul>
+</li>
+<li>网络介质（Network Media）<ul>
+<li>介质可成功传送信号的最大距离是多少？</li>
+<li>介质将安装在什么类型的环境中？</li>
+<li>必须传输的数据量和传输速度是多少？</li>
+<li>介质和安装的成本是什么？</li>
+</ul>
+</li>
+</ul>
+<h1 id="计算机网络类型"><a href="#计算机网络类型" class="headerlink" title="计算机网络类型"></a>计算机网络类型</h1><h2 id="从网络架构分类"><a href="#从网络架构分类" class="headerlink" title="从网络架构分类"></a>从网络架构分类</h2><h3 id="客户端-服务器（Client-Server）"><a href="#客户端-服务器（Client-Server）" class="headerlink" title="客户端-服务器（Client/Server）"></a>客户端-服务器（Client/Server）</h3><p>所有连接到网络并直接参与网络通信的计算机都属于主机 (hosts)。主机也称为终端设备 (end devices)。</p>
+<p>客户端-服务器（Client/Server）又称为主从式架构、C/S 架构，它把客户端 (Client) 与服务器 (Server) 区分开来。每一个客户端软件的实例都可以向一个服务器或应用程序服务器发出请求。</p>
+<p>服务器是装有特殊软件，可以为网络上其他终端设备提供信息（例如电子邮件或网页）的计算机。<strong>每项服务都需要单独的服务器软件</strong></p>
+<p>客户端是安装了特殊软件，可向服务器请求信息以及显示所获取信息的计算机</p>
+<h3 id="浏览器-服务器（Browser-Server）结构"><a href="#浏览器-服务器（Browser-Server）结构" class="headerlink" title="浏览器-服务器（Browser/Server）结构"></a>浏览器-服务器（Browser/Server）结构</h3><p>浏览器-服务器（Browser/Server）结构，简称 B/S 结构，与 C/S 结构不同，其客户端不需要安装专门的软件，只需要浏览器即可，浏览器通过 Web 服务器与数据库进行交互，可以方便的在不同平台下工作；服务器端可采用高性能计算机，并安装 Oracle、Sybase、Informix 等大型数据库。B/S 结构简化了客户端的工作，它是随着 Internet 技术兴起而产生的，对 C/S 技术的改进，但该结构下服务器端的工作较重，对服务器的性能要求更高。</p>
+<h3 id="P2P"><a href="#P2P" class="headerlink" title="P2P"></a>P2P</h3><p>对等式网络（peer-to-peer， 简称 P2P），又称点对点技术，是无中心服务器、依靠用户群（peers）交换信息的互联网体系，它的作用在于，减低以往网络传输中的节点，以降低数据丢失的风险。与有中心服务器的中央网络系统不同，对等网络的每个用户端既是一个节点，也有服务器的功能，任何一个节点无法直接找到其他节点，必须依靠其户群进行信息交流。</p>
+<p>常用的 p2p 服务有，BitTorrent、磁力链、Gnutella、eMule</p>
+<h4 id="P2P-网络的优缺点"><a href="#P2P-网络的优缺点" class="headerlink" title="P2P 网络的优缺点"></a>P2P 网络的优缺点</h4><p>优点</p>
+<ul>
+<li>易于安装，Easy to set up</li>
+<li>复杂性较低，Less complexity</li>
+<li>成本更低，因为不需要专用网络和专用服务器，Lower cost since network devices and dedicated servers may not be required</li>
+<li>可用于简单的任务，例如传输文件和共享打印机，Can be used for simple tasks such as transferring files and sharing printers</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>无法集中管理， No centralized administration</li>
+<li>安全性较差，Not as secure</li>
+<li>不可扩展，Not scalable</li>
+<li>所有设备皆可作为服务器和客户端，这会降低性能，All devices may act as both clients and servers which can slow their performance</li>
+</ul>
+<h2 id="从网络覆盖范围分类"><a href="#从网络覆盖范围分类" class="headerlink" title="从网络覆盖范围分类"></a>从网络覆盖范围分类</h2><h3 id="Internet-互联网"><a href="#Internet-互联网" class="headerlink" title="Internet, 互联网"></a>Internet, 互联网</h3><p>互联网是网络 (network) 与网络之前串成的巨大网络，这些网络以一组标准的网络 TCP/IP 协议族相连，形成逻辑上的单一巨大国际网络。</p>
+<p>互联网不等同于万维网，万维网只是互联网所提供的服务之一</p>
+<p>互联网属于计算机网络 (computer network) 的一种</p>
+<p>互联网带有范围广泛的信息资源和服务，例如相互关系的超文本文件，万维网的应用，电子邮件的基础设施，点对点网络 (p2p, peer-to-peer)，文件共享，以及 IP 电话服务。</p>
+<h3 id="WAN-广域网"><a href="#WAN-广域网" class="headerlink" title="WAN, 广域网"></a>WAN, 广域网</h3><p>广域网（Wide Area Network，WAN），又称广域网、外网、公网。是连接不同地区局域网或城域网计算机通信的远程网。通常跨接很大的物理范围，所覆盖的范围从几十公里到几千公里，它能连接多个地区、城市和国家，或横跨几个洲并能提供远距离通信，形成国际性的远程网络。广域网并不等同于互联网。</p>
+<p>WAN 通常由服务提供商 (SP) 或 Internet 服务提供商 (ISP) 管理。</p>
+<p>WAN 的具体功能包括：</p>
+<ul>
+<li>WAN 互连广泛地理区域（例如各大城市、州、省、国家/地区或大陆之间）内的 LAN。</li>
+<li>WAN 通常由多个服务提供商管理。</li>
+<li>WAN 通常提供 LAN 之间的较慢链路。</li>
+</ul>
+<h3 id="SAN-存储区域网络"><a href="#SAN-存储区域网络" class="headerlink" title="SAN, 存储区域网络"></a>SAN, 存储区域网络</h3><p>存储区域网络（Storage Area Network，SAN）是一种连接外接存储设备和服务器的架构。人们采用包括光纤通道技术、磁盘阵列、磁带柜、光盘柜的各种技术进行实现。该架构的特点是，连接到服务器的存储设备，将被操作系统视为直接连接的存储设备。除针对大型企业的企业级存储方案外，随着在 2000 年后价格和复杂度的降低，越来越多的中小型企业也在逐步采用该项技术。</p>
+<h3 id="MAN-都会网域"><a href="#MAN-都会网域" class="headerlink" title="MAN, 都会网域"></a>MAN, 都会网域</h3><p>都会网域（Metropolitan Area Network，MAN）指大型的计算机网络，属于 IEEE802.6 标准，是介于 LAN 和 WAN 之间能传输语音与数据的公用网络。MAN 是改进 LAN（局域网）中的传输媒介，扩大局域网的范围，达到包含一个大学校园、城市或都会区。它是较大型的局域网，需要的成本较高，但可以提供更快的传输速率。</p>
+<h3 id="LAN-局域网"><a href="#LAN-局域网" class="headerlink" title="LAN, 局域网"></a>LAN, 局域网</h3><p>局域网（Local Area Network, LAN），又称内网。指覆盖局部区域（如办公室或楼层）的计算机网络。早期的局域网网络技术都是各不同厂家所专有，互不兼容。后来，电机电子工程师学会推动了局域网技术的标准化，由此产生了 IEEE 802 系列标准。这一系列标准覆盖了双绞线、同轴电缆、光纤和无线等多种传输媒介和组网方式，并包括网络测试和管理的内容。</p>
+<p>在历经使用了链式局域网， 令牌环，与 AppleTalk 技术后，以太网和 Wi-Fi(无线网络连接) 是现今局域网中最常用的两项技术。</p>
+<p>以太网（IEEE 802.3 标准）是最常用的局域网组网方式。以太网使用双绞线作为传输媒介。在没有中继的情况下，最远可以覆盖 200 米的范围。最普及的以太网类型数据传输速率为 100Mb/s，更新的标准则支持 1000Mb/s 和 10000Mb/s 的速率。</p>
+<h3 id="WLAN-无线局域网"><a href="#WLAN-无线局域网" class="headerlink" title="WLAN, 无线局域网"></a>WLAN, 无线局域网</h3><p>无线局域网（Wireless LAN，WLAN）是不使用任何导线或传输电缆连接的局域网，而使用无线电波作为数据传送的媒介，传送距离一般只有几十米。蓝牙、wifi 都是常用的无线局域网技术</p>
+<p>无线局域网最通用的标准是 IEEE 定义的 802.11 系列标准。</p>
+<h3 id="Intranets-and-Extranets-内部网和外部网"><a href="#Intranets-and-Extranets-内部网和外部网" class="headerlink" title="Intranets and Extranets, 内部网和外部网"></a>Intranets and Extranets, 内部网和外部网</h3><p>内部网（Intranet）通常用于表示一个组织的私有局域网和广域网连接，只有该组织的成员、员工或其他获得授权的人员可以访问。</p>
+<p>外部网（Extranet）是一个使用与互联网同样技术的计算机网络，它通常属于一个企业或组织的内部网（Intranet）或建立在互联网中并为指定的用户提供信息的共享和交流等服务。</p>
+<p>组织可以使用外联网为在其他组织工作，但需要本组织数据的人提供安全访问。外联网示例包括：</p>
+<ul>
+<li>公司为外部供应商和承包商提供访问。</li>
+<li>医院为医生提供预约系统，以便医生为患者安排预约。</li>
+<li>当地教育局为其管辖区的学校提供预算和人员信息。</li>
+</ul>
+<h1 id="Internet-连接"><a href="#Internet-连接" class="headerlink" title="Internet 连接"></a>Internet 连接</h1><h2 id="家庭和小型办公室-Internet-连接"><a href="#家庭和小型办公室-Internet-连接" class="headerlink" title="家庭和小型办公室 Internet 连接"></a>家庭和小型办公室 Internet 连接</h2><ul>
+<li>同轴电缆（Cable） - 通常由有线电视服务提供商提供，Internet <strong>数据信号在输送有线电视信号的同一电缆上进行传输</strong>。它能提供高带宽、始终联网和 Internet 连接。</li>
+<li>DSL - 数字用户线路提供高带宽、始终联网和 Internet 连接。DSL 通过电话线路运行。<strong>通常小型办公室和家庭办公室用户会选择使用非对称 DSL (ADSL)，这种方式的特点是下载速度高于上传速度</strong>。</li>
+<li>移动电话（Cellular） - 手机 Internet 访问使用手机网络连接。只要您能收到手机信号，就能获得手机 Internet 访问。性能可能会受手机功能和手机信号塔的限制。</li>
+<li>卫星（Satellite） - 对于根本没有 Internet 连接的地方来说，获得卫星 Internet 访问非常有用。卫星天线要求到卫星的视线要清晰。</li>
+<li>拨号电话（Dial-up Telephone） - 使用电话线和调制解调器，费用相对较低。拨号调制解调器连接提供的低带宽通常不足用于大型数据传输，但对旅行过程中的移动访问非常有用。</li>
+</ul>
+<p>许多家庭和小型办公室更常使用光纤电缆（fiber optic cables）直接连接。这样，ISP 可以提供更高带宽速度并支持更多服务，例如 Internet、电话、电视。</p>
+<h2 id="企业-Internet-连接"><a href="#企业-Internet-连接" class="headerlink" title="企业 Internet 连接"></a>企业 Internet 连接</h2><p>企业连接选项与家庭用户选项有所不同。企业可能需要更高带宽、专用带宽和托管服务。可用连接选项取决于附近的服务提供商类型。</p>
+<ul>
+<li>专用租用线路（Dedicated Leased Line） - 租用线路实际上是服务提供商网络内连接地理位置分散的办公室的保留电路，提供个人语音和/或数据网络。电路通常按月或按年租用。可能会非常昂贵。</li>
+<li>以太网 WAN（Ethernet WAN） - 以太网 WAN 将 LAN 访问技术扩展到 WAN 中。以太网是一种 LAN 技术，您将在后面的章节中学习。现在以太网的优势将可以扩展到 WAN 中。</li>
+<li>DSL - 企业 DSL 提供各种格式。一种常见的选择是<strong>对称数字用户线路 (SDSL)</strong>，它类似于 DSL 的普通用户版本，<strong>但是提供相同的上传和下载速度</strong>。</li>
+<li>卫星（Satellite ） - 与小型办公室和家庭办公室用户类似，当有线解决方案不可用时，卫星服务可以提供连接。</li>
+</ul>
+<h1 id="可靠网络的构架"><a href="#可靠网络的构架" class="headerlink" title="可靠网络的构架"></a>可靠网络的构架</h1><p>要构建一个可靠的网络，必须在底层架构上解决以下四个特征：</p>
+<ul>
+<li>容错能力，Fault Tolerance<ul>
+<li>有多条路径到达目的地，在链路发生故障的时候可以快速恢复。称为<strong>冗余（redundancy）</strong></li>
+<li>提供冗余的一种方法是实施<strong>分组交换网络（packet-switched network）</strong>，流量分割成通过共享网络发送的数据包，具体内容之后章节内提到</li>
+</ul>
+</li>
+<li>可扩展性，Scalability<ul>
+<li>能够快速扩张来支持新增用户和应用程序，同时还保证不影响现有用户</li>
+<li>使网络具有可扩展性的一种方法是购买模块化的网络设备。</li>
+<li>网络具有可扩展性的原因是设计人员可以遵循广为接受的标准和协议</li>
+</ul>
+</li>
+<li>服务质量，Quality of Service (QoS)<ul>
+<li>当带宽需求超过可用量时，就会造成拥塞。在尝试通过网络实现并发通信时，<strong>网络带宽需求可能超过可用范围，从而造成网络拥塞（congestion）</strong>。</li>
+<li>QoS 成为了用于管理拥塞和确保向所有用户可靠传输内容的主要机制。</li>
+<li>在出现阻塞时，网页内容通常会安排较低的优先级，优先处理流媒体来保障用户体验流畅。</li>
+</ul>
+</li>
+<li>安全，Security<ul>
+<li>网络基础设施的安全性<ul>
+<li>保护提供网络连接的设备的安全</li>
+<li>防止有人未经授权访问网络上的管理软件</li>
+</ul>
+</li>
+<li>信息的安全性<ul>
+<li>机密性（Confidentiality） - 数据机密性意味着只有预定和授权收件人可以访问并读取数据。</li>
+<li>完整性（Integrity） - 数据完整性表示保证信息在从源地址到目的地址的传输过程中不会被更改。</li>
+<li>可用性（Availability） - 数据可用性表示保证授权用户及时可靠地访问数据服务。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络新趋势"><a href="#网络新趋势" class="headerlink" title="网络新趋势"></a>网络新趋势</h1><h2 id="自带设备（Bring-Your-Own-Device，-BYOD）"><a href="#自带设备（Bring-Your-Own-Device，-BYOD）" class="headerlink" title="自带设备（Bring Your Own Device， BYOD）"></a>自带设备（Bring Your Own Device， BYOD）</h2><p>BYOD 意味着设备由任何使用者在任意地点使用</p>
+<h2 id="云计算（Cloud-Computing）"><a href="#云计算（Cloud-Computing）" class="headerlink" title="云计算（Cloud Computing）"></a>云计算（Cloud Computing）</h2><p>云类型主要有四种：公共云、私有云、混合云和定制云。Public Clouds, Private Clouds, Hybrid Clouds, and Custom Clouds.</p>
+<h2 id="电力线网络（Powerline-Networking）"><a href="#电力线网络（Powerline-Networking）" class="headerlink" title="电力线网络（Powerline Networking）"></a>电力线网络（Powerline Networking）</h2><p>电力线网络是家庭网络的一种新兴趋势，它使用现有的电线连接设备。“无需新电线”的概念是指只要有电源插座就能连接网络。这样可以节省安装数据线的成本，而且不会增加电费成本。通过<strong>使用供电的同一配线</strong>(A device connects to an existing home LAN using an adapter and an existing electrical outlet.)，电力线网络通过按一定频率发送数据来发送信息。</p>
+<h2 id="无线宽带（Wireless-Broadband）"><a href="#无线宽带（Wireless-Broadband）" class="headerlink" title="无线宽带（Wireless Broadband）"></a>无线宽带（Wireless Broadband）</h2><p>无线 Internet 服务提供商 （Wireless Internet Service Provider，WISP）。无线 Internet 服务提供商 (WISP) 是使用类似家庭无线局域网 (WLAN) 的无线技术，将用户连接到专用的接入点或热点的 ISP。WISP 更多用于 DSL 或电缆服务不太可行的农村环境。</p>
+<h1 id="网络安全威胁"><a href="#网络安全威胁" class="headerlink" title="网络安全威胁"></a>网络安全威胁</h1><h2 id="网络最常见的外部威胁"><a href="#网络最常见的外部威胁" class="headerlink" title="网络最常见的外部威胁"></a>网络最常见的外部威胁</h2><ul>
+<li>病毒、蠕虫和特洛伊木马（Viruses, worms, and Trojan horses）- 在用户设备上运行的恶意软件和任意代码</li>
+<li>间谍软件和广告软件（Spyware and adware） - 用户设备上安装的软件，秘密收集关于用户的信息</li>
+<li>零日攻击（也称零小时攻击）（Zero-day attacks, also called zero-hour attacks） - 在出现漏洞的第一天发起的攻击</li>
+<li>黑客攻击 （Hacker attacks）- 由经验丰富的人员对用户设备或网络资源发起的攻击</li>
+<li>拒绝服务攻击 （Denial of service attacks）- 意图使网络设备上的应用和进程减缓或崩溃的攻击</li>
+<li>数据拦截和盗窃 （Data interception and theft） - 通过公司网络捕获私人信息的攻击</li>
+<li>身份盗窃 （Identity theft ） - 窃取用户的登录凭据来访问私人数据的攻击</li>
+</ul>
+<p>其中，<strong>身份盗窃是对个人用户造成最大破坏的网络威胁</strong></p>
+<p>大多数常见的数据泄密事件归因于网络的<strong>内部用户</strong>。Typical internal security threats include weak or exposed passwords, lost or stolen devices, and malicious employees.</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>家庭或小型办公室的网络安全组件应至少包括：</p>
+<ul>
+<li>防病毒和反间谍软件 – 这些软件用于防止终端设备感染恶意软件。</li>
+<li>防火墙过滤 – 用于阻止未经授权访问网络。这可以是基于主机的防火墙系统，用于阻止未经授权访问终端设备，也可以是家用路由器上的基本过滤服务，用于阻止外部人员未经授权访问网络。</li>
+</ul>
+<p>除上述内容外，大型网络和企业网络通常具有其他安全要求：</p>
+<ul>
+<li>专用防火墙系统 – 用于提供更高级的防火墙功能，更详细地过滤大量数据流。</li>
+<li>访问控制列表 (ACL) – 用于进一步过滤访问和流量转发。</li>
+<li>入侵防御系统 (IPS) – 用于识别快速扩散的威胁，例如零日攻击或零小时攻击。</li>
+<li>虚拟专用网络 (VPN) – 用于为远程员工提供安全访问。</li>
+</ul>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>collaboration tools</strong> - tools that allow individuals to work together as a team on a project, no matter where they are located</li>
+<li><strong>cellular</strong> - technology in which a user can get access to the Internet when connecting a cell phone to a cell phone network</li>
+<li><strong>SAN</strong> - type of network infrastructure that stores, retrieves, and replicates data</li>
+<li><strong>fault</strong> tolerance - a network characteristic that restricts the impact of a failure on network access and allows a network to recover quickly from the failure</li>
+<li><strong>QoS</strong> - a mechanism to manage the flow of traffic based on different requirements to ensure reliable delivery of each type of traffic</li>
+<li><strong>BYOD</strong> - makes it possible for users to be free to use their personal devices to access a corporate or a campus network</li>
+<li><strong>cloud computing</strong> - technology that allows users and organizations to store data on remotely located servers on the Internet</li>
+<li><strong>data center</strong> - a facility used to store information originating from users or organizations</li>
+<li><strong>Powerline Networking</strong> - the connection of devices to the Internet through the use of existing electrical wiring</li>
+<li><strong>converged network</strong> - a network with the capability of delivering traffic with different requirements but with the use of the same network infrastructure</li>
+<li><strong>DSL</strong> - technology that provides the user with a high-bandwidth connection to the Internet over a telephone line</li>
+<li><strong>peer-to-peer network</strong> - a type of network in which computers can perform the role of a server and a client at the same time</li>
+<li><strong>intranet</strong> - a private interconnection of LANs and WANs inside an organization that can only be accessed by organization members or by non-members with authorization</li>
+<li><strong>extrant</strong> - a network that provides safe and secure access to an organization’s data to authorized people who work outside that organization</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/UML-组件图/" rel="next" title="UML 组件图">
+                <i class="fa fa-chevron-left"></i> UML 组件图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/12/CCNA-Chapter-2-Configure-a-Network-Operating-System/" rel="prev" title="CCNA Chapter 2: Configure a Network Operating System">
+                CCNA Chapter 2: Configure a Network Operating System <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础网络概念"><span class="nav-number">1.</span> <span class="nav-text">基础网络概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络组件（Network-Components）"><span class="nav-number">2.</span> <span class="nav-text">网络组件（Network Components）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络类型"><span class="nav-number">3.</span> <span class="nav-text">计算机网络类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从网络架构分类"><span class="nav-number">3.1.</span> <span class="nav-text">从网络架构分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端-服务器（Client-Server）"><span class="nav-number">3.1.1.</span> <span class="nav-text">客户端-服务器（Client/Server）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器-服务器（Browser-Server）结构"><span class="nav-number">3.1.2.</span> <span class="nav-text">浏览器-服务器（Browser/Server）结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2P"><span class="nav-number">3.1.3.</span> <span class="nav-text">P2P</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P2P-网络的优缺点"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">P2P 网络的优缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从网络覆盖范围分类"><span class="nav-number">3.2.</span> <span class="nav-text">从网络覆盖范围分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Internet-互联网"><span class="nav-number">3.2.1.</span> <span class="nav-text">Internet, 互联网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAN-广域网"><span class="nav-number">3.2.2.</span> <span class="nav-text">WAN, 广域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAN-存储区域网络"><span class="nav-number">3.2.3.</span> <span class="nav-text">SAN, 存储区域网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAN-都会网域"><span class="nav-number">3.2.4.</span> <span class="nav-text">MAN, 都会网域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAN-局域网"><span class="nav-number">3.2.5.</span> <span class="nav-text">LAN, 局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WLAN-无线局域网"><span class="nav-number">3.2.6.</span> <span class="nav-text">WLAN, 无线局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intranets-and-Extranets-内部网和外部网"><span class="nav-number">3.2.7.</span> <span class="nav-text">Intranets and Extranets, 内部网和外部网</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Internet-连接"><span class="nav-number">4.</span> <span class="nav-text">Internet 连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#家庭和小型办公室-Internet-连接"><span class="nav-number">4.1.</span> <span class="nav-text">家庭和小型办公室 Internet 连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#企业-Internet-连接"><span class="nav-number">4.2.</span> <span class="nav-text">企业 Internet 连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可靠网络的构架"><span class="nav-number">5.</span> <span class="nav-text">可靠网络的构架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络新趋势"><span class="nav-number">6.</span> <span class="nav-text">网络新趋势</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自带设备（Bring-Your-Own-Device，-BYOD）"><span class="nav-number">6.1.</span> <span class="nav-text">自带设备（Bring Your Own Device， BYOD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算（Cloud-Computing）"><span class="nav-number">6.2.</span> <span class="nav-text">云计算（Cloud Computing）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电力线网络（Powerline-Networking）"><span class="nav-number">6.3.</span> <span class="nav-text">电力线网络（Powerline Networking）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线宽带（Wireless-Broadband）"><span class="nav-number">6.4.</span> <span class="nav-text">无线宽带（Wireless Broadband）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络安全威胁"><span class="nav-number">7.</span> <span class="nav-text">网络安全威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络最常见的外部威胁"><span class="nav-number">7.1.</span> <span class="nav-text">网络最常见的外部威胁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">7.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">8.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

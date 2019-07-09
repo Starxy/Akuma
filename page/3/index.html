@@ -1,0 +1,3482 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta name="keywords" content="Starxy Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Starxy&#39;s Blog">
+<meta property="og:url" content="http://starxy.cc/page/3/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Starxy&#39;s Blog">
+<meta name="twitter:description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/page/3/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/23/UML-组件图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/23/UML-组件图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 组件图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-23 15:44:29" itemprop="dateCreated datePublished" datetime="2017-11-23T15:44:29+08:00">2017-11-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">580</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UML-Component-Diagrams"><a href="#UML-Component-Diagrams" class="headerlink" title="UML Component Diagrams"></a>UML Component Diagrams</h1><p>组件图 (Component Diagrams) 显示组件，提供的和必需的接口，端口以及它们之间的关系。这种类型的图用于基于组件的开发（CBD）来描述具有面向服务的体系结构（SOA）的系统。</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>组件 (Component) 是一个类用来表述具有封装内容的系统的一个模块化的部分。组件根据提供的接口和所需的接口来定义其行为。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flseyrogznj303w0200q3.jpg" alt></p>
+<p>提供的接口 (Provided interface)，要么是由本身实现，要么是由一个分类器实现、要么是由组件的公共端口 (port) 实现<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsf06linej305a01y3y9.jpg" alt><br>请求的接口 (Required interface)，要么是由组件本身的使用依赖指定，由用于实现组件的分类器之一的使用依赖性指定，是组件的公共端口所必需的。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsf06mcnwj305a0250rz.jpg" alt></p>
+<p>端口 (port) 是一个封装构件的显示的对外窗口，所有进出构件的交互都要通过端口。</p>
+<p>组件图用依赖关系 (Component dependency) 表示各组件之间存在的关系类型。在 UML 中，组件图中依赖关系的表示方法与类图中依赖关系相同，都是一个由客户指向提供者的虚线箭头。</p>
+<p>组件连接器 (Assembly connector) 表示构件之间的关系，它连接构件内部的类，将一个构件的供接口和一个构件的需接口捆绑在一起</p>
+<ul>
+<li>Realization</li>
+<li>Artifact</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/23/UML-组件图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/23/UML-部署图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/23/UML-部署图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 部署图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-23 15:44:10" itemprop="dateCreated datePublished" datetime="2017-11-23T15:44:10+08:00">2017-11-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">838</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Deployment-Diagrams"><a href="#Deployment-Diagrams" class="headerlink" title="Deployment Diagrams"></a>Deployment Diagrams</h1><p>部署图 (Deployment Diagrams) 描述的是系统运行时的结构，展示了硬件的配置及其软件如何部署到网络结构中。一个系统模型只有一个部署图，部署图通常用来帮助理解分布式系统。</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>结点 (Node) 是存在与运行时的代表计算机资源的物理元素，可以是硬件也可以是运行其上的软件系统</p>
+<p>物件(Artifact)，表示物理实体，是软件开发过程的产物。这可能包括流程模型（如用例模型，设计模型等），源文件，可执行文件，设计文档，测试报告，原型，用户手册等。</p>
+<p>节点实例(Node instance)与结点的区别在于名称有下划线和结点类型前面有冒号，冒号前面可以有示例名称也可以没有示例名称</p>
+<p>Manifestation 是一种抽象关系表示一个或多个模型是有一个Artifact渲染（实现）得到的。</p>
+<p>An execution environment is a (software) node that offers an execution environment for specific types of components that are deployed on it in the form of executable artifacts. Components of the appropriate type are deployed to specific execution environments.</p>
+<p>A device is a node which represents a physical computational resource with processing capability upon which artifacts may be deployed for execution.</p>
+<p>通讯路径(Communication path)是两个部署目标之间的链接关系。用来交换信号和消息。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/23/UML-部署图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/23/UML-活动图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/23/UML-活动图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 活动图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-23 15:13:52" itemprop="dateCreated datePublished" datetime="2017-11-23T15:13:52+08:00">2017-11-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">431</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Activity-Diagrams"><a href="#Activity-Diagrams" class="headerlink" title="Activity Diagrams"></a>Activity Diagrams</h1><p>活动图描述了为了完成一个目标需要做的行动以及这些行动的执行顺序。</p>
+<h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsdt9z97wj30bu0ibq3s.jpg" alt></p>
+<p>活动 (Activity) 是一个行为，被分解成一个或多个行动 (action)，一项行动代表一项活动的一个单一步骤</p>
+<p>为了指定活动的流程，可以用一个活动边 (edges) 来将行动连接在一起。边指定了数据是如何从一个行动走向下一个的。</p>
+<p>初始结点 (initial node) 是活动的开始。</p>
+<p>决策节点 (decision node) 是控制节点，用来表明输入指向哪里，由布尔表达式控制。</p>
+<p>合并节点 (merge node) 是决策节点的对立，将交替的流量汇集到一个输出流中。</p>
+<p>分叉节点 (fork node) 将当前通过一个行动的流分成多个并发流。</p>
+<p>连接节点 (join node) 是分叉节点的对立，同步。</p>
+<h2 id="Activity-partitions"><a href="#Activity-partitions" class="headerlink" title="Activity partitions"></a>Activity partitions</h2><p>泳道 (Swim Lane) 一个垂直通道，永远安排某个特定 Acotr 的所有活动。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsds54rwbj30ge0ac754.jpg" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/23/UML-活动图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/23/UML-状态图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/23/UML-状态图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 状态图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-23 13:43:25" itemprop="dateCreated datePublished" datetime="2017-11-23T13:43:25+08:00">2017-11-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">480</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="State-Machine-Diagrams"><a href="#State-Machine-Diagrams" class="headerlink" title="State Machine Diagrams"></a>State Machine Diagrams</h1><p>状态图显示一个状态机，状态机用于对模型元素的动态行为进行建模，具体地说是对系统行为中受事件驱动的方面进行建模。通常使用状态图来说明业务角色或业务实体可能的状态。</p>
+<h2 id="状态-States"><a href="#状态-States" class="headerlink" title="状态 (States)"></a>状态 (States)</h2><p>状态有以下几种：</p>
+<ul>
+<li>simple state</li>
+<li>composite state</li>
+<li>submachine state</li>
+</ul>
+<h3 id="Simple-State"><a href="#Simple-State" class="headerlink" title="Simple State"></a>Simple State</h3><p>一个简单状态不需要子状态。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsd1mc5frj303m021dfl.jpg" alt></p>
+<p>活动标签</p>
+<ul>
+<li>entry (behavior performed upon entry to the state)</li>
+<li>do (ongoing behavior, performed as long as the element is in the state)</li>
+<li>exit (behavior performed upon exit from the state)</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsd4lxnjyj3046030jr6.jpg" alt></p>
+<h3 id="Composite-State"><a href="#Composite-State" class="headerlink" title="Composite State"></a>Composite State</h3><p>表示拥有子状态<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsd6st1osj309g03eweb.jpg" alt></p>
+<h3 id="其他状态"><a href="#其他状态" class="headerlink" title="其他状态"></a>其他状态</h3><p>初始状态 (Initial Pseudostate) 表示为一个实心圆圈<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsd9z9gz7j304g01l0s5.jpg" alt></p>
+<p>最终状态 (Final State) 表示状态机结束。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsdb0hl1yj303g01f3ya.jpg" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/23/UML-状态图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/23/UML-包图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/23/UML-包图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 包图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-23 12:56:43" itemprop="dateCreated datePublished" datetime="2017-11-23T12:56:43+08:00">2017-11-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">736</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UML-Package-Diagrams"><a href="#UML-Package-Diagrams" class="headerlink" title="UML Package Diagrams"></a>UML Package Diagrams</h1><p>包图 (Package Diagram) 是一个 UML 的结构图，表示了系统在包 (package) 层面的设计。提供了将 UML 相关元素进行分组并命名的方法。可视化系统各个部分之间的依赖关系。</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h3><p>包是一种命名空间，用于将语义相关的元素组合在一起，并可能一起更改。将元素组织成组，为系统模型提供更好的结构是一个通用的机制。作为一个名称空间，包可以导入其他包的单个成员或其他包的所有成员。软件包也可以与其他软件包合并。</p>
+<p>一个包被渲染成一个标签式文件夹 - 一个矩形的顶部左边有一个小标签。如果包裹的成员没有显示在包裹矩形内，那么包裹的名字应该放在里面。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fls9z0yedpj303m02d0nu.jpg" alt><br>包裹的成员可能会显示在包裹的边界内。在这种情况下，包的名称应该放在选项卡上。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fls9z0z1hyj307i03aa9u.jpg" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/23/UML-包图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/22/菜谱-极简微波炉蛋包饭/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/22/菜谱-极简微波炉蛋包饭/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">菜谱-极简微波炉蛋包饭</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-22 22:19:32" itemprop="dateCreated datePublished" datetime="2017-11-22T22:19:32+08:00">2017-11-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/菜谱/" itemprop="url" rel="index"><span itemprop="name">菜谱</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">392</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="极简微波炉蛋包饭"><a href="#极简微波炉蛋包饭" class="headerlink" title="极简微波炉蛋包饭"></a>极简微波炉蛋包饭</h1><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrkbw08tqj30p00fmwgm.jpg" alt></p>
+<blockquote>
+<p>本菜谱全部来自于<strong>绵羊料理</strong>。<a href="https://space.bilibili.com/18202105#!/" target="_blank" rel="noopener">点此查看 Up 主空间视频</a><br>本期视频链接：<a href="https://www.bilibili.com/video/av7757659/" target="_blank" rel="noopener">极简微波炉蛋包饭丨绵羊生存料理</a></p>
+</blockquote>
+<h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><ul>
+<li>米饭 200g</li>
+<li>火腿 100g</li>
+<li>洋葱 1/4个</li>
+<li>青椒 半个</li>
+<li>番茄酱 1大勺</li>
+<li>植物油 1/2大勺</li>
+<li>黄油一小块（可选）</li>
+<li>蛋包饭蛋皮<ul>
+<li>鸡蛋 两个</li>
+<li>牛奶 2大勺</li>
+<li>糖、盐、黑胡椒</li>
+</ul>
+</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>青椒去籽、洋葱切去头尾，把青椒、洋葱、火腿切成小丁。</li>
+<li>装入容器，加植物油搅拌均匀。</li>
+<li>盖上盖子，但是一定不能完全密封，放进微波炉高火3分钟。</li>
+<li>取出后加入番茄酱、1/2小勺盐、少许黑胡椒搅拌均匀后，盖起来，高火1分钟。</li>
+<li>放入米饭拌匀后，再放进微波炉高火3分钟。</li>
+<li>用保鲜膜把米饭包裹，用手捏成椭圆形。</li>
+<li>放入饭盒中，将保鲜膜抽掉，摆上一小块黄油。</li>
+<li>鸡蛋打散后加牛奶、少许糖和盐拌匀，盖起来，用微波炉高火2分钟。</li>
+<li>把做好的鸡蛋盖在米饭上。</li>
+<li>可配上用盐水煮熟的西蓝花，挤上番茄酱。</li>
+</ol>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/22/UML-类图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/22/UML-类图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 类图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-22 19:57:52" itemprop="dateCreated datePublished" datetime="2017-11-22T19:57:52+08:00">2017-11-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">629</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UML-Class-and-Object-Diagrams"><a href="#UML-Class-and-Object-Diagrams" class="headerlink" title="UML Class and Object Diagrams"></a>UML Class and Object Diagrams</h1><p>类图是现实世界问题领域的抽象对象的结构化、概念化、逻辑化描述。</p>
+<h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p>UML 中的类大体如下所示，图示分为四个部分</p>
+<ul>
+<li>顶部为类名</li>
+<li>下面一部分用于表述类的属性</li>
+<li>第三部分用于表述类的操作方法</li>
+<li>底部可选表述外部组件</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqei4dc28j30cz06ejrh.jpg" alt><br>类用来表示对象，对象可以是任何有属性和责任的事物</p>
+<ul>
+<li><code>-</code>指私有 (private) 的成员和方法</li>
+<li><code>+</code>指公有 (public) 的成员和方法</li>
+<li><code>#</code>指保护 (protected) 的成员和方法</li>
+</ul>
+<p>对象 (Object) 符号和类符号有相同的部分，唯一的不同是顶部的名称下有下划线</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/22/UML-类图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/22/UML-时序图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/22/UML-时序图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 时序图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-22 17:39:54" itemprop="dateCreated datePublished" datetime="2017-11-22T17:39:54+08:00">2017-11-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">788</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UML-Sequence-Diagrams"><a href="#UML-Sequence-Diagrams" class="headerlink" title="UML Sequence Diagrams"></a>UML Sequence Diagrams</h1><p><strong>时序图</strong>用于描述按时间顺序排列的对象之间的<em>交互模式</em>；它按照参与交互的对象所具有的生命线 (Lifeline) 和它们相互发送的消息来显示这些对象。在时序图中包含对象和主角实例，以及说明它们如何交互的消息。</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li>对象表示参与交互的对象，每个对象带有一条生命线，对象被激活时，生命线上出现一个长条（会话），表示对象的存在<ul>
+<li>普通对象</li>
+<li>匿名对象</li>
+<li>未声明所属类对象</li>
+</ul>
+</li>
+<li>生命线 (Lifeline) 表示对象的存在，当对象被激活（创建或者被引用）时，生命线上出现会话，表示对象参与了这个会话。</li>
+<li>消息 (Message) 由一个对象的生命线指向另一个对象的生命线，如果消息指向空白的生命线，将创建一个新的会话，如果消息指向已有的会话，表示对象延续已有会话。<ul>
+<li>简单消息</li>
+<li>返回消息：虚线箭头指向左边</li>
+<li>同步消息: 箭头为实心黑色三角</li>
+<li>异步消息：箭头只有上半部分</li>
+</ul>
+</li>
+<li>活动</li>
+<li>状态不变验证 (State invariants)：可以在生命线上用大括号<code>{}</code>放置需要检测的条件，当任何消息到达这个位置下方的时候需要对条件进行检测。</li>
+<li>组合片段 (Combined fragments)： 用一个大方框表示的子片段，左上角显示操作符<ul>
+<li>alt - 可以添加 else 条件</li>
+<li>opt - 表示子片段只有当满足条件时才会执行，当只有一个条件时，alt 类似于 opt</li>
+<li>loop - 表示循环</li>
+<li>break - break</li>
+<li>par - parallel</li>
+<li>strict - strict sequencing</li>
+<li>seq - weak sequencing</li>
+<li>critical - critical region</li>
+<li>ignore - ignore</li>
+<li>consider - consider</li>
+<li>assert - assertion</li>
+<li>neg - negative</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/22/UML-时序图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/21/UML-用例图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/21/UML-用例图/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 用例图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-21 22:31:09" itemprop="dateCreated datePublished" datetime="2017-11-21T22:31:09+08:00">2017-11-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UML-Use-Case-Diagrams"><a href="#UML-Use-Case-Diagrams" class="headerlink" title="UML Use Case Diagrams"></a>UML Use Case Diagrams</h1><p>用例图 (Use case diagrams) 通常被称为行为图 (behavior diagrams)， 用来描述一些系统可以与系统的一个或多个外部用户（参与者）合作执行的一组动作（用例）。每个用例应该为系统的参与者或其他利益相关者提供一些可观察到的和有价值的结果。</p>
+<h2 id="用例主题，Use-Case-Subject"><a href="#用例主题，Use-Case-Subject" class="headerlink" title="用例主题，Use Case Subject"></a>用例主题，Use Case Subject</h2><p>用例的主题 (Subject) 定义并代表与业务 需求收集和分析有关的业务，软件系统，物理系统或设备，子系统， 组件或甚至单一类别的边界 。<br>用 UML 来说，主体是一个 扮演“主体”角色的 分类器。他们没有为主题创建一个单独的特殊类，就像是在演员和用例一样。UML 2.5 指出 UseCase 的主题可能是一个系统或任何其他可能具有行为的元素，例如 Component 或 Class。“可能拥有行为的分类器被称为 行为分类器，但 UML 2.5 抽象语法仍然将主体作为普通的分类器来显示。</p>
+<h3 id="用例主题符号"><a href="#用例主题符号" class="headerlink" title="用例主题符号"></a>用例主题符号</h3><p>主题（有时称为系统边界）由矩形表示，主题名称，关联关键字和原型在左上角。 适用于主题的用例位于矩形的内部，角色位于系统边界之外。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqg0iwn8jj306w04gmx0.jpg" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/21/UML-用例图/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/21/UML-概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/21/UML-概述/" class="post-title-link" itemprop="http://starxy.cc/page/3/index.html">UML 概述</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-21 20:18:12" itemprop="dateCreated datePublished" datetime="2017-11-21T20:18:12+08:00">2017-11-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/UML/" itemprop="url" rel="index"><span itemprop="name">UML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>ESAIP 的课程里有门课叫做 UML，11 月 24 号考试之前没怎么去上过课，这系列笔记算是初学。<br>考试内容是画图理解图例内容之后感觉应该不会很难。<br>笔记内容来自 <a href="https://www.uml-diagrams.org/" target="_blank" rel="noopener">The Unified Modeling Language</a>,<a href="http://www.tutorialspoint.com/uml/" target="_blank" rel="noopener">tutorialspoint</a> 和相关中英文维基，由于国内相关内容较少，不再另找正式的中文翻译，文章内涉及到的英文关键词尽量以原文出现。中文翻译均为自译<br>计划是概述单独开一个页面，之后每（几）个 Diagrams 单独开页面。根据相关 Diagrams 的重要程度决定相关内容。Diagrams 的介绍顺序为 ESAIP 中课程 PDF 内的顺序</p>
+</blockquote>
+<h1 id="统一建模语言，-UML-Unified-Modeling-Language-概述"><a href="#统一建模语言，-UML-Unified-Modeling-Language-概述" class="headerlink" title="统一建模语言， UML(Unified Modeling Language) 概述"></a>统一建模语言， UML(Unified Modeling Language) 概述</h1><p>在 1997 年 UML 被 Object Management Group (OMG) 接受并发布了 UML v1.1，到如今已经迭代了许多次。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqc6idezqj309q06xwer.jpg" alt><br>UML 是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法。<br>一图胜千言，UML 就是用图形的方法来实现上述功能。<br>UML 不仅适用于程序设计，同时适用于商业过程。<br>总之 UML 就是用建模来模拟当今所有的复杂环境。</p>
+<!--
+# 模型
+
+在 UML 系统开发中有三个主要的模型：
+
+- **功能模型**：从用户的角度展示系统的功能，包括用例图。
+- **对象模型**：采用对象，属性，操作，关联等概念展示系统的结构和基础，包括类别图、对象图。
+- **动态模型**：展现系统的内部行为。包括序列图，活动图，状态图。
+
+区分 UML 模型和 UML 图是非常重要的，UML 图，包括用例图、协作图、活动图、序列图、部署图、构件图、类图、状态图，是模型中信息的图形表达方式，但是 UML 模型独立于 UML 图存在。UML 的当前版本只提供了模型信息的交换，而没有提供图信息的交换。
+-->
+<p>为了理解 UML 的概念模型，首先我们需要澄清什么是概念模型？以及为什么需要概念模型？</p>
+<ul>
+<li><p>概念模型可以定义为由概念及其关系构成的模型。</p>
+</li>
+<li><p>概念模型是绘制 UML 图之前的第一步。它有助于理解现实世界中的实体以及它们如何相互作用。</p>
+</li>
+</ul>
+<p>由于 UML 描述的是实时系统，因此建立一个概念模型并逐步进行是非常重要的。UML 的概念模型可以通过学习以下三个主要元素来掌握 -</p>
+<ul>
+<li>UML 构建块 (UML building blocks)</li>
+<li>链接构建块的规则 (Rules to connect the building blocks)</li>
+<li>UML 的通用机制 (Common mechanisms of UML)</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/11/21/UML-概述/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

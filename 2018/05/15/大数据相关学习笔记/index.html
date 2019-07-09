@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="大数据技术原理与应用学习笔记 本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序文章内大部分图片和文字描述均来自该课程，侵删  大数据概述大数据时代第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的这次信息浪潮的基础技术支撑是：存储、计算、网络数据产生方式也经历了三个阶段的发展：  运营师系统阶段——由运营式系统生成 用户原创内容阶段——博客微博 感">
+<meta name="keywords" content="大数据,Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据相关学习笔记">
+<meta property="og:url" content="http://starxy.cc/2018/05/15/大数据相关学习笔记/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="大数据技术原理与应用学习笔记 本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序文章内大部分图片和文字描述均来自该课程，侵删  大数据概述大数据时代第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的这次信息浪潮的基础技术支撑是：存储、计算、网络数据产生方式也经历了三个阶段的发展：  运营师系统阶段——由运营式系统生成 用户原创内容阶段——博客微博 感">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frc3rl031sj30xv0l3tf5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frc55bir8tj313q0l5dnj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcc168maqj311m0jm43c.jpg">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据相关学习笔记">
+<meta name="twitter:description" content="大数据技术原理与应用学习笔记 本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序文章内大部分图片和文字描述均来自该课程，侵删  大数据概述大数据时代第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的这次信息浪潮的基础技术支撑是：存储、计算、网络数据产生方式也经历了三个阶段的发展：  运营师系统阶段——由运营式系统生成 用户原创内容阶段——博客微博 感">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frc3rl031sj30xv0l3tf5.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2018/05/15/大数据相关学习笔记/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>大数据相关学习笔记 | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/大数据相关学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大数据相关学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-15 16:01:50" itemprop="dateCreated datePublished" datetime="2018-05-15T16:01:50+08:00">2018-05-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="大数据技术原理与应用学习笔记"><a href="#大数据技术原理与应用学习笔记" class="headerlink" title="大数据技术原理与应用学习笔记"></a>大数据技术原理与应用学习笔记</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h1 id="大数据概述"><a href="#大数据概述" class="headerlink" title="大数据概述"></a>大数据概述</h1><h2 id="大数据时代"><a href="#大数据时代" class="headerlink" title="大数据时代"></a>大数据时代</h2><p>第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的<br>这次信息浪潮的基础技术支撑是：存储、计算、网络<br>数据产生方式也经历了三个阶段的发展：</p>
+<ul>
+<li>运营师系统阶段——由运营式系统生成</li>
+<li>用户原创内容阶段——博客微博</li>
+<li>感知式系统阶段——物联网时代各种传感器设备</li>
+</ul>
+<h2 id="大数据概念"><a href="#大数据概念" class="headerlink" title="大数据概念"></a>大数据概念</h2><p>大数据的 4V：</p>
+<ul>
+<li>Volume 大量化：数据爆炸</li>
+<li>Veloity 多样化：结构化数据（关系数据库）10%、非结构化数据（图形图像）90%</li>
+<li>Variety 快速化：从数据生成到消耗，时间窗口非常小，可用于生成决策的时间非常短</li>
+<li>Value 价值密度低</li>
+</ul>
+<p>到现在科学理论的四种范式：实验、理论、计算、数据驱动<br>思维方式发生了三种改变：全样而非抽样、效率而非精确（因为全样分析误差不会被放大导致不需要追求精度、追求时效性）、相关而非因果</p>
+<h2 id="大数据的关键技术"><a href="#大数据的关键技术" class="headerlink" title="大数据的关键技术"></a>大数据的关键技术</h2><p>大数据的技术层次：数据采集、数据存储与管理、数据处理与分析、数据隐私与安全<br>数据存储与管理、数据处理与分析代表了最核心的两大技术：分布式存储和分布式处理</p>
+<p>分布式数据库：BigTable<br>分布式文件系统：GFS<br>分布式并行处理技术：MapReduce </p>
+<p>计算模式：</p>
+<ul>
+<li>批处理计算：同时处理大量数据进行批量处理，不可能实现秒级相应与交互式计算——MapReduce（典型代表）、Spark（实时性比 MapReduce 更好，能更好的执行迭代运算)</li>
+<li>流计算：专门对流数据进行的计算，实现秒级响应——S4、Storm、Flume</li>
+<li>图计算：高效处理图结构——Google Pregel</li>
+<li>查询分析计算：交互式查询分析高时效性——Dremel、Hive、Cassandra </li>
+</ul>
+<h2 id="大数据与云计算、物联网"><a href="#大数据与云计算、物联网" class="headerlink" title="大数据与云计算、物联网"></a>大数据与云计算、物联网</h2><p>一切云计算解决了两个问题：分布式存储和分布式处理<br>云计算典型特征：虚拟化、多租户<br>云计算分类：共有云、混合云、私有云<br>IaaS：基础设施即服务、PaaS：平台即服务、SaaS：软件即服务</p>
+<p>物联网（IoT：The Internet of Things）万物互联</p>
+<ul>
+<li>应用层：物联网应用</li>
+<li>处理层：业务支撑平台。数据处理</li>
+<li>网络层：电信网、互联网等等，起到了信息传输的作用</li>
+<li>感知层：传感器、RFID网络。数据收集</li>
+</ul>
+<p>关键技术：</p>
+<ul>
+<li>识别技术</li>
+<li>感知技术</li>
+</ul>
+<h1 id="大数据处理架构"><a href="#大数据处理架构" class="headerlink" title="大数据处理架构"></a>大数据处理架构</h1><h2 id="Hadoop-概述"><a href="#Hadoop-概述" class="headerlink" title="Hadoop 概述"></a>Hadoop 概述</h2><p>HDFS 是 GFS 的开源实现。<br>Hadoop 把谷歌提出的两大框架融入到自己平台.<br>具有高可靠性，部分机器故障可继续提供服务（冗余副本机制）<br>高效型<br>可扩展性,可不断在集群中添加机器<br>成本低</p>
+<h2 id="Hadoop-项目结构"><a href="#Hadoop-项目结构" class="headerlink" title="Hadoop 项目结构"></a>Hadoop 项目结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frc3rl031sj30xv0l3tf5.jpg" alt="Hadoop2.0 项目结构"><br>HDFS：分布式文件系统<br>YARN：资源管理和调度框架。负责调度内存 CPU 带宽等计算资源<br>MapReduce：2.0 以前做实时计算，2.0 以后做离线计算和批处理<br>Tez：运行在 YARN 之上的下一代 Hadoop 查询处理框架。把很多 MapReduce 作业进行分析优化，构成 DAG（保证获得最好的处理效率，分清先后顺序）<br>Sprak：类似于 MapReduce 的通用并行框架。但是 Spark 是基于内存的运算，而 MapReduce 是基于磁盘的<br>Hive：Hadoop 上的数据仓库，专门用于企业决策分析，可以把大量的历史数据存在数据仓库中来进行多维度分析。用 SQL 语句书写，但是会转换成 MapReduce 作业来执行<br>Pig：流数据处理，轻量级分析、基于 Hadoop 的大规模数据分析平台，提供类似 SQL 的查询语言 Pig Latin<br>Oozie：作业调度系统<br>ZooKeeper：分布式协调一致性服务，提供分布式锁机群管理<br>HBase：分关系型分布式数据库，面向列存储，执行随即读写和实时应用<br>Flume：日志收集分析框架<br>Sqoop：用于在 Hadoop 与传统数据库之间进行数据传递完成数据导入和导出</p>
+<h2 id="Hadoop-集群的部署和使用"><a href="#Hadoop-集群的部署和使用" class="headerlink" title="Hadoop 集群的部署和使用"></a>Hadoop 集群的部署和使用</h2><p>HDFS 两大组件：</p>
+<ul>
+<li>集群节点：NameNode</li>
+<li>数据节点：DataNode</li>
+</ul>
+<p>一个 NameNode 和多个 DataNode 构成一个分布式文件系统</p>
+<p>MapReduce 计算框架两大组件（2.0 以后改用为 YARN，不存在两种 Tracker）：</p>
+<ul>
+<li>JobTracker：负责对 MapReduce 作业进行管理，将一个作业拆分成多个小作业分发</li>
+<li>TaskTracker：部署在不同的机器上，负责跟踪执行部分小作业</li>
+</ul>
+<p>SecondaryNameNode 冷备份</p>
+<a id="more"></a>
+<h1 id="分布式文件系统-HDFS"><a href="#分布式文件系统-HDFS" class="headerlink" title="分布式文件系统 HDFS"></a>分布式文件系统 HDFS</h1><p>HDFS 是 Hadoop 平台的分布式文件系统，是用来解决大数据的两大核心问题中的海量数据分布式存储问题<br>本章就是着重介绍了 HDFS 的体系结构、存储原理以及读写过程。</p>
+<h2 id="HDFS-简介"><a href="#HDFS-简介" class="headerlink" title="HDFS 简介"></a>HDFS 简介</h2><p>对于分布式文件系统（DFS），在集群中把一个整个的大文件分布的存储到多台机器上面去。采用主从架构，其中一个为主节点来存储元数据，其余为从节点存储相关数据。</p>
+<p>HDFS 实现目标：</p>
+<ul>
+<li>兼容廉价硬件设备</li>
+<li>实现流数据读写</li>
+<li>支持大数据集：小则几百 M 多则几 TB</li>
+<li>支持简单的文件模型：对文件简化，快速批量处理数据，只允许追加不允许修改</li>
+<li>强大的跨平台特性</li>
+</ul>
+<p>HDFS 局限性</p>
+<ul>
+<li>不适合低延迟数据访问：大量数据不能满足实时处理需求（HBase 补足）</li>
+<li>无法高效存储大量小文件：元数据中会出现大量索引结构拖垮性能</li>
+<li>不支持多用户写入及任意修改文件</li>
+</ul>
+<h2 id="HDFS-相关概念"><a href="#HDFS-相关概念" class="headerlink" title="HDFS 相关概念"></a>HDFS 相关概念</h2><p>块（整个 HDFS 中最核心的概念）</p>
+<ul>
+<li>与普通 FS 类似用来降低寻址开销，但是 HDFS 中的块默认为 64MB，相比较大</li>
+<li>MapReduce 以块为单位执行任务，如果块设置较大，则会导致 MapReduce 只有几个任务在执行，发挥不了分布并行的优势</li>
+</ul>
+<p>元数据：包括文件是什么，文件被分为多少块，每个快和文件是怎么映射的，每个块存储在哪个服务器上面</p>
+<p>名称节点（主节点）：整个 HDFS 的集群管家，存储元数据</p>
+<p>名称节点中保存的元数据有两大关键的数据结构</p>
+<ul>
+<li>FsImage：保存系统文件数以及文件树种所有文件和文件夹的元数据<ul>
+<li>文件的复制等级、修改访问时间、访问权限、块大小以及组成文件的块</li>
+<li>具体块在哪个节点上不是由 FsImage 维护的，而是在名称节点和数据节点在运行中实时维护信息，在内存中</li>
+</ul>
+</li>
+<li>EditLog：整个运行过程中对数据进行了类似创建删除何种操作</li>
+</ul>
+<p>每次名称节点启动时，将 FsImage 文件从磁盘加载到内存中去，然后与 EditLog 中合并得到最新的元数据文件，然后替换掉旧版的 FsImage 同时创建一个空的 EditLog。这种添加 EditLog 的目的是 HDFS 非常庞大，运行过程中直接修改大量的 FsImage 会严重拖慢运行效率，而创建一个规模较小的 EditLog 可以优化这个过程。但是在长时间运行中，EditLog 也会不断变大，效率也会变慢，第二名称节点在这时也会发生作用</p>
+<p>第二名称节点有冷备份的作用之外还可以对 EditLog 进行处理，具体做法为：第二名称节点定期的和名称节点进行通讯在某个阶段会请求名称节点停止使用 EditLog 文件，然后创建一个 edits.new 文件，暂时替代 EditLog 的作用。第二名称节点通过 HTTP Get 的方式从名称节点上从 FsImage 和 EditLog 下载到本地完成合并工作后将新的 FsImage 发回名称节点然后完成替换，同时将 edits.new 改为 EditLog。这个过程完成了合并工作和冷备份的效果</p>
+<p>数据节点：具体存储实际数据</p>
+<ul>
+<li>名称节点拿到数据目录以后和数据节点通讯。</li>
+<li>数据节点中的数据实际的被存储到数据节点本地所在的 Linux 文件系统中</li>
+</ul>
+<h2 id="HDFS-体系结构"><a href="#HDFS-体系结构" class="headerlink" title="HDFS 体系结构"></a>HDFS 体系结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frc55bir8tj313q0l5dnj.jpg" alt="HDFS 主从架构"></p>
+<p>HDFS 命名空间：</p>
+<ul>
+<li>目录+文件+块</li>
+<li>且整个 HDFS 只有一个命名空间</li>
+<li>/ + 目录名称访问</li>
+</ul>
+<p>通信协议</p>
+<ul>
+<li>所有通信协议都是构建在 TCP/IP 基础之上</li>
+<li>客户端向名称节点发起 TCP 连接</li>
+<li>集群中名称节点和数据节点之间的交互是专门的数据节点协议进行交互的</li>
+<li>客户端取数据与数据节点交互为远程调用 RPC 实现</li>
+</ul>
+<p>HDFS 架构的局限性</p>
+<ul>
+<li>命名空间限制：命名节点保存在内存中，容纳的对象个数会受限制</li>
+<li>性能瓶颈：整个 DFS 吞吐量受单个名称节点吞吐量影响</li>
+<li>隔离问题：只有一个命名空间导致不同应用之间无法安全隔离</li>
+<li>集群可用性：一旦名称节点故障，整个集群不可用</li>
+</ul>
+<p>以上为 HDFS 1.0 的缺点，在发展过程中，2.0 会设置两个名称节点进行分区管理并支持热备份</p>
+<h2 id="HDFS-存储原理"><a href="#HDFS-存储原理" class="headerlink" title="HDFS 存储原理"></a>HDFS 存储原理</h2><p>数据冗余保存：由于底层构建在廉价计算机上所以容易出故障，所以冗余数据机制要求每个数据都被冗余保存，默认为每个数据块保存 3 份（如果单机配置，冗余只能为 1）。在这种机制之下有几种优点</p>
+<ul>
+<li>加快数据传输速度，加快并行获取数据的速度</li>
+<li>很容易检查错误</li>
+<li>保证数据可靠性</li>
+</ul>
+<p>数据保存策略</p>
+<ul>
+<li>当发生数据块上传过程时冗余因子为 3，存在两个机架的过程。<ul>
+<li>若该过程为内部数据结点发起，则第一副本存放在发起上传的机器，若为外部节点发起则随机挑选一个磁盘和 cpu 性能不满的节点放置第一个副本。</li>
+<li>第二副本则会放到和第一副本不同机架的节点上</li>
+<li>第三副本则放到和第一副本相同机架的节点上</li>
+<li>若冗余因子更大，则剩余副本随机存储</li>
+</ul>
+</li>
+<li>数据读取策略<ul>
+<li>基本策略为就近读取</li>
+<li>而获取距离依靠 HDFS 提供的一个 API 可以获取数据节点所在机架的 ID，客户端也可以调用来获取自己所属机架的 ID</li>
+<li>判断到所有副本所在的数据节点所在的机架如果和客户端机架 ID 一致则选择该节点，否则随机读取</li>
+</ul>
+</li>
+</ul>
+<p>数据错误和恢复</p>
+<ul>
+<li>名称节点出错<ul>
+<li>1.0 中第二名称节点做冷备份出错需要时间重启。2.0 之后热备。然后去得备份的 FsImage 和 EditLog</li>
+</ul>
+</li>
+<li>数据节点出错<ul>
+<li>在 HDFS 运行过程中数据节点会定期不断的向名称节点发送心跳信息，若周期接受不到信息，则标记该数据节点宕机，且将所有在该机器上的数据通过冗余备份发送到其他可用机器上去（负载不均衡的话也会去调整数据块保存位置）。</li>
+</ul>
+</li>
+<li>数据本身出错<ul>
+<li>客户端读取数据会对数据进行校验码校验，校验码在客户端创建数据时生成，当发生数据块校验码不一致时则进行冗余备份的再复制</li>
+</ul>
+</li>
+</ul>
+<h2 id="HDFS-数据读写过程"><a href="#HDFS-数据读写过程" class="headerlink" title="HDFS 数据读写过程"></a>HDFS 数据读写过程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Configuration conf = <span class="keyword">new</span> Configuration();   <span class="comment">//环境配置变量</span></span><br><span class="line">        FileSystem fs = FileSystem.get(conf);       <span class="comment">//FS 实例</span></span><br><span class="line">        Path filename = <span class="keyword">new</span> Path(<span class="string">"hdfs://localhost:9000/user/hadoop/test.txt"</span>);</span><br><span class="line">        FSDataInputStream is = fs.open(filename);</span><br><span class="line">        BufferedReader d = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">        String content = d.readLine();        <span class="comment">//读取文件一行</span></span><br><span class="line">        System.out.println(content);</span><br><span class="line">        d.close();        <span class="comment">//关闭文件</span></span><br><span class="line">        fs.close();        <span class="comment">//关闭 hdfs</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码可以访问到 HDFS，然后进行文件的读取。而上述代码的内部实现原理如下</p>
+<p>Hadoop 中设置了一个 <code>FileSystem</code> 的通用文件系统抽象基类，可以继承来实现具体子类。例如 HDFS 继承实现的 <code>DistributedFileSystem</code><br><code>FileSystem</code> 提供了几种基本方法，其中包括 <code>open</code>、<code>read</code>、<code>close</code><br><code>open()</code> 返回文件输入流 <code>FSDataInputStream</code>，而对于 HDFS 来说会封装一个 <code>DFSDataInputStream</code> 对象。同理<br><code>create()</code> 返回文件输出流 <code>FSDataOutputStream</code> 而对于 HDFS 来说会封装一个 <code>DFSDataOutputStream</code> 对象</p>
+<p>而代码第一行中 conf 环境配置变量的对象的构造方法会加载项目下两个配置文件 core-site.xml 和 hdfs-site.xml 从中获取两个重要参数 fs.defaultFS 用来告诉分布式文件系统的地址，从而知道读取数据的位置，从而 HDFS 内部将 <code>FileSystem</code> 继承为 <code>DistributedFileSystem</code></p>
+<p>而对于用户来说，我们只能知道 Hadoop 提供的前面的类和方法如当发起一次数据块信息获取时调用的<code>FSDataInputStream</code>，而实际上直接与 HDFS 接触的是对象实例化时自动继承的<code>DFSDataInputStream</code>，由该对象内部发起远程过程调用来和名称节点沟通；通过该类的<code>ClientProtocol.getBlocklocations()</code>来询问名称节点数据保存在哪个节点，返回该文件的开始一部分根据距离远近排序的位置信息；获取到数据位置之后调用<code>read()</code>方法与数据节点建立连接读取数据；当结束数据在一个节点的数据读取之后关闭连接，继续调用<code>ClientProtocol.getBlocklocations()</code>查找下一个数据块的位置并返回，然后再次执行<code>read()</code>；直到完成所有数据块的读写；之后调用<code>close()</code>关闭输入流<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcc168maqj311m0jm43c.jpg" alt="HDFS数据读取过程"></p>
+<h1 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h1><p>《大数据时代》维克托·迈尔-舍恩伯格</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/31/ESAIP-Linux/" rel="next" title="ESAIP Linux">
+                <i class="fa fa-chevron-left"></i> ESAIP Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/15/Spark学习笔记/" rel="prev" title="Spark 学习笔记">
+                Spark 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据技术原理与应用学习笔记"><span class="nav-number">1.</span> <span class="nav-text">大数据技术原理与应用学习笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据概述"><span class="nav-number">2.</span> <span class="nav-text">大数据概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#大数据时代"><span class="nav-number">2.1.</span> <span class="nav-text">大数据时代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大数据概念"><span class="nav-number">2.2.</span> <span class="nav-text">大数据概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大数据的关键技术"><span class="nav-number">2.3.</span> <span class="nav-text">大数据的关键技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大数据与云计算、物联网"><span class="nav-number">2.4.</span> <span class="nav-text">大数据与云计算、物联网</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据处理架构"><span class="nav-number">3.</span> <span class="nav-text">大数据处理架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop-概述"><span class="nav-number">3.1.</span> <span class="nav-text">Hadoop 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop-项目结构"><span class="nav-number">3.2.</span> <span class="nav-text">Hadoop 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop-集群的部署和使用"><span class="nav-number">3.3.</span> <span class="nav-text">Hadoop 集群的部署和使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式文件系统-HDFS"><span class="nav-number">4.</span> <span class="nav-text">分布式文件系统 HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-简介"><span class="nav-number">4.1.</span> <span class="nav-text">HDFS 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-相关概念"><span class="nav-number">4.2.</span> <span class="nav-text">HDFS 相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-体系结构"><span class="nav-number">4.3.</span> <span class="nav-text">HDFS 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-存储原理"><span class="nav-number">4.4.</span> <span class="nav-text">HDFS 存储原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-数据读写过程"><span class="nav-number">4.5.</span> <span class="nav-text">HDFS 数据读写过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#书籍推荐"><span class="nav-number">5.</span> <span class="nav-text">书籍推荐</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

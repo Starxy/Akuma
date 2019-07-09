@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OSI 物理层通过网络介质传输构成数据链路层帧的位。 以太网是目前世界上占主导地位的 LAN 技术。以太网在数据链路层和物理层运行。以太网协议标准定义网络通信的许多方面，包括帧格式、帧大小、时序和编码。当消息在以太网络上的主机之间发送时，主机会将消息格式化为标准指定的帧结构。 由于以太网由这些较下层的标准组成，因此可能是 OSI 模型中最容易理解的。OSI 模型将数据链路层的编址、成帧和介质访问功">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 5: Ethernet">
+<meta property="og:url" content="http://starxy.cc/2017/12/17/CCNA-Chapter-5-Ethernet/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="OSI 物理层通过网络介质传输构成数据链路层帧的位。 以太网是目前世界上占主导地位的 LAN 技术。以太网在数据链路层和物理层运行。以太网协议标准定义网络通信的许多方面，包括帧格式、帧大小、时序和编码。当消息在以太网络上的主机之间发送时，主机会将消息格式化为标准指定的帧结构。 由于以太网由这些较下层的标准组成，因此可能是 OSI 模型中最容易理解的。OSI 模型将数据链路层的编址、成帧和介质访问功">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCNA Chapter 5: Ethernet">
+<meta name="twitter:description" content="OSI 物理层通过网络介质传输构成数据链路层帧的位。 以太网是目前世界上占主导地位的 LAN 技术。以太网在数据链路层和物理层运行。以太网协议标准定义网络通信的许多方面，包括帧格式、帧大小、时序和编码。当消息在以太网络上的主机之间发送时，主机会将消息格式化为标准指定的帧结构。 由于以太网由这些较下层的标准组成，因此可能是 OSI 模型中最容易理解的。OSI 模型将数据链路层的编址、成帧和介质访问功">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2017/12/17/CCNA-Chapter-5-Ethernet/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CCNA Chapter 5: Ethernet | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/17/CCNA-Chapter-5-Ethernet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CCNA Chapter 5: Ethernet
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-17 02:24:13" itemprop="dateCreated datePublished" datetime="2017-12-17T02:24:13+08:00">2017-12-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index"><span itemprop="name">CCNA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OSI 物理层通过网络介质传输构成数据链路层帧的位。</p>
+<p>以太网是目前世界上占主导地位的 LAN 技术。以太网在数据链路层和物理层运行。以太网协议标准定义网络通信的许多方面，包括帧格式、帧大小、时序和编码。当消息在以太网络上的主机之间发送时，主机会将消息格式化为标准指定的帧结构。</p>
+<p>由于以太网由这些较下层的标准组成，因此可能是 OSI 模型中最容易理解的。OSI 模型将数据链路层的编址、成帧和介质访问功能与介质的物理层标准分隔开来。以太网标准定义第 2 层协议和第 1 层技术。虽然以太网规格支持不同的介质、带宽以及第 1 层和第 2 层的其他变体，但所有以太网变体的基本帧格式和地址方案是相同的。</p>
+<p>以太网已经从一种共享介质、有争议的数据通信技术发展成为今天的高带宽、全双工技术，本章将分析它的特性和运作。</p>
+<p>总的来说以太网是一个物理层和数据链路层的具体实现，本章笔记所记录的内容与前一章标题类似但是内容上更加具体</p>
+<h1 id="以太网封装"><a href="#以太网封装" class="headerlink" title="以太网封装"></a>以太网封装</h1><p>以太网是在数据链路层和物理层运行的，正如上一章介绍的，以太网标准同时定义第 2 层协议和第 1 层技术。对于第 2 层协议，正如所有 802 IEEE 标准一样，以太网依靠数据链路层的两个单独子层运行，即逻辑链路控制 (LLC) 和 MAC 子层。</p>
+<h2 id="MAC-子层"><a href="#MAC-子层" class="headerlink" title="MAC 子层"></a>MAC 子层</h2><p>以太网 MAC 子层有两项主要职责：</p>
+<ul>
+<li>数据封装</li>
+<li>介质访问控制</li>
+</ul>
+<a id="more"></a>
+<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><p>数据封装过程包括发送前的帧组装和收到帧时的帧解析。在构建帧时，MAC 层会向网络层 PDU 添加帧头和帧尾。</p>
+<p>数据封装提供三项主要功能：</p>
+<ul>
+<li>帧定界 (Frame delimiting) - 成帧过程提供重要的定界符，用于标识组成帧的一组位。这些定界位会对发送节点与接收节点进行同步。</li>
+<li>编址 (Addressing ) - 封装过程包含第 3 层 PDU，还提供数据链路层编址。</li>
+<li>错误检测 (Error detection) - 每个帧中包含一个帧尾，用于检测传输中的任何错误。</li>
+</ul>
+<p>帧的使用有助于比特的发送，因为会把它们组成比特组放在介质中和在接收节点接收。</p>
+<p>Ethernet II 是 TCP/IP 网络中使用的以太网帧格式。在这种格式中帧字段的具体结构和字段大小如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">8 字节</th>
+<th style="text-align:center">6 字节</th>
+<th style="text-align:center">6 字节</th>
+<th style="text-align:center">2 字节</th>
+<th style="text-align:center">46 到 1500 字节</th>
+<th>4 字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">报头</td>
+<td style="text-align:center">目的 MAC 地址</td>
+<td style="text-align:center">源 MAC 地址</td>
+<td style="text-align:center">EhterType</td>
+<td style="text-align:center">数据</td>
+<td>FCS</td>
+</tr>
+<tr>
+<td style="text-align:center">前导码 7 字节、起始帧分节符（SFD，帧首）1 字节</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">用于告知准备接受新帧</td>
+<td style="text-align:center">帧中的地址会跟设备中 MAC 地址检测匹配可以是单播组播广播</td>
+<td style="text-align:center">用于标识发出帧的网卡，必须是单播地址</td>
+<td style="text-align:center">常为 16 进制，0x800 用于 IPV4，0x86DD 用于 IPV6，0x806 用于 ARP</td>
+<td style="text-align:center">包含来自 3 层的 PUD，内含上层的封装信息</td>
+<td>帧校验序列 (FCS) 字段用于检测帧中的错误。它使用循环冗余校验 (CRC)、数据改变可能是由于代表比特的电信号中断所致</td>
+</tr>
+</tbody>
+</table>
+<p>以太网帧大小的最小值为 64 个字节，最大值为 1518 个字节。这包括从“目的 MAC 地址”字段到“帧校验序列 (FCS)”字段的所有字节。在描述帧的大小时，不包含“前导码”字段。</p>
+<p>任何长度小于 64 个字节的帧都被接收站点视为“冲突碎片 (collision fragment)”或“残帧 (runt frame)”而自动丢弃。超过 1500 个字节的数据帧被视为“巨帧 (jumbo)”或“小型巨型帧 (baby giant frames)”。</p>
+<h3 id="介质访问控制"><a href="#介质访问控制" class="headerlink" title="介质访问控制"></a>介质访问控制</h3><p>MAC 子层的第二项职责是介质访问控制。介质访问控制负责将帧放入介质中和从介质中移除帧。顾名思义，它控制对介质的访问。该子层直接与物理层通信。</p>
+<p>以太网的基础逻辑拓扑是一个多路访问总线；因此，各个网段的所有节点（设备）共享介质。以太网是一种网络争用方法。网络争用方法是指一旦有数据需要发送，所有设备都可以尝试通过共享介质传输数据。载波侦听多路访问/冲突检测 (CSMA/CD) 过程用于在半双工以太网 LAN 中检测和解决冲突。当前的以太网 LAN 采用全双工交换机，可使多台设备同时发送和接受，并无任何冲突。</p>
+<h2 id="MAC-地址"><a href="#MAC-地址" class="headerlink" title="MAC 地址"></a>MAC 地址</h2><p>以太网 MAC 地址是一种表示为 12 个十六进制数字（每个十六进制数字为 4 位）的 48 位二进制值。是一个网卡的物理地址，该地址会被永久编码到 ROM 芯片中，因此被称为烧录地址（burned-in address，BIA），在数据链路层封装在帧中。这是设备在以太网中身份的象征。为了避免处理每个帧时产生过多开销，创建了 MAC 地址来标识实际源和目的节点。</p>
+<p>MAC 地址值是 IEEE 为确保每台以太网设备使用全局唯一地址而强制厂商遵守规定的直接结果。IEEE 规定销售以太网设备的任何厂商都要向 IEEE 注册。IEEE 为厂商分配了一个 3 字节（24 位）的代码，称为组织唯一标识符 (Organizationally Unique Identifier，OUI)。</p>
+<p>IEEE 要求厂商遵守两条简单的规定，如图所示：</p>
+<ul>
+<li>分配给网卡或其他以太网设备的所有 MAC 地址都必须使用厂商分配的 OUI 作为前 3 个字节。</li>
+<li>OUI 相同的所有 MAC 地址必须在最后 3 个字节中分配一个唯一值。</li>
+</ul>
+<p>注意：由于生产中或一些虚拟机实施方法中的错误，可能存在重复的 MAC 地址。在以上任一情况下，必须在新网卡或软件中修改 MAC 地址。</p>
+<p>MAC 有三种表示形式：使用破折号、冒号、句点都可以</p>
+<h3 id="单播、组播、广播-MAC-地址"><a href="#单播、组播、广播-MAC-地址" class="headerlink" title="单播、组播、广播 MAC 地址"></a>单播、组播、广播 MAC 地址</h3><p>在以太网中，第 2 层单播、组播和广播通信会使用不同的 MAC 地址。</p>
+<p>单播 MAC 地址是帧从一台发送设备发送到一台目的设备时使用的唯一地址。</p>
+<p>广播数据包中目的 IP 地址为一个主机位全为 1 的 ip 地址作为目的地址，该地址也成为广播地址，而目的 MAC 地址为十六进制（在二进制中是 48 个 1）的 FF-FF-FF-FF-FF-FF 广播 MAC 地址。</p>
+<p>组播 MAC 地址</p>
+<p>源主机用来确定目的 MAC 地址的流程称为地址解析协议 (ARP)。ARP 将在本章后续部分讨论。</p>
+<p>虽然目的 MAC 地址可以是单播、广播或组播地址，但是源 MAC 地址必须始终为单播地址。</p>
+<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>第 2 层以太网交换机使用 MAC 地址做出转发决策。它完全忽视帧的数据部分的协议，例如 IPv4 数据包。交换机仅根据第 2 层以太网 MAC 地址做出转发决策。</p>
+<p>与旧式以太网集线器（它重复除了传入端口以外的所有端口的位）不同，以太网交换机在做出每个帧的转发决策时会查询 MAC 地址表。</p>
+<p>MAC 地址表有时也称为内容可编址内存 (content addressable memory，CAM) 表。</p>
+<p>交换机通过检查端口传入帧的源 MAC 地址来动态构建 MAC 地址表。交换机通过匹配帧中的目的 MAC 地址与 MAC 地址表中的条目来转发帧。</p>
+<p>对进入交换机的每个以太网帧执行下列流程。</p>
+<ul>
+<li>记录每个进入交换机的每个帧的源 MAC 地址和帧进入交换机的端口号<ul>
+<li>如果源 MAC 地址不存在，会将其和传入端口号一并添加到表中。</li>
+<li>如果源 MAC 地址已存在于表中，则交换机会更新该条目的刷新计时器。默认情况下，大多数以太网交换机将条目在表中保留 5 分钟。</li>
+</ul>
+</li>
+</ul>
+<p>注意：如果源 MAC 地址已存在于表中，但是在不同的端口上，交换机会将该地址视为一个新的条目。使用相同的 MAC 地址和最新的端口号来替换该条目。</p>
+<ul>
+<li>转发 – 检查目的 MAC 地址 如果目的 MAC 地址为单播地址，该交换机会看帧中的目的 MAC 地址与 MAC 地址表中的条目是否匹配。<ul>
+<li>如果表中存在该地址，交换机会从指定端口转发帧。</li>
+<li>如果表中不存在该地址，交换机会从除传入端口外的所有端口转发帧。我们将这称为未知单播（unknown unicast）。</li>
+</ul>
+</li>
+</ul>
+<p>注意：如果目的 MAC 地址为广播或组播，该帧将泛洪到除传入端口外的所有端口。</p>
+<h2 id="交换机上的帧转发方法"><a href="#交换机上的帧转发方法" class="headerlink" title="交换机上的帧转发方法"></a>交换机上的帧转发方法</h2><ul>
+<li>存储转发交换，Store-and-forward switching</li>
+<li>直通交换，Cut-through switching</li>
+</ul>
+<h1 id="地址解析协议，ARP"><a href="#地址解析协议，ARP" class="headerlink" title="地址解析协议，ARP"></a>地址解析协议，ARP</h1><p>当数据包在网络之间进行交换时，源 IP 地址和目的 IP 地址都是封装在第三层 UDP 中，不会更改，而 MAC 地址会在每层设备中重新解封封装，在解封后设备会根据目的 ip 地址来确定下一设备的物理信息，当目的 IP 地址处于远程网络中时，则目的 MAC 地址为主机的默认网关（即路由器的网卡）的地址。，而数据流中 IPv4 数据包的 IPv4 地址如何与通往目的地路径中每条链路上的 MAC 地址相关联？这可以通过地址解析协议 (Address Resolution Protocol，ARP) 过程来完成。</p>
+<p>网络中的设备会使用 ARP 确定目的 MAC 地址，ARP 提供两种基本功能：</p>
+<ul>
+<li>将 IP 地址解析为 MAC 地址，</li>
+<li>维护映射表</li>
+</ul>
+<p>也就是说，当数据包发送到要封装入以太网帧的数据链路层时，设备将参照其内存中的表来查找映射至 IPv4 地址的 MAC 地址。如果设备找到 IPv4 地址，其相应的 MAC 地址将作为帧中的目的 MAC 地址。如果找不到该条目，设备会发送一个 ARP 请求。</p>
+<p>在思科路由器上，<code>show ip arp</code> 命令用于显示 ARP 表。</p>
+<p>在 Windows 7 PC 上，<code>arp –a</code> 命令用于显示 ARP 表。</p>
+<h2 id="ARP-请求"><a href="#ARP-请求" class="headerlink" title="ARP 请求"></a>ARP 请求</h2><p>当设备需要与 IPv4 地址关联的 MAC 地址，而它的 ARP 表中没有 IPv4 地址条目时，会发送一个 ARP 请求。</p>
+<p>ARP 消息直接封装到以太网帧中。没有 IPv4 报头。ARP 请求消息包括：</p>
+<ul>
+<li>目的 IPv4 地址 – 这是需要相应的 MAC 地址的 IPv4 地址。</li>
+<li>目的 MAC 地址 – 这是未知 MAC 地址，并在 ARP 请求消息中为空。</li>
+</ul>
+<p>ARP 请求使用以下报头信息封装在以太网帧中：</p>
+<ul>
+<li>目的 MAC 地址 – 这是一种要求 LAN 上的所有以太网网卡接受并处理 ARP 请求的广播地址。</li>
+<li>源 MAC 地址 – 这是 ARP 请求发送方的 MAC 地址。</li>
+<li>类型 - ARP 消息的类型字段为 0x806。该类型字段会通知接收网卡需要将帧的数据部分传递给 ARP 处理。</li>
+</ul>
+<p>因为 ARP 请求属于广播，交换机会将其泛洪到除接收端口外的其他所有端口。LAN 上的所有以太网网卡会处理广播。每台设备必须处理 ARP 请求，以检查目的 IPv4 地址是否与其自己的地址相匹配。路由器不会将广播转发到其他接口。</p>
+<p>LAN 上只有一台设备的 IPv4 地址与 ARP 请求中的目的 IPv4 地址相匹配。所有其他设备将不应答。</p>
+<h2 id="ARP-应答"><a href="#ARP-应答" class="headerlink" title="ARP 应答"></a>ARP 应答</h2><p>只有具有和 ARP 请求中目的 IPv4 地址关联的 IPv4 地址的设备会以 ARP 应答做出响应。ARP 应答消息包括：</p>
+<ul>
+<li>发送方的 IPv4 地址 – 这是发送方的 IPv4 地址，发送方即被请求 MAC 地址的那台设备。</li>
+<li>发送方的 MAC 地址 – 这是发送方的 MAC 地址，即 ARP 请求发送方需要的 MAC 地址。</li>
+</ul>
+<p>ARP 应答使用以下报头信息封装在以太网帧中：</p>
+<ul>
+<li>目的 MAC 地址 – 这是 ARP 请求发送方的 MAC 地址。</li>
+<li>源 MAC 地址 – 这是 ARP 应答发送方的 MAC 地址。</li>
+<li>类型 - ARP 消息的类型字段为 0x806。该类型字段会通知接收网卡需要将帧的数据部分传递给 ARP 处理。</li>
+</ul>
+<p>只有原始发送 ARP 请求的设备会收到单播 ARP 应答。收到该 ARP 应答后，设备会将 IPv4 地址及相应的 MAC 地址添加到自身的 ARP 表中。该 IPv4 地址的数据包现在便可使用其相应的 MAC 地址封装在帧中。</p>
+<p>如果没有设备响应 ARP 请求，就无法创建帧，所以会丢弃数据包。</p>
+<p>ARP 表中的条目具有时间戳。如果设备在时间戳到期时没有从特定设备收到帧，此设备的条目将会从 ARP 表中删除。</p>
+<p>此外，也可以在 ARP 表中输入静态映射条目，但这种情况很少见。静态 ARP 表条目没有到期时间，必须手动删除。</p>
+<p>注意：IPv6 使用与 IPv4 类似的 ARP 流程，称为 ICMPv6 邻居发现。与 IPv4 的 ARP 请求和 ARP 应答类似，IPv6 使用邻居请求和邻居通告消息。</p>
+<h2 id="ARP-问题"><a href="#ARP-问题" class="headerlink" title="ARP 问题"></a>ARP 问题</h2><ul>
+<li>ARP 请求广播带来的网络性能下降</li>
+<li>ARP 欺骗（ARP Spoofing）</li>
+</ul>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>Organizationally Unique Identifier</strong> - a three-byte code that is assigned by IEEE to identify the vendor of a NIC</li>
+<li><strong>physical address</strong> - a Layer 2 address that allows NICs to communicate with each other</li>
+<li><strong>logical address</strong> - a Layer 3 address that identifies both the network and the specific host on that network</li>
+<li><strong>Address Resolution Protocol</strong> - the process that is used to find a Layer 2 address when a Layer 3 address is known</li>
+<li><strong>auto-MDIX</strong> - a feature that detects the type of cable, and configures the interfaces to allow the connection</li>
+<li><strong>store-and-forward switching</strong> - a switching method that receives the entire frame before forwarding</li>
+<li><strong>cut-through switching</strong> - a switching method that begins the forwarding process as soon as enough information has been received to make a forwarding decision</li>
+<li><strong>fast-forward switching</strong> - a cut-through switching method that begins to forward data as soon as the destination address has been received</li>
+<li><strong>fragment-free switching</strong> - a cut-through switching method that begins to forward data after receipt of the first 64 bytes of a frame</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/15/CCNA-Chapter-4-Network-Access/" rel="next" title="CCNA Chapter 4: Network Access">
+                <i class="fa fa-chevron-left"></i> CCNA Chapter 4: Network Access
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/18/CCNA-Chapter-6-Network-Layer/" rel="prev" title="CCNA Chapter 6: Network Layer">
+                CCNA Chapter 6: Network Layer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#以太网封装"><span class="nav-number">1.</span> <span class="nav-text">以太网封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-子层"><span class="nav-number">1.1.</span> <span class="nav-text">MAC 子层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据封装"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介质访问控制"><span class="nav-number">1.1.2.</span> <span class="nav-text">介质访问控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-地址"><span class="nav-number">1.2.</span> <span class="nav-text">MAC 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单播、组播、广播-MAC-地址"><span class="nav-number">1.2.1.</span> <span class="nav-text">单播、组播、广播 MAC 地址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交换机"><span class="nav-number">2.</span> <span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交换机上的帧转发方法"><span class="nav-number">2.1.</span> <span class="nav-text">交换机上的帧转发方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地址解析协议，ARP"><span class="nav-number">3.</span> <span class="nav-text">地址解析协议，ARP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-请求"><span class="nav-number">3.1.</span> <span class="nav-text">ARP 请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-应答"><span class="nav-number">3.2.</span> <span class="nav-text">ARP 应答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-问题"><span class="nav-number">3.3.</span> <span class="nav-text">ARP 问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">4.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

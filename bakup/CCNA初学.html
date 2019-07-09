@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="思科的网络工程师认证，也是我们来到法国这边之后学的计算机网络的课。因为前几节课没去上，又到了不得不上的程度，就随便写点笔记来记一下比较关键的地方。笔记大多数来自于思科学院官方网站。由于考试为英语考试，本篇笔记内的专有名词还需要再另外附上英文  CCNA (Cisco Certified Network Associate)网络组件网络基础设施有三种 设备 介质 服务  设备和介质是网络的物理要素">
+<meta name="keywords" content="计算机网络,基础学习,CCNA">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CCNA 初学">
+<meta property="og:url" content="http://starxy.cc/bakup/CCNA初学.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="思科的网络工程师认证，也是我们来到法国这边之后学的计算机网络的课。因为前几节课没去上，又到了不得不上的程度，就随便写点笔记来记一下比较关键的地方。笔记大多数来自于思科学院官方网站。由于考试为英语考试，本篇笔记内的专有名词还需要再另外附上英文  CCNA (Cisco Certified Network Associate)网络组件网络基础设施有三种 设备 介质 服务  设备和介质是网络的物理要素">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh8qyyvsbj30dx0690t3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh7obn27ej30g603qmxe.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rxskhj30gp07qgme.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh86lznmmj30gs00mwec.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rgvzhj30gp02awef.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rpu0oj30gq02p0sw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh86m1zr5j30gr010wed.jpg">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCNA 初学">
+<meta name="twitter:description" content="思科的网络工程师认证，也是我们来到法国这边之后学的计算机网络的课。因为前几节课没去上，又到了不得不上的程度，就随便写点笔记来记一下比较关键的地方。笔记大多数来自于思科学院官方网站。由于考试为英语考试，本篇笔记内的专有名词还需要再另外附上英文  CCNA (Cisco Certified Network Associate)网络组件网络基础设施有三种 设备 介质 服务  设备和介质是网络的物理要素">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh8qyyvsbj30dx0690t3.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/bakup/CCNA初学.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CCNA 初学 | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">CCNA 初学</h1>
+
+<div class="post-meta">
+  
+  
+
+
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <blockquote>
+<p>思科的网络工程师认证，也是我们来到法国这边之后学的计算机网络的课。因为前几节课没去上，又到了不得不上的程度，就随便写点笔记来记一下比较关键的地方。<br>笔记大多数来自于思科学院官方网站。<br>由于考试为英语考试，本篇笔记内的专有名词还需要再另外附上英文</p>
+</blockquote>
+<h1 id="CCNA-Cisco-Certified-Network-Associate"><a href="#CCNA-Cisco-Certified-Network-Associate" class="headerlink" title="CCNA (Cisco Certified Network Associate)"></a>CCNA (Cisco Certified Network Associate)</h1><h2 id="网络组件"><a href="#网络组件" class="headerlink" title="网络组件"></a>网络组件</h2><h3 id="网络基础设施有三种"><a href="#网络基础设施有三种" class="headerlink" title="网络基础设施有三种"></a>网络基础设施有三种</h3><ul>
+<li>设备</li>
+<li>介质</li>
+<li>服务</li>
+</ul>
+<p>设备和介质是网络的物理要素，即硬件。硬件通常是网络平台的可见组成部分，如笔记本电脑、PC、交换机、路由器、无线接入点或用于连接设备的电缆。</p>
+<p>服务包括人们日常使用的许多常见网络应用程序，如电子邮件托管服务和 Web 托管服务。过程提供的是通过网络定向和移动消息的功能。过程不易觉察，但却是网络运行的关键。</p>
+<h3 id="终端设备"><a href="#终端设备" class="headerlink" title="终端设备"></a>终端设备</h3><p>人们最熟悉的网络设备称为终端设备。</p>
+<p>终端设备是通过网络传输的消息的源或目的地。为了区分不同的终端设备，网络中的每台终端设备都用一个地址加以标识。当一台终端设备发起通信时，会使用目的终端设备的地址来指定应该将消息发送到哪里。</p>
+<h3 id="中间网络设备"><a href="#中间网络设备" class="headerlink" title="中间网络设备"></a>中间网络设备</h3><ul>
+<li>重新生成和重新传输数据信号</li>
+<li>维护有关网络和网际网络中存在哪些通道的信息。</li>
+<li>将错误和通信故障通知其它设备</li>
+<li>发生链路故障时按照备用路径转发数据</li>
+<li>根据优先级别分类和转发消息</li>
+<li>根据安全设置允许或拒绝数据的通行</li>
+</ul>
+<a id="more"></a>
+<h2 id="可靠网络"><a href="#可靠网络" class="headerlink" title="可靠网络"></a>可靠网络</h2><p>随着网络的发展变化，我们发现底层架构必须解决以下四个基本特性才能满足用户的期望：容错能力、可扩展性、服务质量 (QoS)、安全</p>
+<h3 id="容错能力"><a href="#容错能力" class="headerlink" title="容错能力"></a>容错能力</h3><p>人们期望的结果是，Internet 能始终为依赖于它的数百万用户提供服务。这就要求网络架构具有容错能力。容错网络能够降低故障影响，从而保证让受影响的设备数量降至最低。这种网络还能够在发生此类故障时快速恢复。这些网络依赖于消息的源地址与目的地址之间的多条路径。如果一条路径失败，消息可以立即通过不同的链路发送。有多条路径到达目的地被称为<strong>冗余</strong>。</p>
+<p>可靠网络提供冗余的一种方法就是实施<strong>分组交换网络</strong>。分组交换将流量分割成通过共享网络发送的数据包。单个消息，例如一份电子邮件或一段视频流，会分割成多个消息块，称为数据包。每个数据包拥有所需的消息源和目的地的编址信息。网络内的路由器基于当时的网络状况交换数据包。这意味着，单个消息中的所有数据包，可能会采用完全不同的路径到达目的地。在图中，当一条链路发生故障，路由器动态改变路由时，用户并没有发觉而且没有受到影响。</p>
+<p>对于通常用于语音通信的电路交换网络而言，情况并非如此。电路交换网络是指在用户通信之前在源和目的地之间建立专用电路的网络。如果呼叫意外终止，则用户必须发起新连接。</p>
+<h3 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h3><p>可扩展的网络能够迅速扩张来支持新增用户和应用程序，同时还保证丝毫不会影响为现有用户提供的服务。图中显示了一个新网络如何能轻松添加到现有网络中。此外，网络具有扩展能力，因为设计人员可以遵循广为接受的标准和协议。这使得软件和硬件供应商可以集中精力改进产品和服务，而无需为要在网络内运行的新规则集的设计而担忧。</p>
+<h3 id="服务质量-QoS"><a href="#服务质量-QoS" class="headerlink" title="服务质量 (QoS)"></a>服务质量 (QoS)</h3><p>QoS 是用于管理拥塞和确保向所有用户可靠传输内容的主要机制。</p>
+<p>当带宽需求超过可用量时，就会造成拥塞。网络带宽用一秒内传输的位数进行衡量，或表示为位/秒 (bps)。在尝试通过网络实现并发通信时，网络带宽需求可能超过可用范围，从而造成网络拥塞。</p>
+<p>如果流量规模大于可通过网络传输的量，设备会将数据包排队列入内存中，直至有资源可以传输它们。图中，一位用户正在请求一个网页，另一位在打电话。由于部署了 QoS 策略，路由器会管理数据和语音流量的传输，当网络出现拥塞时，将优先处理语音通信。</p>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>网络基础设施、服务以及联网设备上的数据是极为重要的个人和企业资产。必须注意两种网络安全问题：网络基础设施安全性和信息安全性。</p>
+<p>为保障网络基础设施的安全，一方面要保护提供网络连接的设备的安全，另一方面要防止有人未经授权访问网络上的管理软件</p>
+<p>信息安全性是指保护通过网络传输的数据包中包含的信息和联网设备中存储的信息。为了实现网络安全性目标，需要满足三个主要要求：</p>
+<ul>
+<li>机密性 - 数据机密性意味着只有预定和授权收件人可以访问并读取数据。</li>
+<li>完整性 - 数据完整性表示保证信息在从源地址到目的地址的传输过程中不会被更改。</li>
+<li>可用性 - 数据可用性表示保证授权用户及时可靠地访问数据服务。</li>
+</ul>
+<h2 id="Cisco-IOS-Cisco-Internetwork-Operating-System"><a href="#Cisco-IOS-Cisco-Internetwork-Operating-System" class="headerlink" title="Cisco IOS (Cisco Internetwork Operating System )"></a>Cisco IOS (Cisco Internetwork Operating System )</h2><p>所用到的安装程序:<a href="https://s3.amazonaws.com/lr_assets/20002/518210206/14350004/1.0?response-content-type=application/x-msdownload&amp;response-content-disposition=attachment%3Bfilename%3D%22PacketTracer71_64bit_setup_signed.exe%22&amp;AWSAccessKeyId=AKIAJ7XLQRRFSJBP4HZQ&amp;Expires=1510601330&amp;Signature=nt82PR3SbGqgAJuoLxrzDh%2BEdpE%3D" target="_blank" rel="noopener">PacketTracer71_64bit</a></p>
+<p>基础中文使用向导两份：</p>
+<ul>
+<li><p><a href="https://static-course-assets.s3.amazonaws.com/ITN6/zh/course/files/1.2.4.4%20Packet%20Tracer%20-%20Help%20and%20Navigation%20Tips.pka" target="_blank" rel="noopener">1.2.4.4 Packet Tracer - Help and Navigation Tips.pka</a></p>
+</li>
+<li><p><a href="https://static-course-assets.s3.amazonaws.com/ITN6/zh/course/files/1.2.4.5%20Packet%20Tracer%20-%20Network%20Representation.pka" target="_blank" rel="noopener">1.2.4.5 Packet Tracer - Network Representation.pka</a></p>
+</li>
+</ul>
+<h3 id="Cisco-IOS-访问"><a href="#Cisco-IOS-访问" class="headerlink" title="Cisco IOS 访问"></a>Cisco IOS 访问</h3><p>访问方法有三种：<strong>控制台</strong>、<strong>SSH</strong>、<strong>Telnet</strong></p>
+<h3 id="主要命令模式"><a href="#主要命令模式" class="headerlink" title="主要命令模式"></a>主要命令模式</h3><ul>
+<li>命令符前为 <code>&gt;</code> 表示用户 EXEC 模式。</li>
+<li>命令符前为 <code>#</code> 表示特权 EXEC 模式。</li>
+<li>输入<code>enable</code>进入特权 EXEC 模式提示符变为<code>#</code>，返回用户 EXEC 为 <code>disenable</code></li>
+<li>要配置设备，用户必须进入<strong>全局配置模式</strong>，在全局配置模式下有两个子模式：<ul>
+<li><strong>线路配置模式</strong> - 用于配置控制台、SSH、Telnet 或 AUX 访问。</li>
+<li><strong>接口配置模式</strong>  - 用于配置交换机端口或路由器网络接口。</li>
+</ul>
+</li>
+</ul>
+<p>当使用 CLI 时，每种模式由该模式独有的命令提示符来标识。例如，线路配置模式的默认提示符为 <code>Switch(config-line)#</code>，而接口配置模式的默认提示符为 <code>Switch(config-if)#</code>。  </p>
+<ul>
+<li>全局配置模式:在特权 EXEC 模式下输入<code>configure terminal</code><ul>
+<li>接口子配置模式: <code>interface vlan 1</code><ul>
+<li><code>interface fastethernet 0/1</code></li>
+</ul>
+</li>
+<li>控制台端口管理界面：<code>line console 0</code>  <em>0 表示第一个，但通常是唯一个的一个</em></li>
+<li>虚拟终端管理界面： <code>line vty 0 15</code>  <em>表示管理第一条到第十六条 vty 线路</em></li>
+</ul>
+</li>
+<li><code>end</code> 和 <code>Ctrl+Z</code> 可以在任意全局配置模式下返回特权 EXEC 模式。</li>
+</ul>
+<h3 id="命令结构"><a href="#命令结构" class="headerlink" title="命令结构"></a>命令结构</h3><p>Cisco IOS 设备支持许多命令。每个 IOS 命令都有特定的格式或语法，并且只能在相应的模式下执行。常规命令语法为命令后接相应的关键字和参数。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh8qyyvsbj30dx0690t3.jpg" alt><br>关键字 - 操作系统中定义的具体参数（图中的 ip protocols）<br>参数 - 没有预定义；是由用户定义的值或变量。（图中的 192.168.10.5）</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh7obn27ej30g603qmxe.jpg" alt></p>
+<p>上下文帮助：在你需要帮助的时候按下 <code>?</code> ，相当于 Tab 键和 help 命令，自行尝试</p>
+<h3 id="热键和快捷方式"><a href="#热键和快捷方式" class="headerlink" title="热键和快捷方式"></a>热键和快捷方式</h3><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rxskhj30gp07qgme.jpg" alt><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh86lznmmj30gs00mwec.jpg" alt><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rgvzhj30gp02awef.jpg" alt><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh83rpu0oj30gq02p0sw.jpg" alt><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flh86m1zr5j30gr010wed.jpg" alt></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li>配置主机名： <strong>hostname</strong> <em>name</em></li>
+<li>配置特权 EXEC 密码： <strong>enable secret</strong> <em>password</em></li>
+<li>配置用户 EXEC 密码<ul>
+<li>进入相应的子模式执行：<strong>password</strong> <em>password</em></li>
+<li>启动用户 EXEC 登陆：<strong>login</strong></li>
+</ul>
+</li>
+<li>加密密码：<strong>service password-encryption</strong></li>
+<li>标语信息: <strong>banner motd</strong> <em>the message of the day</em></li>
+<li>配置文件命令<ul>
+<li>查看运行配置文件：<strong>show running-config</strong></li>
+<li>查看启动配置文件： <strong>show startup-config</strong></li>
+<li>将运行配置文件保存到启动配置文件： <strong>copy running-config startup-config</strong></li>
+<li>删除启动配置文件： <strong>erase startup-config</strong></li>
+<li>重启配置文件：<strong>reload</strong></li>
+</ul>
+</li>
+<li>分配 ipv4 地址： <strong>ip address</strong> <em>ip-address subnet-mask</em></li>
+<li>接口配置命令启用虚拟接口： <strong>no shutdown</strong></li>
+<li>验证交换机接口状况： <strong>show ip interface brief</strong></li>
+</ul>
+<h4 id="标语信息的作用"><a href="#标语信息的作用" class="headerlink" title="标语信息的作用"></a>标语信息的作用</h4><p>管要求用户输入密码是防止未经授权的人员进入网络的有效方法，但同时必须向试图访问设备的人员声明仅授权人员才可访问设备。出于此目的，可向设备输出中加入一条标语。当控告某人侵入设备时，标语可在诉讼程序中起到重要作用。某些法律体系规定，若不事先通知用户，则既不允许起诉该用户，甚至连对该用户进行监控都不允许。</p>
+<p>因为任何试图登录的人员均可看到标语，因此标语消息应该谨慎措辞。标语的确切内容或措辞取决于当地法律和企业政策。标语应指明仅允许授权人员访问设备。任何暗含“欢迎登录”或“邀请登录”意味的词语都不合适。此外，标语可以涉及影响所有网络用户的信息，例如系统关机安排和其他信息。</p>
+<h4 id="运行配置文件"><a href="#运行配置文件" class="headerlink" title="运行配置文件"></a>运行配置文件</h4><p>有两种系统文件用于存储设备配置：</p>
+<ul>
+<li><strong>启动配置</strong> - 该文件存储在非易失性随机访问存储器 (NVRAM) 中，包含设备在启动或重启时将会使用的所有命令。设备断电后，NVRAM 中的内容不会丢失。</li>
+<li><strong>运行配置</strong> - 该文件存储在随机访问存储器 (RAM) 中，反映当前配置。修改运行配置会立即影响思科设备的运行。RAM 是易失性存储器。如果设备断电或重新启动，则它会丢失所有内容。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>网络介质类型包括：<strong>双绞线铜缆</strong>、<strong>光缆</strong>、<strong>同轴电缆</strong>和<strong>无线</strong>。之后会详细提起<br>交换机有一个或多个交换机虚拟接口 (SVI)。这些是虚拟接口，借助虚拟接口，即可使用 IPv4 通过网络远程管理交换机。每台交换机的默认配置中都“现成”带有一个 SVI。默认 SVI 是接口 <code>VLAN1</code>。<br>要远程访问交换机 SVI 上必须配置 IP 地址和子网掩码。要在交换机上配置 <code>SVI</code>，请使用 <code>interface vlan 1</code> 全局配置命令。<code>Vlan 1</code> 并不是一个实际物理接口，而是一个虚拟接口。然后使用 <code>ip address ip-address subnet-mask</code> 接口配置命令分配 IPv4 地址。最后，使用 no shutdown 接口配置命令启用虚拟接口。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CCNA-Cisco-Certified-Network-Associate"><span class="nav-number">1.</span> <span class="nav-text">CCNA (Cisco Certified Network Associate)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络组件"><span class="nav-number">1.1.</span> <span class="nav-text">网络组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络基础设施有三种"><span class="nav-number">1.1.1.</span> <span class="nav-text">网络基础设施有三种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终端设备"><span class="nav-number">1.1.2.</span> <span class="nav-text">终端设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间网络设备"><span class="nav-number">1.1.3.</span> <span class="nav-text">中间网络设备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠网络"><span class="nav-number">1.2.</span> <span class="nav-text">可靠网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容错能力"><span class="nav-number">1.2.1.</span> <span class="nav-text">容错能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可扩展性"><span class="nav-number">1.2.2.</span> <span class="nav-text">可扩展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务质量-QoS"><span class="nav-number">1.2.3.</span> <span class="nav-text">服务质量 (QoS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全"><span class="nav-number">1.2.4.</span> <span class="nav-text">安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cisco-IOS-Cisco-Internetwork-Operating-System"><span class="nav-number">1.3.</span> <span class="nav-text">Cisco IOS (Cisco Internetwork Operating System )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cisco-IOS-访问"><span class="nav-number">1.3.1.</span> <span class="nav-text">Cisco IOS 访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要命令模式"><span class="nav-number">1.3.2.</span> <span class="nav-text">主要命令模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令结构"><span class="nav-number">1.3.3.</span> <span class="nav-text">命令结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#热键和快捷方式"><span class="nav-number">1.3.4.</span> <span class="nav-text">热键和快捷方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">1.3.5.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标语信息的作用"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">标语信息的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行配置文件"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">运行配置文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,3482 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta name="keywords" content="Starxy Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Starxy&#39;s Blog">
+<meta property="og:url" content="http://starxy.cc/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Starxy&#39;s Blog">
+<meta name="twitter:description" content="算法爱好者/Linux初学者笔记基本随性写，欢迎戳下方联系">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2019/02/11/使用-J1800-工控板搭建家用服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/11/使用-J1800-工控板搭建家用服务器/" class="post-title-link" itemprop="http://starxy.cc/index.html">使用 J1800 工控板搭建家用服务器</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-11 15:47:30" itemprop="dateCreated datePublished" datetime="2019-02-11T15:47:30+08:00">2019-02-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过程。</p>
+<h2 id="使用-Certbot-对动态解析域名开启-HTTPS"><a href="#使用-Certbot-对动态解析域名开启-HTTPS" class="headerlink" title="使用 Certbot 对动态解析域名开启 HTTPS"></a>使用 Certbot 对动态解析域名开启 HTTPS</h2><p>动态域名的解决方案就很随意了，现在有很多成熟的动态 ip 解析办法，我手里自有一个域名，所以只需要检测 ip 地址变更的时候向 dnspod 提交变更解析的申请即可。详细文档可以参考 <a href="https://www.dnspod.cn/docs/index.html" target="_blank" rel="noopener">dnspod api</a>。</p>
+<p>对于家用的宽带，普遍的情况是运营商禁用了常用的低位端口，22、80、443 这些端口不用考虑根本不可能开放的。而 Certbot 默认情况验证方式为：</p>
+<ul>
+<li>certbot 程序在 web 目录的根目录下放置一个文件。</li>
+<li>letsencrypt 的服务器通过域名来访问这个文件，来验证你申请的域名是属于你的</li>
+</ul>
+<p>然而默认是通过 80/443 端口来访问，所以在家庭带宽情况下该验证方法就失效了。我们可以通过修改域名 DNS 的 TXT 记录来验证域名</p>
+<p>运行 <code>sudo certbot --manual --preferred-challenges dns certonly</code> 会要求你输入需要启用 HTTPS 的域名然后同意记录本机 ip 后弹出以下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.example.com with the following value:</span><br><span class="line"></span><br><span class="line">z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</span><br><span class="line"></span><br><span class="line">Once this is deployed,</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
+<p>根据上述提示，修改为于域名添加一个 <code>TXT</code> 记录，主机记录为 <code>_acme-challenge</code>，记录值为上述提示的字符串 <code>z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</code>。等到域名生效之后在命令行中按回车继续。等待 letsencrypt 验证成功即可。</p>
+<p>该中方法不支持 <code>cerbot renew</code>，请等到域名快过期后（三个月）手动再次执行上述操作，或者手动编写脚本来对 dns 值进行自动修改。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/02/11/使用-J1800-工控板搭建家用服务器/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/21/技术资料分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/21/技术资料分享/" class="post-title-link" itemprop="http://starxy.cc/index.html">技术资料分享</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-21 13:43:07" itemprop="dateCreated datePublished" datetime="2018-12-21T13:43:07+08:00">2018-12-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="技术资料分享"><a href="#技术资料分享" class="headerlink" title="技术资料分享"></a>技术资料分享</h1><p>内容大部分来自 <a href="http://www.ruanyifeng.com/blog" target="_blank" rel="noopener">阮一峰个人网站</a></p>
+<ul>
+<li>软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录</li>
+<li>文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述</li>
+<li>资源：存档分享性质的资源</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/12/21/技术资料分享/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/14/使用-Git-进行有效的项目管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/14/使用-Git-进行有效的项目管理/" class="post-title-link" itemprop="http://starxy.cc/index.html">使用 Git 进行有效的项目管理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-14 10:34:29" itemprop="dateCreated datePublished" datetime="2018-12-14T10:34:29+08:00">2018-12-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h1><blockquote>
+<p>首先理解以下概念对之后的版本和分支管理有很大的帮助<br>该部分内容来自 <a href="https://git-scm.com/book/zh" target="_blank" rel="noopener">git-scm 中文手册</a></p>
+</blockquote>
+<h2 id="直接记录快照，而非差异比较"><a href="#直接记录快照，而非差异比较" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h2><p>Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。<br>除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。</p>
+<p><img src="http://ddns.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png" alt="deltas"></p>
+<p>Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 Git 对待数据更像是一个<strong>快照流</strong>。</p>
+<p><img src="http://ddns.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png" alt="snapshots"></p>
+<p>在之后讨论分支管理的时候，就能体会到这种管理方式带来的益处</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/12/14/使用-Git-进行有效的项目管理/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/12/APScheduler-User-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/12/APScheduler-User-guide/" class="post-title-link" itemprop="http://starxy.cc/index.html">APScheduler User guide</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-12 09:07:53" itemprop="dateCreated datePublished" datetime="2018-12-12T09:07:53+08:00">2018-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>全文译自 APScheduler 官方文档<br>原文地址：<a href="https://apscheduler.readthedocs.io/en/latest/userguide.html" target="_blank" rel="noopener">https://apscheduler.readthedocs.io/en/latest/userguide.html</a></p>
+</blockquote>
+<h1 id="APScheduler-用户指南"><a href="#APScheduler-用户指南" class="headerlink" title="APScheduler 用户指南"></a>APScheduler 用户指南</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首选安装方式为通过 <code>pip</code> 安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install apscheduler</span><br></pre></td></tr></table></figure>
+<p>你可以下载并运行 <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">get-pip.py</a> 来轻易的安装 <code>pip</code></p>
+<p>某些原因下，<code>pip</code> 不能工作，你可以从 PypI 手动下载 <a href="https://pypi.python.org/pypi/APScheduler/" target="_blank" rel="noopener">APScheduler 包文件</a>，然后完成安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>包文件中包含了名为 <code>example</code> 的文件夹，可以在该文件夹下找到 APScheduler 的多种使用样例。样例同样也可以 <a href="https://github.com/agronholm/apscheduler/tree/master/examples/?at=master" target="_blank" rel="noopener">在线浏览</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>APSchedule 有四种基本的组件</p>
+<ul>
+<li>触发器（triggers）</li>
+<li>作业存储器（job stores）</li>
+<li>执行器（executors）</li>
+<li>调度器（schedulers）</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/12/12/APScheduler-User-guide/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/11/27/弱类型-强类型-动态类型-静态类型-之间的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/27/弱类型-强类型-动态类型-静态类型-之间的区别/" class="post-title-link" itemprop="http://starxy.cc/index.html">弱类型 强类型 动态类型 静态类型 之间的区别</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-27 10:35:24" itemprop="dateCreated datePublished" datetime="2018-11-27T10:35:24+08:00">2018-11-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h1><ul>
+<li><strong>编译时知道变量类型的是静态类型，反之为动态类型。</strong></li>
+<li>静态类型在处理类型错误时是运行错误，而动态类型为运行时错误</li>
+<li><p>比如 JavaScript 中 <code>var a = b.getName()</code> 是动态类型的，运行时才能根据 <code>getName()</code> 的返回值确定<code>a</code>的变量类型</p>
+</li>
+<li><p><strong>不允许隐式类型转换的为强类型，反之为弱类型</strong></p>
+</li>
+<li>比如 C++ 中 int 可以和 double 之间进行隐式的类型转换，haskell 的 int 就不能变成 double</li>
+</ul>
+<p>但是根据这两种定义我们会发现有这种情况的产生：<br>一般来说我们认为：Python 为强类型语言，C/C++为弱类型语言，但是 Python 中同样支持 int 与 double 之间的隐式类型转换，根据定义 Python 反而为弱类型语言。<br>在这种情况下引入下一节的定义更为的妥善。而对 Python 语言类型的解释可以参看下面的链接</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/20224705" target="_blank" rel="noopener">如何理解编程语言（例如 Python）的强类型和动态连编？</a></li>
+<li><a href="https://www.zhihu.com/question/43498005" target="_blank" rel="noopener">为什么说 Python 是强类型语言？</a></li>
+</ul>
+<h1 id="与编译器行为有关的定义"><a href="#与编译器行为有关的定义" class="headerlink" title="与编译器行为有关的定义"></a>与编译器行为有关的定义</h1><p>在描述更为科学的类型顶一下让我们先引入这些概念</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li><strong>Program Errors</strong><ul>
+<li><strong>trapped errors</strong> ： 导致程序终止执行。如除 0、Java 中数组越界访问</li>
+<li><strong>untrapped errors</strong>： 出错后继续执行，但可能出现任意行为。如 C 里的缓冲区溢出、Jump 到错误地址</li>
+</ul>
+</li>
+<li><strong>Forbidden Behaviors</strong>： 语言设计时，可以定义一组 forbidden behaviors. 必须包括所有 untrapped errors, 可能包含 trapped errors.</li>
+<li><strong>Well behaved</strong>： 如果程序执行不可能出现 forbidden behaviors, 则为 well behaved。</li>
+<li><strong>ill behaved</strong>：否则为 ill behaved</li>
+</ul>
+<p>这几个概念之间的关系如下：<br><img src="http://ddns.starxy.cc:8877/41/2d22e1622866e2acfc6f0fdee8b540cd2cb6df.jpg" alt="基本概念关系"></p>
+<h2 id="具体定义"><a href="#具体定义" class="headerlink" title="具体定义"></a>具体定义</h2><ul>
+<li><strong>强、弱类型</strong></li>
+<li>如果一个语言的所有程序都为 well behaved，即不可能出现 forbidden behaviors，则该语言为强类型</li>
+<li><p>如果一个语言出现了 ill behaved，比如 C 语言的缓冲区溢出，属于 trapped errors，则该语言为弱类型</p>
+</li>
+<li><p><strong>静态、动态类型</strong></p>
+</li>
+<li>如果在编译期间拒绝了 ill behaved 程序，则为静态类型</li>
+<li>如果在运行期间拒绝 ill behaved 程序，则为动态类型</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，目前在网络上能查到的相关定义大体来说就是如上所说，当然显而易见的是，如果存在一个程序有 untrapeed errors 行为，那么也就是说编译器没有阻止这种行为的发生，也就是没有在编译期间拒绝ill behaved程序，所以弱类型静态语言是怎么产生的呢。<br>这个问题之后再看吧。</p>
+<p>常见的语言类型划分</p>
+<p><img src="http://ddns.starxy.cc:8877/e6/2463fe3f45ade40ae6ddc52a9b1113e778cb20.jpg" alt="常见语言类型划分"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/09/26/图像处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/26/图像处理/" class="post-title-link" itemprop="http://starxy.cc/index.html">图像处理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-26 13:56:58" itemprop="dateCreated datePublished" datetime="2018-09-26T13:56:58+08:00">2018-09-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">14k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>该文章为计算机图形图像处理选修课笔记</p>
+</blockquote>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
+<li>数字图像处理为使用<strong>像素</strong>作为基本构成单位</li>
+<li>图像处理可以分为三个层级<ul>
+<li>低级处理：输入输出均为图像；比如图像降噪，对比度增强，锐化等</li>
+<li>中级处理：输入为图像但输出为图像的特征；比如图像边缘提取，使计算机更方便的对图像进行处理</li>
+<li>高级处理：对图像内容的理解：人脸识别，指纹识别</li>
+</ul>
+</li>
+<li>各类图像都是由<strong>照射源</strong>和形成图像的<strong>场景</strong>元素 对光能的反射或吸收相结合而产生</li>
+<li>数字图像以像素对应的灰度值，反应对应像素的颜色， 一个数值表示一个颜色</li>
+<li>灰度值的典型取值范围是 2 的整数次幂，目前最常用的值是 256 即 0-255</li>
+<li>黑白图像采用单通道即可描述，而彩色图像需要三通道构成，最常见的为 RGB 图，即图像三原色</li>
+</ul>
+<h2 id="BMP-文件格式"><a href="#BMP-文件格式" class="headerlink" title="BMP 文件格式"></a>BMP 文件格式</h2><ul>
+<li>BMP 文件由文件头和数据区域构成，其中文件头保存文件信息，图像信息，调色板数据。数据区域保存图像数据</li>
+<li>文件信息<ul>
+<li>WORD BMPid BMP 文件标志，其固定值为 0x4d42 即 BM</li>
+<li>DWORD FileSize 文件大小，以字节为单位。</li>
+<li>WORD Reserved1； BMP 文件保留字，必须为 0</li>
+<li>WORD Reserved2； BMP 文件保留字，必须为 0</li>
+<li>DWORD ImageOﬀset； 图像数据的起始位置相对于 文件开头的偏移量</li>
+</ul>
+</li>
+<li>图像信息<ul>
+<li>DWORD HeaderSize； BMP 图像信息大小 (40 或 12)， 以字节为单位</li>
+<li>DWORD ImageWidth； BMP 图像宽度，以像素为单位</li>
+<li>DWORD ImageHeight； BMP 图像高度，以像素为单位</li>
+<li>WORD EquipLevel； 目标设备的级别 (色彩平面数)， 固定为 1</li>
+<li>WORD BitsPerPixel； 每个像素所需要的位数，1，4， 8，24</li>
+<li>DWORD EncodeType； 压 缩 类 型， 0(不 压 缩)， 1(BI RLE8)，2(BI RLE4)</li>
+<li>DWORD ImageSize； BMP 位图大小，以字节为单位</li>
+</ul>
+</li>
+<li>调色板数据<ul>
+<li>BYTE rgbBlue； 蓝色的亮度值，此值 0-255</li>
+<li>BYTE rgbGreen； 绿色的亮度值。此值 0-255</li>
+<li>BYTE rgbRed； 红色的亮度值。此值 0-255</li>
+<li>BYTE rgbReserved； 此值必须 0</li>
+</ul>
+</li>
+<li>调色板数据紧跟在图像信息之后，用于说明位图颜色，每个结构体是由四个域组成</li>
+<li>若不是真彩色图像，表项的个数与图像使用的颜色个数相同。每一项代表了一个颜色</li>
+<li>若图像为真彩色，每个像素所占的位数 BitPerPixel=24 则图像数据每三个字节代表了一个像素，这三个字节分别定义了 RGB 的亮度，所以省去了调色板</li>
+<li>图像数据<ul>
+<li>当 biBitCount=1 时，图像数据中的每个字节代表 8 个 像素</li>
+<li>当 biBitCount=4 时，图像数据中的每个字节代表 2 个 像素</li>
+<li>当 biBitCount=8 时，图像数据中的每个字节代表 1 个 像素</li>
+<li>当 biBitCount=24 时，图像数据中的每 3 个字节代 表 1 个像素</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/26/图像处理/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/Spark学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/05/15/Spark学习笔记/" class="post-title-link" itemprop="http://starxy.cc/index.html">Spark 学习笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-15 21:23:44" itemprop="dateCreated datePublished" datetime="2018-05-15T21:23:44+08:00">2018-05-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Spark-概述"><a href="#Spark-概述" class="headerlink" title="Spark 概述"></a>Spark 概述</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h2 id="Spark-与-Scala"><a href="#Spark-与-Scala" class="headerlink" title="Spark 与 Scala"></a>Spark 与 Scala</h2><p>Spark 为一门用 Scala 开发的大数据框架，成名类似于 Hadoop，Spark 在 2014 年刷新了 Hadoop 之前保持的 1TB 数据基准排序的记录，到现在成为了一个基于内存计算的大数据并行计算框架，可用于构建大型的、低延迟的数据分析应用。</p>
+<p>Spark 特点</p>
+<ul>
+<li>运行速度快：使用 DAG 执行引擎来进行作业调度，效率要比 MapReduce 高效的多</li>
+<li>容易使用：支持多种编程方式</li>
+<li>通用性：Spark 提供了完整而强大的技术栈<ul>
+<li>内存计算 Spark Core</li>
+<li>包括 SQL 查询分析 Spark SQL</li>
+<li>流式计算 Spark Streaming</li>
+<li>机器学习 Spark MLib</li>
+<li>图算法 GraphX</li>
+</ul>
+</li>
+<li>运行模式多样</li>
+</ul>
+<p>Scala 语言是一门现代的多范式编程语言（比如函数式、面向对象、过程式），平滑的集成了面向对象和函数式编程两种风格可以运行于 Java 平台（JVM）之上。</p>
+<p>Scala 特性</p>
+<ul>
+<li>强大的并发性，支持函数式编程，支持分布式系统</li>
+<li>语法简洁，提供优雅 API</li>
+<li>Scala 兼容 Java，且能融入到 Hadoop 生态圈</li>
+<li>提供 REPL（交互式解释器），提高开发效率</li>
+</ul>
+<h2 id="Spark-与-Hadoop-的对比"><a href="#Spark-与-Hadoop-的对比" class="headerlink" title="Spark 与 Hadoop 的对比"></a>Spark 与 Hadoop 的对比</h2><p>Hadoop 的缺点</p>
+<ul>
+<li>表达能力有限：不是所有应用都能用 Map 和 Reduce 表达</li>
+<li>磁盘 IO 开销较大</li>
+<li>延迟高</li>
+<li>任务之间衔接涉及到 IO 开销</li>
+<li>前一个任务完成前其他任务无法开始。难以胜任复杂、多阶段的任务计算</li>
+</ul>
+<p>Spark 相比 Hadoop MapReduce 的优点</p>
+<ul>
+<li>计算模式属于 MapReduce 但提供多种数据集操作类型是编程模型更灵活</li>
+<li>Spark 提供内存计算，迭代计算不需要读写磁盘</li>
+<li>Spark 基于 DAG 任务调度机制</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/15/Spark学习笔记/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/大数据相关学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/05/15/大数据相关学习笔记/" class="post-title-link" itemprop="http://starxy.cc/index.html">大数据相关学习笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-15 16:01:50" itemprop="dateCreated datePublished" datetime="2018-05-15T16:01:50+08:00">2018-05-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="大数据技术原理与应用学习笔记"><a href="#大数据技术原理与应用学习笔记" class="headerlink" title="大数据技术原理与应用学习笔记"></a>大数据技术原理与应用学习笔记</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h1 id="大数据概述"><a href="#大数据概述" class="headerlink" title="大数据概述"></a>大数据概述</h1><h2 id="大数据时代"><a href="#大数据时代" class="headerlink" title="大数据时代"></a>大数据时代</h2><p>第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的<br>这次信息浪潮的基础技术支撑是：存储、计算、网络<br>数据产生方式也经历了三个阶段的发展：</p>
+<ul>
+<li>运营师系统阶段——由运营式系统生成</li>
+<li>用户原创内容阶段——博客微博</li>
+<li>感知式系统阶段——物联网时代各种传感器设备</li>
+</ul>
+<h2 id="大数据概念"><a href="#大数据概念" class="headerlink" title="大数据概念"></a>大数据概念</h2><p>大数据的 4V：</p>
+<ul>
+<li>Volume 大量化：数据爆炸</li>
+<li>Veloity 多样化：结构化数据（关系数据库）10%、非结构化数据（图形图像）90%</li>
+<li>Variety 快速化：从数据生成到消耗，时间窗口非常小，可用于生成决策的时间非常短</li>
+<li>Value 价值密度低</li>
+</ul>
+<p>到现在科学理论的四种范式：实验、理论、计算、数据驱动<br>思维方式发生了三种改变：全样而非抽样、效率而非精确（因为全样分析误差不会被放大导致不需要追求精度、追求时效性）、相关而非因果</p>
+<h2 id="大数据的关键技术"><a href="#大数据的关键技术" class="headerlink" title="大数据的关键技术"></a>大数据的关键技术</h2><p>大数据的技术层次：数据采集、数据存储与管理、数据处理与分析、数据隐私与安全<br>数据存储与管理、数据处理与分析代表了最核心的两大技术：分布式存储和分布式处理</p>
+<p>分布式数据库：BigTable<br>分布式文件系统：GFS<br>分布式并行处理技术：MapReduce </p>
+<p>计算模式：</p>
+<ul>
+<li>批处理计算：同时处理大量数据进行批量处理，不可能实现秒级相应与交互式计算——MapReduce（典型代表）、Spark（实时性比 MapReduce 更好，能更好的执行迭代运算)</li>
+<li>流计算：专门对流数据进行的计算，实现秒级响应——S4、Storm、Flume</li>
+<li>图计算：高效处理图结构——Google Pregel</li>
+<li>查询分析计算：交互式查询分析高时效性——Dremel、Hive、Cassandra </li>
+</ul>
+<h2 id="大数据与云计算、物联网"><a href="#大数据与云计算、物联网" class="headerlink" title="大数据与云计算、物联网"></a>大数据与云计算、物联网</h2><p>一切云计算解决了两个问题：分布式存储和分布式处理<br>云计算典型特征：虚拟化、多租户<br>云计算分类：共有云、混合云、私有云<br>IaaS：基础设施即服务、PaaS：平台即服务、SaaS：软件即服务</p>
+<p>物联网（IoT：The Internet of Things）万物互联</p>
+<ul>
+<li>应用层：物联网应用</li>
+<li>处理层：业务支撑平台。数据处理</li>
+<li>网络层：电信网、互联网等等，起到了信息传输的作用</li>
+<li>感知层：传感器、RFID网络。数据收集</li>
+</ul>
+<p>关键技术：</p>
+<ul>
+<li>识别技术</li>
+<li>感知技术</li>
+</ul>
+<h1 id="大数据处理架构"><a href="#大数据处理架构" class="headerlink" title="大数据处理架构"></a>大数据处理架构</h1><h2 id="Hadoop-概述"><a href="#Hadoop-概述" class="headerlink" title="Hadoop 概述"></a>Hadoop 概述</h2><p>HDFS 是 GFS 的开源实现。<br>Hadoop 把谷歌提出的两大框架融入到自己平台.<br>具有高可靠性，部分机器故障可继续提供服务（冗余副本机制）<br>高效型<br>可扩展性,可不断在集群中添加机器<br>成本低</p>
+<h2 id="Hadoop-项目结构"><a href="#Hadoop-项目结构" class="headerlink" title="Hadoop 项目结构"></a>Hadoop 项目结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frc3rl031sj30xv0l3tf5.jpg" alt="Hadoop2.0 项目结构"><br>HDFS：分布式文件系统<br>YARN：资源管理和调度框架。负责调度内存 CPU 带宽等计算资源<br>MapReduce：2.0 以前做实时计算，2.0 以后做离线计算和批处理<br>Tez：运行在 YARN 之上的下一代 Hadoop 查询处理框架。把很多 MapReduce 作业进行分析优化，构成 DAG（保证获得最好的处理效率，分清先后顺序）<br>Sprak：类似于 MapReduce 的通用并行框架。但是 Spark 是基于内存的运算，而 MapReduce 是基于磁盘的<br>Hive：Hadoop 上的数据仓库，专门用于企业决策分析，可以把大量的历史数据存在数据仓库中来进行多维度分析。用 SQL 语句书写，但是会转换成 MapReduce 作业来执行<br>Pig：流数据处理，轻量级分析、基于 Hadoop 的大规模数据分析平台，提供类似 SQL 的查询语言 Pig Latin<br>Oozie：作业调度系统<br>ZooKeeper：分布式协调一致性服务，提供分布式锁机群管理<br>HBase：分关系型分布式数据库，面向列存储，执行随即读写和实时应用<br>Flume：日志收集分析框架<br>Sqoop：用于在 Hadoop 与传统数据库之间进行数据传递完成数据导入和导出</p>
+<h2 id="Hadoop-集群的部署和使用"><a href="#Hadoop-集群的部署和使用" class="headerlink" title="Hadoop 集群的部署和使用"></a>Hadoop 集群的部署和使用</h2><p>HDFS 两大组件：</p>
+<ul>
+<li>集群节点：NameNode</li>
+<li>数据节点：DataNode</li>
+</ul>
+<p>一个 NameNode 和多个 DataNode 构成一个分布式文件系统</p>
+<p>MapReduce 计算框架两大组件（2.0 以后改用为 YARN，不存在两种 Tracker）：</p>
+<ul>
+<li>JobTracker：负责对 MapReduce 作业进行管理，将一个作业拆分成多个小作业分发</li>
+<li>TaskTracker：部署在不同的机器上，负责跟踪执行部分小作业</li>
+</ul>
+<p>SecondaryNameNode 冷备份</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/15/大数据相关学习笔记/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/31/ESAIP-Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/12/31/ESAIP-Linux/" class="post-title-link" itemprop="http://starxy.cc/index.html">ESAIP Linux</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-31 12:49:47" itemprop="dateCreated datePublished" datetime="2017-12-31T12:49:47+08:00">2017-12-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本篇文章主要为 1 月 4 号的 linux 考试所准备的。因为内容不多，打算一个页面写完整个课程内容</p>
+</blockquote>
+<h1 id="Linux-Basis"><a href="#Linux-Basis" class="headerlink" title="Linux Basis"></a>Linux Basis</h1><!-- - basic command
+    - `passwd`
+    - `su`
+    - sudo
+    - id
+    - nano
+    - vim
+    - gedit
+    - whatis
+    - --help
+    - man
+
+
+
+# File System
+
+- personal
+    - /home/username
+- user executables
+    - /bin
+    - /usr/bin
+    - /usr/local/bin
+- system executables
+    - /sbin
+    - /usr/sbin
+    - /usr/local/sbin
+- configuration
+    - /etc
+- temporary files
+    - /tmp
+- core
+    - /boot
+- server data
+    - /var
+    - /srv
+- server information
+    - /proc
+    - /sys
+- shared libraries
+    - /lib
+    - /usr/lib
+    - /usr/local/lib -->
+<h2 id="Structure-of-Disk"><a href="#Structure-of-Disk" class="headerlink" title="Structure of Disk"></a>Structure of Disk</h2><p><code>硬盘的物理结构一般由磁头与碟片、电动机、主控芯片与排线等部件组成；当主电动机带动碟片旋转时，副电动机带动一组磁头到相对应的碟片上并确定读取正面还是反面的碟面，磁头悬浮在碟面上画出一个与碟片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容；</code></p>
+<p>A hard disk drive platter (or disk) is the circular disk on which magnetic data is stored in a hard disk drive. Platter is the most important thing on HDD.</p>
+<ul>
+<li>Sector<ul>
+<li>a sector is a subdivision of a track on a magnetic disk or optical disc. Each sector stores a fixed amount of user-accessible data, traditionally 512 bytes for hard disk drives (HDDs) and 2048 bytes for CD-ROMs and DVD-ROMs. Newer HDDs use 4096-byte (4 KiB) sectors, which are known as the Advanced Format (AF).The sector is the minimum storage unit of a hard drive.</li>
+</ul>
+</li>
+<li>Track<ul>
+<li>The tracks are the thin concentric circular strips of sectors. At least one head is required to read a single track. With respect to disk geometries the terms track and cylinder are closely related. For a single or double sided floppy disk track is the common term; and for more than two heads cylinder is the common term. Strictly speaking a track is a given <code>CH</code> combination consisting of <code>SPT</code> sectors, while a cylinder consists of <code>SPT×H</code> sectors. Tracks are subdivided into blocks (or sectors, pages)</li>
+</ul>
+</li>
+<li>Cylinders<ul>
+<li>The concept is concentric, hollow, cylindrical slices through the physical disks (platters), collecting the respective circular tracks aligned through the stack of platters. As usually, cylinder is the minmum unit for File System.</li>
+</ul>
+</li>
+</ul>
+<p>In a word, Sector is the minmum unit, many sectors on the same circular make up a track, and many track on different radius make up a platter. Cylinder is a set of Tracks which on different platters but has the same radius.</p>
+<h3 id="Partition-table"><a href="#Partition-table" class="headerlink" title="Partition table"></a>Partition table</h3><p>In fact, A new HDD is seems like a Log, you need to cut the log into different section to do next job, and you also remember which section is used for what. Partition table is the same reasion.</p>
+<p>A partition is a fixed-size subset of a disk drive which is treated as a unit by the operating system.[1] A partition table is a table maintained on disk by the operating system describing the partitions on that disk.</p>
+<p>The terms partition table and partition map are most commonly associated with the MBR partition table of a Master Boot Record (MBR) in IBM PC compatibles, but it may be used generically to refer to other “formats” that divide a disk drive into partitions, such as: GUID Partition Table (GPT)</p>
+<p>Partitions can be created, resized, or deleted. This is called disk partitioning. It is usually done during the installation of an operating system, however it is sometimes possible to make changes to the partitions even after the operating system has been installed.</p>
+<p>The organization of the partition table in the MBR limits the maximum addressable storage space of a disk to 2 TiB (232 × 512 bytes).</p>
+<h4 id="MBR-Master-Boot-Record"><a href="#MBR-Master-Boot-Record" class="headerlink" title="MBR, Master Boot Record"></a>MBR, Master Boot Record</h4><p>A master boot record is a special type of boot sector at the very beginning of partitioned computer mass storage devices with IBM PC-compatible systems and beyond.</p>
+<p>The MBR holds the information on how the logical partitions, containing filesystems, are organized on that medium.The MBR also contains executable code to function as a loader for the installed operating system—usually by passing control over to the loader’s second stage, or in conjunction with each partition’s volume boot record (VBR). This MBR code is usually referred to as a boot loader.</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fn2tt4vzh5j30fa0not9b.jpg" alt></p>
+<p>For one disk :</p>
+<ul>
+<li>Only four Priamry partition.</li>
+<li>Support one Extended partition, a special primary partition type used as a container to hold other partitions</li>
+<li>Extended partition can create unlimited logical partition.</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/12/31/ESAIP-Linux/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/" class="post-title-link" itemprop="http://starxy.cc/index.html">CCNA Chapter 11: Build a Small Network</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-20 15:59:44" itemprop="dateCreated datePublished" datetime="2017-12-20T15:59:44+08:00">2017-12-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index"><span itemprop="name">CCNA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本课程到目前为止，已经介绍了数据网络为以人为本的网络提供的服务，阐明了 OSI 模型各层的功能和 TCP/IP 协议的工作原理，并深入研究了常用 LAN 技术 — 以太网。接下来，我们要介绍如何将这些要素组合成能够正常运行的网络。</p>
+<ul>
+<li>Each application or network service uses protocols, which define the standards and data formats to be used. Without protocols, the data network would not have a common way to format and direct data.</li>
+<li>To scale a network, several elements are required:<ul>
+<li>Network documentation - physical and logical topology</li>
+<li>Device Inventory - list of devices that use or make up the network </li>
+<li>Budget - Itemized IT budget, including fiscal year equipment purchasing budget</li>
+<li>Traffic analysis - protocols, applications, and services and their respective traffic requirements should be documented</li>
+</ul>
+</li>
+<li>Executive timeouts allow the Cisco device to automatically disconnect users after they have been idle for the specified time. Console, vty, and aux ports can be configured with executive timeouts.</li>
+<li><code>ipconfig /displaydns</code> show any cached DNS entries for this web page</li>
+<li>Traceroute uses the ICMP (Internet Control Message Protocol) to send and receive echo-request and echo-reply messages.</li>
+<li>A firewall is one of the most effective security tools for protecting internal network users from external threats.  A firewall resides between two or more networks, controls the traffic between them, and helps prevent unauthorized access. A host intrusion prevention system can help prevent outside intruders and should be used on all systems.</li>
+<li>The <code>show file systems</code> command displays all of the available file systems on the device. If usbflash0: appears then the router recognizes the USB drive as a valid storage device. The <code>pwd</code> command shows the current directory being navigated, and the <code>cd</code> command is used to change the current directory. The <code>dir flash0:</code> command will show the contents of flash memory, not the USB drive.</li>
+<li>When a Windows computer cannot communicate with an IPv4 DHCP server, the computer automatically assigns itself an IP address in the169.254.0.0/16 range. Linux and Apple computers do not automatically assign an IP address.​</li>
+<li>Capturing traffic during low utilization time will not give a good representation of the different traffic types. Because some traffic could be local to a particular segment, the  capture must be done on different network segments.</li>
+<li>Not all traffic should receive the same treatment or priority through a network. Some types of traffic, such as voice and video, require the highest priority because they are very sensitive to network latency and delay. Other types of traffic, such as FTP, which is not sensitive to latency and delay, should be given the lowest level of priority so that the higher priority traffic can get through.</li>
+<li>The <code>tracert</code> command is used to initiate a trace from the command prompt on a Windows PC. The <code>traceroute</code>command is used to initiate a trace from a Cisco router or switch. Some other PC operating systems, such as Linux and Mac OS also use the traceroute command. The <code>ping</code> command does not display the network path to the remote host.</li>
+<li>The most common indicators of a ping issued from the Cisco IOS are “!”, “.”, and “U”. The “!” indicates that the ping completed successfully, verifying connectivity at Layer 3. The “.” may indicate that a connectivity problem, routing problem, or device security issue exists along the path and that an ICMP destination unreachable message was not provided. The “U” indicates that a router along the path may not have had a route to the destination address, and that it responded with an ICMP unreachable message.</li>
+<li>The correct syntax is RouterA(config)# <code>login block-for (number of seconds) attempts (number of attempts) within (number of seconds)</code>command will block login attempts on RouterA for a period .</li>
+<li>Small networks generally have only one link to an ISP to establish a connection to the Internet. Problems can occur in the network, which can cause the disruption of this service. In order to keep connectivity, redundancy has to be provided. If the problem is in the router interface that is connected to the ISP, another interface can be activated on the router, so if one interface fails, traffic may be redirected toward the other interface. However, if the router itself fails, a second router that is connected to another ISP can be used as a backup.</li>
+<li>Because worms take advantage of vulnerabilities in the system itself, the most effective way to mitigate worm attacks is to download security updates from the operating system vendor and patch all vulnerable systems.  </li>
+<li>Whenever an administrator connects to the console port, the configuration applied under the line con 0 interface determines how the user is authenticated. The console port configuration has the login command with local as the keyword. That means the username and password are required before the administrator is even allowed to see the enable mode prompt. Because the correct username and password was typed, the administrator will be presented with the enable mode prompt.</li>
+<li>Physical threats can be classified into four categories:<ul>
+<li>Environmental threats -Temperature extremes (too hot or too cold) or humidity extremes (too wet or too dry)</li>
+<li>Hardware threats - Physical damage to servers, routers, switches, cabling plant, and workstations</li>
+<li>Electrical threats - Voltage spikes, insufficient supply voltage (brownouts), unconditioned power (noise), and total power loss</li>
+<li>Maintenance threats - Poor handling of key electrical components (electrostatic discharge), lack of critical spare parts, poor cabling, and poor labeling</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="全文译自 APScheduler 官方文档原文地址：https://apscheduler.readthedocs.io/en/latest/userguide.html  APScheduler 用户指南安装首选安装方式为通过 pip 安装 1pip install apscheduler 你可以下载并运行 get-pip.py 来轻易的安装 pip 某些原因下，pip 不能工作，你可以从 P">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APScheduler User guide">
+<meta property="og:url" content="http://starxy.cc/2018/12/12/APScheduler-User-guide/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="全文译自 APScheduler 官方文档原文地址：https://apscheduler.readthedocs.io/en/latest/userguide.html  APScheduler 用户指南安装首选安装方式为通过 pip 安装 1pip install apscheduler 你可以下载并运行 get-pip.py 来轻易的安装 pip 某些原因下，pip 不能工作，你可以从 P">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APScheduler User guide">
+<meta name="twitter:description" content="全文译自 APScheduler 官方文档原文地址：https://apscheduler.readthedocs.io/en/latest/userguide.html  APScheduler 用户指南安装首选安装方式为通过 pip 安装 1pip install apscheduler 你可以下载并运行 get-pip.py 来轻易的安装 pip 某些原因下，pip 不能工作，你可以从 P">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2018/12/12/APScheduler-User-guide/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>APScheduler User guide | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/12/APScheduler-User-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">APScheduler User guide
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-12 09:07:53" itemprop="dateCreated datePublished" datetime="2018-12-12T09:07:53+08:00">2018-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>全文译自 APScheduler 官方文档<br>原文地址：<a href="https://apscheduler.readthedocs.io/en/latest/userguide.html" target="_blank" rel="noopener">https://apscheduler.readthedocs.io/en/latest/userguide.html</a></p>
+</blockquote>
+<h1 id="APScheduler-用户指南"><a href="#APScheduler-用户指南" class="headerlink" title="APScheduler 用户指南"></a>APScheduler 用户指南</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首选安装方式为通过 <code>pip</code> 安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install apscheduler</span><br></pre></td></tr></table></figure>
+<p>你可以下载并运行 <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">get-pip.py</a> 来轻易的安装 <code>pip</code></p>
+<p>某些原因下，<code>pip</code> 不能工作，你可以从 PypI 手动下载 <a href="https://pypi.python.org/pypi/APScheduler/" target="_blank" rel="noopener">APScheduler 包文件</a>，然后完成安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>包文件中包含了名为 <code>example</code> 的文件夹，可以在该文件夹下找到 APScheduler 的多种使用样例。样例同样也可以 <a href="https://github.com/agronholm/apscheduler/tree/master/examples/?at=master" target="_blank" rel="noopener">在线浏览</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>APSchedule 有四种基本的组件</p>
+<ul>
+<li>触发器（triggers）</li>
+<li>作业存储器（job stores）</li>
+<li>执行器（executors）</li>
+<li>调度器（schedulers）</li>
+</ul>
+<a id="more"></a>
+<p><strong>触发器</strong> 包含调度逻辑。每一个任务有自己的调度器来确定何时运行作业。除了初始配置之外，触发器是完全无状态的（stateless）</p>
+<p><strong>作业存储器</strong> 存储被调度的作业。默认的任务存储器只将作业保存在内存中，其他的任务存储器可以将作业保存在多种数据库中。作业的数据在保存到持久性的数据存储器中时都会被序列化，从中加载时将会被反序列化。除了默认的存储器外，作业存储器不会将作业存储在内存中，而是在扮演一个中间人从后端进行保存，加载，更新，查询等工作。绝对不能在调度器之间共享任务存储器</p>
+<p><strong>执行器</strong> 处理作业的运行。通常通过将作业中可调用对象提交给线程或者进程池来完成此操作。作业完成后执行器将会通知调度器，调度器随后发出相应的事件</p>
+<p><strong>调度器</strong> 是剩余的部分。通常来说你只有一个调度器运行在一个应用实例中。开发者一般不会直接处理触发器、作业存储器和执行器，而是通过调度器来提供相应的接口来处理。配置作业存储器和执行器通过调度器来完成，比如添加，修改，删除作业</p>
+<h2 id="选择合适的调度器、作业存储器、执行器和触发器"><a href="#选择合适的调度器、作业存储器、执行器和触发器" class="headerlink" title="选择合适的调度器、作业存储器、执行器和触发器"></a>选择合适的调度器、作业存储器、执行器和触发器</h2><p>选择的调度器主要取决于您的开发环境和使用 APScheduler 的目的，以下是选择调度器的快速说明：</p>
+<ul>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/blocking.html#apscheduler.schedulers.blocking.BlockingScheduler" target="_blank" rel="noopener"><code>BlockingScheduler</code></a>：当调度器是应用进程中唯一的运行事项时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/background.html#apscheduler.schedulers.background.BackgroundScheduler" target="_blank" rel="noopener"><code>BackgroundScheduler</code></a>：当您没有使用以下框架，并希望调度程序运行在应用内部时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/asyncio.html#apscheduler.schedulers.asyncio.AsyncIOScheduler" target="_blank" rel="noopener"><code>AsyncIOScheduler</code></a>：当应用使用异步 io 模块时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/gevent.html#apscheduler.schedulers.gevent.GeventScheduler" target="_blank" rel="noopener"><code>GeventScheduler</code></a>：当应用使用 gevent 时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/tornado.html#apscheduler.schedulers.tornado.TornadoScheduler" target="_blank" rel="noopener"><code>TornadoScheduler</code></a>：当你构建一个 Tornado 应用是使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/twisted.html#apscheduler.schedulers.twisted.TwistedScheduler" target="_blank" rel="noopener"><code>TwistedScheduler</code></a>：当你构建一个 Twisted 应用时使用</li>
+<li><a href="#"><code>QtScheduler</code></a>：当你构建一个 Qt 应用时使用</li>
+</ul>
+<p>为了选择合适的作业存储器，你需要确定是否需要持久化作业，如果程序启动时作业总是被重新创建，你可以使用默认值（<code>MemoryJobStore</code>）。但是如果你需要你的作业在应用重启或者崩溃时保留作业调度程序，那么您可以选择您工作环境中最常用的工具。由于 <code>PostgreSQL</code> 强大的数据完整性保护，使用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/jobstores/sqlalchemy.html#apscheduler.jobstores.sqlalchemy.SQLAlchemyJobStore" target="_blank" rel="noopener"><code>SQLAlchemyJobStore</code></a> 和 <code>PostgreSQL</code> 是比较好的选择</p>
+<p>如果你使用调度器选择部分所述框架之一，执行器通常会给你选定。否则的话，默认的 <a href="https://apscheduler.readthedocs.io/en/latest/modules/executors/pool.html#apscheduler.executors.pool.ThreadPoolExecutor" target="_blank" rel="noopener"><code>ThreadPoolExecutor</code></a> 应该足以应付大多数情况。如果你的工作负载涉及 CPU 密集操作。则应该考虑 <a href="https://apscheduler.readthedocs.io/en/latest/modules/executors/pool.html#apscheduler.executors.pool.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 来使用多个 CPU 核心。你也可以同时使用这两者。将 ProcessPoolExecutor 添加为第二执行器</p>
+<p>当你调度一个作业时，你需要为它选择一个触发器。触发器决定了作业触发的时间逻辑。APScheduler 有三种内建的触发器类型：</p>
+<ul>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/triggers/date.html#module-apscheduler.triggers.date" target="_blank" rel="noopener"><code>data</code></a>：当你想要在某个特定时间点运行任务时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/triggers/interval.html#module-apscheduler.triggers.interval" target="_blank" rel="noopener"><code>interval</code></a>：当你想要以固定的时间间隔运行作业时使用</li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html#module-apscheduler.triggers.cron" target="_blank" rel="noopener"><code>cron</code></a>：当你想要在一天中的某个特定时间运行作业时使用</li>
+</ul>
+<p>也可以将多个触发器组合成一个触发器，该触发器将在所有参与触发器的约定时间内出发。也可以在任何触发器触发时触发。更多文档请看 <a href="https://apscheduler.readthedocs.io/en/latest/modules/triggers/combining.html#module-apscheduler.triggers.combining" target="_blank" rel="noopener"><code>combining triggers</code></a></p>
+<p>你可以在各自的 API 文档页面上找到每个作业存储，执行器，触发器类型的插件名称。</p>
+<h2 id="配置调度器"><a href="#配置调度器" class="headerlink" title="配置调度器"></a>配置调度器</h2><p>APScheduler 提供了多种方式来配置调度器。你可以使用配置字典，也可以将选项作为关键在参数传递，也可以先实例化调度器，然后再添加作业并配置调度器。这样你就可以在任何环境下的最大灵活性</p>
+<p>可以在 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler" target="_blank" rel="noopener"><code>BaseScheduler</code></a> 类的 API 参考上找到调度器级别配置选线的完整列表。调度器子类还包含额外的选项，在相关的 API 文档中已经给出。每个作业存储器和执行器的配置选项也可以在各自相关的 API 文档中找到</p>
+<p>假设你希望在你的应用中运行一个默认的作业存储器和执行器的 BackgroundScheduler</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">scheduler = BackgroundScheduler()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initialize the rest of the application here, or before the scheduler initialization</span></span><br></pre></td></tr></table></figure>
+<p>这将为您提供一个 BackgroundScheduler，其 MemoryJobStore 名为“default”，ThreadPoolExecutor 名为“default”，默认最大线程数为 10。</p>
+<p>现在假设你需要两个作业存储器使用两个执行器。并且你希望调整新作业的默认值并且设置不同的时区。以下三个示例完全等效，并且提供：</p>
+<ul>
+<li>一个名为 mongo 的 MongoDBJobStore</li>
+<li>一个名为 default 的 SQLAlchemyJobStore (使用 SQLite)</li>
+<li>一个名为 default 的 ThreadPoolExecutor 最大线程为 20</li>
+<li>一个名为 processpool 的 ProcessPoolExecutor 最大线程为 5</li>
+<li>UTC 作为调度器的时区</li>
+<li>默认新作业的 coalescing 关闭</li>
+<li>新作业的默认最大实例限制为 3</li>
+</ul>
+<p>示例 1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pytz <span class="keyword">import</span> utc</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"><span class="keyword">from</span> apscheduler.jobstores.mongodb <span class="keyword">import</span> MongoDBJobStore</span><br><span class="line"><span class="keyword">from</span> apscheduler.jobstores.sqlalchemy <span class="keyword">import</span> SQLAlchemyJobStore</span><br><span class="line"><span class="keyword">from</span> apscheduler.executors.pool <span class="keyword">import</span> ThreadPoolExecutor, ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jobstores = &#123;</span><br><span class="line">    <span class="string">'mongo'</span>: MongoDBJobStore(),</span><br><span class="line">    <span class="string">'default'</span>: SQLAlchemyJobStore(url=<span class="string">'sqlite:///jobs.sqlite'</span>)</span><br><span class="line">&#125;</span><br><span class="line">executors = &#123;</span><br><span class="line">    <span class="string">'default'</span>: ThreadPoolExecutor(<span class="number">20</span>),</span><br><span class="line">    <span class="string">'processpool'</span>: ProcessPoolExecutor(<span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line">job_defaults = &#123;</span><br><span class="line">    <span class="string">'coalesce'</span>: <span class="literal">False</span>,</span><br><span class="line">    <span class="string">'max_instances'</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)</span><br></pre></td></tr></table></figure>
+<p>示例 2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># The "apscheduler." prefix is hard coded</span></span><br><span class="line">scheduler = BackgroundScheduler(&#123;</span><br><span class="line">    <span class="string">'apscheduler.jobstores.mongo'</span>: &#123;</span><br><span class="line">         <span class="string">'type'</span>: <span class="string">'mongodb'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'apscheduler.jobstores.default'</span>: &#123;</span><br><span class="line">        <span class="string">'type'</span>: <span class="string">'sqlalchemy'</span>,</span><br><span class="line">        <span class="string">'url'</span>: <span class="string">'sqlite:///jobs.sqlite'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'apscheduler.executors.default'</span>: &#123;</span><br><span class="line">        <span class="string">'class'</span>: <span class="string">'apscheduler.executors.pool:ThreadPoolExecutor'</span>,</span><br><span class="line">        <span class="string">'max_workers'</span>: <span class="string">'20'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'apscheduler.executors.processpool'</span>: &#123;</span><br><span class="line">        <span class="string">'type'</span>: <span class="string">'processpool'</span>,</span><br><span class="line">        <span class="string">'max_workers'</span>: <span class="string">'5'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'apscheduler.job_defaults.coalesce'</span>: <span class="string">'false'</span>,</span><br><span class="line">    <span class="string">'apscheduler.job_defaults.max_instances'</span>: <span class="string">'3'</span>,</span><br><span class="line">    <span class="string">'apscheduler.timezone'</span>: <span class="string">'UTC'</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>示例 3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pytz <span class="keyword">import</span> utc</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"><span class="keyword">from</span> apscheduler.jobstores.sqlalchemy <span class="keyword">import</span> SQLAlchemyJobStore</span><br><span class="line"><span class="keyword">from</span> apscheduler.executors.pool <span class="keyword">import</span> ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jobstores = &#123;</span><br><span class="line">    <span class="string">'mongo'</span>: &#123;<span class="string">'type'</span>: <span class="string">'mongodb'</span>&#125;,</span><br><span class="line">    <span class="string">'default'</span>: SQLAlchemyJobStore(url=<span class="string">'sqlite:///jobs.sqlite'</span>)</span><br><span class="line">&#125;</span><br><span class="line">executors = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;<span class="string">'type'</span>: <span class="string">'threadpool'</span>, <span class="string">'max_workers'</span>: <span class="number">20</span>&#125;,</span><br><span class="line">    <span class="string">'processpool'</span>: ProcessPoolExecutor(max_workers=<span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line">job_defaults = &#123;</span><br><span class="line">    <span class="string">'coalesce'</span>: <span class="literal">False</span>,</span><br><span class="line">    <span class="string">'max_instances'</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">scheduler = BackgroundScheduler()</span><br><span class="line"></span><br><span class="line"><span class="comment"># .. do something else here, maybe add jobs etc.</span></span><br><span class="line"></span><br><span class="line">scheduler.configure(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)</span><br></pre></td></tr></table></figure>
+<h2 id="启动调度器"><a href="#启动调度器" class="headerlink" title="启动调度器"></a>启动调度器</h2><p>通过调用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.start" target="_blank" rel="noopener"><code>start()</code></a> 可以很简单的启动调度器。对于 <code>BlockingScheduler</code> 以外的调度器，此调用程序将立刻返回，你可以继续应用程序的初始化过程。</p>
+<p>对于 <code>BlockingScheduler</code>，你只能在完成所有初始化步骤之后再调用 <code>start()</code></p>
+<blockquote>
+<p>注意: 在调度器启动后，你不能再更改任何设置</p>
+</blockquote>
+<h2 id="添加作业"><a href="#添加作业" class="headerlink" title="添加作业"></a>添加作业</h2><p>有两种方式添加作业到调度器</p>
+<ol>
+<li>调用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.add_job" target="_blank" rel="noopener"><code>add_job()</code></a></li>
+<li>使用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.scheduled_job" target="_blank" rel="noopener"><code>scheduled_job()</code></a> 装饰函数</li>
+</ol>
+<p>第一种方式是最常用的方式。第二种方法主要是方便的声明那些在应用运行时不会更改的作业。 <code>add_job()</code> 方法返回一个 <a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job" target="_blank" rel="noopener"><code>apscheduler.job.Job</code></a> 实例，可以稍后用来修改或删除作业</p>
+<p>你可以在<strong>任何时间</strong>在调度器上安排作业。如果添加作业时调度器尚未运行。作业将会被暂时调度，当调度器启动时，该作业的第一个运行时间（触发器触发的时间点）才会被计算</p>
+<p>必须注意到的是，如果你使用序列化的执行器和作业存储器。它会给你的作业添加一下要求：</p>
+<ol>
+<li>可调用的目标必须是可以全局访问的</li>
+<li>对可调用目标的任何参数必须是可序列化的</li>
+</ol>
+<p>内置作业存储器中，只有 MemoryJobStore 不会序列化作业；内置执行器中，只有 ProcessPoolExecutor 会序列化作业</p>
+<blockquote>
+<p>重要：在初始化阶段如果你在持久化作业存储器中调度作业，则必须为作业定义显式 ID 并且使用 <code>replace_existing = True</code> 否则每次应用重启都会获得作业的新副本<br>技巧：要立即运行作业，在添加作业时忽略 <code>trigger</code> 参数</p>
+</blockquote>
+<h2 id="移除作业"><a href="#移除作业" class="headerlink" title="移除作业"></a>移除作业</h2><p>当你从调度器移除一个作业时，他将会从关联的作业存储器中移除，并且不会再执行。有两种方式可以删除作业：</p>
+<ol>
+<li>调用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.remove_job" target="_blank" rel="noopener"><code>remove_job()</code></a> 带有作业的 ID 和作业存储器的别名</li>
+<li>通过由 <code>add_job()</code> 返回的作业实例调用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job.remove" target="_blank" rel="noopener"><code>remove()</code></a></li>
+</ol>
+<p>后一个方法更方便，但是需要你在某处存储添加作业时返回的对象实例，对于通过<code>scheduled_job()</code>调度的作业，仅能通过第一个方法来删除</p>
+<p>当某个作业调度结束（例如：它的触发器再也不会触发），该作业将会自动移除</p>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job = scheduler.add_job(myfunc, <span class="string">'interval'</span>, minutes=<span class="number">2</span>)</span><br><span class="line">job.remove()</span><br></pre></td></tr></table></figure>
+<p>同样的，使用显式的作业 ID</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scheduler.add_job(myfunc, <span class="string">'interval'</span>, minutes=<span class="number">2</span>, id=<span class="string">'my_job_id'</span>)</span><br><span class="line">scheduler.remove_job(<span class="string">'my_job_id'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="暂停和恢复作业"><a href="#暂停和恢复作业" class="headerlink" title="暂停和恢复作业"></a>暂停和恢复作业</h2><p>你可以很轻易的通过一个 <code>Job</code> 实例或调度器来暂停和恢复作业。当一个作业被暂停时，下一次的触发时间将会被清楚，并且不再进行计算之后的触发时间，直到该作业被恢复。要暂停一个作业，可以使用以下方法：</p>
+<ul>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job.pause" target="_blank" rel="noopener"><code>apscheduler.job.Job.pause()</code></a></li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.pause_job" target="_blank" rel="noopener"><code>apscheduler.schedulers.base.BaseScheduler.pause_job()</code></a></li>
+</ul>
+<p>要恢复一个作业：</p>
+<ul>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job.resume" target="_blank" rel="noopener"><code>apscheduler.job.Job.resume()</code></a></li>
+<li><a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.resume_job" target="_blank" rel="noopener"><code>apscheduler.schedulers.base.BaseScheduler.resume_job()</code></a></li>
+</ul>
+<h2 id="获取作业调度列表"><a href="#获取作业调度列表" class="headerlink" title="获取作业调度列表"></a>获取作业调度列表</h2><p>要获得可处理的计划作业列表，可以使用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.get_jobs" target="_blank" rel="noopener"><code>get_jobs()</code></a> 方法。该方法会返回一个 <code>Job</code> 实例列表。如果你只想关心某个特定作业存储器中的作业，可以将作业存储器的别名当作参数传入</p>
+<p>方便起见，你可以使用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.print_jobs" target="_blank" rel="noopener"><code>print_jobs</code></a> 方法，该方法将打印格式化的作业列表，其触发器和下次运行时间</p>
+<h2 id="修改作业"><a href="#修改作业" class="headerlink" title="修改作业"></a>修改作业</h2><p>你可以通过调用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job.modify" target="_blank" rel="noopener"><code>apscheduler.job.Job.modify()</code></a> 或 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.modify_job" target="_blank" rel="noopener"><code>modify_job()</code></a> 来修改任何一个作业的除了 <code>id</code> 之外的任何属性属性</p>
+<p>示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job.modify(max_instances=<span class="number">6</span>, name=<span class="string">'Alternate name'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果你想要重新调度一个作业，即改变触发器可以使用 <a href="https://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job.reschedule" target="_blank" rel="noopener"><code>apscheduler.job.Job.reschedule()</code></a> 或 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.reschedule_job" target="_blank" rel="noopener"><code>reschedule_job()</code></a>。这两个方法会为作业构造一个新的触发器，并且会根据新的触发器重新计算下一个运行时间</p>
+<p>示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.reschedule_job(<span class="string">'my_job_id'</span>, trigger=<span class="string">'cron'</span>, minute=<span class="string">'*/5'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="停止调度器"><a href="#停止调度器" class="headerlink" title="停止调度器"></a>停止调度器</h2><p>为了停止调度器，可以执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.shutdown()</span><br></pre></td></tr></table></figure>
+<p>默认情况下，调度器关闭其作业存储器和执行器，并等待所有当前正在执行的作业完成。如果你不想等待你可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.shutdown(wait=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p>这样将会关闭作业存储器和执行器但是不会等到任何运行的作业完成</p>
+<h2 id="暂停和恢复作业处理（调度器暂停）"><a href="#暂停和恢复作业处理（调度器暂停）" class="headerlink" title="暂停和恢复作业处理（调度器暂停）"></a>暂停和恢复作业处理（调度器暂停）</h2><p>暂停作业处理是可能的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.pause()</span><br></pre></td></tr></table></figure>
+<p>这会造成调度器在恢复处理之前不在会唤醒</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.resume()</span><br></pre></td></tr></table></figure>
+<p>也可以在暂停状态下启用调度器，即没有第一个唤醒调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.start(paused=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>如果你需要删除以一些你不需要的但是有机会运行的作业这会非常有用</p>
+<h2 id="限制并发执行的作业实例数量"><a href="#限制并发执行的作业实例数量" class="headerlink" title="限制并发执行的作业实例数量"></a>限制并发执行的作业实例数量</h2><p>默认情况下，一个作业只能有一个实例在一个时间点运行。这意味着，如果作业即将运行但是前一个时间点运行的还没有完成，则最新的作业运行时将会视为失败。在添加作业时指定 <code>max_instances</code> 关键字参数，可以是设定调度器将允许并发运行的该作业实例数量</p>
+<h2 id="丢失的作业执行器和合并（coalescing）"><a href="#丢失的作业执行器和合并（coalescing）" class="headerlink" title="丢失的作业执行器和合并（coalescing）"></a>丢失的作业执行器和合并（coalescing）</h2><p>有些时候，调度器可能不能在计划运行时执行调度作业，最常见的情况是当作业被在序列化作业存储中调用时，调度器在该作业应该执行后关闭并重启。发生这种情况时，该作业被认为是“失火”，调度器将会根据 <code>misfire_grace_time</code> 选项（可按作业设置或者全局调度器选项设置）来检查每个错过的执行时间，以查看是否仍需要出发作业，这可能导致多次连续执行作业</p>
+<p>如果你的用例不希望出现这种情况，则可以使用 <code>coalescing</code> 来将所有的错过执行合并为一个。总而言之，如果 <code>coalescing</code> 选项为开启的，并且调度器看到了一个或多个队列中的作业执行，那么触发器将会执行一次</p>
+<blockquote>
+<p>注意：如果由于可用池中没有可用的线程或者进程而延迟作业，则执行器可能会因为它运行得太晚而挑过它（与最初的运行时间相比）。如果您的应用程序中可能发生这种情况，你可能希望增加执行器的线程/进程数，或者将 <code>misfire_grace_time</code> 的值调整的更高</p>
+</blockquote>
+<h2 id="调度器事件"><a href="#调度器事件" class="headerlink" title="调度器事件"></a>调度器事件</h2><p>可以将事件监听器附加到调度器上。调度器在某些情况下被触发，并且可能携带该特定事件的详细附加信息。通过给定合适的 <code>mask</code> 参数到 <a href="https://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.add_listener" target="_blank" rel="noopener"><code>add_listener()</code></a> 方法或者将不同的常量放在一起，可以只监听某种特定类型的事件。可调用的接收器可以被带着一个 event 对象调用</p>
+<p>有关可用事件及其属性的详细信息，请查看关于 <a href="https://apscheduler.readthedocs.io/en/latest/modules/events.html#module-apscheduler.events" target="_blank" rel="noopener"><code>events</code></a> 模块的文档</p>
+<p>示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_listener</span><span class="params">(event)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> event.exception:</span><br><span class="line">        print(<span class="string">'The job crashed :('</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'The job worked :)'</span>)</span><br><span class="line"></span><br><span class="line">scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)</span><br></pre></td></tr></table></figure>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><p>如果调度器没有按照预想来工作，提高 <code>apscheduler</code> logger 的日志级别为 <code>DEBUG</code> 会很有帮助</p>
+<p>如果尚未开启日志记录，可以执行以下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig()</span><br><span class="line">logging.getLogger(<span class="string">'apscheduler'</span>).setLevel(logging.DEBUG)</span><br></pre></td></tr></table></figure>
+<p>这应该提供许多关于调度程序内部发生的有用信息。</p>
+<p>另外，请确保查看<a href="https://apscheduler.readthedocs.io/en/latest/faq.html" target="_blank" rel="noopener">常见问题</a>部分，以查看问题是否已解决。</p>
+<h2 id="Reporting-bugs"><a href="#Reporting-bugs" class="headerlink" title="Reporting bugs"></a>Reporting bugs</h2><p>A bug tracker is provided by Github.</p>
+<h2 id="Getting-help"><a href="#Getting-help" class="headerlink" title="Getting help"></a>Getting help</h2><p>If you have problems or other questions, you can either:</p>
+<ul>
+<li>Ask in the <a href="https://gitter.im/apscheduler/Lobby" target="_blank" rel="noopener">apscheduler</a> room on Gitter</li>
+<li>Ask on the <a href="http://groups.google.com/group/apscheduler" target="_blank" rel="noopener">APScheduler Google group</a>, or</li>
+<li>Ask on <a href="http://stackoverflow.com/questions/tagged/apscheduler" target="_blank" rel="noopener">StackOverflow</a> and tag your question with the <code>apscheduler</code> tag</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/27/弱类型-强类型-动态类型-静态类型-之间的区别/" rel="next" title="弱类型 强类型 动态类型 静态类型 之间的区别">
+                <i class="fa fa-chevron-left"></i> 弱类型 强类型 动态类型 静态类型 之间的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/14/使用-Git-进行有效的项目管理/" rel="prev" title="使用 Git 进行有效的项目管理">
+                使用 Git 进行有效的项目管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#APScheduler-用户指南"><span class="nav-number">1.</span> <span class="nav-text">APScheduler 用户指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例代码"><span class="nav-number">1.2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.3.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择合适的调度器、作业存储器、执行器和触发器"><span class="nav-number">1.4.</span> <span class="nav-text">选择合适的调度器、作业存储器、执行器和触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置调度器"><span class="nav-number">1.5.</span> <span class="nav-text">配置调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动调度器"><span class="nav-number">1.6.</span> <span class="nav-text">启动调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加作业"><span class="nav-number">1.7.</span> <span class="nav-text">添加作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移除作业"><span class="nav-number">1.8.</span> <span class="nav-text">移除作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂停和恢复作业"><span class="nav-number">1.9.</span> <span class="nav-text">暂停和恢复作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取作业调度列表"><span class="nav-number">1.10.</span> <span class="nav-text">获取作业调度列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改作业"><span class="nav-number">1.11.</span> <span class="nav-text">修改作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止调度器"><span class="nav-number">1.12.</span> <span class="nav-text">停止调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂停和恢复作业处理（调度器暂停）"><span class="nav-number">1.13.</span> <span class="nav-text">暂停和恢复作业处理（调度器暂停）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制并发执行的作业实例数量"><span class="nav-number">1.14.</span> <span class="nav-text">限制并发执行的作业实例数量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#丢失的作业执行器和合并（coalescing）"><span class="nav-number">1.15.</span> <span class="nav-text">丢失的作业执行器和合并（coalescing）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度器事件"><span class="nav-number">1.16.</span> <span class="nav-text">调度器事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障排除"><span class="nav-number">1.17.</span> <span class="nav-text">故障排除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reporting-bugs"><span class="nav-number">1.18.</span> <span class="nav-text">Reporting bugs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-help"><span class="nav-number">1.19.</span> <span class="nav-text">Getting help</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

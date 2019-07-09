@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="网络层网络层（Network Layer）是 OSI 模型中的第三层（TCP/IP 模型中的网际层）。网络层提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，并具有一定的拥塞控制和流量控制的能力。由于 TCP/IP 协议体系中的网络层功能由 IP 协议规定和实现，故又称 IP 层。 本章着重介绍网络层的作用。其中将探讨如何把网络分为不同的主机组，以便管理网络内的数据包流。此外还介绍了如何实">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 6: Network Layer">
+<meta property="og:url" content="http://starxy.cc/2017/12/18/CCNA-Chapter-6-Network-Layer/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="网络层网络层（Network Layer）是 OSI 模型中的第三层（TCP/IP 模型中的网际层）。网络层提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，并具有一定的拥塞控制和流量控制的能力。由于 TCP/IP 协议体系中的网络层功能由 IP 协议规定和实现，故又称 IP 层。 本章着重介绍网络层的作用。其中将探讨如何把网络分为不同的主机组，以便管理网络内的数据包流。此外还介绍了如何实">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fml98skr94j30jk05nq3h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmla63zspdj30jk0amjrs.jpg">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCNA Chapter 6: Network Layer">
+<meta name="twitter:description" content="网络层网络层（Network Layer）是 OSI 模型中的第三层（TCP/IP 模型中的网际层）。网络层提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，并具有一定的拥塞控制和流量控制的能力。由于 TCP/IP 协议体系中的网络层功能由 IP 协议规定和实现，故又称 IP 层。 本章着重介绍网络层的作用。其中将探讨如何把网络分为不同的主机组，以便管理网络内的数据包流。此外还介绍了如何实">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fml98skr94j30jk05nq3h.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2017/12/18/CCNA-Chapter-6-Network-Layer/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CCNA Chapter 6: Network Layer | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/18/CCNA-Chapter-6-Network-Layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CCNA Chapter 6: Network Layer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-18 00:41:08" itemprop="dateCreated datePublished" datetime="2017-12-18T00:41:08+08:00">2017-12-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index"><span itemprop="name">CCNA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>网络层（Network Layer）是 OSI 模型中的第三层（TCP/IP 模型中的网际层）。网络层提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，并具有一定的拥塞控制和流量控制的能力。由于 TCP/IP 协议体系中的网络层功能由 IP 协议规定和实现，故又称 IP 层。</p>
+<p>本章着重介绍网络层的作用。其中将探讨如何把网络分为不同的主机组，以便管理网络内的数据包流。此外还介绍了如何实现网络之间的通信。网络之间的这种通信称为路由。</p>
+<p>为了实现这种端到端传输，网络层使用了四个基本过程：</p>
+<ul>
+<li>终端设备编址 - 必须为终端设备配置唯一的 IP 地址，以便在网络上进行识别。</li>
+<li>封装 - 网络层将来自传输层的协议数据单元 (PDU) 封装到数据包中。封装过程中会添加 IP 报头信息，例如来源（发送）和目的（接收）主机的 IP 地址。</li>
+<li>路由 - 网络层提供服务，将数据包转发至另一网络上的目的主机。要传送到其他网络，数据包必须经过路由器的处理。路由器的作用是为数据包选择最佳路径，并将其转发至目的主机，该过程称为路由。数据包可能需要经过很多中间设备才能到达目的主机。数据包在到达目的主机的过程中经过的每个路由器均称作一跳。</li>
+<li>解封 - 当数据包到达目的主机的网络层时，主机会检查数据包的 IP 报头。如果在报头中的目的 IP 地址与其自身的 IP 地址匹配，IP 报头将会从数据包中删除。网络层解封数据包后，后继的第 4 层 PDU 会向上传递到传输层的相应服务。</li>
+</ul>
+<p>传输层（OSI 第 4 层）负责管理每台主机上的运行进程之间的数据传输，而网络层协议则指定从一台主机向另一台主机传送数据时使用的数据包结构和处理过程。网络层工作时无需考虑每个数据包中所携带的数据，这使其能够为多台主机之间的多种类型的通信传送数据包。</p>
+<h1 id="IP，Internet-Protocol"><a href="#IP，Internet-Protocol" class="headerlink" title="IP，Internet Protocol"></a>IP，Internet Protocol</h1><p>网络层的两种主要协议为 IPv4 和 IPv6</p>
+<p>IP 协议有三种特征：</p>
+<ul>
+<li>无连接：发送数据包前不于目标建立端到端连接</li>
+<li>尽力交付：IP 不可靠，不保证数据包交付，IP 不具备管理和恢复未送达数据包或已损坏数据包的能力，在 TCP/IP 协议簇中，传输层负责保证可靠性。</li>
+<li>介质无关：与传输介质无关，网络层会考虑介质可以传输的最大 PDU 大小。此特征称为最大传输单位 (maximum transmission unit，MTU)。在将数据包从一个介质转发到具有更小 MTU 的介质时，必须分割数据包。此过程称为数据包分段（fragmenting the packet）或分段（fragmentation）。</li>
+</ul>
+<h2 id="IPv4-和-IPv6-的优缺点"><a href="#IPv4-和-IPv6-的优缺点" class="headerlink" title="IPv4 和 IPv6 的优缺点"></a>IPv4 和 IPv6 的优缺点</h2><p>IPv4 的局限性</p>
+<ul>
+<li>IP 地址耗尽 - 对于目前来说，40 亿可用的 IPv4 的地址已经接近耗尽</li>
+<li>Internet 路由表膨胀 - 路由器使用路由表（routing table）确定最佳路径。随着连接到 Internet 的服务器数量增加，网络路由的数量也不断增加。这些 IPv4 路由消耗 Internet 路由器上的大量内存和处理器资源。</li>
+<li>缺乏端到端连接 - <strong>网络地址转换 (Network Address Translation，NAT) </strong>是 IPv4 网络中经常实施的一项技术。NAT 为多种设备共享单一的公有 IPv4 地址提供方法。但是，因为共享了公有 IPv4 地址，内部网络主机的 IPv4 地址会隐藏起来。这会给需要端到端连接的技术造成难题。</li>
+</ul>
+<p>IPv6 的功能提升包括：</p>
+<ul>
+<li>更大的地址空间 - IPv6 地址基于 128 位分层编址，而 IPv4 采用的是 32 位。</li>
+<li>改进数据包处理过程 - IPv6 报头简化为更少的字段。</li>
+<li>消除了对 NAT 的需求 - 有了数额如此巨大的公有 IPv6 地址，私有 IPv4 地址和公有 IPv4 地址之间不再需要 NAT。这可避免需要端到端连接的应用程序遇到某些由 NAT 引起的应用程序故障。</li>
+</ul>
+<h2 id="封装-IP"><a href="#封装-IP" class="headerlink" title="封装 IP"></a>封装 IP</h2><p>传输层会将数据分段然后添加报头信息，以便目的设备接收后重组。</p>
+<p>网络层所处理的数据是传输层封装之后的，网络层会添加 IP 报头，内含包括目的 IP 地址在内的重要内容，目的 IP 地址在到达目的设备之前都不会改变。</p>
+<p>相对于 IPv4 报头，IPv6 的简化报头有若干优势：</p>
+<ul>
+<li>报头格式简单，处理数据包更高效</li>
+<li>负载更大，增加了吞吐量和传输效率</li>
+<li>分层网络体系结构增加了路由器效率</li>
+<li>自动配置地址</li>
+</ul>
+<h3 id="IPv4-报头格式"><a href="#IPv4-报头格式" class="headerlink" title="IPv4 报头格式"></a>IPv4 报头格式</h3><p>IPv4 报头格式如下，括号内为 bits</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fml98skr94j30jk05nq3h.jpg" alt></p>
+<ol>
+<li><strong>版本号（Version）</strong>：长度 4 bit 。标识目前采用的 IP 协议的版本号。一般的值为 0100（IPv4），0110（IPv6）</li>
+<li><strong>IP 报头长度（Header Length）</strong>：长度 4 bit 。这个字段的作用是为了描述 IP 报头的长度，因为在 IP 报头中有变长的可选部分。该部分占 4 个 bit，长度单位为 4 个字节，即本区域值 = IP 头部长度（单位为字节）/ 长度单位（4 个字节）。因此，一个 IP 报头的长度最长为 “ 1111 ”，即 15 x 4 个字节 = 60 个字节。IP 报头最小长度为 20 字节</li>
+<li><strong>服务类型（Type of Service）</strong>也称为 Differentiated Services，DS 字段是一个用于确定每个数据包优先级的 8 位字段。DiffServ 字段的六个最高有效位是区分服务代码点 (DSCP)，而后两位是显式拥塞通知 (ECN) 位。</li>
+<li><strong>IP 包总长度（Total Length）</strong>：长度 16 bit 。以字节为单位计算的 IP 包的长度（包括头部和数据），所以 IP 包最大长度 65 535 字节。所以，数据包有效载荷的大小 = IP 包总长度（Total Length）- IP 报头长度（Header Length）。</li>
+<li><strong>标识符（Identifier）</strong>：长度 16 bit 。该字段和 Flags 和 Fragment Offest 字段联合使用，对较大的上层数据包进行分段操作。路由器从一种介质向具有较小 MTU 的另一种介质转发数据包时必须将数据包分段。路由器将一个包拆分后，所有拆分开的小包被标记相同的值，以便目的端设备能够区分哪个包属于被拆分开的包的一部分。</li>
+<li><strong>标记（Flags）</strong>：长度 3 bit 。<ul>
+<li>该字段第一位不使用。</li>
+<li>第二位是 DF（Don’t Fragment）位，DF 位设为 1 时表明路由器不能对该上层数据包分段。如果一个上层数据包无法在不分段的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息。</li>
+<li>第三位是 MF（More Fragments）位，当路由器对一个上层数据包分段，则路由器会在除了最后一个分段的 IP 包的报头中将 MF 位设为 1 。</li>
+</ul>
+</li>
+<li><strong>片偏移（Fragment Offset）</strong>：长度 13 bit，以 8 个八位组为单位。表示该 IP 包在该组分片包中位置，接收端靠此来组装还原 IP 包。</li>
+<li><strong>生存时间（TTL）</strong>：长度 8 bit，设计之初是以秒（s）为单位的，但实际以跳数为单位，建议的缺省值为 64 。 包含用于限制数据包寿命的一个 8 位二进制值。数据包发送方设置初始 TTL 值，数据包每经过一次路由器处理，数值就减少一。如果 TTL 字段的值减为零，则路由器将丢弃该数据包并向源 IP 地址发送 Internet 控制消息协议 (ICMP) 超时消息。这个字段可以防止由于路由环路而导致 IP 包在网络中不停被转发。</li>
+<li><strong>协议（Protocol）</strong>：长度 8 bit 。标识了上层所使用的协议。以下是比较常用的协议号：1 ICMP；2 IGMP；6 TCP；17 UDP；88 IGRP；89 OSPF 。</li>
+<li><strong>头部校验（Header Checksum）</strong>：长度 16 bit 。用来做 IP 头部的正确性检测，但不包含数据部分。 因为每个路由器要改变 TTL 的值，所以路由器会为每个通过的数据包重新计算这个值</li>
+<li><strong>起源和目标地址（Source and Destination Addresses）</strong>：这两个地址都是 32 bit 。标识了这个 IP 包的起源和目标地址。要注意除非使用 NAT，否则整个传输的过程中，这两个地址不会改变。</li>
+<li><strong>可选项（Options）</strong>：这是一个可变长的字段。该字段属于可选项，主要用于测试，一般不填写，由起源设备根据需要改写。可选项目包含以下内容：<ul>
+<li>松散源路由（Loose source routing）：给出一连串路由器接口的 IP 地址。IP 包必须沿着这些 IP 地址传送，但是允许在相继的两个 IP 地址之间跳过多个路由器。</li>
+<li>严格源路由（Strict source routing）：给出一连串路由器接口的 IP 地址。IP 包必须沿着这些 IP 地址传送，如果下一跳不在 IP 地址表中则表示发生错误。</li>
+<li>路由记录（Record route）：当 IP 包离开每个路由器的时候记录路由器的出站接口的 IP 地址。</li>
+<li>时间戳（Timestamps）：当 IP 包离开每个路由器的时候记录时间。</li>
+<li>填充（Padding）：因为 IP 报头长度（Header Length）部分的单位为 32 bit，所以 IP 报头的长度必须为 32 bit 的整数倍。因此，在可选项后面，IP 协议会填充若干个 0，以达到 32 bit 的整数倍。</li>
+</ul>
+</li>
+</ol>
+<h3 id="IPv6-报头格式"><a href="#IPv6-报头格式" class="headerlink" title="IPv6 报头格式"></a>IPv6 报头格式</h3><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmla63zspdj30jk0amjrs.jpg" alt></p>
+<ol>
+<li><strong>版本（Version）</strong>：4 bit，值为 6（二进制值为 0110）表示 IPv6 报文。</li>
+<li><strong>流量类别（Traffic Class）</strong>：8 bit，这相当于 IPv4 协议中的 ToS 字段。但是，考虑到 ToS 字段这些年的发展，现在都用来做区分服务等级（Differentiated Class of Service，DiffServ）了。所以，即使这个字段和旧的 ToS 字段有些相似，它们的名字要比所传送的值更能确切地反映目前的用处。</li>
+<li><strong>流标签（Flow Label）</strong>：20 bit，IPv6 中新增。流标签可用来标记特定流的报文，以便在网络层区分不同的报文。转发路径上的路由器可以根据流标签来区分流并进行处理。由于流标签在 IPv6 报文头中携带，转发路由器可以不必根据报文内容来识别不同的流，目的节点也同样可以根据流标签识别流，同时由于流标签在报文头中，因此使用 IPSec 后仍然可以根据流标签进行 QoS 处理。</li>
+<li><strong>有效载荷长度（Payload Length）</strong>：16 bit，以字节为单位的 IPv6 载荷长度，也就是 IPv6 报文基本头以后部分的长度（包括所有扩展头部分）。IPv4 的总长度字段是 16 位的，但 IPv6 的有效载荷长度字段却是 20 位，这就意味着该字段能够指定更长的有效载荷（1 048 575 字节，相对 IPv4 中只有 65 535 字节）。</li>
+<li><strong>下一报头（Next Header）</strong>：8 bit，用来标识当前头（基本头或扩展头）后下一个头的类型。此域内定义的类型与 IPv4 中的协议域值相同。IPv6 定义的扩展头由基本头或扩展头中的扩展头域链接成一条链。这一机制下处理扩展头更高效，转发路由器只处理必须处理的选项头，提高了转发效率。</li>
+<li><strong>跳数限制（Hop Limit）</strong>：8 bit，和 IPv4 中的 TTL 字段类似。每个转发此报文的节点把此域减 1，如果此域值减到 0 则丢弃。注意：IPv4 中的 TTL 设计之初是以秒（s）为单位的，但实际使用时跟 IPv6 中的 Hop Limit 一样，是以跳数为单位。</li>
+<li><strong>源地址（Source Address）</strong>：128 bit，报文的源地址。</li>
+<li><strong>目的地址（Destination Address）</strong>：128 bit，报文的目的地址。</li>
+</ol>
+<p>IPv6 数据包还可能包含扩展报头 (EH)，以便提供可选的网络层信息。扩展报头为可选项，位于 IPv6 报头及负载之间。EH 用于分段、安全性、移动性支持等。</p>
+<p>与 IPv4 不同，路由器不会对路由的 IPv6 数据包进行分段。</p>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><p>路由（routing）就是通过互联的网络把信息从源地址传输到目的地址的活动。路由发生在 OSI 网络参考模型中的第三层即网路层。</p>
+<p>主机可以将数据包发送至：</p>
+<ul>
+<li>自身 - 主机会将数据包发送到一个称作<strong>环回接口的特殊 IPv4 地址 127.0.0.1</strong>，以对自身执行 ping 操作。对环回接口执行 ping 操作可以测试主机上的 TCP/IP 协议堆栈。</li>
+<li>本地主机 - 该主机与发送主机位于同一本地网络。这些主机共享同一个网络地址。</li>
+<li>远程主机 - 这是位于远程网络上的主机。这些主机不共享同一个网络地址。</li>
+</ul>
+<h2 id="默认网关"><a href="#默认网关" class="headerlink" title="默认网关"></a>默认网关</h2><p>默认网关是可以将流量路由到其他网络的网络设备。它是将流量从本地网络路由出去的路由器。</p>
+<p>如果把一个网络比作一个房间，那么默认网关就好比是门口。如果要去另一个房间或网络，您就需要找到门口。</p>
+<p>或者，不知道默认网关 IP 地址的 PC 或计算机就好比是一个房间里不知道门口在哪的人。他们可以和房间或网络中的其他人交谈，但是如果他们不知道默认网关地址，或者如果没有默认网关，那么就没有出路。</p>
+<p>主机的路由表通常包括默认网关。主机通过动态主机配置协议 (Dynamic Host Configuration Protocol，DHCP) 动态接收默认网关 IPv4 地址，或者通过手动配置。配置默认网关会在 PC 的路由表中创建一个默认路由。默认路由是计算机尝试联系远程网络时所用的路由或路径。</p>
+<h2 id="路由表"><a href="#路由表" class="headerlink" title="路由表"></a>路由表</h2><p>当一台主机发送数据包到另一台主机时，它将使用路由表来确定将数据包发送到哪里。如果目的主机位于远程网络，则数据包会转发到默认网关。</p>
+<p>数据包到达默认网关（通常是路由器）时会发生什么情况？路由器会查看路由表来确定将数据包转发到哪里。</p>
+<p>路由器的路由表存储下列信息：</p>
+<ul>
+<li>直连路由 - 这些路由来自于活动的路由器接口。当接口配置了 IP 地址并激活时，路由器会添加直连路由。路由器的每个接口均连接到一个不同的网段。</li>
+<li>远程路由 - 这些路由来自连接到其他路由器的远程网络。通向这些网络的路由可以由网络管理员在本地路由器上手动配置，也可动态配置，后者的方法是启用本地路由器，使其与其他使用动态路由协议的路由器交换信息。</li>
+<li>默认路由 - 与主机一样，如果路由表中没有通向目标网络的其他路由，路由器也会将默认路由作为最后选用网关。</li>
+</ul>
+<p>在 Cisco IOS 路由器上，<code>show ip route</code> 命令可用于显示路由器的 IPv4 路由表</p>
+<p>还必须要知道，路由器不能转发目的网络与路由表中的路由不匹配的数据包。如果路由表中没有代表目的网络的路由，会丢弃数据包（即不转发）。但是，正如主机可以使用默认网关将数据包转发到未知目的地址，路由器也可以包含默认路由，以创建最后选用网关。可以手动配置或动态获取默认路由。</p>
+<h3 id="直连路由表条目"><a href="#直连路由表条目" class="headerlink" title="直连路由表条目"></a>直连路由表条目</h3><p>为路由器接口配置 IPv4 地址、子网掩码并激活时，将会自动创建以下两个路由表条目：</p>
+<ul>
+<li>C - 用于确定直连网络。为接口配置 IP 地址并激活时，会自动创建直连网络。</li>
+<li>L - 表示这是本地接口。这是路由器接口的 IPv4 地址。</li>
+</ul>
+<p>例如：<code>C 192.168.10.1 is directly connected,GigabitEthernet0/0</code></p>
+<p>直连路由表条目有三部分组成：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">路由来源</th>
+<th style="text-align:center">目的网络</th>
+<th style="text-align:center">传出接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">确定路由如何获知网络</td>
+<td style="text-align:center">确定目的网络和他的获取方式</td>
+<td style="text-align:center">确定用于将数据转发至最终目的地的出口</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">192.168.10.1 is directly connected,</td>
+<td style="text-align:center">GigabitEthernet0/0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="远程网络路由表条目"><a href="#远程网络路由表条目" class="headerlink" title="远程网络路由表条目"></a>远程网络路由表条目</h3><p>一个路由器通常配置有多个接口。路由表既储存直连网络信息，也储存远程网络信息。</p>
+<p>远程网络路由表条目有 7 个部分</p>
+<p>例如：<code>D 10.1.1.0/24 90 2170112 via 209.165.200.226, 00:00:05, Serial0/0/0</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">路由来源</th>
+<th style="text-align:center">目的网络</th>
+<th style="text-align:center">管理距离</th>
+<th style="text-align:center">度量</th>
+<th style="text-align:center">下一跳</th>
+<th style="text-align:center">路由时间戳</th>
+<th>传出接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">确定路由器如何获知网络。常见路由来源包括 S（静态路由）、D（增强型内部网关路由选择协议）、O（开放最短路径优先选择）</td>
+<td style="text-align:center">确定目的网络</td>
+<td style="text-align:center">确定路由来源的管理距离（可信度），值越低表示可信度越高</td>
+<td style="text-align:center">值越低表示此路由器越佳</td>
+<td style="text-align:center">用于确定转发数据包的下一路由器的 IP 地址</td>
+<td style="text-align:center">用于识别路由器最后一次侦听的时间</td>
+<td>确定用于将数据转发至最终目的地的出口</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">10.1.1.0/24</td>
+<td style="text-align:center">90</td>
+<td style="text-align:center">2170112</td>
+<td style="text-align:center">via 209.165.200.226,</td>
+<td style="text-align:center">00:00:05,</td>
+<td>Serial0/0/0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>路由器（英语：Router，又称路径器）是一种电讯网络设备，提供路由与转送两种重要机制，可以决定数据包从来源端到目的端所经过的路由路径（host 到 host 之间的传输路径），这个过程称为路由；将路由器输入端的数据包移送至适当的路由器输出端（在路由器内部进行），这称为转送。路由工作在 OSI 模型的第三层——即网络层，例如网际协议（IP）。</p>
+<p>它是一种设备同样也是一种计算机，同其他计算机设备一样，路由器也需要 CPU、OS、RAM、ROM、NVRAM 和闪存</p>
+<p>路由表、ARP 缓存表、数据包缓存都存放在 RAM 中</p>
+<p>思科路由器和交换机都会在重启时将 IOS 映像和启动配置文件加载到 RAM 中，如图所示。</p>
+<p><code>show version</code> 命令会显示路由器当前所运行的 Cisco IOS 软件的版本信息、引导程序版本信息以及硬件配置信息（包括系统存储器大小）。</p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>routing</strong> - the process of sending packets to hosts on a remote network</li>
+<li><strong>maximum transmission unit,MTU</strong> - the largest PDU that is supported</li>
+<li><strong>Time-to-Live,TTL</strong> - a value that limits the the lifetime of a packet</li>
+<li><strong>administrative distance</strong> - the trustworthiness of a route</li>
+<li><strong>next-hop</strong> - the destination router indicated by the outgoing interface entry in the routing table</li>
+<li><strong>RAM</strong> - volatile memory that stores the running configuration and tables as generated by the device</li>
+<li><strong>ROM</strong> - nonvolatile memory that contains a limited IOS and instructions for the router</li>
+<li><strong>NVRAM</strong> - nonvolatile memory that stores the startup configuration of a device</li>
+<li><strong>hostname</strong> - a way to identify a networking device</li>
+<li><strong>flash</strong> - nonvolatile memory that stores the IOS and other system files</li>
+<li><strong>connectionless</strong> - a connection does not have to be established to send data</li>
+<li><strong>in-band configuration</strong> - requires the establishment of a network connection to the device to be configured</li>
+<li><strong>out-of-band configuration</strong> - requires a direct physical connection to the device to be configured</li>
+<li><strong>default gateway</strong> - a device that allows the devices on one network to communicate with devices on other networks</li>
+<li><strong>metric</strong> - a value that is used by a routing protocol to identify the best route to insert into a routing table</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/17/CCNA-Chapter-5-Ethernet/" rel="next" title="CCNA Chapter 5: Ethernet">
+                <i class="fa fa-chevron-left"></i> CCNA Chapter 5: Ethernet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/19/CCNA-Chapter-7-IP-Addressing/" rel="prev" title="CCNA Chapter 7: IP Addressing">
+                CCNA Chapter 7: IP Addressing <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络层"><span class="nav-number">1.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP，Internet-Protocol"><span class="nav-number">2.</span> <span class="nav-text">IP，Internet Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv4-和-IPv6-的优缺点"><span class="nav-number">2.1.</span> <span class="nav-text">IPv4 和 IPv6 的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装-IP"><span class="nav-number">2.2.</span> <span class="nav-text">封装 IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv4-报头格式"><span class="nav-number">2.2.1.</span> <span class="nav-text">IPv4 报头格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6-报头格式"><span class="nav-number">2.2.2.</span> <span class="nav-text">IPv6 报头格式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由"><span class="nav-number">3.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认网关"><span class="nav-number">3.1.</span> <span class="nav-text">默认网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由表"><span class="nav-number">3.2.</span> <span class="nav-text">路由表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直连路由表条目"><span class="nav-number">3.2.1.</span> <span class="nav-text">直连路由表条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程网络路由表条目"><span class="nav-number">3.2.2.</span> <span class="nav-text">远程网络路由表条目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器"><span class="nav-number">3.3.</span> <span class="nav-text">路由器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">4.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

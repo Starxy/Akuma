@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="互联网协议地址（英语：Internet Protocol Address，又译为网际协议地址），缩写为 IP 地址（英语：IP Address），是分配给网络上使用网际协议（英语：Internet Protocol, IP）的设备的数字标签。常见的 IP 地址分为 IPv4 与 IPv6 两大类。 IPv4对于同一网络中的所有设备，地址的网络部分中的位必须完全相同。地址的主机部分中的位必须唯一，这">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 7: IP Addressing">
+<meta property="og:url" content="http://starxy.cc/2017/12/19/CCNA-Chapter-7-IP-Addressing/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="互联网协议地址（英语：Internet Protocol Address，又译为网际协议地址），缩写为 IP 地址（英语：IP Address），是分配给网络上使用网际协议（英语：Internet Protocol, IP）的设备的数字标签。常见的 IP 地址分为 IPv4 与 IPv6 两大类。 IPv4对于同一网络中的所有设备，地址的网络部分中的位必须完全相同。地址的主机部分中的位必须唯一，这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmmj5uv6f2j30h404st96.jpg">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCNA Chapter 7: IP Addressing">
+<meta name="twitter:description" content="互联网协议地址（英语：Internet Protocol Address，又译为网际协议地址），缩写为 IP 地址（英语：IP Address），是分配给网络上使用网际协议（英语：Internet Protocol, IP）的设备的数字标签。常见的 IP 地址分为 IPv4 与 IPv6 两大类。 IPv4对于同一网络中的所有设备，地址的网络部分中的位必须完全相同。地址的主机部分中的位必须唯一，这">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmmj5uv6f2j30h404st96.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2017/12/19/CCNA-Chapter-7-IP-Addressing/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CCNA Chapter 7: IP Addressing | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/19/CCNA-Chapter-7-IP-Addressing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CCNA Chapter 7: IP Addressing
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-19 12:39:51" itemprop="dateCreated datePublished" datetime="2017-12-19T12:39:51+08:00">2017-12-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/" itemprop="url" rel="index"><span itemprop="name">ESAIP</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index"><span itemprop="name">CCNA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">14 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>互联网协议地址（英语：Internet Protocol Address，又译为网际协议地址），缩写为 IP 地址（英语：IP Address），是分配给网络上使用网际协议（英语：Internet Protocol, IP）的设备的数字标签。常见的 IP 地址分为 IPv4 与 IPv6 两大类。</p>
+<h1 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h1><p>对于同一网络中的所有设备，地址的网络部分中的位必须完全相同。地址的主机部分中的位必须唯一，这方便识别网络中的特定主机。如果两台主机在 32 位数据流中的指定网络部分有相同的位模式，则这两台主机位于同一网络。主机如何知道 32 位数据流中的哪一部分用于标识网络，哪一部分用于标识主机呢？这项工作由子网掩码（ subnet mask）负责。</p>
+<h2 id="IPv4-编址格式"><a href="#IPv4-编址格式" class="headerlink" title="IPv4 编址格式"></a>IPv4 编址格式</h2><p>IPv4 地址可被写作任何表示一个 32 位整数值的形式，但为了方便人类阅读和分析，它通常被写作点分十进制的形式，即四个字节被分开用十进制写出，中间用点分隔。</p>
+<p>下表展示了几种不同的格式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式</th>
+<th style="text-align:center">值</th>
+<th style="text-align:center">从点分十进制转换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">点分十进制</td>
+<td style="text-align:center">192.0.2.235</td>
+<td style="text-align:center">不适用</td>
+</tr>
+<tr>
+<td style="text-align:center">点分十六进制</td>
+<td style="text-align:center">0xC0.0x00.0x02.0xEB</td>
+<td style="text-align:center">每个字节被单独转换为十六进制</td>
+</tr>
+<tr>
+<td style="text-align:center">点分八进制</td>
+<td style="text-align:center">0300.0000.0002.0353</td>
+<td style="text-align:center">每个字节被单独转换为八进制</td>
+</tr>
+<tr>
+<td style="text-align:center">十六进制</td>
+<td style="text-align:center">0xC00002EB</td>
+<td style="text-align:center">将点分十六进制连在一起</td>
+</tr>
+<tr>
+<td style="text-align:center">十进制</td>
+<td style="text-align:center">3221226219</td>
+<td style="text-align:center">用十进制写出的 32 位整数</td>
+</tr>
+<tr>
+<td style="text-align:center">八进制</td>
+<td style="text-align:center">030000001353</td>
+<td style="text-align:center">用八进制写出的 32 位整数</td>
+</tr>
+</tbody>
+</table>
+<p>此外，在点分格式中，每个字节都可用任意的进制表达。如，192.0x00.0002.235 是一种合法（但不常用）的表示。</p>
+<a id="more"></a>
+<h2 id="特殊用途的地址"><a href="#特殊用途的地址" class="headerlink" title="特殊用途的地址"></a>特殊用途的地址</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">CIDR 地址块</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">参考资料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.0.0.0/8</td>
+<td style="text-align:center">本网络（仅作为源地址时合法）</td>
+<td style="text-align:center">RFC 5735</td>
+</tr>
+<tr>
+<td style="text-align:center">10.0.0.0/8</td>
+<td style="text-align:center">专用网络</td>
+<td style="text-align:center">RFC 1918</td>
+</tr>
+<tr>
+<td style="text-align:center">100.64.0.0/10</td>
+<td style="text-align:center">地址共享</td>
+<td style="text-align:center">RFC 6598</td>
+</tr>
+<tr>
+<td style="text-align:center">127.0.0.0/8</td>
+<td style="text-align:center">环回</td>
+<td style="text-align:center">RFC 5735</td>
+</tr>
+<tr>
+<td style="text-align:center">169.254.0.0/16</td>
+<td style="text-align:center">链路本地</td>
+<td style="text-align:center">RFC 3927</td>
+</tr>
+<tr>
+<td style="text-align:center">172.16.0.0/12</td>
+<td style="text-align:center">专用网络</td>
+<td style="text-align:center">RFC 1918</td>
+</tr>
+<tr>
+<td style="text-align:center">192.0.0.0/24</td>
+<td style="text-align:center">保留（IANA）</td>
+<td style="text-align:center">RFC 5735</td>
+</tr>
+<tr>
+<td style="text-align:center">192.0.2.0/24</td>
+<td style="text-align:center">TEST-NET-1，文档和示例</td>
+<td style="text-align:center">RFC 5735</td>
+</tr>
+<tr>
+<td style="text-align:center">192.88.99.0/24</td>
+<td style="text-align:center">6to4 中继</td>
+<td style="text-align:center">RFC 3068</td>
+</tr>
+<tr>
+<td style="text-align:center">192.168.0.0/16</td>
+<td style="text-align:center">专用网络</td>
+<td style="text-align:center">RFC 1918</td>
+</tr>
+<tr>
+<td style="text-align:center">198.18.0.0/15</td>
+<td style="text-align:center">网络基准测试</td>
+<td style="text-align:center">RFC 2544</td>
+</tr>
+<tr>
+<td style="text-align:center">198.51.100.0/24</td>
+<td style="text-align:center">TEST-NET-2，文档和示例</td>
+<td style="text-align:center">RFC 5737</td>
+</tr>
+<tr>
+<td style="text-align:center">203.0.113.0/24</td>
+<td style="text-align:center">TEST-NET-3，文档和示例</td>
+<td style="text-align:center">RFC 5737</td>
+</tr>
+<tr>
+<td style="text-align:center">224.0.0.0/4</td>
+<td style="text-align:center">多播（之前的 D 类网络）</td>
+<td style="text-align:center">RFC 3171</td>
+</tr>
+<tr>
+<td style="text-align:center">240.0.0.0/4</td>
+<td style="text-align:center">保留（之前的 E 类网络）</td>
+<td style="text-align:center">RFC 1700</td>
+</tr>
+<tr>
+<td style="text-align:center">255.255.255.255</td>
+<td style="text-align:center">受限广播</td>
+<td style="text-align:center">RFC 919</td>
+</tr>
+</tbody>
+</table>
+<h3 id="专用网络"><a href="#专用网络" class="headerlink" title="专用网络"></a>专用网络</h3><p>在 IPv4 所允许的大约四十亿地址中，三个地址块被保留作专用网络。这些地址块在专用网络之外不可路由，专用网络之内的主机也不能直接与公共网络通信。但通过网络地址转换（NAT），使用这些地址的主机可以像拥有共有地址的主机在互联网上通信。</p>
+<p>下表展示了三个被保留作专用网络的地址块（RFC 1918）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名字</th>
+<th style="text-align:center">地址范围</th>
+<th style="text-align:center">地址数量</th>
+<th style="text-align:center">有类别的描述</th>
+<th style="text-align:center">最大的 CIDR 地址块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">24 位块</td>
+<td style="text-align:center">10.0.0.0–10.255.255.255</td>
+<td style="text-align:center">16,777,216</td>
+<td style="text-align:center">一个 A 类</td>
+<td style="text-align:center">10.0.0.0/8</td>
+</tr>
+<tr>
+<td style="text-align:center">20 位块</td>
+<td style="text-align:center">172.16.0.0–172.31.255.255</td>
+<td style="text-align:center">1,048,576</td>
+<td style="text-align:center">连续的 16 个 B 类</td>
+<td style="text-align:center">172.16.0.0/12</td>
+</tr>
+<tr>
+<td style="text-align:center">16 位块</td>
+<td style="text-align:center">192.168.0.0–192.168.255.255</td>
+<td style="text-align:center">65,536</td>
+<td style="text-align:center">连续的 256 个 C 类</td>
+<td style="text-align:center">192.168.0.0/16</td>
+</tr>
+</tbody>
+</table>
+<h3 id="环回地址-Loopback-Address"><a href="#环回地址-Loopback-Address" class="headerlink" title="环回地址 (Loopback Address)"></a>环回地址 (Loopback Address)</h3><p>地址块 127.0.0.0/8 被保留作环回通信用。此范围中的地址绝不应出现在主机之外，发送至此地址的报文被作为同一虚拟网络设备上的入站报文（环回），主要用于检查 TCP/IP 协议栈是否正确运行和本机对本机的链接。</p>
+<h3 id="本地链路地址"><a href="#本地链路地址" class="headerlink" title="本地链路地址"></a>本地链路地址</h3><p>链路本地地址（Link-local address）是计算机网络中一类特殊的地址， 通常被称为自动私有 IP 编址 (APIPA) 地址。Windows DCHP 客户端在无可用 DHCP 服务器时，使用它们进行自我配置。在对等连接中非常有用。</p>
+<p>它仅供于在网段，或广播域中的主机相互通信使用。这类主机通常不需要外部互联网服务，仅有主机间相互通讯的需求。</p>
+<p>IPv4 链路本地地址定义在 169.254.0.0/16 地址块。 IPv6 定义在 fe80::/10 地址块。</p>
+<h3 id="以-0-或-255-结尾的地址"><a href="#以-0-或-255-结尾的地址" class="headerlink" title="以 0 或 255 结尾的地址"></a>以 0 或 255 结尾的地址</h3><p>一个常见的误解是以 0 或 255 结尾的地址永远不能分配给主机：这仅在子网掩码至少 24 位长度时（旧的 C 类地址，或 CIDR 中的/24 到/32）才成立。</p>
+<p>在有类别的编址中，只有三种可能的子网掩码：A 类：255.0.0.0，B 类：255.255.0.0，C 类：255.255.255.0。如，在子网 192.168.5.0/255.255.255.0（即 192.168.5.0/24）中，网络识别码 192.168.5.0 用来表示整个子网，所以它不能用来标识子网上的某个特定主机。</p>
+<p>广播地址允许数据包发往子网上的所有设备。一般情况下，广播地址是借由子网掩码的比特反码并和网络识别码运行 OR 的比特运算得到，即广播地址是子网中的最后一个地址。在上述例子中，广播地址是 192.168.5.255，所以为了避免歧义，这个地址也不能被分配给主机。在 A、B 和 C 类网络中，广播地址总是以 255 结尾。</p>
+<p>但是，这并不意味着每个以 255 结尾的地址都不能用做主机地址。比如，在 B 类子网 192.168.0.0/255.255.0.0（即 192.168.0.0/16）中，广播地址是 192.168.255.255（主机位全 1）。在这种情况下，尽管可能带来误解，但 192.168.1.255、192.168.2.255 等地址可以被分配给主机。同理，192.168.0.0 作为网络识别码不能被分配，但 192.168.1.0、192.168.2.0 等都是可以的。</p>
+<p>随着 CIDR 的到来，广播地址不一定总是以 255 结尾（广播地址是指主机位都为 1 的地址，255 只是其中一种情况）。比如，子网 203.0.113.16/28 的广播地址是 203.0.113.31。</p>
+<p>一般情况下，子网的第一个和最后一个地址分别被作为网络识别码和广播地址，任何其它地址都可以被分配给其上的主机。</p>
+<h2 id="分类网络"><a href="#分类网络" class="headerlink" title="分类网络"></a>分类网络</h2><p>分类网络（Classful Addressing）或称“分级式定址”，是在互联网 IPv4 还未出现枯竭问题的时候，用于描述互联网的网络体系的一个术语。它将 IPv4 的 IP 地址分成五个类别。每个类别的地址都由它们的前 3 位来标识；每个类别都定义了网络的大小或者类型（单播或多播）。</p>
+<p>为了和已存在的 IP 地址空间及 IP 数据报兼容，对 IP 地址的定义在 1981 年的 RFC 791 进行了修改。修改后的 IP 地址共有三种网络地址长度不同的单播地址。如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Class</th>
+<th style="text-align:center">前缀位</th>
+<th style="text-align:center">网络地址位数</th>
+<th style="text-align:center">剩余的位数</th>
+<th style="text-align:center">网络数</th>
+<th style="text-align:center">每个网络的主机数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A 类地址</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">128</td>
+<td style="text-align:center">16,777,214</td>
+</tr>
+<tr>
+<td style="text-align:center">B 类地址</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">16,384</td>
+<td style="text-align:center">65,534</td>
+</tr>
+<tr>
+<td style="text-align:center">C 类地址</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">2,097,152</td>
+<td style="text-align:center">254</td>
+</tr>
+<tr>
+<td style="text-align:center">D 类地址（群播）</td>
+<td style="text-align:center">1110</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+</tr>
+<tr>
+<td style="text-align:center">E 类地址（保留）</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+<td style="text-align:center">未定义</td>
+</tr>
+</tbody>
+</table>
+<p>可用的主机地址总是 2N - 2（N 是所用的位数，减 2 是因为第一个和最后一个地址都是无效的）。因此，对于用 8 位来表示主机地址的 C 类地址来说，主机数就是 254。</p>
+<p>但是比较两个 IP 地址的物理网络的方法没有改变。对每个地址，在确定它的网络地址所占的位数和相应的值之后，就可以比较它们的网络地址了。如果两个网络地址相同，则两个 IP 地址在同一网络上</p>
+<p>第一轮的改变在短期内已经足够，但是 IP 地址仍然在不断变得短缺。其中主要的问题是，多数的网站对 c 类的网络地址来说太大了，因此它们都得到了 b 类的地址。随着互联网的快速发展，b 类的地址（共 214 个）迅速减少。分类网络于 1993 年被无类别域间路由取代以解决这个问题。</p>
+<h2 id="无类别域间路由"><a href="#无类别域间路由" class="headerlink" title="无类别域间路由"></a>无类别域间路由</h2><p>无类别域间路由（Classless Inter-Domain Routing、CIDR）是一个用于给用户分配 IP 地址以及在互联网上有效地路由 IP 数据包的对 IP 地址进行归类的方法。用来解决基于分类网络下，IPv4 地址分配不足的问题</p>
+<p>无类别域间路由是基于可变长子网掩码（VLSM）来进行任意长度的前缀的分配的。CIDR 包括：</p>
+<ul>
+<li>指定任意长度的前缀的可变长子网掩码技术。遵从 CIDR 规则的地址有一个后缀说明前缀的位数，例如：192.168.0.0/16。这使得对日益缺乏的 IPv4 地址的使用更加有效。</li>
+<li>将多个连续的前缀聚合成超网，以及，在互联网中，只要有可能，就显示为一个聚合的网络，因此在总体上可以减少路由表的表项数目。聚合使得互联网的路由表不用分为多级，并通过 VLSM 逆转“划分子网”的过程。</li>
+<li>根据机构的实际需要和短期预期需要而不是分类网络中所限定的过大或过小的地址块来管理 IP 地址的分配的过程。</li>
+</ul>
+<h1 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h1><p>网际协议第 6 版（英文：Internet Protocol version 6，缩写：IPv6）是网际协议（IP）的最新版本，用作互联网的网络层协议，用它来取代 IPv4 主要是为了解决 IPv4 地址枯竭问题，不过它也在其他很多方面对 IPv4 有所改进。</p>
+<p>IPv6 具有比 IPv4 大得多的编码地址空间。这是因为 IPv6 采用 128 位的地址，而 IPv4 使用的是 32 位。因此新增的地址空间支持 2128（约 3.4×1038）个地址，具体数量为 340,282,366,920,938,463,463,374,607,431,768,211,456 个，也可以说成 1632 个，因为 32 位地址每位可以取 16 个不同的值。</p>
+<h2 id="IPv6-编址格式"><a href="#IPv6-编址格式" class="headerlink" title="IPv6 编址格式"></a>IPv6 编址格式</h2><p>IPv6 从 IPv4 到 IPv6 最显著的变化就是网络地址的长度。RFC 2373 和 RFC 2374 定义的 IPv6 地址有 128 位长；IPv6 地址的表达形式一般采用 32 个十六进制数。</p>
+<p>在很多场合，IPv6 地址由两个逻辑部分组成：<strong>一个 64 位的网络前缀和一个 64 位的主机地址</strong>，主机地址通常根据物理地址自动生成，叫做 EUI-64（或者 64-位扩展唯一标识）</p>
+<p>IPv6 二进位制下为 128 位长度，以 16 位为一组，每组以冒号“:”隔开，可以分为 8 组，每组以 4 位十六进制方式表示。例如：2001:0db8:85a3:08d3:1319:8a2e:0370:7344 是一个合法的 IPv6 地址。</p>
+<p>同时 IPv6 在某些条件下可以省略：</p>
+<ol>
+<li>每项数字前导的 0 可以省略，省略后前导数字仍是 0 则继续，例如下组 IPv6 是相等的。<ul>
+<li>2001:0DB8:<strong>0</strong>2de:<strong>0000</strong>:<strong>0000</strong>:<strong>0000</strong>:<strong>0000</strong>:<strong>0</strong>e13</li>
+<li>2001:DB8:2de:<strong>0000</strong>:<strong>0000</strong>:<strong>0000</strong>:<strong>0000</strong>:e13</li>
+<li>2001:DB8:2de:<strong>000</strong>:<strong>000</strong>:<strong>000</strong>:<strong>000</strong>:e13</li>
+<li>2001:DB8:2de:<strong>00</strong>:<strong>00</strong>:<strong>00</strong>:<strong>00</strong>:e13</li>
+<li>2001:DB8:2de:<strong>0</strong>:<strong>0</strong>:<strong>0</strong>:<strong>0</strong>:e13</li>
+</ul>
+</li>
+<li>可以用双冒号“::”表示一组 0 或多组连续的 0，但只能出现一次：<ol>
+<li>如果四组数字都是零，可以被省略。遵照以上省略规则，下面这两组 IPv6 都是相等的。<ul>
+<li>2001:DB8:2de:<strong>0</strong>:<strong>0</strong>:<strong>0</strong>:<strong>0</strong>:e13</li>
+<li>2001:DB8:2de::e13</li>
+<li>2001:0DB8:0000:0000:0000:0000:1428:57ab</li>
+<li>2001:0DB8:0000:0000:0000::1428:57ab</li>
+<li>2001:0DB8:0:0:0:0:1428:57ab</li>
+<li>2001:0DB8:0::0:1428:57ab</li>
+<li>2001:0DB8::1428:57ab</li>
+</ul>
+</li>
+<li>2001::25de::cade 是非法的，因为双冒号出现了两次。它有可能是下种情形之一，造成无法推断。</li>
+</ol>
+<ul>
+<li>2001:0000:0000:0000:0000:25de:0000:cade</li>
+<li>2001:0000:0000:0000:25de:0000:0000:cade</li>
+<li>2001:0000:0000:25de:0000:0000:0000:cade</li>
+<li>2001:0000:25de:0000:0000:0000:0000:cade</li>
+</ul>
+<ol>
+<li>如果这个地址实际上是 IPv4 的地址，后 32 位可以用 10 进制数表示；因此::ffff:192.168.89.9 相等于::ffff:c0a8:5909，但不等于::192.168.89.9 和::c0a8:5909。</li>
+</ol>
+</li>
+</ol>
+<p>另外，::ffff:1.2.3.4 格式叫做 IPv4 映射地址。而::1.2.3.4 格式叫做 IPv4 一致地址，目前已被取消。</p>
+<p>IPv4 位址可以很容易的转化为 IPv6 格式。举例来说，如果 IPv4 的一个地址为 135.75.43.52（十六进制为 0x874B2B34），它可以被转化为 0000:0000:0000:0000:0000:ffff:874B:2B34 或者::ffff:874B:2B34。同时，还可以使用混合符号（IPv4-compatible address），则地址可以为::ffff:135.75.43.52。</p>
+<h3 id="IPv6-全局单播地址结构"><a href="#IPv6-全局单播地址结构" class="headerlink" title="IPv6 全局单播地址结构"></a>IPv6 全局单播地址结构</h3><p>IPv6 全局单播地址 (GUA) 具有全局唯一性，可在 IPv6 Internet 上路由。这些地址相当于公有 IPv4 地址。互联网名称与数字地址分配机构 (ICANN)，即 IANA 的运营商，将 IPv6 地址块分配给五家 RIR。目前分配的仅是前三位为 001 或 2000:: /3 的全局单播地址。换句话说，GUA 地址的第一个十六进制数以 2 或 3 开头。这只是可用 IPv6 地址空间的 1/8，对于其他类型单播和组播地址而言只是很小的一部分。</p>
+<p>注意：2001:0DB8::/32 已经留作备档之用，包括示例用途。</p>
+<p>全局单播地址有三个部分：</p>
+<ul>
+<li>全局路由前缀</li>
+<li>子网 ID</li>
+<li>接口 ID</li>
+<li>全局路由前缀</li>
+</ul>
+<p>全局路由前缀为提供商（如 ISP）分配给客户或站点的地址的前缀或网络部分。一般来说，RIR 向客户分配 /48 全局路由前缀。这包括从公司企业网络到单个家庭网络中的每个站点。</p>
+<p>如图显示使用 /48 全局路由前缀的全局单播地址结构。/48 前缀是分配的最常见全局路由前缀<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmmj5uv6f2j30h404st96.jpg" alt><br>例如，IPv6 地址 2001:0DB8:ACAD::/48 的前缀显示前 48 位（3 个十六进制数）(2001:0DB8:ACAD) 是该地址的前缀或网络部分。/48 前缀长度前的双冒号 (::) 表示地址的剩余部分全部为 0。</p>
+<p>全局路由前缀的大小决定子网 ID 的大小。</p>
+<ul>
+<li>子网 ID 组织使用子网 ID 确定其站点的子网。子网 ID 越大，可用子网越多。</li>
+<li>接口 ID IPv6 接口 ID 相当于 IPv4 地址的主机部分。使用术语“接口 ID”是因为单个主机可能有多个接口，而每个接口又有一个或多个 IPv6 地址。强烈建议在大多数情况下使用 /64 子网。换言之，如图 2 所示的 64 位接口 ID。</li>
+</ul>
+<p>注意：与 IPv4 不同，在 IPv6 中，全 0 和全 1 主机地址可以分配给设备。全 1 地址可以使用是因为 IPv6 中不使用广播地址。全 0 地址也可使用，但它留作子网路由器任播地址，应仅分配给路由器。</p>
+<p>读取多数 IPv6 地址的一种简单方法是计算十六进制数。如图 3 所示，在 /64 全局单播地址中，前四个十六进制数是地址的网络部分，其中第四个十六进制数表示子网 ID。剩下的四个十六进制数用于接口 ID。</p>
+<h3 id="特殊地址"><a href="#特殊地址" class="headerlink" title="特殊地址"></a>特殊地址</h3><p>IPv6 中有些地址是有特殊含义的：</p>
+<ul>
+<li>未指定地址<ul>
+<li>::/128－所有比特皆为零的地址称作未指定地址。这个地址不可指定给某个网络接口，并且只有在主机尚未知道其来源 IP 时，才会用于软件中。路由器不可转送包含未指定地址的数据包。</li>
+</ul>
+</li>
+<li>链路本地地址<ul>
+<li>::1/128－是一种单播绕回地址。如果一个应用程序将数据包送到此地址，IPv6 堆栈会转送这些数据包绕回到同样的虚拟接口（相当于 IPv4 中的 127.0.0.1/8）。</li>
+<li>fe80::/10－这些链路本地地址指明，这些地址只在区域连接中是合法的，这有点类似于 IPv4 中的 169.254.0.0/16。</li>
+</ul>
+</li>
+<li>唯一区域位域<ul>
+<li>fc00::/7－唯一区域地址（ULA，unique local address）只可在一群网站中绕送。这定义在 RFC 4193 中，是用来取代站点本地位域。这地址包含一个 40 比特的伪随机数，以减少当网站合并或数据包误传到网络时碰撞的风险。这些地址除了只能用于区域外，还具备全域性的范畴，这点违反了唯一区域位域所取代的站点本地地址的定义。</li>
+</ul>
+</li>
+<li>多播地址<ul>
+<li>ff00::/8－这个前置表明定义在”IP Version 6 Addressing Architecture”（RFC 4291）中的多播地址。其中，有些地址已用于指定特殊协议，如 ff0X::101 对应所有区域的 NTP 服务器（RFC 2375）。</li>
+</ul>
+</li>
+<li>请求节点多播地址（Solicited-node multicast address）<ul>
+<li>ff02::1:FFXX:XXXX－XX:XXXX 为相对应的单播或任播地址中的三个最低的字节。</li>
+</ul>
+</li>
+<li><a href="#ipv4">IPv4</a><ul>
+<li><a href="#ipv4-%E7%BC%96%E5%9D%80%E6%A0%BC%E5%BC%8F">IPv4 编址格式</a></li>
+<li><a href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E9%80%94%E7%9A%84%E5%9C%B0%E5%9D%80">特殊用途的地址</a><ul>
+<li><a href="#%E4%B8%93%E7%94%A8%E7%BD%91%E7%BB%9C">专用网络</a></li>
+<li><a href="#%E7%8E%AF%E5%9B%9E%E5%9C%B0%E5%9D%80-loopback-address">环回地址 (Loopback Address)</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E9%93%BE%E8%B7%AF%E5%9C%B0%E5%9D%80">本地链路地址</a></li>
+<li><a href="#%E4%BB%A5-0-%E6%88%96-255-%E7%BB%93%E5%B0%BE%E7%9A%84%E5%9C%B0%E5%9D%80">以 0 或 255 结尾的地址</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C">分类网络</a></li>
+<li><a href="#%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1">无类别域间路由</a></li>
+</ul>
+</li>
+<li><a href="#ipv6">IPv6</a><ul>
+<li><a href="#ipv6-%E7%BC%96%E5%9D%80%E6%A0%BC%E5%BC%8F">IPv6 编址格式</a><ul>
+<li><a href="#ipv6-%E5%85%A8%E5%B1%80%E5%8D%95%E6%92%AD%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84">IPv6 全局单播地址结构</a></li>
+<li><a href="#%E7%89%B9%E6%AE%8A%E5%9C%B0%E5%9D%80">特殊地址</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-%E5%9C%B0%E5%9D%80%E7%9A%84%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE">IPv6 地址的自动配置</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE---slaac">动态配置 - SLAAC</a><ul>
+<li><a href="#ra-%E9%80%89%E9%A1%B9-1%EF%BC%9Aslaac">RA 选项 1：SLAAC</a></li>
+<li><a href="#ra-%E9%80%89%E9%A1%B9-2%EF%BC%9Aslaac-%E5%92%8C%E6%97%A0%E7%8A%B6%E6%80%81-dhcpv6">RA 选项 2：SLAAC 和无状态 DHCPv6</a></li>
+<li><a href="#ra-%E9%80%89%E9%A1%B9-3%EF%BC%9A%E6%9C%89%E7%8A%B6%E6%80%81-dhcpv6">RA 选项 3：有状态 DHCPv6</a></li>
+<li><a href="#eui-64-%E6%B5%81%E7%A8%8B%E5%92%8C%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90">EUI-64 流程和随机生成</a><ul>
+<li><a href="#eui-64-%E6%B5%81%E7%A8%8B">EUI-64 流程</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%84%E6%8E%A5%E5%8F%A3-id">随机生成的接口 ID</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8A%A8%E6%80%81%E6%9C%AC%E5%9C%B0%E9%93%BE%E8%B7%AF%E5%9C%B0%E5%9D%80">动态本地链路地址</a></li>
+<li><a href="#%E9%9D%99%E6%80%81%E6%9C%AC%E5%9C%B0%E9%93%BE%E8%B7%AF%E5%9C%B0%E5%9D%80">静态本地链路地址</a></li>
+</ul>
+</li>
+<li><a href="#ipv4-%E5%92%8C-ipv6-%E5%85%B1%E5%AD%98">IPv4 和 IPv6 共存</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E9%AA%8C%E8%AF%81">连接验证</a><ul>
+<li><a href="#icmpv4-%E5%92%8C-icmpv6">ICMPv4 和 ICMPv6</a></li>
+<li><a href="#ping-%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%9B%9E">Ping 本地环回</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></li>
+</ul>
+<h2 id="IPv6-地址的自动配置"><a href="#IPv6-地址的自动配置" class="headerlink" title="IPv6 地址的自动配置"></a>IPv6 地址的自动配置</h2><p>与使用 IPv4 一样，在客户端配置静态地址并不能扩展至更大的环境。因此，多数 IPv6 网络的管理员会启用 IPv6 地址的动态分配。</p>
+<p>设备可以通过两种方法自动获取 IPv6 全局单播地址：</p>
+<p>无状态地址自动配置 (SLAAC)<br>有状态 DHCPv6<br>注意：使用 DHCPv6 或 SLAAC 时，本地路由器的本地链路地址将自动指定为默认网关地址。</p>
+<h2 id="动态配置-SLAAC"><a href="#动态配置-SLAAC" class="headerlink" title="动态配置 - SLAAC"></a>动态配置 - SLAAC</h2><p>无状态地址自动配置 (Stateless Address Autoconfiguration,SLAAC) 是允许设备从 IPv6 路由器获取 IPv6 前缀、前缀长度、默认网关地址及其他信息，而无需使用 DHCPv6 服务器的方法。使用 SLAAC，设备根据本地路由器的 ICMPv6 路由器通告 (Router Advertisement,RA) 消息获取必要信息。</p>
+<p>IPv6 路由器每 200 秒定期将 ICMPv6 RA 消息发送到网络上所有支持 IPv6 的设备。在响应发送 ICMPv6 路由器请求 (RS) 消息的主机时，也会发送 RA 消息。</p>
+<p>默认情况下未启用 IPv6 路由。要将路由器启用为 IPv6 路由器，必须使用 <code>ipv6 unicast-routing</code> 全局配置命令。</p>
+<p>注意：IPv6 地址也可在未启用为 IPv6 路由器的路由器上配置。</p>
+<p>ICMPv6 RA 消息提示设备获取 IPv6 全局单播地址的方式。最终决定取决于设备的操作系统。ICMPv6 RA 消息包括：</p>
+<ul>
+<li>网络前缀和前缀长度 – 告知设备其所属的网络。</li>
+<li>默认网关 – IPv6 本地链路地址，RA 消息的源 IPv6 地址。</li>
+<li>DNS 地址和域名 – DNS 服务器的地址和域名。</li>
+</ul>
+<p>RA 消息具有三个选项：</p>
+<p>选项 1：SLAAC - 这里有你需要的所有信息，前缀、前缀长度、默认网关<br>选项 2：SLAAC 和无状态 DHCPv6 - 我有一部分信息，但是需要从 DHCP 服务器获取其他信息 (如 DNS 地址）。<br>选项 3：有状态 DHCPv6（无 SLAAC） - 我不能提供帮助，请向 DHCP6 请求所有信息</p>
+<h3 id="RA-选项-1：SLAAC"><a href="#RA-选项-1：SLAAC" class="headerlink" title="RA 选项 1：SLAAC"></a>RA 选项 1：SLAAC</h3><p>默认情况下，RA 消息会提示接收设备使用 RA 消息中的信息创建其自己的 IPv6 全局单播地址及其他信息。DHCPv6 服务器的服务不是必需项。</p>
+<p>SLAAC 是无状态的，也就是说没有中央服务器（例如有状态 DHCPv6 服务器）来分配全局单播地址和维持设备及其地址的清单。借助 SLAAC，客户端设备使用 RA 消息中的信息创建其自己的全局单播地址。</p>
+<ul>
+<li>前缀 – RA 消息中接收</li>
+<li>接口 ID – 使用 EUI-64 流程或通过生成一个随机 64 位数字产生。</li>
+</ul>
+<h3 id="RA-选项-2：SLAAC-和无状态-DHCPv6"><a href="#RA-选项-2：SLAAC-和无状态-DHCPv6" class="headerlink" title="RA 选项 2：SLAAC 和无状态 DHCPv6"></a>RA 选项 2：SLAAC 和无状态 DHCPv6</h3><p>通过此选项，RA 消息给予设备以下提示：</p>
+<ul>
+<li>使用 SLAAC 创建其自己的 IPv6 全局单播地址.</li>
+<li>使用路由器的本地链路地址，即默认网关地址的 RA 的源 IPv6 地址。</li>
+<li>使用无状态 DHCPv6 服务器获取其他信息，例如 DNS 服务器地址和域名。</li>
+</ul>
+<p>使用无状态 DHCPv6 服务器分配 DNS 服务器地址和域名。它不分配全局单播地址。</p>
+<h3 id="RA-选项-3：有状态-DHCPv6"><a href="#RA-选项-3：有状态-DHCPv6" class="headerlink" title="RA 选项 3：有状态 DHCPv6"></a>RA 选项 3：有状态 DHCPv6</h3><p>有状态 DHCPv6 与 IPv4 的 DHCP 相似。使用有状态 DHCPv6 服务器的服务，设备可自动接收编址信息，包括全局单播地址、前缀长度和 DNS 服务器地址。</p>
+<p>通过此选项，RA 消息给予设备以下提示：</p>
+<ul>
+<li>使用路由器的本地链路地址，即默认网关地址的 RA 的源 IPv6 地址。</li>
+<li>使用有状态 DHCPv6 服务器获取全局单播地址、DNS 服务器地址、域名和所有其他信息。</li>
+<li>使用有状态 DHCPv6 服务器分配并维持哪台设备接收哪个 IPv6 地址的清单。IPv4 的 DHCP 是有状态的。</li>
+</ul>
+<h3 id="EUI-64-流程和随机生成"><a href="#EUI-64-流程和随机生成" class="headerlink" title="EUI-64 流程和随机生成"></a>EUI-64 流程和随机生成</h3><p>当 RA 消息为 SLAAC 或 SLAAC 和无状态 DHCPv6 时，客户端必须生成自己的接口 ID。客户端从 RA 消息中获知地址的前缀部分，但必须创建自己的接口 ID。接口 ID 可使用 EUI-64 流程或随机生成的 64 位数字创建。</p>
+<h4 id="EUI-64-流程"><a href="#EUI-64-流程" class="headerlink" title="EUI-64 流程"></a>EUI-64 流程</h4><p>IEEE 定义了扩展唯一标识符 (EUI) 或修改的 EUI-64 流程。该流程使用客户端的 48 位以太网 MAC 地址，并在该 48 位 MAC 地址的中间插入另外 16 位来创建 64 位接口 ID。</p>
+<p>以太网 MAC 地址一般使用十六进制表示，由两部分组成：</p>
+<ul>
+<li>组织唯一标识符 (OUI) – OUI 为 IEEE 分配的 24 位（6 个十六进制数字）厂商代码。</li>
+<li>设备标识符 – 设备标识符是通用 OUI 内的唯一 24 位（6 个十六进制数字）值。</li>
+</ul>
+<p>EUI-64 接口 ID 以二进制表示，共分三个部分：</p>
+<ul>
+<li>客户端 MAC 地址的 24 位 OUI，但是第 7 位（通用/本地 (U/L) 位）颠倒。这意味着，如果第 7 位是 0，则它会变为 1，反之亦然。</li>
+<li>插入的 16 位值 FFFE（十六进制）</li>
+<li>客户端 MAC 地址的 24 位设备标识符</li>
+</ul>
+<p>注意：U/L 位的用途和该位值的翻转原因会在 RFC 5342 中讨论。</p>
+<p>确定更可能使用 EUI-64 创建地址的简单方法是接口 ID 中间的 FFFE</p>
+<p>EUI-64 优势在于可以使用以太网 MAC 地址确定接口 ID。这也允许网络管理员使用唯一 MAC 地址轻松跟踪终端设备的 IPv6 地址。但是，这却为很多客户带来了隐私忧虑。他们担心他们的数据包可以追溯到实际物理计算机。出于这些顾虑，可以转而使用随机生成的接口 ID。</p>
+<h4 id="随机生成的接口-ID"><a href="#随机生成的接口-ID" class="headerlink" title="随机生成的接口 ID"></a>随机生成的接口 ID</h4><p>根据操作系统，设备可以使用随机生成的接口 ID，而不使用 MAC 地址和 EUI-64 流程。例如，从 Windows Vista 开始，Windows 使用随机生成的接口 ID，而不是 EUI-64 创建的接口 ID。Windows XP 和之前的 Windows 操作系统均使用 EUI-64。</p>
+<p>接口 ID 创建后（无论是使用 EUI-64 流程还是通过随机生成），它都可以在 RA 消息中结合 IPv6 前缀来创建全局单播地址。</p>
+<p>注意：为确保任何 IPv6 单播地址的唯一性，客户端可以使用重复地址检测 (Duplicate Address Detection,DAD) 流程。这与 ARP 请求其地址的流程相似。如该请求没有响应，则地址是唯一的。</p>
+<h2 id="动态本地链路地址"><a href="#动态本地链路地址" class="headerlink" title="动态本地链路地址"></a>动态本地链路地址</h2><p>所有的 IPv6 设备必须具有 IPv6 本地链路地址。本地链路地址可以动态创建，也可作为静态本地链路地址手动配置。</p>
+<p>创建本地链路地址时，会根据给出的前缀和通过 EUI-64 流程或随机生成的 64 位数字创建的接口 ID 动态创建本地链路地址。操作系统通常会将相同的办法用于 SLAAC 创建的全局单播地址和动态分配的本地链路地址。默认情况下，思科 IOS 路由器使用 EUI-64 为 IPv6 接口上的所有本地链路地址生成接口 ID。</p>
+<p>为了更容易在路由器上识别和记忆这些地址，通常要在路由器上静态配置 IPv6 本地链路地址。</p>
+<h2 id="静态本地链路地址"><a href="#静态本地链路地址" class="headerlink" title="静态本地链路地址"></a>静态本地链路地址</h2><p>手动配置本地链路地址使得创建的地址便于识别和记忆。一般来说，只需要在路由器上创建可识别的本地链路地址。这样做很有用，因为路由器本地链路地址将被用作默认网关地址并包含在路由通告消息中。</p>
+<p>可以使用与创建 IPv6 全局单播地址相同的接口命令来手动配置本地链路地址，但还需要本地链路参数。当地址以 FE80 到 FEBF 范围的十六进制数开头时，本地链路参数必须符合该地址。</p>
+<p>图中显示了使用 ipv6 address interface 命令配置的本地链路地址。使用本地链路地址 FE80::1 让系统更容易识别出它属于路由器 R1。所有 R1 接口上均配置相同的 IPv6 本地链路地址。可以在各个链路上配置 FE80::1，因为它仅需在单个链路上保持唯一性。</p>
+<p>类似于 R1，将 FE80::2 配置为路由器 R2 所有接口的 IPv6 本地链路地址。</p>
+<h1 id="IPv4-和-IPv6-共存"><a href="#IPv4-和-IPv6-共存" class="headerlink" title="IPv4 和 IPv6 共存"></a>IPv4 和 IPv6 共存</h1><p>过渡到 IPv6 不是一朝一夕可以完成的。在可预测的未来，IPv4 和 IPv6 将共存。该过渡预计会花费数年时间。IETF 已经创建了各种协议和工具来协助网络管理员将网络迁移到 IPv6。迁移技术可分为三类：</p>
+<ul>
+<li>双堆栈 (Dual Stack)，双堆栈允许 IPv4 和 IPv6 在同一网络中共存。双堆栈设备同时运行 IPv4 和 IPv6 协议栈。</li>
+<li>隧道 (Tunneling)，隧道是在 IPv4 网络中传输 IPv6 数据包的一种方法。IPv6 数据包封装在 IPv4 数据包中，类似于其他类型的数据。</li>
+<li>转换 (Translation)，网络地址转换 64 (NAT64) 允许支持 IPv6 的设备使用与 IPv4 NAT 类似的方法与支持 IPv4 的设备通信。IPv6 数据包转换为 IPv4 数据包，反之亦然。</li>
+</ul>
+<p>注意：隧道和转换仅在需要时使用。目标是从源到目的地进行本地 IPv6 通信。</p>
+<h1 id="连接验证"><a href="#连接验证" class="headerlink" title="连接验证"></a>连接验证</h1><h2 id="ICMPv4-和-ICMPv6"><a href="#ICMPv4-和-ICMPv6" class="headerlink" title="ICMPv4 和 ICMPv6"></a>ICMPv4 和 ICMPv6</h2><p>虽然 IP 并非尽力传输协议，TCP/IP 协议簇却会在发生某些错误时提供要发送的消息。这些消息使用 ICMP 服务发送。<strong>其用途是就特定情况下处理 IP 数据包的相关问题提供反馈，而并非是使 IP 可靠</strong>。ICMP 消息并非必需的，而且在网络内通常出于安全原因而被禁止。</p>
+<p>ICMP 可同时用于 IPv4 和 IPv6。ICMPv4 是 IPv4 的消息协议。ICMPv6 为 IPv6 提供相同的服务，此外，还包括其他功能。在本课程中，涉及 ICMPv4 和 ICMPv6 时均会使用术语 ICMP。</p>
+<p>ICMP 消息的类型及其发送原因非常多。我们将介绍其中比较常见的一些消息。</p>
+<p>ICMPv4 和 ICMPv6 通用的 ICMP 消息包括：</p>
+<ul>
+<li>主机确认（Host Confirmation    ）：ICMP 回应消息可用于确定主机是否运行正常。本地主机向一台主机发送 ICMP 回应请求。如果主机可用，目的主机会回应以响应应答。</li>
+<li>目标或服务不可达（Destination or Service Unreachable）： 当主机或网关收到无法传送的数据包时，它会使用 ICMP 目的地不可达消息通知源主机，目标或服务无法到达。消息包括指示数据包为何无法传送的代码。注意：ICMPv6 的目的地不可达消息代码与此类似，但是也稍有不同。<ul>
+<li>ICMPv4 的目的地不可达代码示例有：</li>
+<li>0 - 网络不可达。</li>
+<li>1 - 主机不可达。</li>
+<li>2 - 协议不可达。</li>
+<li>3 - 端口不可达。</li>
+</ul>
+</li>
+<li>超时（Time Exceeded）：路由器使用 ICMPv4 超时消息表明，因为数据包的生存时间 (TTL) 字段递减到 0 而不能转发数据包。如果路由器接收数据包并且将 IPv4 数据包的 TTL 字段的值递减为零，则它会丢弃数据包并向源主机发送超时消息。</li>
+<li>路由重定向</li>
+</ul>
+<p>如果路由器因数据包过期而无法转发 IPv6 数据包，ICMPv6 也会发送超时消息。IPv6 没有 TTL 字段；它使用<strong>跳数限制字段(Hop Limit field)来确定数据包是否过期。</strong></p>
+<h2 id="Ping-本地环回"><a href="#Ping-本地环回" class="headerlink" title="Ping 本地环回"></a>Ping 本地环回</h2><p>我们也可以使用 ping 进行一些特殊测试和验证。例如，测试本地主机上的内部 IPv4 或 IPv6 配置。要执行此测试，对于 IPv4，我们 ping 本地环回地址 127.0.0.1，对于 IPv6，则是 ::1。</p>
+<p><strong>从 127.0.0.1 接收的 IPv4 响应或从 ::1 接收的 IPv6 响应，表示主机上的 IP 安装正确。此响应来自网络层。但是，此响应并不代表地址、掩码或网关配置正确。</strong>它也不能说明有关网络协议栈下层的任何状态。它只测试 IP 网络层的 IP 连接。如果收到错误消息，则表示该主机上的 TCP/IP 无法正常运行。</p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>brinary</strong> - a numbering system consisting of the digits 0 and 1, used by computers to perform operations</li>
+<li><strong>bit</strong> - a single binary digit, represented by a 0 or a 1</li>
+<li><strong>octet</strong> - one section of an IP address, consisting of a group of 8 bits</li>
+<li><strong>positional notation</strong> - determining a digit value based on the digit position, used in converting from one numbering system to another</li>
+<li><strong>subnet mask</strong> - a continuous sequence of 1 bits followed by a continuous sequence of 0 bits, used to determine the network portion of an IP address</li>
+<li><strong>ANDing</strong> - a binary process used to determine the network address of a host address by using the host address subnet mask</li>
+<li><strong>prefix lenght</strong> - the number of bits set to 1 in a subnet mask</li>
+<li><strong>network address</strong> - a dotted-decimal number that represents a unique IP network</li>
+<li><strong>host address</strong> - any IP address in an IP network that can be assigned to an interface</li>
+<li><strong>broadcast address</strong> - a dotted-decimal number that represents all hosts in an IP network</li>
+<li><strong>unicast address</strong> - the IP address of a single host on a network</li>
+<li><strong>multicast address</strong> - an IP address representing a selected group of hosts</li>
+<li><strong>public address</strong> - an IP address that can be routed on the Internet</li>
+<li><strong>private address</strong> - an IP address used internally and not routed on the Internet</li>
+<li><strong>classful addressing</strong> - specific ranges of IP addresses that make up classes of addresses in which the number of available network and host addresses are defined</li>
+<li><strong>classless addressing</strong> - IP addressing standards created in 1993 that allow address allocation based on prefix length rather than predefined class ranges</li>
+<li><strong>hexadecimal</strong> - a base-sixteen numbering system that uses numerals 0 through 9 and letters A through F to represent binary numbers in more condensed form</li>
+<li><strong>IPv6 link-local address</strong> - an IP address that is required for every IPv6-enabled network interface and that allows a device to communicate with other IPv6-enabled devices on the same link</li>
+<li><strong>ping</strong> - a utility that sends a series of echo requests from one IP host to another IP host and that processes the echo reply messages to test connectivity between the devices</li>
+<li><strong>traceroute</strong> - a utility that generates details about the route traveled by data sent between two devices</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/18/CCNA-Chapter-6-Network-Layer/" rel="next" title="CCNA Chapter 6: Network Layer">
+                <i class="fa fa-chevron-left"></i> CCNA Chapter 6: Network Layer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/19/CCNA-Chapter-8-Subnetting-IP-Networks/" rel="prev" title="CCNA Chapter 8: Subnetting IP Networks">
+                CCNA Chapter 8: Subnetting IP Networks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IPv4"><span class="nav-number">1.</span> <span class="nav-text">IPv4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv4-编址格式"><span class="nav-number">1.1.</span> <span class="nav-text">IPv4 编址格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊用途的地址"><span class="nav-number">1.2.</span> <span class="nav-text">特殊用途的地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#专用网络"><span class="nav-number">1.2.1.</span> <span class="nav-text">专用网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环回地址-Loopback-Address"><span class="nav-number">1.2.2.</span> <span class="nav-text">环回地址 (Loopback Address)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地链路地址"><span class="nav-number">1.2.3.</span> <span class="nav-text">本地链路地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以-0-或-255-结尾的地址"><span class="nav-number">1.2.4.</span> <span class="nav-text">以 0 或 255 结尾的地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类网络"><span class="nav-number">1.3.</span> <span class="nav-text">分类网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无类别域间路由"><span class="nav-number">1.4.</span> <span class="nav-text">无类别域间路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPv6"><span class="nav-number">2.</span> <span class="nav-text">IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv6-编址格式"><span class="nav-number">2.1.</span> <span class="nav-text">IPv6 编址格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6-全局单播地址结构"><span class="nav-number">2.1.1.</span> <span class="nav-text">IPv6 全局单播地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊地址"><span class="nav-number">2.1.2.</span> <span class="nav-text">特殊地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv6-地址的自动配置"><span class="nav-number">2.2.</span> <span class="nav-text">IPv6 地址的自动配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态配置-SLAAC"><span class="nav-number">2.3.</span> <span class="nav-text">动态配置 - SLAAC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RA-选项-1：SLAAC"><span class="nav-number">2.3.1.</span> <span class="nav-text">RA 选项 1：SLAAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RA-选项-2：SLAAC-和无状态-DHCPv6"><span class="nav-number">2.3.2.</span> <span class="nav-text">RA 选项 2：SLAAC 和无状态 DHCPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RA-选项-3：有状态-DHCPv6"><span class="nav-number">2.3.3.</span> <span class="nav-text">RA 选项 3：有状态 DHCPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EUI-64-流程和随机生成"><span class="nav-number">2.3.4.</span> <span class="nav-text">EUI-64 流程和随机生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EUI-64-流程"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">EUI-64 流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机生成的接口-ID"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">随机生成的接口 ID</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态本地链路地址"><span class="nav-number">2.4.</span> <span class="nav-text">动态本地链路地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态本地链路地址"><span class="nav-number">2.5.</span> <span class="nav-text">静态本地链路地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPv4-和-IPv6-共存"><span class="nav-number">3.</span> <span class="nav-text">IPv4 和 IPv6 共存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接验证"><span class="nav-number">4.</span> <span class="nav-text">连接验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ICMPv4-和-ICMPv6"><span class="nav-number">4.1.</span> <span class="nav-text">ICMPv4 和 ICMPv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ping-本地环回"><span class="nav-number">4.2.</span> <span class="nav-text">Ping 本地环回</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">5.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

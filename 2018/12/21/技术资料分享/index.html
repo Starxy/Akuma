@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
+<meta name="keywords" content="Starxy Blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术资料分享">
+<meta property="og:url" content="http://starxy.cc/2018/12/21/技术资料分享/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-09T02:13:30.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="技术资料分享">
+<meta name="twitter:description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
+
+
+
+
+
+
+  <link rel="canonical" href="http://starxy.cc/2018/12/21/技术资料分享/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>技术资料分享 | Starxy's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109694055-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-todolist">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/todo" rel="section"><i class="menu-item-icon fa fa-fw fa-check-square-o"></i> <br>ToDoList</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/21/技术资料分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+      <meta itemprop="image" content="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">技术资料分享
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-21 13:43:07" itemprop="dateCreated datePublished" datetime="2018-12-21T13:43:07+08:00">2018-12-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="技术资料分享"><a href="#技术资料分享" class="headerlink" title="技术资料分享"></a>技术资料分享</h1><p>内容大部分来自 <a href="http://www.ruanyifeng.com/blog" target="_blank" rel="noopener">阮一峰个人网站</a></p>
+<ul>
+<li>软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录</li>
+<li>文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述</li>
+<li>资源：存档分享性质的资源</li>
+</ul>
+<a id="more"></a>
+<h2 id="软件工具"><a href="#软件工具" class="headerlink" title="软件工具"></a>软件工具</h2><ul>
+<li><a href="http://etherpad.org/" target="_blank" rel="noopener">Etherpad</a> 老牌多人实时编辑协同工具</li>
+<li><a href="https://github.com/nhnent/tui.calendar" target="_blank" rel="noopener">tui.calendar</a> 一个号称所有功能都包括的网页日历库。</li>
+<li><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat</a> 带有语法高亮的 cat</li>
+<li><a href="https://github.com/snail007/goproxy" target="_blank" rel="noopener">goproxy</a> go 语言实现的高性能代理服务器</li>
+<li><a href="https://gitea.io/zh-cn/" target="_blank" rel="noopener">gitea</a> 私人 github gitlib</li>
+<li><a href="https://github.com/jmoon018/PacVim" target="_blank" rel="noopener">PacVim</a> 通过吃豆人学习 vim</li>
+<li><a href="https://github.com/tamlok/vnote" target="_blank" rel="noopener">vnote</a> 跨平台 markdown 笔记应用</li>
+<li><a href="https://github.com/nbedos/termtosvg" target="_blank" rel="noopener">termtosvg</a> 录制命令行操作到 svg 格式</li>
+<li><a href="https://picheta.me/obfuscator" target="_blank" rel="noopener">C/C++ 混淆器</a> 在线 c++混淆器</li>
+<li><a href="https://github.com/chubin/cheat.sh" target="_blank" rel="noopener">cheat.sh</a> 一个只能在命令行访问的文档查询网站，使用方法就是命令行执行 curl cheat.sh</li>
+<li><a href="https://products.office.com/en-us/microsoft-teams/group-chat-software" target="_blank" rel="noopener">微软 Teams</a></li>
+<li><a href="https://techcommunity.microsoft.com/t5/Office-365-Blog/Microsoft-Whiteboard-is-now-generally-available-for-Windows/ba-p/214574" target="_blank" rel="noopener">微软 Whiteboard</a> 微软推出了一个团队协作工具，可以让用户在多种设备上，远程实时分享电子白板。</li>
+<li><a href="https://github.com/Vim-cn/elimage" target="_blank" rel="noopener">自建图床</a></li>
+<li><a href="https://www.wireguard.com/" target="_blank" rel="noopener">WireGuard</a></li>
+<li><a href="https://github.com/BYVoid/OpenCC" target="_blank" rel="noopener">OpenCC</a> 简繁正体字转换</li>
+<li><a href="https://adguard.com/en/blog/introducing-adguard-home/" target="_blank" rel="noopener">AdGuard</a> 家用 dns 服务</li>
+<li><a href="https://nginxconfig.io/" target="_blank" rel="noopener">NGINX 配置生成</a></li>
+<li><a href="https://github.com/maxmcd/webtty" target="_blank" rel="noopener">webtty</a> 使用 webRTC 协议分享命令行对话的工具</li>
+<li><a href="https://github.com/shazow/ssh-chat" target="_blank" rel="noopener">ssh-chat</a> Go 语言实现的 SSH 聊天服务端</li>
+<li><a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">图床管理工具</a></li>
+<li><a href="https://app.astralapp.com" target="_blank" rel="noopener">Github Star 管理工具</a></li>
+<li><a href="http://www.simplestickynotes.com/" target="_blank" rel="noopener">Simple Stick Notes</a> Windows 桌面便签</li>
+<li><a href="http://rufus.akeo.ie/?locale=zh_CN" target="_blank" rel="noopener">Rufus - 轻松创建 USB 启动盘</a></li>
+<li><a href="http://bigjpg.com/" target="_blank" rel="noopener">基于深度学习的图片放大</a></li>
+<li><a href="https://www.snipaste.com/" target="_blank" rel="noopener">Snip &amp; Paste</a> 多功能截图软件</li>
+<li><a href="http://voidtools.com/" target="_blank" rel="noopener">Everything</a> windows 下全盘搜索</li>
+<li><a href="http://ditto-cp.sourceforge.net/" target="_blank" rel="noopener">DITTO</a> 增强剪切板功能 局域网共享</li>
+<li><a href="https://www.sumatrapdfreader.org/free-pdf-reader.html" target="_blank" rel="noopener">sumatrapdfreader</a> pdf阅读器</li>
+<li><a href="https://www.piriform.com/recuva/download" target="_blank" rel="noopener">Recuva</a> 数据恢复</li>
+<li><a href="https://github.com/CopyTranslator/CopyTranslator" target="_blank" rel="noopener">pdf翻译</a></li>
+<li><a href="https://github.com/tldr-pages/tldr" target="_blank" rel="noopener">tldr 简单的man工具</a></li>
+<li><a href="https://www.overleaf.com/" target="_blank" rel="noopener">overleaf 在线late编辑工具</a>包含各类模板</li>
+<li>[ping.pe]</li>
+</ul>
+<h2 id="文档教程"><a href="#文档教程" class="headerlink" title="文档教程"></a>文档教程</h2><ul>
+<li><a href="http://www.yinwang.org/blog-cn/2018/04/13/csbook-chapter1" target="_blank" rel="noopener">电子书 - 解密计算机科学</a> 王垠正在写的新书，目前只公布了第一章。</li>
+<li><a href="https://github.com/crossoverJie/Java-Interview" target="_blank" rel="noopener">Java 面试</a></li>
+<li><a href="https://github.com/trimstray/test-your-sysadmin-skills" target="_blank" rel="noopener">Linux 系统管理面试</a></li>
+<li><a href="https://github.com/cfenollosa/os-tutorial" target="_blank" rel="noopener">从零开始写一个操作系统</a></li>
+<li><a href="https://tls.ulfheim.net/" target="_blank" rel="noopener">图解 HTTPS 协议</a> 详细到每个字节</li>
+<li><a href="https://datree.io/blog/top-10-github-best-practices/" target="_blank" rel="noopener">GitHub 十大最佳实践</a></li>
+<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">成功的 Git 分支模型</a></li>
+<li><a href="https://isudox.com/2017/02/18/a-successful-git-branching-model-zh/" target="_blank" rel="noopener">上文的中文版</a></li>
+<li><a href="https://github.com/piglei/one-python-craftsman" target="_blank" rel="noopener">Python 工匠</a></li>
+<li><a href="https://forestry.io/blog/for-static-sites-theres-no-excuse-not-to-use-a-cdn/" target="_blank" rel="noopener">静态页面没有理由不用 CDN</a></li>
+<li><a href="https://graphql.cn" target="_blank" rel="noopener">GraphQL 一种 API 查询语言</a></li>
+<li><a href="https://bjornjohansen.no/www-or-not" target="_blank" rel="noopener">网站主站需不需要 www</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html" target="_blank" rel="noopener">WebAssembly 现状与实战</a>（中文）本文重点介绍如何使用 AssemblyScript 来编写 WebAssembly。</li>
+<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/" target="_blank" rel="noopener">Google Python 开源项目规范</a></li>
+<li><a href="https://cryptobook.nakov.com/" target="_blank" rel="noopener">程序员密码学</a></li>
+<li><a href="https://lepture.com/en/2018/structure-of-a-flask-project" target="_blank" rel="noopener">flask 项目结构</a></li>
+<li><a href="https://blog.csdn.net/javazejian/article/details/54561302" target="_blank" rel="noopener">关于 Spring IOC (DI-依赖注入) 你需要知道的一切</a></li>
+<li><a href="https://http2-explained.haxx.se/content/zh/" target="_blank" rel="noopener">http2 讲解</a> curl 作者编写 中文翻译</li>
+<li><a href="https://http3-explained.haxx.se/zh/" target="_blank" rel="noopener">http3 讲解</a></li>
+<li><a href="https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html" target="_blank" rel="noopener">linux 内核揭秘</a> 中文</li>
+<li><a href="https://learnopengl-cn.github.io" target="_blank" rel="noopener">LearnOpenGL 中文教程</a></li>
+<li><a href="https://blog.networkprofile.org/6-year-homelab-history-in-pictures/" target="_blank" rel="noopener">6 年家用机房搭建</a></li>
+<li><a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">Python 的奇淫技巧</a></li>
+<li><a href="https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/" target="_blank" rel="noopener">监控和调优Linux网络堆栈：接收数据</a> <a href="http://archive.is/ijPgo" target="_blank" rel="noopener">存档</a></li>
+<li><a href="https://blog.packagecloud.io/eng/2017/02/06/monitoring-tuning-linux-networking-stack-sending-data/" target="_blank" rel="noopener">监控和调优Linux网络堆栈：发送数据</a> <a href="http://archive.is/IE4cs" target="_blank" rel="noopener">存档</a></li>
+<li><a href="https://flaviocopes.com/chrome-devtools-tips/" target="_blank" rel="noopener">Chrome 控制台使用教程</a></li>
+</ul>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
+<li><a href="https://github.com/TheAlgorithms/Python" target="_blank" rel="noopener">用 python 写的算法库</a></li>
+<li><a href="https://crashcourse.club/" target="_blank" rel="noopener">crashcourse.club</a> Crash Course 是一个 Youtube 的教育频道。B 站上面有很多翻译小组。他们组成了一个联盟防止翻译重复，并提供了索引。</li>
+<li><a href="https://about.gitlab.com/handbook/" target="_blank" rel="noopener">GitLab 员工手册</a></li>
+<li><a href="https://anvaka.github.io/greview/hands-on-ml/1/" target="_blank" rel="noopener">机器学习书籍清单</a></li>
+<li><a href="https://github.com/alaskasquirrel/Chinese-Podcasts" target="_blank" rel="noopener">中文播客资源</a></li>
+<li><a href="https://github.com/521xueweihan/HelloGitHub" target="_blank" rel="noopener">HelloGithub</a> 每月 28 号发布面 各种编程语言的项目、让生活变得更美好的工具、书籍、学习笔记、教程等</li>
+<li><a href="https://dos.zczc.cz/" target="_blank" rel="noopener">DOS 游戏博物馆</a> 包含中文 dos 游戏，可在线 <a href="http://www.famicn.com/" target="_blank" rel="noopener">中文家用游戏博物馆</a></li>
+<li><a href="https://github.com/kdzwinel/betwixt" target="_blank" rel="noopener">betwixt</a> Chrome 控制台风格的抓包工具</li>
+<li><a href="https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/bash.sh" target="_blank" rel="noopener">bash 速查</a></li>
+<li><a href="https://github.com/30-seconds/30-seconds-of-code" target="_blank" rel="noopener">30 秒系列</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/23936161" target="_blank" rel="noopener">12 个游戏学编程</a></li>
+<li><a href="https://github.com/mbinary/USTC-CS-Courses-Resource" target="_blank" rel="noopener">USTC 课程资源</a></li>
+<li><a href="https://www.crypto101.io/" target="_blank" rel="noopener">密码学免费入门教程</a></li>
+<li><a href="https://lovecia.com/" target="_blank" rel="noopener">3ds 盗版资源</a> 和 <a href="http://www.oldmanemu.net/" target="_blank" rel="noopener">全主机平台盗版资源 10块钱会员</a></li>
+<li><a href="https://www.speedguide.net/port.php" target="_blank" rel="noopener">查询各个 port 来源</a></li>
+<li><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question" target="_blank" rel="noopener">每日一个面试题</a></li>
+<li><a href="https://github.com/Micropoor/Micro8" target="_blank" rel="noopener">渗透相关课程</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/使用-Git-进行有效的项目管理/" rel="next" title="使用 Git 进行有效的项目管理">
+                <i class="fa fa-chevron-left"></i> 使用 Git 进行有效的项目管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/11/使用-J1800-工控板搭建家用服务器/" rel="prev" title="使用 J1800 工控板搭建家用服务器">
+                使用 J1800 工控板搭建家用服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://ddns.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg" alt="Starxy">
+            
+              <p class="site-author-name" itemprop="name">Starxy</p>
+              <p class="site-description motion-element" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:Galaxy_djx@hotmail.com" title="Email &rarr; mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 &rarr; https://www.zhihu.com/people/starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://coding.net/u/Starxy" title="Coding &rarr; https://coding.net/u/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Starxy" title="GitHub &rarr; https://github.com/Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam &rarr; http://steamcommunity.com/profiles/76561198208117763/" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#技术资料分享"><span class="nav-number">1.</span> <span class="nav-text">技术资料分享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#软件工具"><span class="nav-number">1.1.</span> <span class="nav-text">软件工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档教程"><span class="nav-number">1.2.</span> <span class="nav-text">文档教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">1.3.</span> <span class="nav-text">资源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">185k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66021383";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.6.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
