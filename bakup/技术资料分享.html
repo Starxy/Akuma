@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="概况之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过">
+  <meta name="description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
 <meta name="keywords" content="Starxy Blog">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用 J1800 工控板搭建家用服务器">
-<meta property="og:url" content="http://starxy.cc/2019/02/11/使用-J1800-工控板搭建家用服务器/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术资料分享">
+<meta property="og:url" content="http://starxy.cc/bakup/技术资料分享.html">
 <meta property="og:site_name" content="Starxy&#39;s Blog">
-<meta property="og:description" content="概况之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过">
+<meta property="og:description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-09T02:13:30.166Z">
+<meta property="og:updated_time" content="2019-07-22T06:50:18.128Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 J1800 工控板搭建家用服务器">
-<meta name="twitter:description" content="概况之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过">
+<meta name="twitter:title" content="技术资料分享">
+<meta name="twitter:description" content="技术资料分享内容大部分来自 阮一峰个人网站  软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录 文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述 资源：存档分享性质的资源">
 
 
 
 
 
 
-  <link rel="canonical" href="http://starxy.cc/2019/02/11/使用-J1800-工控板搭建家用服务器/">
+  <link rel="canonical" href="http://starxy.cc/bakup/技术资料分享.html">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>使用 J1800 工控板搭建家用服务器 | Starxy's Blog</title>
+  <title>技术资料分享 | Starxy's Blog</title>
   
 
 
@@ -387,242 +387,163 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2019/02/11/使用-J1800-工控板搭建家用服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Starxy">
-      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
-      <meta itemprop="image" content="http://app.starxy.cc:8877/ca/ae61b420c68de35acfd5110f2ac62047583112.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Starxy's Blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">使用 J1800 工控板搭建家用服务器
-              
-            
-          </h1>
-        
+<h1 class="post-title" itemprop="name headline">技术资料分享</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
+<div class="post-meta">
+  
+  
 
-            
-            
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
 
-              
-                
-              
+</div>
 
-              <time title="创建时间：2019-02-11 15:47:30" itemprop="dateCreated datePublished" datetime="2019-02-11T15:47:30+08:00">2019-02-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-09 10:13:30" itemprop="dateModified" datetime="2019-07-09T10:13:30+08:00">2019-07-09</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过程。</p>
-<h2 id="使用-Certbot-对动态解析域名开启-HTTPS"><a href="#使用-Certbot-对动态解析域名开启-HTTPS" class="headerlink" title="使用 Certbot 对动态解析域名开启 HTTPS"></a>使用 Certbot 对动态解析域名开启 HTTPS</h2><p>动态域名的解决方案就很随意了，现在有很多成熟的动态 ip 解析办法，我手里自有一个域名，所以只需要检测 ip 地址变更的时候向 dnspod 提交变更解析的申请即可。详细文档可以参考 <a href="https://www.dnspod.cn/docs/index.html" target="_blank" rel="noopener">dnspod api</a>。</p>
-<p>对于家用的宽带，普遍的情况是运营商禁用了常用的低位端口，22、80、443 这些端口不用考虑根本不可能开放的。而 Certbot 默认情况验证方式为：</p>
+      <div class="post-body">
+        
+        
+          <h1 id="技术资料分享"><a href="#技术资料分享" class="headerlink" title="技术资料分享"></a>技术资料分享</h1><p>内容大部分来自 <a href="http://www.ruanyifeng.com/blog" target="_blank" rel="noopener">阮一峰个人网站</a></p>
 <ul>
-<li>certbot 程序在 web 目录的根目录下放置一个文件。</li>
-<li>letsencrypt 的服务器通过域名来访问这个文件，来验证你申请的域名是属于你的</li>
+<li>软件工具：我个人正在用的或者感觉以后会用到/有意思的。对于一些针对某些不会用到的语言和平台的不会收录</li>
+<li>文档教程：主要是针对某一个问题/方向的教程、和对某一个观点的详细描述</li>
+<li>资源：存档分享性质的资源</li>
 </ul>
-<p>然而默认是通过 80/443 端口来访问，所以在家庭带宽情况下该验证方法就失效了。我们可以通过修改域名 DNS 的 TXT 记录来验证域名</p>
-<p>运行 <code>sudo certbot --manual --preferred-challenges dns certonly</code> 会要求你输入需要启用 HTTPS 的域名然后同意记录本机 ip 后弹出以下提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.example.com with the following value:</span><br><span class="line"></span><br><span class="line">z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</span><br><span class="line"></span><br><span class="line">Once this is deployed,</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
-<p>根据上述提示，修改为于域名添加一个 <code>TXT</code> 记录，主机记录为 <code>_acme-challenge</code>，记录值为上述提示的字符串 <code>z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</code>。等到域名生效之后在命令行中按回车继续。等待 letsencrypt 验证成功即可。</p>
-<p>该中方法不支持 <code>cerbot renew</code>，请等到域名快过期后（三个月）手动再次执行上述操作，或者手动编写脚本来对 dns 值进行自动修改。</p>
 <a id="more"></a>
-<h2 id="Netdata-错误处理"><a href="#Netdata-错误处理" class="headerlink" title="Netdata 错误处理"></a>Netdata 错误处理</h2><h3 id="10min-netdev-budget-ran-outs"><a href="#10min-netdev-budget-ran-outs" class="headerlink" title="10min netdev budget ran outs"></a>10min netdev budget ran outs</h3><p>这是一个与数据包接收与处理有关的问题。根据 softnet 图表描述，该图表有三个值</p>
-<ul>
-<li>processed 代表 cpu 处理的数据包</li>
-<li>dropped 代表丢弃的包计数，该出丢包是由于内核缓存队列满了，可以通过增加 <code>net.core.netdev_max_backlog</code> 的值修复</li>
-<li>squeezed 代表在从 ring buffer 运输到内核网络缓存队列时, 由于“运输小车”没能装下,而导致丢包。可以通过增大内核参数 <code>net.core.netdev_budget</code> 和 <code>net.core.netdev_budget_usecs</code> 的值来修复</li>
+<h2 id="软件工具"><a href="#软件工具" class="headerlink" title="软件工具"></a>软件工具</h2><ul>
+<li><a href="http://etherpad.org/" target="_blank" rel="noopener">Etherpad</a> 老牌多人实时编辑协同工具</li>
+<li><a href="https://github.com/nhnent/tui.calendar" target="_blank" rel="noopener">tui.calendar</a> 一个号称所有功能都包括的网页日历库。</li>
+<li><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat</a> 带有语法高亮的 cat</li>
+<li><a href="https://github.com/snail007/goproxy" target="_blank" rel="noopener">goproxy</a> go 语言实现的高性能代理服务器</li>
+<li><a href="https://gitea.io/zh-cn/" target="_blank" rel="noopener">gitea</a> 私人 github gitlib</li>
+<li><a href="https://github.com/jmoon018/PacVim" target="_blank" rel="noopener">PacVim</a> 通过吃豆人学习 vim</li>
+<li><a href="https://github.com/tamlok/vnote" target="_blank" rel="noopener">vnote</a> 跨平台 markdown 笔记应用</li>
+<li><a href="https://github.com/nbedos/termtosvg" target="_blank" rel="noopener">termtosvg</a> 录制命令行操作到 svg 格式</li>
+<li><a href="https://picheta.me/obfuscator" target="_blank" rel="noopener">C/C++ 混淆器</a> 在线 c++混淆器</li>
+<li><a href="https://github.com/chubin/cheat.sh" target="_blank" rel="noopener">cheat.sh</a> 一个只能在命令行访问的文档查询网站，使用方法就是命令行执行 curl cheat.sh</li>
+<li><a href="https://products.office.com/en-us/microsoft-teams/group-chat-software" target="_blank" rel="noopener">微软 Teams</a></li>
+<li><a href="https://techcommunity.microsoft.com/t5/Office-365-Blog/Microsoft-Whiteboard-is-now-generally-available-for-Windows/ba-p/214574" target="_blank" rel="noopener">微软 Whiteboard</a> 微软推出了一个团队协作工具，可以让用户在多种设备上，远程实时分享电子白板。</li>
+<li><a href="https://github.com/Vim-cn/elimage" target="_blank" rel="noopener">自建图床</a></li>
+<li><a href="https://www.wireguard.com/" target="_blank" rel="noopener">WireGuard</a></li>
+<li><a href="https://github.com/BYVoid/OpenCC" target="_blank" rel="noopener">OpenCC</a> 简繁正体字转换</li>
+<li><a href="https://adguard.com/en/blog/introducing-adguard-home/" target="_blank" rel="noopener">AdGuard</a> 家用 dns 服务</li>
+<li><a href="https://nginxconfig.io/" target="_blank" rel="noopener">NGINX 配置生成</a></li>
+<li><a href="https://github.com/maxmcd/webtty" target="_blank" rel="noopener">webtty</a> 使用 webRTC 协议分享命令行对话的工具</li>
+<li><a href="https://github.com/shazow/ssh-chat" target="_blank" rel="noopener">ssh-chat</a> Go 语言实现的 SSH 聊天服务端</li>
+<li><a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">图床管理工具</a></li>
+<li><a href="https://app.astralapp.com" target="_blank" rel="noopener">Github Star 管理工具</a></li>
+<li><a href="http://www.simplestickynotes.com/" target="_blank" rel="noopener">Simple Stick Notes</a> Windows 桌面便签</li>
+<li><a href="http://rufus.akeo.ie/?locale=zh_CN" target="_blank" rel="noopener">Rufus - 轻松创建 USB 启动盘</a></li>
+<li><a href="http://bigjpg.com/" target="_blank" rel="noopener">基于深度学习的图片放大</a></li>
+<li><a href="https://www.snipaste.com/" target="_blank" rel="noopener">Snip &amp; Paste</a> 多功能截图软件</li>
+<li><a href="http://voidtools.com/" target="_blank" rel="noopener">Everything</a> windows 下全盘搜索</li>
+<li><a href="http://ditto-cp.sourceforge.net/" target="_blank" rel="noopener">DITTO</a> 增强剪切板功能 局域网共享</li>
+<li><a href="https://www.sumatrapdfreader.org/free-pdf-reader.html" target="_blank" rel="noopener">sumatrapdfreader</a> pdf阅读器</li>
+<li><a href="https://www.piriform.com/recuva/download" target="_blank" rel="noopener">Recuva</a> 数据恢复</li>
+<li><a href="https://github.com/CopyTranslator/CopyTranslator" target="_blank" rel="noopener">pdf翻译</a></li>
+<li><a href="https://github.com/tldr-pages/tldr" target="_blank" rel="noopener">tldr 简单的man工具</a></li>
+<li><a href="https://www.overleaf.com/" target="_blank" rel="noopener">overleaf 在线late编辑工具</a>包含各类模板</li>
+<li>[ping.pe]</li>
 </ul>
-<p>我在此处应用的值为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net.core.netdev_budget = 3000</span><br><span class="line">net.core.netdev_budget_usecs = 6000</span><br><span class="line">net.core.netdev_max_backlog = 100000</span><br></pre></td></tr></table></figure>
-<p>注意，该处值够用即可，如果太大，可能会造成软中断占用太长 cpu 时间，而引起其他性能问题。</p>
-<p>参考：</p>
-<ul>
-<li><a href="https://github.com/netdata/netdata/issues/1076" target="_blank" rel="noopener">Github issue 1076</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/52397230" target="_blank" rel="noopener">Linux TCP 收包内容总结—–学习笔记</a></li>
+<h2 id="文档教程"><a href="#文档教程" class="headerlink" title="文档教程"></a>文档教程</h2><ul>
+<li><a href="http://www.yinwang.org/blog-cn/2018/04/13/csbook-chapter1" target="_blank" rel="noopener">电子书 - 解密计算机科学</a> 王垠正在写的新书，目前只公布了第一章。</li>
+<li><a href="https://github.com/crossoverJie/Java-Interview" target="_blank" rel="noopener">Java 面试</a></li>
+<li><a href="https://github.com/trimstray/test-your-sysadmin-skills" target="_blank" rel="noopener">Linux 系统管理面试</a></li>
+<li><a href="https://github.com/cfenollosa/os-tutorial" target="_blank" rel="noopener">从零开始写一个操作系统</a></li>
+<li><a href="https://tls.ulfheim.net/" target="_blank" rel="noopener">图解 HTTPS 协议</a> 详细到每个字节</li>
+<li><a href="https://datree.io/blog/top-10-github-best-practices/" target="_blank" rel="noopener">GitHub 十大最佳实践</a></li>
+<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">成功的 Git 分支模型</a></li>
+<li><a href="https://isudox.com/2017/02/18/a-successful-git-branching-model-zh/" target="_blank" rel="noopener">上文的中文版</a></li>
+<li><a href="https://github.com/piglei/one-python-craftsman" target="_blank" rel="noopener">Python 工匠</a></li>
+<li><a href="https://forestry.io/blog/for-static-sites-theres-no-excuse-not-to-use-a-cdn/" target="_blank" rel="noopener">静态页面没有理由不用 CDN</a></li>
+<li><a href="https://graphql.cn" target="_blank" rel="noopener">GraphQL 一种 API 查询语言</a></li>
+<li><a href="https://bjornjohansen.no/www-or-not" target="_blank" rel="noopener">网站主站需不需要 www</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html" target="_blank" rel="noopener">WebAssembly 现状与实战</a>（中文）本文重点介绍如何使用 AssemblyScript 来编写 WebAssembly。</li>
+<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/" target="_blank" rel="noopener">Google Python 开源项目规范</a></li>
+<li><a href="https://cryptobook.nakov.com/" target="_blank" rel="noopener">程序员密码学</a></li>
+<li><a href="https://lepture.com/en/2018/structure-of-a-flask-project" target="_blank" rel="noopener">flask 项目结构</a></li>
+<li><a href="https://blog.csdn.net/javazejian/article/details/54561302" target="_blank" rel="noopener">关于 Spring IOC (DI-依赖注入) 你需要知道的一切</a></li>
+<li><a href="https://http2-explained.haxx.se/content/zh/" target="_blank" rel="noopener">http2 讲解</a> curl 作者编写 中文翻译</li>
+<li><a href="https://http3-explained.haxx.se/zh/" target="_blank" rel="noopener">http3 讲解</a></li>
+<li><a href="https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html" target="_blank" rel="noopener">linux 内核揭秘</a> 中文</li>
+<li><a href="https://learnopengl-cn.github.io" target="_blank" rel="noopener">LearnOpenGL 中文教程</a></li>
+<li><a href="https://blog.networkprofile.org/6-year-homelab-history-in-pictures/" target="_blank" rel="noopener">6 年家用机房搭建</a></li>
+<li><a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">Python 的奇淫技巧</a></li>
+<li><a href="https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/" target="_blank" rel="noopener">监控和调优Linux网络堆栈：接收数据</a> <a href="http://archive.is/ijPgo" target="_blank" rel="noopener">存档</a></li>
+<li><a href="https://blog.packagecloud.io/eng/2017/02/06/monitoring-tuning-linux-networking-stack-sending-data/" target="_blank" rel="noopener">监控和调优Linux网络堆栈：发送数据</a> <a href="http://archive.is/IE4cs" target="_blank" rel="noopener">存档</a></li>
+<li><a href="https://flaviocopes.com/chrome-devtools-tips/" target="_blank" rel="noopener">Chrome 控制台使用教程</a></li>
 </ul>
-<h3 id="inbound-packets-dropped-ratio"><a href="#inbound-packets-dropped-ratio" class="headerlink" title="inbound packets dropped ratio"></a>inbound packets dropped ratio</h3><p>该值为网卡丢包与接受包之比，该值在 0.1% 以上就会报告警告，在 2% 以上就会严重警告。</p>
-<p>根据图表描述可知影响该值的有：</p>
-<ul>
-<li>softnet 的 backlog 满载</li>
-<li>错误的虚拟局域网标签</li>
-<li>错误的协议类型</li>
-<li>IPv6 的数据帧发送到了不支持 IPv6 的服务器上</li>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
+<li><a href="https://github.com/TheAlgorithms/Python" target="_blank" rel="noopener">用 python 写的算法库</a></li>
+<li><a href="https://crashcourse.club/" target="_blank" rel="noopener">crashcourse.club</a> Crash Course 是一个 Youtube 的教育频道。B 站上面有很多翻译小组。他们组成了一个联盟防止翻译重复，并提供了索引。</li>
+<li><a href="https://about.gitlab.com/handbook/" target="_blank" rel="noopener">GitLab 员工手册</a></li>
+<li><a href="https://anvaka.github.io/greview/hands-on-ml/1/" target="_blank" rel="noopener">机器学习书籍清单</a></li>
+<li><a href="https://github.com/alaskasquirrel/Chinese-Podcasts" target="_blank" rel="noopener">中文播客资源</a></li>
+<li><a href="https://github.com/521xueweihan/HelloGitHub" target="_blank" rel="noopener">HelloGithub</a> 每月 28 号发布面 各种编程语言的项目、让生活变得更美好的工具、书籍、学习笔记、教程等</li>
+<li><a href="https://dos.zczc.cz/" target="_blank" rel="noopener">DOS 游戏博物馆</a> 包含中文 dos 游戏，可在线 <a href="http://www.famicn.com/" target="_blank" rel="noopener">中文家用游戏博物馆</a></li>
+<li><a href="https://github.com/kdzwinel/betwixt" target="_blank" rel="noopener">betwixt</a> Chrome 控制台风格的抓包工具</li>
+<li><a href="https://github.com/skywind3000/awesome-cheatsheets/blob/master/languages/bash.sh" target="_blank" rel="noopener">bash 速查</a></li>
+<li><a href="https://github.com/30-seconds/30-seconds-of-code" target="_blank" rel="noopener">30 秒系列</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/23936161" target="_blank" rel="noopener">12 个游戏学编程</a></li>
+<li><a href="https://github.com/mbinary/USTC-CS-Courses-Resource" target="_blank" rel="noopener">USTC 课程资源</a></li>
+<li><a href="https://www.crypto101.io/" target="_blank" rel="noopener">密码学免费入门教程</a></li>
+<li><a href="https://lovecia.com/" target="_blank" rel="noopener">3ds 盗版资源</a> 和 <a href="http://www.oldmanemu.net/" target="_blank" rel="noopener">全主机平台盗版资源 10块钱会员</a></li>
+<li><a href="https://www.speedguide.net/port.php" target="_blank" rel="noopener">查询各个 port 来源</a></li>
+<li><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question" target="_blank" rel="noopener">每日一个面试题</a></li>
+<li><a href="https://github.com/Micropoor/Micro8" target="_blank" rel="noopener">渗透相关课程</a></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig &lt;interface&gt; promisc</span><br></pre></td></tr></table></figure>
-<p>参考<a href="https://www.suse.com/support/kb/doc/?id=7007165" target="_blank" rel="noopener">文档</a>执行上述命令后丢包率不下降，初步判断丢包不为上述原因造成。</p>
-<p>注意到我目前的网卡为 <code>RTL8111/8168/8411</code> 应当使用 r8168 的驱动，但是服务器上使用的是 r8169 的驱动，一直没有影响，但是应当尽早解决。</p>
 
+        
+      </div>
+      
+      
       
     </div>
-
     
 
+
+
     
     
     
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/14/使用-Git-进行有效的项目管理/" rel="next" title="使用 Git 进行有效的项目管理">
-                <i class="fa fa-chevron-left"></i> 使用 Git 进行有效的项目管理
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/22/互联网中常用的密码学场景/" rel="prev" title="互联网中常用的密码学场景">
-                互联网中常用的密码学场景 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
   </div>
 
 
@@ -857,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概况"><span class="nav-number">1.</span> <span class="nav-text">概况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Certbot-对动态解析域名开启-HTTPS"><span class="nav-number">1.1.</span> <span class="nav-text">使用 Certbot 对动态解析域名开启 HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netdata-错误处理"><span class="nav-number">1.2.</span> <span class="nav-text">Netdata 错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10min-netdev-budget-ran-outs"><span class="nav-number">1.2.1.</span> <span class="nav-text">10min netdev budget ran outs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inbound-packets-dropped-ratio"><span class="nav-number">1.2.2.</span> <span class="nav-text">inbound packets dropped ratio</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#技术资料分享"><span class="nav-number">1.</span> <span class="nav-text">技术资料分享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#软件工具"><span class="nav-number">1.1.</span> <span class="nav-text">软件工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档教程"><span class="nav-number">1.2.</span> <span class="nav-text">文档教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">1.3.</span> <span class="nav-text">资源</span></a></li></ol></li></ol></div>
             
 
           </div>
