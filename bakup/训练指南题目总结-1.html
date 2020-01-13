@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="题目格式照抄书上格式，[例题编号] 题目名称 (英文题目名，[题目来源]，OJ编号) 例题12 组装电脑(Assemble, NWERC 2007, LA 3971) 【题意】有$b$块钱，用来组装一台电脑，给出$n$个配件的种类、品质因子数和价格，要求给种类型的配件各买一个，总价不超过$b$，且所选配件中“品质最差配件”的品质因子数应尽量大。结果输出最小的品质因子数的最大值。【分析】这类问题为">
+<meta property="og:type" content="website">
+<meta property="og:title" content="训练指南题目总结-1">
+<meta property="og:url" content="http://starxy.cc/bakup/%E8%AE%AD%E7%BB%83%E6%8C%87%E5%8D%97%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93-1.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="题目格式照抄书上格式，[例题编号] 题目名称 (英文题目名，[题目来源]，OJ编号) 例题12 组装电脑(Assemble, NWERC 2007, LA 3971) 【题意】有$b$块钱，用来组装一台电脑，给出$n$个配件的种类、品质因子数和价格，要求给种类型的配件各买一个，总价不超过$b$，且所选配件中“品质最差配件”的品质因子数应尽量大。结果输出最小的品质因子数的最大值。【分析】这类问题为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006Ka4GEly1fduk4x9dg0j331j0ym117.jpg">
+<meta property="article:published_time" content="2017-03-20T10:11:21.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.194Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="刷题总结">
+<meta property="article:tag" content="刘汝佳训练指南">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006Ka4GEly1fduk4x9dg0j331j0ym117.jpg">
+
+<link rel="canonical" href="http://starxy.cc/bakup/%E8%AE%AD%E7%BB%83%E6%8C%87%E5%8D%97%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93-1">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false
+  };
+</script>
+
+  <title>训练指南题目总结-1 | Starxy's Blog
+  </title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">训练指南题目总结-1
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <blockquote>
+<p>题目格式照抄书上格式，[例题编号] 题目名称 (英文题目名，[题目来源]，OJ编号)</p>
+<h3 id="例题12-组装电脑-Assemble-NWERC-2007-LA-3971"><a href="#例题12-组装电脑-Assemble-NWERC-2007-LA-3971" class="headerlink" title="例题12 组装电脑(Assemble, NWERC 2007, LA 3971)"></a>例题12 组装电脑(Assemble, NWERC 2007, LA 3971)</h3></blockquote>
+<p>【题意】<br>有$b$块钱，用来组装一台电脑，给出$n$个配件的种类、品质因子数和价格，要求给种类型的配件各买一个，总价不超过$b$，且所选配件中“品质最差配件”的品质因子数应尽量大。<br>结果输出最小的品质因子数的最大值。<br>【分析】<br>这类问题为典型的<strong>“最小值最大”</strong>的问题，对于这类问题我们应该采用<strong>二分答案</strong>的方法。<br>首先我们假设答案为$x$，如何判断这个$x$是否符合题目要求。显然，我们可以将所有品质因子小于$x$的所有配件，如果可以组成一台电脑，那么标准答案$ans \geq x$否则$ans &lt; x$。<br>至于如何判断能否在答案为$x$的情况下能否组成电脑，我们只需要选剩下零件中最便宜的配件即可，如果这样还不能组成电脑那么当前的$x$不可能有解。<br>【关键】<br>最小值最大、二分法</p>
+<a id="more"></a>
+<h3 id="例题13-派-Pie-NWERC-2006-LA-3635"><a href="#例题13-派-Pie-NWERC-2006-LA-3635" class="headerlink" title="例题13 派(Pie, NWERC 2006, LA 3635)"></a>例题13 派(Pie, NWERC 2006, LA 3635)</h3><p>【题意】<br>有$F+1$个人来分$N$个圆形派，每个人分到的必须是一整块派，即不能由几块拼在一起，且要求面积相同，求每个人能分到的派的最大的面积。<br>【分析】<br>这题看似和上一题差的很远，但是实际上可以用同样分方法来解决。<br>我们把问题转换成：<strong>“能否让所有人都得到一块面积为$x$的派”</strong>。<br>这样的话我们可以对$x$进行二分答案来解决了，当$x$太大的时候，满足不了所有的$F+1$个人，这样的$x$自然是不符合要求的。具体我们可以对于一个$x$我们算一下能分出几份派来，然后看数目能否够$F+1$即可。因为必须是整块，所以一个半径为$r$的派只能划分$[\pi r^2/x]$块。问题解决<br>【关键】<br>二分法</p>
+<h3 id="例题11-新汉诺塔问题-A-Different-Task-UVa-10795"><a href="#例题11-新汉诺塔问题-A-Different-Task-UVa-10795" class="headerlink" title="例题11 新汉诺塔问题(A Different Task, UVa 10795)"></a>例题11 新汉诺塔问题(A Different Task, UVa 10795)</h3><p>【题意】<br>现有标准的汉诺塔上有$n$个大小各异的盘子。给定一个初始局面（图1-21所示），求它移动到目标局面（图1-22）至少需要多少步。移动规则如下：一次智能移动一个盘子；在移动一个盘子之前，必须把压在上面的其他盘子先移走；编号大的盘子不能压在编号小的盘子上。<br><img src="https://ws1.sinaimg.cn/large/006Ka4GEly1fduk4x9dg0j331j0ym117.jpg" alt=""><br>【输入格式】<br>输入包含不超过100组数据。每组数据第一行为正整数$n(1\leq n \leq 60)$；第二行包含$n$个$1~3$的整数，即初始局面中每个盘子所在的柱子编号；第三行和第二行格式相同，为目标局面，输入结束标注为$n=0$<br>【分析】<br>首先是我们知道一点，最编号大的盘子如果初始局面和目标局面在同一柱子上，那么这个盘子就不用考虑了。<br>我们假设目前需要移动的最大的盘子的编号为$k$，</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例题12-组装电脑-Assemble-NWERC-2007-LA-3971"><span class="nav-number">1.</span> <span class="nav-text">例题12 组装电脑(Assemble, NWERC 2007, LA 3971)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例题13-派-Pie-NWERC-2006-LA-3635"><span class="nav-number">2.</span> <span class="nav-text">例题13 派(Pie, NWERC 2006, LA 3635)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例题11-新汉诺塔问题-A-Different-Task-UVa-10795"><span class="nav-number">3.</span> <span class="nav-text">例题11 新汉诺塔问题(A Different Task, UVa 10795)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

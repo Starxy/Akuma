@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Spark 概述 本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序文章内大部分图片和文字描述均来自该课程，侵删  Spark 与 ScalaSpark 为一门用 Scala 开发的大数据框架，成名类似于 Hadoop，Spark 在 2014 年刷新了 Hadoop 之前保持的 1TB 数据基准排序的记录，到现在成为了一个基于内存计算的大数据并行计算框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 学习笔记">
+<meta property="og:url" content="http://starxy.cc/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="Spark 概述 本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序文章内大部分图片和文字描述均来自该课程，侵删  Spark 与 ScalaSpark 为一门用 Scala 开发的大数据框架，成名类似于 Hadoop，Spark 在 2014 年刷新了 Hadoop 之前保持的 1TB 数据基准排序的记录，到现在成为了一个基于内存计算的大数据并行计算框架">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdm5xejsj310a0hwgq1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdo2ki92j319s0dm7b9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdwx95t6j31an0j0q76.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frce8kgonhj31780fedke.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frce9w876sj31cx0f3gs2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcedfda71j30vl0k242k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcxa5tsg1j317l0cuwh5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcxvq743rj30yx0llafm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyrrx9lyj316d0jaad5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyyh7pufj311i0djjyy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyz34w18j318p0egaji.jpg">
+<meta property="article:published_time" content="2018-05-15T13:23:44.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.184Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdm5xejsj310a0hwgq1.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Spark 学习笔记 | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spark 学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-15 21:23:44" itemprop="dateCreated datePublished" datetime="2018-05-15T21:23:44+08:00">2018-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Spark-概述"><a href="#Spark-概述" class="headerlink" title="Spark 概述"></a>Spark 概述</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h2 id="Spark-与-Scala"><a href="#Spark-与-Scala" class="headerlink" title="Spark 与 Scala"></a>Spark 与 Scala</h2><p>Spark 为一门用 Scala 开发的大数据框架，成名类似于 Hadoop，Spark 在 2014 年刷新了 Hadoop 之前保持的 1TB 数据基准排序的记录，到现在成为了一个基于内存计算的大数据并行计算框架，可用于构建大型的、低延迟的数据分析应用。</p>
+<p>Spark 特点</p>
+<ul>
+<li>运行速度快：使用 DAG 执行引擎来进行作业调度，效率要比 MapReduce 高效的多</li>
+<li>容易使用：支持多种编程方式</li>
+<li>通用性：Spark 提供了完整而强大的技术栈<ul>
+<li>内存计算 Spark Core</li>
+<li>包括 SQL 查询分析 Spark SQL</li>
+<li>流式计算 Spark Streaming</li>
+<li>机器学习 Spark MLib</li>
+<li>图算法 GraphX</li>
+</ul>
+</li>
+<li>运行模式多样</li>
+</ul>
+<p>Scala 语言是一门现代的多范式编程语言（比如函数式、面向对象、过程式），平滑的集成了面向对象和函数式编程两种风格可以运行于 Java 平台（JVM）之上。</p>
+<p>Scala 特性</p>
+<ul>
+<li>强大的并发性，支持函数式编程，支持分布式系统</li>
+<li>语法简洁，提供优雅 API</li>
+<li>Scala 兼容 Java，且能融入到 Hadoop 生态圈</li>
+<li>提供 REPL（交互式解释器），提高开发效率</li>
+</ul>
+<h2 id="Spark-与-Hadoop-的对比"><a href="#Spark-与-Hadoop-的对比" class="headerlink" title="Spark 与 Hadoop 的对比"></a>Spark 与 Hadoop 的对比</h2><p>Hadoop 的缺点</p>
+<ul>
+<li>表达能力有限：不是所有应用都能用 Map 和 Reduce 表达</li>
+<li>磁盘 IO 开销较大</li>
+<li>延迟高</li>
+<li>任务之间衔接涉及到 IO 开销</li>
+<li>前一个任务完成前其他任务无法开始。难以胜任复杂、多阶段的任务计算</li>
+</ul>
+<p>Spark 相比 Hadoop MapReduce 的优点</p>
+<ul>
+<li>计算模式属于 MapReduce 但提供多种数据集操作类型是编程模型更灵活</li>
+<li>Spark 提供内存计算，迭代计算不需要读写磁盘</li>
+<li>Spark 基于 DAG 任务调度机制</li>
+</ul>
+<a id="more"></a>
+<h1 id="Spark-生态系统"><a href="#Spark-生态系统" class="headerlink" title="Spark 生态系统"></a>Spark 生态系统</h1><p>在实际应用中，大数据处理包括三个类型：</p>
+<ul>
+<li>复杂的批量处理，数十分钟到几小时。MapReduce</li>
+<li>基于历史数据的交互式查询，数十秒到数分钟。Cloudera Impala</li>
+<li>基于实时数据流处理，毫秒到数秒之间。Storm</li>
+</ul>
+<p>由此带来的问题：</p>
+<ul>
+<li>不同场景输入输出数据无法做到无缝共享</li>
+<li>不同软件需要不同的开发和维护，较高的使用成本</li>
+<li>比较难对同一个集群中的各个系统进行统一的资源协调分配</li>
+</ul>
+<p>Spark 设计遵循“一个软件栈满足不同应用场景”的理念，逐渐形成了一整套生态系统<br>Spark 可以部署在 YARN 之上，提供一站式的数据解决方案<br>Spark 所提供的生态系统足以应对上述三种场景<br>Spark 生态系统已成为 BDAS（伯克利大学数据实验室软件栈） 的重要组成<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdm5xejsj310a0hwgq1.jpg" alt="BDAS 架构"><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdo2ki92j319s0dm7b9.jpg" alt="Spark 组件应用场景"></p>
+<h1 id="Spark-运行架构"><a href="#Spark-运行架构" class="headerlink" title="Spark 运行架构"></a>Spark 运行架构</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>弹性分布式数据集（RDD，Resillient Distributed Dataset）是分布式内存的抽象概念，提供了一种高度受限的共享内存模型</li>
+<li>有向无环图（DAG）反映了 RDD 之间的依赖关系</li>
+<li>Executor，是运行在工作节点的一个进程，负责运行 Task</li>
+<li>Application，用户编写的 Spark 应用程序</li>
+<li>Task，运行在 Executor 之上的工作单元</li>
+<li>Job，一般一个 Application 包含多个 Job，一个 Job 包含多个 RDD 及作用于相应 RDD 上的各种操作</li>
+<li>Stage，是 Job 调用的基本单位，一个 Job 会分为多组 Task，每组 Task 被称为 Stage，或者称为 TaskSet，代表了一组关联的、相互之间没有 Shuffle 依赖关系的任务组成的任务集</li>
+</ul>
+<h2 id="Spark-基本架构设计"><a href="#Spark-基本架构设计" class="headerlink" title="Spark 基本架构设计"></a>Spark 基本架构设计</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcdwx95t6j31an0j0q76.jpg" alt="Spark 基本架构图"></p>
+<ul>
+<li>Cluster Manager，集群资源管理器，负责对整个 Spark 应用程序来进行集群资源管理分配和调度。可以自带或 Mesos 或 YARN</li>
+<li>Work Node，运行作业任务的工作节点</li>
+<li>Driver Program，每个应用的任务控制节点，生成 DAG，对 DAG 进行分成多个阶段，对阶段进行拆解，吧任务分给相关具体的 Executor 执行都是由 Driver 执行</li>
+<li>Executor，负责每个工作节点上具体任务执行的进程</li>
+</ul>
+<p>该架构设计与 Hadoop MapReduce 相比优点</p>
+<ul>
+<li>利用多线程来执行具体的任务减少任务的启动开销</li>
+<li>Executor 中有一个 BlockManager，会将内存和磁盘共同视为存储设备，有效减少 IO 开销</li>
+</ul>
+<h2 id="Spark-中各种概念之间的相互关系"><a href="#Spark-中各种概念之间的相互关系" class="headerlink" title="Spark 中各种概念之间的相互关系"></a>Spark 中各种概念之间的相互关系</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frce8kgonhj31780fedke.jpg" alt="Spark 中各种概念之间的相互关系"><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frce9w876sj31cx0f3gs2.jpg" alt="Spark 中各种概念之间的相互关系"></p>
+<h2 id="Spark-运行基本流程"><a href="#Spark-运行基本流程" class="headerlink" title="Spark 运行基本流程"></a>Spark 运行基本流程</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcedfda71j30vl0k242k.jpg" alt="Spark 运行基本流程"></p>
+<ol>
+<li>为应用构建起基本的运行环境，即由 Driver 创建一个 SparkContext 进行资源的申请、任务的分配和监控</li>
+<li>资源管理器为 Executor 分配资源，并启动 Executor 进程，进程会汇报资源的使用情况</li>
+<li>SparkContext 根据 RDD 的依赖关系构建 DAG 图，DAG 图提交给 DAG Scheduler 解析成 Stage，然后吧一个个 TaskSet 提交给底层调度器 Task Scheduler 处理；Executor 主动向 SparkContext 申请 Task，Task Scheduler 将 Task 发放给 Executor 运行并提供应用程序代码</li>
+<li>Task 在 Executor 上运行把执行结果反馈给 TaskScheduler，然后反馈给 DAGScheduler，运行完毕后写入数据并释放所有资源</li>
+</ol>
+<h2 id="Spark-运行架构特点"><a href="#Spark-运行架构特点" class="headerlink" title="Spark 运行架构特点"></a>Spark 运行架构特点</h2><ul>
+<li>每个 AppIication 都有自己专属的 Executor 进程，并且该进程在 AppIication 运行期间一直驻留。Executor 进程以多线程的方式运行 Task</li>
+<li>Spark 运行过程与资源管理器无关，只要能够获取 Executor 进程并保持通信即可</li>
+<li>Task 采用了数据本地性和推测执行等优化机制</li>
+</ul>
+<h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><h3 id="RDD-基本概念"><a href="#RDD-基本概念" class="headerlink" title="RDD 基本概念"></a>RDD 基本概念</h3><p>设计背景：许多迭代式算法（比如机器学习）和交互式数据挖掘工具，共同之处是，不同计算阶段之间会重用中间结果，目前 MapReduce 框架都是吧中间结果写入到磁盘中带来非常大的磁盘 IO 开销和序列化的开销。RDD 就是为了满足这种需求而出现，它提供了一个抽象的数据结构，将应用逻辑表达式进行一些列的转换。不同的 RDD 之间的转换操作形成以依赖关系（DAG 图），可以实现管道化，一个 RDD 的结果可以作为下一个 RDD 的输入，避免中间数据存储</p>
+<p>RDD 概念：一个 RDD 就是一个分布式对象集合，本质上是一个只读的分区记录集合，毎个 RDO 可分成多个分区，毎个分区就是一个数据集片段，并且一个 RDD 的不同分区可以被保存到集群中不同的节点上，从而可以在集群中的不同节点上进行并行计算。<br>RDD 提供了一种高度受限的内存共享模型，即 RDD 是只读的记录分区的集合，不能直接修改，只能基于稳定的物理存储中的数据集创建 RDD，或者通过在其他 RDD 上执行确定的转换操作（如 map、join、group by）而创建得到新的 RDD</p>
+<p>RDD 提供了两种操作来支持常见的数据运算：</p>
+<ul>
+<li>转换（Transformation）：转换接口非常简单，类似 map、filter 这种粗粒度的数据转换，而不能对某个数据项进行修改（不适合网页爬虫）</li>
+<li>动作（Action）</li>
+</ul>
+<h3 id="RDD-典型执行过程"><a href="#RDD-典型执行过程" class="headerlink" title="RDD 典型执行过程"></a>RDD 典型执行过程</h3><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcxa5tsg1j317l0cuwh5.jpg" alt="RDD 执行实例"></p>
+<ol>
+<li>RDD 读入外部数据源进行创建数据，根据数据大小创建不同分区，不同分区放到不同数据节点上</li>
+<li>RDD 经过一系列转换操作，每一次都会产生不同的 RDD 供给下一个转换使用，不计算结果，只记录轨迹</li>
+<li>最后一个 RDD 经过动作操作计算产生结果</li>
+<li>这一系列处理成为一个 Lineage（血缘关系）反映了不同 RDD 之间的依赖关系，即 DAG 拓扑排序的结果</li>
+</ol>
+<h3 id="RDD-特性"><a href="#RDD-特性" class="headerlink" title="RDD 特性"></a>RDD 特性</h3><ul>
+<li>高效的容错性。容错机制：血缘关系的设计方式使得 RDD 天生具有容错性，当一个 RDD 分区出现错误，只需要往上层节点追溯并再次转换即可</li>
+<li>中间结果持久化到内存：数据在内存中的多个 RDD 操作之间进行传递，降低磁盘开销</li>
+<li>存放的数据可以是 Java 对象，避免了不必要的对象序列化和反序列化</li>
+</ul>
+<h3 id="RDD-的依赖关系和运行过程"><a href="#RDD-的依赖关系和运行过程" class="headerlink" title="RDD 的依赖关系和运行过程"></a>RDD 的依赖关系和运行过程</h3><p>Spark 通过分析各个 RDD 的依赖关系生成了 DAG 图再通过分析各个 RDD 中的分区之间的依赖关系（宽依赖、窄依赖）来决定如何划分 Stage</p>
+<ul>
+<li>窄依赖：表现为一个父 RDD 的分区对应于一个子 RDD 的分区或者多个父 RDD 的分区对应于一个子 RDD 的分区</li>
+<li>宽依赖：一个父 RDD 的一个分区对应于一个子 RDD 的多个分区</li>
+</ul>
+<p>具体划分方法</p>
+<ul>
+<li>在 DAG 中进行反向解析，遇到宽依赖就断开（存在 Shuffle）</li>
+<li>遇到窄依赖酒把当前的 RDD 加入 Stage</li>
+<li>将窄依赖尽量划分在同一个 Stage 中，可以实现流水线计算从而使得数据可以直接在内存中进行交换</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcxvq743rj30yx0llafm.jpg" alt="Stage 划分过程"><br>如图可以看出，RDD A 和 B 之间是宽依赖，所以 A 被单独划分为一个 Stage 1，CDFE 之间都是窄依赖，可以直接划分成一个 Stage 2 构成流水化作业，之后 B 到 G 是窄依赖，F 到 G 为宽依赖，所以最后根据划分方法总共划分为三个 Stage</p>
+<p>Stage 的类型</p>
+<ul>
+<li>ShuffleMapStage：不是最终的 Stage，在他之后还有其他的 Stage，所以它的输出一定要经过 Shuffle 过程，并作为后续 Stage 的输入。这种 Stage 是以 Shuffle 为输出边界（存在宽依赖断开），其输入边界可以是从外部获取数据，也可以使另一个 ShuffleMapStage 的输出其输出可以使另一个 Stage 的开始</li>
+<li>ResultStage：没有输出，而是直接产生结果或存储。zhezhongStage 是直接输出结果，其输入边界可以是从外部获取数据也可以是另一个 ShuffleMapStage 的输出。一个 Job 必定会有至少一个 ResultStage</li>
+</ul>
+<h1 id="Spark-SQL"><a href="#Spark-SQL" class="headerlink" title="Spark SQL"></a>Spark SQL</h1><p>SparkSQL 在 Hive 兼容层面仅依赖 HiveQL 解析、Hive 元数据也就是说，从 HQL 被解析成抽象语法树（AST) 起，就全部由 SparkSQL 接管了。SparkSQL 执行计划生成和优化都由 Catalyst(函数式关系查询优化框架）负责</p>
+<p>SparkSQL 增加了 SchemaRDD(即带有 Schema 信息的 RDD) 使用户可以在 SparkSQL 中执行 SQL 语句</p>
+<p>备注：SchemaRDD 在后来的 SparkSQL 版本中演化为 DataFrame</p>
+<h1 id="Spark-部署和应用"><a href="#Spark-部署和应用" class="headerlink" title="Spark 部署和应用"></a>Spark 部署和应用</h1><p>Spark 三种部署方式</p>
+<ul>
+<li>Standalone：自带的资源管理框架。类似 MapReduce1.0，slot 为资源分配单位，但是不进行 map slot 和 reduce slot 切分</li>
+<li>Spark on Mesos：Spark 和 Mesos 相互支持比较充分</li>
+<li>Spark on YARN</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyrrx9lyj316d0jaad5.jpg" alt="统一部署"></p>
+<p>不同计算框架统一运行在YARN中的优势：</p>
+<ul>
+<li>计算资源按需伸缩</li>
+<li>不用付在应用混搭、集群利用率高</li>
+<li>共享底层存储，避免数据库跨集群迁移</li>
+</ul>
+<h1 id="Spark-编程实践"><a href="#Spark-编程实践" class="headerlink" title="Spark 编程实践"></a>Spark 编程实践</h1><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyyh7pufj311i0djjyy.jpg" alt="ActionAPI"><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frcyz34w18j318p0egaji.jpg" alt="TransformationAPI"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spark/" rel="tag"># Spark</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/15/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="大数据相关学习笔记">
+      <i class="fa fa-chevron-left"></i> 大数据相关学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="next" title="图像处理">
+      图像处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-概述"><span class="nav-number">1.</span> <span class="nav-text">Spark 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-与-Scala"><span class="nav-number">1.1.</span> <span class="nav-text">Spark 与 Scala</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-与-Hadoop-的对比"><span class="nav-number">1.2.</span> <span class="nav-text">Spark 与 Hadoop 的对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-生态系统"><span class="nav-number">2.</span> <span class="nav-text">Spark 生态系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-运行架构"><span class="nav-number">3.</span> <span class="nav-text">Spark 运行架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-基本架构设计"><span class="nav-number">3.2.</span> <span class="nav-text">Spark 基本架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-中各种概念之间的相互关系"><span class="nav-number">3.3.</span> <span class="nav-text">Spark 中各种概念之间的相互关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-运行基本流程"><span class="nav-number">3.4.</span> <span class="nav-text">Spark 运行基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-运行架构特点"><span class="nav-number">3.5.</span> <span class="nav-text">Spark 运行架构特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD"><span class="nav-number">3.6.</span> <span class="nav-text">RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-基本概念"><span class="nav-number">3.6.1.</span> <span class="nav-text">RDD 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-典型执行过程"><span class="nav-number">3.6.2.</span> <span class="nav-text">RDD 典型执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-特性"><span class="nav-number">3.6.3.</span> <span class="nav-text">RDD 特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-的依赖关系和运行过程"><span class="nav-number">3.6.4.</span> <span class="nav-text">RDD 的依赖关系和运行过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL"><span class="nav-number">4.</span> <span class="nav-text">Spark SQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-部署和应用"><span class="nav-number">5.</span> <span class="nav-text">Spark 部署和应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-编程实践"><span class="nav-number">6.</span> <span class="nav-text">Spark 编程实践</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

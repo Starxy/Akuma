@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="通信基本规则对于所有的通信形式，不论是人与人之间的还是计算机之间的，都需要具有三种基本的要素，消息来源、消息目的地和通道。 除此之外通信的双方必须对通信的内容有着同样的解读规范，既是协议（Protocols），所有的协议必须具有以下方面：  标识发送方和接收方 通用语言和语法 传递的速度和时间 证实或确认要求  网络通信中使用的协议共享许多基本特质。除了识别源和目的地址之外，计算机和网络协议还定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 3: Network Protocols and Communications">
+<meta property="og:url" content="http://starxy.cc/2017/12/14/CCNA-Chapter-3-Network-Protocols-and-Communications/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="通信基本规则对于所有的通信形式，不论是人与人之间的还是计算机之间的，都需要具有三种基本的要素，消息来源、消息目的地和通道。 除此之外通信的双方必须对通信的内容有着同样的解读规范，既是协议（Protocols），所有的协议必须具有以下方面：  标识发送方和接收方 通用语言和语法 传递的速度和时间 证实或确认要求  网络通信中使用的协议共享许多基本特质。除了识别源和目的地址之外，计算机和网络协议还定义">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmgt6x76pyj30ey0a6wf5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkmfni2lvj30h70d6taf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkmmtew4kj30fs03mwem.jpg">
+<meta property="article:published_time" content="2017-12-14T09:27:53.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.181Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmgt6x76pyj30ey0a6wf5.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2017/12/14/CCNA-Chapter-3-Network-Protocols-and-Communications/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CCNA Chapter 3: Network Protocols and Communications | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/14/CCNA-Chapter-3-Network-Protocols-and-Communications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CCNA Chapter 3: Network Protocols and Communications
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-14 17:27:53" itemprop="dateCreated datePublished" datetime="2017-12-14T17:27:53+08:00">2017-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="通信基本规则"><a href="#通信基本规则" class="headerlink" title="通信基本规则"></a>通信基本规则</h1><p>对于所有的通信形式，不论是人与人之间的还是计算机之间的，都需要具有三种基本的要素，消息来源、消息目的地和通道。</p>
+<p>除此之外通信的双方必须对通信的内容有着同样的解读规范，既是协议（Protocols），所有的协议必须具有以下方面：</p>
+<ul>
+<li>标识发送方和接收方</li>
+<li>通用语言和语法</li>
+<li>传递的速度和时间</li>
+<li>证实或确认要求</li>
+</ul>
+<p>网络通信中使用的协议共享许多基本特质。除了识别源和目的地址之外，计算机和网络协议还定义了消息在网络中如何传输的细节。<br>常用的计算机协议如下：</p>
+<ul>
+<li>消息编码 Message Encoding</li>
+<li>消息格式和封装 Message Formatting and Encapsulation</li>
+<li>消息大小 Message Size</li>
+<li>消息时序 Message Timming</li>
+<li>消息传输选项 Message Delivery Options</li>
+</ul>
+<a id="more"></a>
+<h2 id="消息编码"><a href="#消息编码" class="headerlink" title="消息编码"></a>消息编码</h2><p>在发送消息时，首先执行的步骤之一是编码（Encoding）。编码是为了便于传输信息，信息将被转换为另一种广为接受的形式。解码（Decoding）是编码的逆向过程，其目的是解释信息。</p>
+<p>主机之间的编码必须采用适合介质的格式。通过网络发送的消息先由发送主机转换成位。根据用来传输位的网络介质，将每个位编码成声音、光波或电子脉冲的样式，如铜制线缆和光纤分别采用不同的信号传递信息。目的主机接收并解码信号，解释收到的消息。</p>
+<h2 id="消息格式和封装"><a href="#消息格式和封装" class="headerlink" title="消息格式和封装"></a>消息格式和封装</h2><p>对于人们之前广为使用的书信交流方式，信件都包含以下要素：收信人的标识，称呼，信件正文，结束语，信件的身份标识。这就是消息的格式。除此之外，大多数信件还需要信封，信封上有寄信人和收信人的地址。如果目的地址和格式不正确，信件就无法投递。</p>
+<p>将一种消息格式（信件）放入另一种消息格式（信封）的过程称为封装（encapsulation）。收信人从信封中取出信件的过程就是解封（De-encapsulation）。</p>
+<p>通过计算机网络发送的消息也要遵循特定的格式规则才能被发送和处理。就像信件封装在信封中进行投递一样，计算机消息也以类似方式处理。<strong>每条计算机消息在通过网络发送之前都以特定的格式封装，称为帧（frame）</strong>。帧就像信封一样；它提供目的地址和源主机的地址。注意，帧在帧编址部分和封装的消息中都有一个源地址和一个目的地址。关于这两种类型的地址之间的区别将在本章后续部分作出说明。</p>
+<p>帧的格式和内容由消息类型及其发送通道决定。消息如果没有正确格式化，就无法成功发送或被目的主机处理。</p>
+<h2 id="消息大小"><a href="#消息大小" class="headerlink" title="消息大小"></a>消息大小</h2><p>通信的另一条规则是大小。人们在相互交流时，他们发送的消息通常会分成较小的部分或较短的句子。这些句子的大小限制为接收方一次可以处理的大小。</p>
+<p>同样，将一条长消息通过网络从一台主机发送到另一台主机时，也必须将其分为许多小片段控制网络中传送的消息片段（帧）大小的规则非常严格，并且不同的渠道有不同的规则。帧太长或太短都无法传送。帧大小限制规则要求源主机将长消息分割为同时符合最小和最大长度要求的多个片段。长消息必须分成不同的帧发送，其中每个帧包含原始消息的一个片段。每个帧还将拥有自己的编址信息。在接收主机上，消息的各个片段会重新组合为原始消息</p>
+<h2 id="消息时序"><a href="#消息时序" class="headerlink" title="消息时序"></a>消息时序</h2><ul>
+<li>信息的访问方法： 网络主机需要访问方法来了解开始发送消息的时间以及在发生冲突时响应的方式。</li>
+<li>流量控制： 源主机和目的主机使用流量控制方法来协商成功通信的正确时序。</li>
+<li>响应超时：网络主机也会使用规则来指定等待响应的时长，以及在响应超时的情况下执行什么操作。</li>
+</ul>
+<h2 id="消息传输选项"><a href="#消息传输选项" class="headerlink" title="消息传输选项"></a>消息传输选项</h2><p>对于不同类型的消息，有的需要接收方收到后发送确认回执，而有的不需要。此外，一对一传输选项称为<strong>单播（unicast）</strong>，如果主机需要用一对多传输选项发送消息，则称为“<strong>组播（multicast）</strong>”，如果网络上所有主机都需要同时接收该消息，可以使用<strong>广播（broadcast）</strong>。广播代表一对全体的消息传输选项。</p>
+<h1 id="网络协议和标准"><a href="#网络协议和标准" class="headerlink" title="网络协议和标准"></a>网络协议和标准</h1><p>通信协议或简称为传输协议（Communications Protocol）在电信中，是指在任何物理介质中允许两个或多个在传输系统中的终端之间传播信息的系统标准，也是指计算机通信或网络设备的共同语言， <strong>通信协议定义了通信中的语法学, 语义学和同步规则以及可能存在的错误检测与纠正</strong>。通信协议在硬件，软件或两者之间皆可实现</p>
+<p>协议栈（Protocol stack），又称协议堆叠，是计算机网络协议套件（协议簇，协议族）的一个具体的软件实现。</p>
+<p>例如对于 TCP/IP 协议族，常见的协议有应用层的 HTTP、DNS、DHCP，传输层的 TCP、UDP，互联网层的 IPV4、IPV6、ICMP，网络接入层的 Ethernet 等等</p>
+<h2 id="TCP-IP-协议族的通信过程"><a href="#TCP-IP-协议族的通信过程" class="headerlink" title="TCP/IP 协议族的通信过程"></a>TCP/IP 协议族的通信过程</h2><ol>
+<li><p>首先演示是 Web 服务器准备超文本标记语言 (HTML) 页面作为需要发送的数据。</p>
+</li>
+<li><p>将应用程序协议 HTTP 报头添加到 HTML 数据的前面。报头包含各种信息，包括服务器所使用的 HTTP 版本和指示它有信息需要传送给 Web 客户端的状态码。</p>
+</li>
+<li><p>HTTP 应用层协议将 HTML 格式的网页数据传送到传输层。TCP 传输层协议用于管理单个会话，本示例中为 Web 服务器和 Web 客户端之间的单个会话。</p>
+</li>
+<li><p>接下来将 IP 信息添加到 TCP 信息的前面。IP 分配合适的源和目的 IP 地址。此信息称为 <strong>IP 数据包（IP packet）</strong>。</p>
+</li>
+<li><p>以太网协议将信息添加到 IP 数据包的两端，称为<strong>数据链路帧（ data link frame）</strong>。将此帧传送到通往 Web 客户端的路径中最近的路由器上。该路由器将删除以太网信息，分析 IP 数据包，为该数据包确定最佳路径，将数据包插入新的帧中，并将其发送到通往目的地的下一个邻居路由器上。<strong>每台路由器在转发数据包之前都会删除旧的数据链路信息并添加新的数据链路信息</strong>。</p>
+</li>
+<li><p>现在该数据在由介质和中间设备组成的网际网络中传输。</p>
+</li>
+<li><p>客户端收到包含数据的数据链路帧。每个协议报头都会得到处理，然后按与添加相反的顺序将其删除。将以太网信息处理并删除之后，接着处理并删除 IP 协议信息，然后是 TCP 信息，最后是 HTTP 信息。</p>
+</li>
+<li><p>然后网页信息将传递到客户端的 Web 浏览器软件。</p>
+</li>
+</ol>
+<p>总的来说：在每一层上都会将上一层封装好的数据整个地重新作为新的消息再封装上这一层所添加的信息。具体可以看该章 <a href="./#封装与解封">封装与解封</a> 部分</p>
+<h1 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h1><p>网络模型只是网络工作原理的表示方式，模型不是实际的网络。</p>
+<p>使用分层模型来描述网络协议及其工作方式的优点包括：</p>
+<ul>
+<li>有助于协议设计，因为对于在特定层工作的协议而言，它们的工作方式及其与上下层之间的接口都已经确定。</li>
+<li>促进竞争，因为可以同时使用不同厂商的产品。</li>
+<li>避免一个协议层的技术或功能变化影响相邻的其他层。</li>
+<li>提供了描述网络功能和能力的通用语言。</li>
+</ul>
+<p>TCP/IP 模型和开放式系统互联 (OSI) 模型是讨论网络功能时使用的主要模型。它们每个代表一个基本分层网络模型类型：</p>
+<ul>
+<li><strong>协议模型（Protocol model）</strong> - 这种类型的模型与特定的协议簇结构紧密配合。TCP/IP 模型描述了 TCP/IP 协议簇中每个协议层实现的功能，因此属于协议模型。TCP/IP 也用作参考模型。</li>
+<li><strong>参考模型（Reference model）</strong> - 这种类型的模型通过描述特定层需要完成什么但不规定如何完成来保持各类网络协议和服务中的一致性。OSI 模型是一种广为人知的网际网络参考模型，但也是 OSI 协议簇中的一种协议模型。</li>
+</ul>
+<h2 id="OSI-参考模型"><a href="#OSI-参考模型" class="headerlink" title="OSI 参考模型"></a>OSI 参考模型</h2><p>OSI 参考模型总共有 7 层，从上到下分别为：</p>
+<ul>
+<li><strong>应用层 (Application)</strong>：包含用于进程间通讯的协议</li>
+<li><strong>表示层 (Presentation)</strong>：对应用层服务之间传输的数据规定了通用的表示方法。</li>
+<li><strong>会话层 (Session)</strong>：为表示层提供组织对话和管理数据交换的服务</li>
+<li><strong>传输层 (Transport)</strong>：为终端设备之间的每个通讯定义了<strong>数据分段</strong>、传输和重组服务 <strong>封装端口信息</strong></li>
+<li><strong>网络层 (Network)</strong>：为所标识的终端设备之间通过网络交换一个个数据的片段提供服务，<strong>封装逻辑地址，即 IP 地址</strong></li>
+<li><strong>数据链路层 (Data Link)</strong>：描述了设备之间通过公共介质交换数据帧的方法 <strong>添加物理地址，即 MAC 地址</strong></li>
+<li><strong>物理层 (Physical)</strong>：物理层协议描述的机械、电气、功能和操作方法用于激活、维护和停用网络设备之间比特传输使用的物理连接</li>
+</ul>
+<h2 id="TCP-IP-协议模型"><a href="#TCP-IP-协议模型" class="headerlink" title="TCP/IP 协议模型"></a>TCP/IP 协议模型</h2><p> TCP/IP 协议模型公有 4 层，从上到下依次为：</p>
+<ul>
+<li><strong>应用层 (Application)</strong>：向用户提供数据，以及编码和对话控制</li>
+<li><strong>传输层 (Transoprt)</strong>：支持各种设备之间通过不同网络通信</li>
+<li><strong>互联网层 (Internet)</strong>：确定通过网络的最佳路径</li>
+<li><strong>网络接入层 (Network Access)</strong>：控制组成网络的硬件设备和介质</li>
+</ul>
+<h2 id="两种网络模型的对比"><a href="#两种网络模型的对比" class="headerlink" title="两种网络模型的对比"></a>两种网络模型的对比</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmgt6x76pyj30ey0a6wf5.jpg" alt=""></p>
+<h1 id="网络中的数据传输"><a href="#网络中的数据传输" class="headerlink" title="网络中的数据传输"></a>网络中的数据传输</h1><h2 id="消息分段"><a href="#消息分段" class="headerlink" title="消息分段"></a>消息分段</h2><p>理论上来说，可以将一次通信的内容作为一大块连续的高容量位流，通过网络从源发送到目的地。但如果真以这种方式传输消息，那就意味着在传输此数据期间，同一个网络中的其他设备都不能发送或接收消息。这种大型数据流会导致严重的延迟。而且，一旦互联网络基础架构中有一条链路在传输期间出现故障，那么整个消息都会丢失，必须全部重传。</p>
+<p>所以，更好的办法是先将数据划分为更小、更易于管理的片段，然后再通过网络发送。将数据流划分为较小的片段称为<strong>分段 (segmentation)</strong>。消息分段主要有两个优点：</p>
+<ul>
+<li>通过从源设备向目的设备发送一个个小片段，就可以在网络上交替发送许多不同会话，称为<strong>多路复用 (multiplexing)</strong>。</li>
+<li>分段可以增强网络通信的效率。如果由于网络故障或网络拥塞，有部分消息未能传送到目的地，则只需重新传输丢失的部分。</li>
+</ul>
+<p>使用分段和多路复用在网络上传输消息要面临的挑战是增加了该过程的复杂程度。</p>
+<h2 id="封装与解封"><a href="#封装与解封" class="headerlink" title="封装与解封"></a>封装与解封</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkmfni2lvj30h70d6taf.jpg" alt="">‘<br>在通过网络介质传输应用程序数据的过程中，随着数据沿协议栈向下传递，每层都要添加各种协议信息。此过程称为<strong>封装 (Encapsulation)</strong>。<br>一段数据在任意协议层的表示形式称为<strong>协议数据单元 (Protocol Data Units , PDU)</strong>。在封装过程中，后续的每一层都根据使用的协议封装其从上一层接收的 PDU。在网络中发送消息时，封装过程自上而下工作。在各层，上层信息被视为封装协议内的数据。例如，TCP 数据段被视为 IP 数据包内的数据。<br>接收主机上的过程与之相反，称为<strong>解封 (De-encapsulation)</strong>。解封是接收设备用来删除一个或多个协议报头的过程。数据在朝着最终用户应用程序沿<em>协议栈向上移动</em>的过程中被解封。</p>
+<p>Logical addresses, also known as IP addresses, are encapsulated at the network layer. Physical addresses are encapsulated at the data link layer. Port addresses are encapsulated at the transport layer. No addresses are encapsulated at the physical layer.</p>
+<h2 id="网络地址和数据链路地址"><a href="#网络地址和数据链路地址" class="headerlink" title="网络地址和数据链路地址"></a>网络地址和数据链路地址</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkmmtew4kj30fs03mwem.jpg" alt=""><br>网络层和数据链路层负责将数据从源设备传输到目的设备。如图，两层中的协议都包含源地址和目的地址，但它们的地址具有不同的用途。</p>
+<ul>
+<li><strong>网络层源地址和目的地址 (Network layer source and destination addresses)</strong> - 负责将 IP 数据包从原始源设备传输到处于同一网络或远程网络中的最终目的设备。</li>
+<li><strong>数据链路层源地址和目的地址 (Data link layer source and destination addresses)</strong> – 负责将数据链路帧从一个网络接口卡 (NIC) 传输到同一网络上的另一个 NIC。</li>
+</ul>
+<p>IP 地址是网络层（或第 3 层）逻辑地址，用于将 IP 数据包从原始源设备传输到最终目的设备。<br>IP 数据包包含两个 IP 地址：</p>
+<ul>
+<li><strong>源 IP 地址 (Source IP address)</strong> - 发送设备（数据包的原始源设备）的 IP 地址。</li>
+<li><strong>目的 IP 地址 (Destination IP address)</strong> - 接收设备（数据包的最终目的设备）的 IP 地址。</li>
+<li>MAC 地址是以太网网卡的物理内嵌地址。The MAC address is also known as the physical or Ethernet address. Because it is encoded on hardware, on the Ethernet NIC, it will stay the same no matter where the NIC is geographically located.</li>
+</ul>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>encoding</strong> - process of modifying data to an acceptable format for transmission</li>
+<li><strong>decoding</strong> - process of modifying transmitted data into a format that is usable by a device</li>
+<li><strong>encapsulation</strong> - process of inserting a formatted message inside another formatted message</li>
+<li><strong>segmentation</strong> - process of splitting data into smaller pieces for transmission on a network</li>
+<li><strong>de-encapsulation</strong> - process of removing a formatted message from another formatted message</li>
+<li><strong>unicast</strong> - a form of message delivery in which a message is delivered to a single destination</li>
+<li><strong>multicast</strong> - a form of transmission in which a message is delivered to a group of hosts</li>
+<li><strong>broadcast</strong> - a form of transmission in which a message is delivered to all hosts on a network</li>
+<li><strong>open standard</strong> - refers to protocols that are available to the public at no cost</li>
+<li><strong>proprietary</strong> - refers to protocols that are developed by companies and are available to the public for purchase</li>
+<li><strong>PDU</strong> - the form of a piece of data that is associated with each protocol layer</li>
+<li><strong>default gateway</strong> - a router that is responsible for redirecting the packets it receives to their destination</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/12/CCNA-Chapter-2-Configure-a-Network-Operating-System/" rel="prev" title="CCNA Chapter 2: Configure a Network Operating System">
+      <i class="fa fa-chevron-left"></i> CCNA Chapter 2: Configure a Network Operating System
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/15/CCNA-Chapter-4-Network-Access/" rel="next" title="CCNA Chapter 4: Network Access">
+      CCNA Chapter 4: Network Access <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通信基本规则"><span class="nav-number">1.</span> <span class="nav-text">通信基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息编码"><span class="nav-number">1.1.</span> <span class="nav-text">消息编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息格式和封装"><span class="nav-number">1.2.</span> <span class="nav-text">消息格式和封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息大小"><span class="nav-number">1.3.</span> <span class="nav-text">消息大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息时序"><span class="nav-number">1.4.</span> <span class="nav-text">消息时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息传输选项"><span class="nav-number">1.5.</span> <span class="nav-text">消息传输选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络协议和标准"><span class="nav-number">2.</span> <span class="nav-text">网络协议和标准</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议族的通信过程"><span class="nav-number">2.1.</span> <span class="nav-text">TCP&#x2F;IP 协议族的通信过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络分层模型"><span class="nav-number">3.</span> <span class="nav-text">网络分层模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-参考模型"><span class="nav-number">3.1.</span> <span class="nav-text">OSI 参考模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议模型"><span class="nav-number">3.2.</span> <span class="nav-text">TCP&#x2F;IP 协议模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种网络模型的对比"><span class="nav-number">3.3.</span> <span class="nav-text">两种网络模型的对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络中的数据传输"><span class="nav-number">4.</span> <span class="nav-text">网络中的数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息分段"><span class="nav-number">4.1.</span> <span class="nav-text">消息分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装与解封"><span class="nav-number">4.2.</span> <span class="nav-text">封装与解封</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络地址和数据链路地址"><span class="nav-number">4.3.</span> <span class="nav-text">网络地址和数据链路地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">5.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

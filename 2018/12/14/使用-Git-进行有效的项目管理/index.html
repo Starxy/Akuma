@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Git 基础 首先理解以下概念对之后的版本和分支管理有很大的帮助该部分内容来自 git-scm 中文手册  直接记录快照，而非差异比较Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Git 进行有效的项目管理">
+<meta property="og:url" content="http://starxy.cc/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="Git 基础 首先理解以下概念对之后的版本和分支管理有很大的帮助该部分内容来自 git-scm 中文手册  直接记录快照，而非差异比较Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png">
+<meta property="article:published_time" content="2018-12-14T02:34:29.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.187Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png">
+
+<link rel="canonical" href="http://starxy.cc/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>使用 Git 进行有效的项目管理 | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Git 进行有效的项目管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-14 10:34:29" itemprop="dateCreated datePublished" datetime="2018-12-14T10:34:29+08:00">2018-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h1><blockquote>
+<p>首先理解以下概念对之后的版本和分支管理有很大的帮助<br>该部分内容来自 <a href="https://git-scm.com/book/zh" target="_blank" rel="noopener">git-scm 中文手册</a></p>
+</blockquote>
+<h2 id="直接记录快照，而非差异比较"><a href="#直接记录快照，而非差异比较" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h2><p>Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。<br>除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。</p>
+<p><img src="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png" alt="deltas"></p>
+<p>Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 Git 对待数据更像是一个<strong>快照流</strong>。</p>
+<p><img src="http://app.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png" alt="snapshots"></p>
+<p>在之后讨论分支管理的时候，就能体会到这种管理方式带来的益处</p>
+<a id="more"></a>
+<h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><p>Git 有三种状态，：已提交（committed）、已修改（modified）和已暂存（staged）。 已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
+<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录以及暂存区域。</p>
+<p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。是中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。<br>你可以试着复制一个项目的 .git 文件夹到一个空文件夹中，执行 <code>git checkout *</code> 你就能发现 git 的版本控制带来的便利</p>
+<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。</p>
+<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域。</p>
+<h2 id="Git-的分支"><a href="#Git-的分支" class="headerlink" title="Git 的分支"></a>Git 的分支</h2><p>上面提到了 Git 保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。在提交时，Git 会保存一个提交对象（commit object），该提交对象会存放一个指向暂存内容的指针。当然该对象还包含了作者信息、commit 信息、以及指向其父对象的指针。在经过了多次提交之后，每次的提交对象会根据其父对象指针链在一起形成一个链表结构。<br><img src="http://app.starxy.cc:8877/95/4aea124f740ea4d0bc286e801a9af1a2de3094.png" alt="commits-and-parents"></p>
+<p>而我们所用创建的新的分支其实就是创建了一个指向当前提交状态的指针。具体我们在哪个分支上。是由一个叫做 <code>HEAD</code> 的特殊指针来指向对应当前分支的分支指针。<br><img src="http://app.starxy.cc:8877/00/3902474161650bcc984fa3965bfeba20398634.png" alt="branch-and-history"></p>
+<p>当在两个不同的分支上进行工作时，当前的分支指针和 <code>HEAD</code> 指针会向前移动，而相对应的，其他分支（指针）会落后于该分支（指针）。在此时当我们进行 <code>merge</code> 合并操作时，实际上是把要合并的分支指针指向要对应的分支指针即可。</p>
+<p>而进行检出操作时，也同样是将当前指针指向对应的分支，然后将工作区恢复成对应分支所指向的快照内容<br>所以说，由于 Git 的分支本质上是包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都异常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符），如此的简单能不快吗？</p>
+<h1 id="Git-的分支管理最佳实践"><a href="#Git-的分支管理最佳实践" class="headerlink" title="Git 的分支管理最佳实践"></a>Git 的分支管理最佳实践</h1><h2 id="主干分支"><a href="#主干分支" class="headerlink" title="主干分支"></a>主干分支</h2><blockquote>
+<p>此部分内容来自于 <a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a></p>
+</blockquote>
+<p>中心库要保证至少有两个伴随代码库整个生命流程的主要分支</p>
+<ul>
+<li>main</li>
+<li>develop</li>
+</ul>
+<p>我们始终将 origin/master 分支作为一个主干分支，并且将他的 HEAD 指针始终指向可发布的生产状态（production-ready state）<br>origin/develop 分支作为另一主干分支，而它的 HEAD 指针始终指向为下一发版而做的最新开发改动。有人把这成为 integration 分支。通常这就是 nightly 版本发布的出处。<br>因此，每次把改动合并到 master 分支上后，就生成了一个新的可发布的生产状态。我们对合并到 master 分支的行为把控严格，所以理论上，每当 master 分支上有 commit 操作时，我们可以通过 Git hook 脚本实现自动构建并把应用推送到生产服务器上。</p>
+<h2 id="辅助分支"><a href="#辅助分支" class="headerlink" title="辅助分支"></a>辅助分支</h2><p>主干分支之外，我们的开发模型使用了很多辅助分支来帮助团队成员间的并行开发，减轻功能跟踪的成本，预备新版的发布，协助快速修复已发布版本的问题。和主干分支不同，这些辅助分支只有有限的生命期，最终会被移除。<br>我们可能会用到的辅助分支有：</p>
+<ul>
+<li>Feature 分支</li>
+<li>Release 分支</li>
+<li>Hotfix 分支</li>
+</ul>
+<h3 id="Feature-分支"><a href="#Feature-分支" class="headerlink" title="Feature 分支"></a>Feature 分支</h3><p>从 develop 分支派生，且必须 merge 回 develop 分支<br>是用来为未来的发版而开发新 features 的分支。当开始 feature 的开发时，feature 将在那个版本被合并还是未知的。但是只要该功能处在开发状态 feature 分支就会存在，如果要将 feature 添加到新版本中，那么就将该分支合并到 develop 分支，否则丢弃。</p>
+<p>Feature 分支通常只存在于开发者的 repo 中，而不会在中心库 origin repo 中。</p>
+<h3 id="Release-分支"><a href="#Release-分支" class="headerlink" title="Release 分支"></a>Release 分支</h3><h1 id="Github-最佳实践"><a href="#Github-最佳实践" class="headerlink" title="Github 最佳实践"></a>Github 最佳实践</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/12/APScheduler-User-guide/" rel="prev" title="APScheduler 用户指南">
+      <i class="fa fa-chevron-left"></i> APScheduler 用户指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/22/%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9C%BA%E6%99%AF/" rel="next" title="互联网中常用的密码学场景">
+      互联网中常用的密码学场景 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-基础"><span class="nav-number">1.</span> <span class="nav-text">Git 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接记录快照，而非差异比较"><span class="nav-number">1.1.</span> <span class="nav-text">直接记录快照，而非差异比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种状态"><span class="nav-number">1.2.</span> <span class="nav-text">三种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-的分支"><span class="nav-number">1.3.</span> <span class="nav-text">Git 的分支</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-的分支管理最佳实践"><span class="nav-number">2.</span> <span class="nav-text">Git 的分支管理最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主干分支"><span class="nav-number">2.1.</span> <span class="nav-text">主干分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辅助分支"><span class="nav-number">2.2.</span> <span class="nav-text">辅助分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-分支"><span class="nav-number">2.2.1.</span> <span class="nav-text">Feature 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Release-分支"><span class="nav-number">2.2.2.</span> <span class="nav-text">Release 分支</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github-最佳实践"><span class="nav-number">3.</span> <span class="nav-text">Github 最佳实践</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

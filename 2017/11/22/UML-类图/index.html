@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="UML Class and Object Diagrams类图是现实世界问题领域的抽象对象的结构化、概念化、逻辑化描述。 图例UML 中的类大体如下所示，图示分为四个部分  顶部为类名 下面一部分用于表述类的属性 第三部分用于表述类的操作方法 底部可选表述外部组件  类用来表示对象，对象可以是任何有属性和责任的事物  -指私有 (private) 的成员和方法 +指公有 (public) 的成员和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML 类图">
+<meta property="og:url" content="http://starxy.cc/2017/11/22/UML-%E7%B1%BB%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="UML Class and Object Diagrams类图是现实世界问题领域的抽象对象的结构化、概念化、逻辑化描述。 图例UML 中的类大体如下所示，图示分为四个部分  顶部为类名 下面一部分用于表述类的属性 第三部分用于表述类的操作方法 底部可选表述外部组件  类用来表示对象，对象可以是任何有属性和责任的事物  -指私有 (private) 的成员和方法 +指公有 (public) 的成员和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqei4dc28j30cz06ejrh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrixs7zevj309907e0st.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjoiiwkfj30de07hmxa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjutotcmj30cn0683yr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjybq1hlj30g60913zz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivd4nej30js0fc0sy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivf7d7j30pc0c8aa9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivm5lcj30mu0jgt9j.jpg">
+<meta property="article:published_time" content="2017-11-22T11:57:52.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.185Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="UML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqei4dc28j30cz06ejrh.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2017/11/22/UML-%E7%B1%BB%E5%9B%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>UML 类图 | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/11/22/UML-%E7%B1%BB%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UML 类图
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-11-22 19:57:52" itemprop="dateCreated datePublished" datetime="2017-11-22T19:57:52+08:00">2017-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>629</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="UML-Class-and-Object-Diagrams"><a href="#UML-Class-and-Object-Diagrams" class="headerlink" title="UML Class and Object Diagrams"></a>UML Class and Object Diagrams</h1><p>类图是现实世界问题领域的抽象对象的结构化、概念化、逻辑化描述。</p>
+<h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p>UML 中的类大体如下所示，图示分为四个部分</p>
+<ul>
+<li>顶部为类名</li>
+<li>下面一部分用于表述类的属性</li>
+<li>第三部分用于表述类的操作方法</li>
+<li>底部可选表述外部组件</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flqei4dc28j30cz06ejrh.jpg" alt=""><br>类用来表示对象，对象可以是任何有属性和责任的事物</p>
+<ul>
+<li><code>-</code>指私有 (private) 的成员和方法</li>
+<li><code>+</code>指公有 (public) 的成员和方法</li>
+<li><code>#</code>指保护 (protected) 的成员和方法</li>
+</ul>
+<p>对象 (Object) 符号和类符号有相同的部分，唯一的不同是顶部的名称下有下划线</p>
+<a id="more"></a>
+<h2 id="属性的多重性-Attributes-Multiplicity"><a href="#属性的多重性-Attributes-Multiplicity" class="headerlink" title="属性的多重性 (Attributes Multiplicity)"></a>属性的多重性 (Attributes Multiplicity)</h2><p>一个类属性的多重性指的是当所属的类被实例化时，有多少个实例被创建。假如一个类有四个轮子属性，那么在创建时就会生成四个轮子的实例<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrixs7zevj309907e0st.jpg" alt=""></p>
+<!--
+## 关系
+
+### Dependency relationship
+
+两个类之间最弱 (weakest) 的关系是依赖 (Dependency) 关系，类之间的依赖意味着一个类使用了另一个类 ("...uses a...")
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrj5w84nsj30d703dq2v.jpg)
+
+不同的依赖关系
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrj5web8wj30jg0ef0st.jpg)
+
+如搜索需要使用搜索引擎，类需要引用接口，都是一类依赖关系
+
+### Association relationship
+
+关联 (Association) 关系表示一个类拥有另一个类。由关联关系连接的对象不需要在生命线 (lifeline) 中联系在一起。一个销毁不会影响另一个
+
+可以理解为"...has a...".
+
+Associations are typically read as "...has a...".
+
+### Aggregation and composition
+
+聚合 (Aggregation) 是一种增强版的关联 (Association)，表示所有权，并在生命线中有更紧密的关系。
+可以理解为"...owns a..."
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrji7j7cuj30da0380so.jpg)
+
+构成()是一种强的二元关系。可以理解为"...is part of..."，当父元素被删除时，子元素也会被删除
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjkroehvj30eq03ddfs.jpg)
+
+### Association class
+
+当两个类之间的关系不是简单的结构联系时，可以使用协助类(Association class)。例如一个个人可能和一个公司之间有一段实现的雇佣关系。需要表述雇佣时间，可以用如下方式。
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjoiiwkfj30de07hmxa.jpg)
+
+### Generalization
+
+泛化(Generalization)关系，经常用来引出不同类之间的共同部分。这种关系的目标是一个普遍的，或不太具体的来源版本
+类或接口。
+![](http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjrgy970j30ah09g3yo.jpg)
+-->
+<h2 id="Association-class"><a href="#Association-class" class="headerlink" title="Association class"></a>Association class</h2><p>当两个类之间的关系不是简单的结构联系时，可以使用协助类(Association class)。例如一个个人可能和一个公司之间有一段实现的雇佣关系。需要表述雇佣时间，可以用如下方式。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjoiiwkfj30de07hmxa.jpg" alt=""></p>
+<h2 id="Abstract-class"><a href="#Abstract-class" class="headerlink" title="Abstract class"></a>Abstract class</h2><p>抽象类(Abstract class)是一个典型的类，通常提供操作签名但是不提供实现，你也可以拥有一个完全不提供操作的抽象类，抽象类对于识别通用功能非常有用<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjutotcmj30cn0683yr.jpg" alt=""></p>
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p>接口(Interface)是一个分类器，定义了属性和方法，但是没有实现可以用接口来</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flrjybq1hlj30g60913zz.jpg" alt=""></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivd4nej30js0fc0sy.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivf7d7j30pc0c8aa9.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flsgivm5lcj30mu0jgt9j.jpg" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UML/" rel="tag"># UML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/11/22/UML-%E6%97%B6%E5%BA%8F%E5%9B%BE/" rel="prev" title="UML 时序图">
+      <i class="fa fa-chevron-left"></i> UML 时序图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/11/22/%E8%8F%9C%E8%B0%B1-%E6%9E%81%E7%AE%80%E5%BE%AE%E6%B3%A2%E7%82%89%E8%9B%8B%E5%8C%85%E9%A5%AD/" rel="next" title="菜谱-极简微波炉蛋包饭">
+      菜谱-极简微波炉蛋包饭 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UML-Class-and-Object-Diagrams"><span class="nav-number">1.</span> <span class="nav-text">UML Class and Object Diagrams</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图例"><span class="nav-number">1.1.</span> <span class="nav-text">图例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性的多重性-Attributes-Multiplicity"><span class="nav-number">1.2.</span> <span class="nav-text">属性的多重性 (Attributes Multiplicity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Association-class"><span class="nav-number">1.3.</span> <span class="nav-text">Association class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract-class"><span class="nav-number">1.4.</span> <span class="nav-text">Abstract class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface"><span class="nav-number">1.5.</span> <span class="nav-text">Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.6.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

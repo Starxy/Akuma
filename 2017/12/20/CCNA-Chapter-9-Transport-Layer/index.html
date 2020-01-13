@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="数据网络和 Internet 通过提供可靠的人际通信来支持以人为本的网络。人们可以在一台设备上使用多种应用和服务来发送消息或者检索信息，例如电子邮件、Web 和即时消息等。这些应用程序发出的数据经过封装传输，最终送达目的设备上的相应应用程序。 我们之前曾介绍过，OSI 传输层的进程从应用层接收数据，然后进行相应处理以便用于网络层编址。源计算机与接收计算机通信，决定如何将数据划分为数据段，如何确保不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 9: Transport Layer">
+<meta property="og:url" content="http://starxy.cc/2017/12/20/CCNA-Chapter-9-Transport-Layer/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="数据网络和 Internet 通过提供可靠的人际通信来支持以人为本的网络。人们可以在一台设备上使用多种应用和服务来发送消息或者检索信息，例如电子邮件、Web 和即时消息等。这些应用程序发出的数据经过封装传输，最终送达目的设备上的相应应用程序。 我们之前曾介绍过，OSI 传输层的进程从应用层接收数据，然后进行相应处理以便用于网络层编址。源计算机与接收计算机通信，决定如何将数据划分为数据段，如何确保不">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmndkzpfcsj30k00c8t94.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmnezenc3gj30fa075dft.jpg">
+<meta property="article:published_time" content="2017-12-20T01:43:12.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.183Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmndkzpfcsj30k00c8t94.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2017/12/20/CCNA-Chapter-9-Transport-Layer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CCNA Chapter 9: Transport Layer | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/20/CCNA-Chapter-9-Transport-Layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CCNA Chapter 9: Transport Layer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-20 09:43:12" itemprop="dateCreated datePublished" datetime="2017-12-20T09:43:12+08:00">2017-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>数据网络和 Internet 通过提供可靠的人际通信来支持以人为本的网络。人们可以在一台设备上使用多种应用和服务来发送消息或者检索信息，例如电子邮件、Web 和即时消息等。这些应用程序发出的数据经过封装传输，最终送达目的设备上的相应应用程序。</p>
+<p>我们之前曾介绍过，OSI 传输层的进程从应用层接收数据，然后进行相应处理以便用于网络层编址。源计算机与接收计算机通信，决定如何将数据划分为数据段，如何确保不会丢失任何数据段，以及如何验证所有数据段均已到达。我们可以把传输层想象成一个运输部门，负责准备一个订单的多个包裹以供运输。</p>
+<p>传输层负责在两个应用程序之间建立临时通信会话和在它们之间传递数据。应用程序生成从源主机的应用程序发送到目的主机的应用程序的数据。这不考虑目的主机类型、数据必须通过的介质类型、数据使用的路径、链路拥塞情况或网络大小</p>
+<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><p>在计算机网络中，传输层（英语：transport layer）互联网协议包与开放系统互连（OSI）网络堆栈中协议的分层结构中的方法的一个概念划分。该层的协议为应用进程提供端到端的通信服务。 它提供面向连接的数据流支持、可靠性、流量控制、多路复用等服务。</p>
+<p>传输层负责在两个应用程序之间建立临时通信会话和在它们之间传递数据。应用程序生成从源主机的应用程序发送到目的主机的应用程序的数据。这不考虑目的主机类型、数据必须通过的介质类型、数据使用的路径、链路拥塞情况或网络大小</p>
+<h2 id="传输层的职责"><a href="#传输层的职责" class="headerlink" title="传输层的职责"></a>传输层的职责</h2><h3 id="跟踪各个会话（tracking-Individual-Conversations-）"><a href="#跟踪各个会话（tracking-Individual-Conversations-）" class="headerlink" title="跟踪各个会话（tracking Individual Conversations ）"></a>跟踪各个会话（tracking Individual Conversations ）</h3><p>在传输层中，源应用程序和目的应用程序之间传输的每个数据集称为会话。每台主机上都可以有多个应用程序同时在网络上通信。每个应用程序都与一台或多台远程主机上的一个或多个应用程序通信。传输层负责维护并跟踪这些会话。</p>
+<h3 id="数据分段和数据段重组（Segmenting-Data-and-Reassembling-Segments）"><a href="#数据分段和数据段重组（Segmenting-Data-and-Reassembling-Segments）" class="headerlink" title="数据分段和数据段重组（Segmenting Data and Reassembling Segments）"></a>数据分段和数据段重组（Segmenting Data and Reassembling Segments）</h3><p>数据必须准备好用易管理的片段通过介质发送出去。大多数网络对单个数据包能承载的数据量都有限制。传输层协议的服务可将应用程序数据分为大小适中的数据块。该服务包括每段数据所需的封装功能。报头用于重组，每个数据块都会添加一个报头。此报头用于跟踪数据流。</p>
+<p>数据片段到达目的设备后，传输层必须能将其重组为可用于应用层的完整数据流。传输层协议规定了如何使用传输层报头信息来重组要传送到应用层的数据片段。</p>
+<h3 id="标识应用程序（Identifying-the-Applications）"><a href="#标识应用程序（Identifying-the-Applications）" class="headerlink" title="标识应用程序（Identifying the Applications）"></a>标识应用程序（Identifying the Applications）</h3><p>为了将数据流传送到适当的应用程序，传输层必须要标识目标应用程序。因此，传输层为每一个应用程序分配一个标识符，称为端口号。在每台主机中，每个需要访问网络的软件进程都将被分配一个唯一的端口号。</p>
+<h3 id="会话多路复用-（Conversation-Multiplexing）"><a href="#会话多路复用-（Conversation-Multiplexing）" class="headerlink" title="会话多路复用 （Conversation Multiplexing）"></a>会话多路复用 （Conversation Multiplexing）</h3><p>将某些类型的数据（如视频流）作为完整的通信流在网络中发送，会使用所有可用带宽。这会阻止其他通信同时发生。而且也难以对损坏的数据开展错误恢复和重新传输的工作。</p>
+<p>为了识别每段数据，传输层向几个字段添加包含二进制数据的报头。不同的传输层协议通过这些字段值在管理数据通信过程中执行各自的功能。</p>
+<h3 id="传输层可靠性（Transport-Layer-Reliability）"><a href="#传输层可靠性（Transport-Layer-Reliability）" class="headerlink" title="传输层可靠性（Transport Layer Reliability）"></a>传输层可靠性（Transport Layer Reliability）</h3><p>传输层还负责管理会话的可靠性要求。不同的应用程序有不同的传输可靠性要求。</p>
+<p>IP 只涉及数据包的结构、地址分配和路由。IP 不指定数据包的传送或传输方式。传输协议则指定在主机之间传输报文的方式。TCP/IP 提供两种传输层协议，即传输控制协议 (Transmission Control Protocol，TCP) 和用户数据报协议 (User Datagram Protocol，UDP)。IP 使用这些传输协议来实现主机的数据通信和传输。</p>
+<p>TCP 被认为是可靠且功能齐全的传输层协议，用于确保所有数据到达目的设备。但是，这需要 TCP 报头中包含其他字段，这会增加数据包的大小，同时也会增加延迟。相反，UDP 是不提供可靠性的一个比较简单的传输层协议。因此，UDP 的字段较少而且比 TCP 更快。</p>
+<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>传输控制协议（英语：Transmission Control Protocol，缩写为 TCP）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793定义。在简化的计算机网络OSI模型中，它完成第四层传输层所指定的功能</p>
+<p>在因特网协议族（Internet protocol suite）中，TCP层是位于IP层之上，应用层之下的中间层。不同主机的应用层之间经常需要可靠的、像管道一样的连接，但是IP层不提供这样的流机制，而是提供不可靠的包交换。</p>
+<p>应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体的TCP层。TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。</p>
+<p>使用 TCP 的三项基本的可靠性操作：</p>
+<ul>
+<li>计算并跟踪从特定应用程序发送到特定主机的数据段的数量。</li>
+<li>确认收到数据</li>
+<li>在一定时间段后，重新发送任何未确认的数据。</li>
+</ul>
+<h2 id="TCP-功能"><a href="#TCP-功能" class="headerlink" title="TCP 功能"></a>TCP 功能</h2><p>要了解 TCP 和 UDP 的差异，就必须了解每种协议如何实现特定的可靠性功能，以及它们如何跟踪会话。除了支持数据分段和重组的基本功能之外，TCP 还提供以下服务：</p>
+<ul>
+<li><p>建立会话（Establishing a Session）：TCP 是一种面向连接的协议。面向连接的协议在转发任何流量之前，在源设备和目的设备之间协商并建立永久连接（或会话）。通过建立会话，设备可以协商特定时间能够转发的流量，而且两个设备之间的通信数据可得到严格管理。</p>
+</li>
+<li><p>可靠传输（Reliable Delivery）：在网络术语中，可靠性指确保从源设备发送的每个数据段都能够到达目的设备。由于多种原因，数据段在网络传输过程中可能会损坏或者完全丢失。</p>
+</li>
+<li><p>同序传输（Same-Order Delivery）：由于网络可能提供了多条路由，每条路由又有不同的传输速率，所以可能导致数据抵达的顺序错乱。通过对数据段编号和排序，TCP 可以确保按正确的顺序重组这些数据段。</p>
+</li>
+<li><p>流量控制（Flow Control）：网络主机的内存或处理能力等资源有限。当 TCP 发现这些资源超负荷运转时，它可以请求源应用程序降低数据流速。为此，TCP 会调整源设备传输的数据量。流量控制可避免当接收主机的资源不堪重负时，数据的重新传输。</p>
+</li>
+</ul>
+<h2 id="TCP数据包结构"><a href="#TCP数据包结构" class="headerlink" title="TCP数据包结构"></a>TCP数据包结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmndkzpfcsj30k00c8t94.jpg" alt=""></p>
+<ol>
+<li>来源连接端口（16位长）－辨识发送连接端口</li>
+<li>目的连接端口（16位长）－辨识接收连接端口</li>
+<li>序列号（seq，32位长）<ul>
+<li>如果含有同步化旗标（SYN），则此为最初的序列号；第一个数据比特的序列码为本序列号加一。</li>
+<li>如果没有同步化旗标（SYN），则此为第一个数据比特的序列码。</li>
+</ul>
+</li>
+<li>确认号（ack，32位长）—期望收到的数据的开始序列号。也即已经收到的数据的字节长度加1。</li>
+<li>报头长度（4位长）—以4字节为单位计算出的数据段开始地址的偏移值。</li>
+<li>保留—须置0</li>
+<li>标志符<ul>
+<li>URG—为1表示高优先级数据包，紧急指针字段有效。</li>
+<li>ACK—为1表示确认号字段有效</li>
+<li>PSH—为1表示是带有PUSH标志的数据，指示接收方应该尽快将这个报文段交给应用层而不用等待缓冲区装满。</li>
+<li>RST—为1表示出现严重差错。可能需要重现创建TCP连接。还可以用于拒绝非法的报文段和拒绝连接请求。</li>
+<li>SYN—为1表示这是连接请求或是连接接受请求，用于创建连接和使顺序号同步</li>
+<li>FIN—为1表示发送方没有数据要传输了，要求释放连接。</li>
+</ul>
+</li>
+<li>窗口（WIN，16位长）—表示从确认号开始，本报文的接受方可以接收的字节数，即接收窗口大小。用于流量控制。</li>
+<li>校验和（Checksum，16位长）—对整个的TCP报文段，包括TCP头部和TCP数据，以16位字进行计算所得。这是一个强制性的字段。</li>
+<li>紧急指针（16位长）—本报文段中的紧急数据的最后一个字节的序号。</li>
+<li>选项字段—最多40字节。每个选项的开始是1字节的kind字段，说明选项的类型。<ul>
+<li>0：选项表结束（1字节）</li>
+<li>1：无操作（1字节）用于选项字段之间的字边界对齐。</li>
+<li>2：最大报文段长度（4字节，Maximum Segment Size，MSS）通常在创建连接而设置SYN标志的数据包中指明这个选项，指明本端所能接收的最大长度的报文段。通常将MSS设置为（MTU-40）字节，携带TCP报文段的IP数据报的长度就不会超过MTU，从而避免本机发生IP分片。只能出现在同步报文段中，否则将被忽略。</li>
+<li>3：窗口扩大因子（4字节，wscale），取值0-14。用来把TCP的窗口的值左移的位数。只能出现在同步报文段中，否则将被忽略。这是因为现在的TCP接收数据缓冲区（接收窗口）的长度通常大于65535字节。</li>
+<li>4：sackOK—发送端支持并同意使用SACK选项。</li>
+<li>5：SACK实际工作的选项。</li>
+<li>8：时间戳（10字节，TCP Timestamps Option，TSopt）</li>
+<li>发送端的时间戳（Timestamp Value field，TSval，4字节）</li>
+<li>时间戳回显应答（Timestamp Echo Reply field，TSecr，4字节）</li>
+</ul>
+</li>
+</ol>
+<h2 id="网络套接字"><a href="#网络套接字" class="headerlink" title="网络套接字"></a>网络套接字</h2><p>在计算机科学中，网络套接字（英语：Network socket），又译网络套接字、网络接口、网络插槽，是电脑网络中进程间数据流的端点。使用以网际协议（Internet Protocol）为通信基础的网络套接字，称为网际套接字（Internet socket）。因为网际协议的流行，现代绝大多数的网络套接字，都是属于网际套接字。</p>
+<p>socket是一种操作系统提供的进程间通信机制。</p>
+<p>在操作系统中，通常会为应用程序提供一组应用程序接口（API），称为套接字接口（英语：socket API）。应用程序可以通过套接字接口，来使用网络套接字，以进行数据交换。最早的套接字接口来自于4.2 BSD，因此现代常见的套接字接口大多源自Berkeley套接字（Berkeley sockets）标准。<strong>在套接字接口中，以IP地址及通信端口组成套接字地址（socket address）。远程的套接字地址，以及本地的套接字地址完成连接后，再加上使用的协议（protocol），这个五元组（five-element tuple)，作为套接字对（socket pairs），之后就可以彼此交换数据。</strong>例如，再同一台计算机上，TCP协议与UDP协议可以同时使用相同的port而互不干扰。 操作系统根据套接字地址，可以决定应该将数据送达特定的进程或线程。这就像是电话系统中，以电话号码加上分机号码，来决定通话对象一般。</p>
+<h2 id="运作方式"><a href="#运作方式" class="headerlink" title="运作方式"></a>运作方式</h2><p>TCP协议的运行可划分为三个阶段：连接创建(connection establishment)、数据传送（data transfer）和连接终止（connection termination）。操作系统将TCP连接抽象为套接字表示的本地端点（local end-point），作为编程界面给程序使用。在TCP连接的生命期内，本地端点要经历一系列的状态改变。</p>
+<h3 id="创建通路"><a href="#创建通路" class="headerlink" title="创建通路"></a>创建通路</h3><p>TCP用三路握手（或称三次握手，three-way handshake）过程创建一个连接。在连接创建过程中，很多参数要被初始化，例如序号被初始化以保证按序传输和连接的强壮性。</p>
+<p>一对终端同时初始化一个它们之间的连接是可能的。但通常是由一端打开一个套接字（socket）然后监听来自另一方的连接，这就是通常所指的被动打开（passive open）。服务器端被被动打开以后，用户端就能开始创建主动打开（active open）。</p>
+<ol>
+<li>客户端通过向服务器端发送一个SYN来创建一个主动打开，作为三路握手的一部分。客户端把这段连接的序号设定为随机数A。</li>
+<li>服务器端应当为一个合法的SYN回送一个SYN/ACK。ACK的确认码应为A+1，SYN/ACK包本身又有一个随机产生的序号B。</li>
+<li>最后，客户端再发送一个ACK。当服务端收到这个ACK的时候，就完成了三路握手，并进入了连接创建状态。此时包的序号被设定为收到的确认号A+1，而响应号则为B+1。</li>
+</ol>
+<p>如果服务器端接到了客户端发的SYN后回了SYN-ACK后客户端掉线了，服务器端没有收到客户端回来的ACK，那么，这个连接处于一个中间状态，即没成功，也没失败。于是，服务器端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻倍，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s才知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 63s，TCP才会断开这个连接。</p>
+<h3 id="资源使用"><a href="#资源使用" class="headerlink" title="资源使用"></a>资源使用</h3><p>主机收到一个TCP包时，用两端的IP地址与端口号来标识这个TCP包属于哪个session。使用一张表来存储所有的session，表中的每条称作Transmission Control Block（TCB），tcb结构的定义包括连接使用的源端口、目的端口、目的ip、序号、应答序号、对方窗口大小、己方窗口大小、tcp状态、tcp输入/输出队列、应用层输出队列、tcp的重传有关变量等。</p>
+<p>服务器端的连接数量是无限的，只受内存的限制。客户端的连接数量，过去由于在发送第一个SYN到服务器之前需要先分配一个随机空闲的端口，这限制了客户端IP地址的对外发出连接的数量上限。从Linux 4.2开始，有了socket选项<code>IP_BIND_ADDRESS_NO_PORT</code>，它通知Linux内核不保留usingbind使用端口号为0时内部使用的临时端口（ephemeral port），在connect时会自动选择端口以组成独一无二的四元组（同一个客户端端口可用于连接不同的服务器套接字；同一个服务器端口可用于接受不同客户端套接字的连接）。</p>
+<p>对于不能确认的包、接收但还没读取的数据，都会占用操作系统的资源。</p>
+<h3 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h3><p>在TCP的数据传送状态，很多重要的机制保证了TCP的可靠性和强壮性。它们包括：使用序号，对收到的TCP报文段进行排序以及检测重复的数据；使用校验和检测报文段的错误，即无错传输；使用确认和计时器来检测和纠正丢包或延时；流控制（Flow control）；拥塞控制（Congestion control）；丢失包的重传。</p>
+<h4 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h4><p>通常在每个TCP报文段中都有一对序号和确认号。TCP报文发送者称自己的字节流的编号为序号，称接收到对方的字节流编号为确认号。TCP报文的接收者为了确保可靠性，在接收到一定数量的连续字节流后才发送确认。这是对TCP的一种扩展，称为选择确认（Selective Acknowledgement）。选择确认使得TCP接收者可以对乱序到达的数据块进行确认。每一个字节传输过后，ISN号都会递增1。</p>
+<p>通过使用序号和确认号，TCP层可以把收到的报文段中的字节按正确的顺序交付给应用层。序号是32位的无符号数，在它增大到232-1时，便会回绕到0。对于ISN的选择是TCP中关键的一个操作，它可以确保强壮性和安全性。</p>
+<p>TCP协议使用序号（sequence number）标识每端发出的字节的顺序，从而另一端接收数据时可以重建顺序，无惧传输时的包的乱序交付或丢包。在发送第一个包时（SYN包），选择一个随机数作为序号的初值，以克制TCP序号预测攻击.</p>
+<p>发送确认包(Acks)，携带了接收到的对方发来的字节流的编号，称为确认号，以告诉对方已经成功接收的数据流的字节位置。Ack并不意味着数据已经交付了上层应用程序。</p>
+<p>可靠性通过发送方检测到丢失的传输数据并重传这些数据。包括超时重传（Retransmission timeout，RTO）与重复累计确认（duplicate cumulative acknowledgements，DupAcks）。</p>
+<h5 id="基于重复累计确认的重传"><a href="#基于重复累计确认的重传" class="headerlink" title="基于重复累计确认的重传"></a>基于重复累计确认的重传</h5><p>如果一个包（不妨设它的序号是100，即该包始于第100字节）丢失，接收方就不能确认这个包及其以后的包，因为采用了累计ack。接收方在收到100以后的包时，发出对包含第99字节的包的确认。这种重复确认是包丢失的信号。发送方如果收到3次对同一个包的确认，就重传最后一个未被确认的包。阈值设为3被证实可以减少乱序包导致的无作用的重传（spurious retransmission）现象。选择性确认(SACK)的使用能明确反馈哪个包收到了，极大改善了TCP重传必要的包的能力。</p>
+<h5 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h5><p>发送方使用一个保守估计的时间作为收到数据包的确认的超时上限。如果超过这个上限仍未收到确认包，发送方将重传这个数据包。每当发送方收到确认包后，会重置这个重传定时器。典型地，定时器的值设定为 $  {\displaystyle {\text{smoothed RTT}}+\max(G,4\times {\text{RTT variation}})}  $ 其中 $G$是时钟粒度。进一步，如果重传定时器被触发，仍然没有收到确认包，定时器的值将被设为前次值的二倍（直到特定阈值）。这可对抗中间人攻击方式的拒绝服务攻击，这种攻击愚弄发送者重传很多次导致接受者被压垮。</p>
+<h4 id="数据传输举例"><a href="#数据传输举例" class="headerlink" title="数据传输举例"></a>数据传输举例</h4><ol>
+<li>发送方首先发送第一个包含序列号为1（可变化）和1460字节数据的TCP报文段给接收方。接收方以一个没有数据的TCP报文段来回复（只含报头），用确认号1461来表示已完全收到并请求下一个报文段。</li>
+<li>发送方然后发送第二个包含序列号为1461，长度为1460字节的数据的TCP报文段给接收方。正常情况下，接收方以一个没有数据的TCP报文段来回复，用确认号2921（1461+1460）来表示已完全收到并请求下一个报文段。发送接收这样继续下去。</li>
+<li>然而当这些数据包都是相连的情况下，接收方没有必要每一次都回应。比如，他收到第1到5条TCP报文段，只需回应第五条就行了。在例子中第3条TCP报文段被丢失了，所以尽管他收到了第4和5条，然而他只能回应第2条。</li>
+<li>发送方在发送了第三条以后，没能收到回应，因此当时钟（timer）过时（expire）时，他重发第三条。（每次发送者发送一条TCP报文段后，都会再次启动一次时钟：RTT）。</li>
+<li>这次第三条被成功接收，接收方可以直接确认第5条，因为4，5两条已收到。</li>
+</ol>
+<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><p>TCP的16位的校验和（checksum）的计算和检验过程如下：发送者将TCP报文段的头部和数据部分的和计算出来，再对其求反码（一的补数），就得到了校验和，然后将结果装入报文中传输。（这里用反码和的原因是这种方法的循环进位使校验和可以在16位、32位、64位等情况下的计算结果再叠加后相同）接收者在收到报文后再按相同的算法计算一次校验和。这里使用的反码使得接收者不用再将校验和字段保存起来后清零，而可以直接将报文段连同校验加总。如果计算结果是全部为一，那么就表示了报文的完整性和正确性。</p>
+<p>注意：TCP校验和也包括了96位的伪头部，其中有源地址、目的地址、协议以及TCP的长度。这可以避免报文被错误地路由。</p>
+<p>按现在的标准，TCP的校验和是一个比较脆弱的校验。出错概率高的数据链路层需要更高的能力来探测和纠正连接错误。TCP如果是在今天设计的，它很可能有一个32位的CRC校验来纠错，而不是使用校验和。但是通过在第二层使用通常的CRC校验或更完全一点的校验可以部分地弥补这种脆弱的校验。第二层是在TCP层和IP层之下的，比如PPP或以太网，它们使用了这些校验。但是这也并不意味着TCP的16位校验和是冗余的，对于因特网传输的观察，表明在受CRC校验保护的各跳之间，软件和硬件的错误通常也会在报文中引入错误，而端到端的TCP校验能够捕捉到大部分简单的错误 这就是应用中的端到端原则。</p>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>流量控制用来避免主机分组发送得过快而使接收方来不及完全收下，一般由接收方通告给发送方进行调控。</p>
+<p>TCP使用滑动窗口协议实现流量控制。接收方在“接收窗口”域指出还可接收的字节数量。发送方在没有新的确认包的情况下至多发送“接收窗口”允许的字节数量。接收方可修改“接收窗口”的值。</p>
+<p>当接收方宣布接收窗口的值为0，发送方停止进一步发送数据，开始了“保持定时器”（persist timer），以避免因随后的修改接收窗口的数据包丢失使连接的双侧进入死锁，发送方无法发出数据直至收到接收方修改窗口的指示。当“保持定时器”到期时，TCP发送方尝试恢复发送一个小的ZWP包（Zero Window Probe），期待接收方回复一个带着新的接收窗口大小的确认包。一般ZWP包会设置成3次，如果3次过后还是0的话，有的TCP实现就会发RST把链接断了。</p>
+<p>如果接收方以很小的增量来处理到来的数据，它会发布一系列小的接收窗口。这被称作愚蠢窗口综合症，因为它在TCP的数据包中发送很少的一些字节，相对于TCP包头是很大的开销。解决这个问题，就要避免对小的window size做出响应，直到有足够大的window size再响应：</p>
+<ul>
+<li>接收端使用David D Clark算法：如果收到的数据导致window size小于某个值，可以直接ack把window给关闭了，阻止了发送端再发数据。等到接收端处理了一些数据后windows size大于等于了MSS，或者接收端buffer有一半为空，就可以把window打开让发送端再发数据过来。</li>
+<li>发送端使用著名的Nagle算法来延时处理，条件一：Window Size&gt;=MSS 或是 Data Size &gt;=MSS；条件二：等待时间或是超时200ms，这两个条件有一个满足，才会发数据，否则就是在积累数据。Nagle算法默认是打开的，所以对于一些需要小包场景的程序——比如像telnet或ssh这样的交互性程序，需要关闭这个算法。可以在Socket设置<code>TCP_NODELAY</code>选项来关闭这个算法。</li>
+</ul>
+<h4 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><p>拥塞控制是发送方根据网络的承载情况控制分组的发送量，以获取高性能又能避免拥塞崩溃（congestion collapse，网络性能下降几个数量级）。这在网络流之间产生近似最大最小公平分配。</p>
+<p>发送方与接收方根据确认包或者包丢失的情况，以及定时器，估计网络拥塞情况，从而修改数据流的行为，这称为拥塞控制或网络拥塞避免。</p>
+<p>TCP的现代实现包含四种相互影响的拥塞控制算法: 慢开始, 拥塞避免, 快重传, 快恢复 (RFC 5681).</p>
+<p>此外，发送方采取“超时重传”（retransmission timeout，RTO），这是估计出来回通信延迟 (RTT) 以及RTT的方差。</p>
+<p>RFC793中定义的计算SRTT的经典算法：指数加权移动平均（Exponential weighted moving average）</p>
+<ol>
+<li>先采样RTT，记下最近好几次的RTT值。</li>
+<li>做平滑计算SRTT公式为：<code>SRTT =( α * SRTT ) + ((1- α) * RTT)</code>，其中 α 取值在0.8 到 0.9之间</li>
+<li>计算RTO，公式：<code>RTO = min [ UBOUND, max [ LBOUND, (β * SRTT) ] ]</code>其中 UBOUND是最大的timeout时间上限值，LBOUND是最小的timeout时间下限值，β值一般在1.3到2.0之间。</li>
+</ol>
+<p>1987年，计算RTT的Karn算法或TCP时间戳(RFC 1323)，最大特点是——忽略重传，不把重传的RTT做采样。但是，如果在某一时间，网络闪动，突然变慢了，产生了比较大的延时，这个延时导致要重转所有的包（因为之前的RTO很小），于是，因为重转的不算，所以，RTO就不会被更新，这是一个灾难。为此，Karn算法一发生重传，就对现有的RTO值翻倍。这就是的Exponential backoff。</p>
+<p>1988年，在RFC 6298中给出范·雅各布森算法取平均以获得平滑往返时延（Smoothed Round Trip Time，SRTT），作为最终的RTT估计值。这个算法在被用在今天的TCP协议中：</p>
+<p><code>SRTT= SRTT+ α(RTT– SRTT)DevRTT= (1-β)*DevRTT+ β*(|RTT-SRTT|)RTO= µ *SRTT + ∂ *DevRTT</code><br>其中：DevRTT是Deviation RTT。在Linux下，α = 0.125，β = 0.25， μ = 1，∂= 4</p>
+<h3 id="最大分段大小"><a href="#最大分段大小" class="headerlink" title="最大分段大小"></a>最大分段大小</h3><p>最大分段大小 (MSS)是在单个分段中TCP愿意接受的数据的字节数最大值。MSS应当足够小以避免IP分片，它会导致丢包或过多的重传。在TCP连接创建时，双端在SYN报文中用MSS选项宣布各自的MSS，这是从双端各自直接相连的数据链路层的最大传输单元(MTU)的尺寸减去固定的IP首部和TCP首部长度。以太网MTU为1500字节， MSS值可达1460字节。使用IEEE 802.3的MTU为1492字节，MSS可达1452字节。如果目的IP地址为“非本地的”，MSS通常的默认值为536（这个默认值允许20字节的IP首部和20字节的TCP首部以适合576字节IP数据报）。此外，发送方可用传输路径MTU发现（见RFC 1191）推导出从发送方到接收方的网络路径上的最小MTU，以此动态调整MSS以避免网络IP分片。</p>
+<p>MSS发布也被称作“MSS协商”（MSS negotiation）。严格讲，这并非是协商出来一个统一的MSS值，TCP允许连接两端使用各自不同的MSS值。例如，这会发生在参与TCP连接的一台设备使用非常少的内存处理到来的TCP分组。</p>
+<h3 id="选择确认"><a href="#选择确认" class="headerlink" title="选择确认"></a>选择确认</h3><p>最初采取累计确认的TCP协议在丢包时效率很低。例如，假设通过10个分组发出了1万个字节的数据。如果第一个分组丢失，在纯粹的累计确认协议下，接收方不能说它成功收到了1,000到9,999字节，但未收到包含0到999字节的第一个分组。因而，发送方可能必须重传所有1万个字节。</p>
+<p>为此，TCP采取了“选择确认”（selective acknowledgment，SACK）选项。RFC 2018对此定义为允许接收方确认它成功收到的分组的不连续的块，以及基础TCP确认的成功收到最后连续字节序号。这种确认可以指出SACK block，包含了已经成功收到的连续范围的开始与结束字节序号。在上述例子中，接收方可以发出SACK指出序号1000到9999，发送方因此知道只需重发第一个分组(字节 0 到 999)。</p>
+<p>TCP发送方会把乱序收包当作丢包，因此会重传乱序收到的包，导致连接的性能下降。重复SACK选项（duplicate-SACK option）是定义在RFC 2883中的SACK的一项扩展，可解决这一问题。接收方发出D-ACK指出没有丢包，接收方恢复到高传输率。D-SACK使用了SACK的第一个段来做标志，</p>
+<ul>
+<li>如果SACK的第一个段的范围被ACK所覆盖，那么就是D-SACK;</li>
+<li>如果SACK的第一个段的范围被SACK的第二个段覆盖，那么就是D-SACK</li>
+</ul>
+<p>D-SACK旨在告诉发送端：收到了重复的数据，数据包没有丢，丢的是ACK包；或者“Fast Retransmit算法”触发的重传不是因为发出去的包丢了，也不是因为回应的ACK包丢了，而是因为网络延时导致的reordering。</p>
+<p>SACK选项并不是强制的。仅当双端都支持时才会被使用。TCP连接创建时会在TCP头中协商SACK细节。在 Linux下，可以通过<code>tcp_sack</code>参数打开SACK功能（Linux 2.4后默认打开）。Linux下的<code>tcp_dsack</code>参数用于开启D-SACK功能（Linux 2.4后默认打开）。选择确认也用于流控制传输协议 (SCTP).</p>
+<h3 id="TCP窗口缩放选项"><a href="#TCP窗口缩放选项" class="headerlink" title="TCP窗口缩放选项"></a>TCP窗口缩放选项</h3><p>TCP窗口尺寸域控制数据包在2至65,535字节。RFC 1323定义的TCP窗口缩放选项用于把最大窗口尺寸从65,535字节扩大至1G字节。扩大窗口尺寸是TCP优化的需要。</p>
+<p>窗口缩放选项尽在TCP三次握手时双端在SYN包中独立指出这个方向的缩放系数。该值是16比特窗口尺寸的向左位移数，从0 (表示不位移)至14。</p>
+<p>某些路由器或分组防火墙会重写窗口缩放选项，这可能导致不稳定的网络传输。</p>
+<h3 id="TCP时间戳"><a href="#TCP时间戳" class="headerlink" title="TCP时间戳"></a>TCP时间戳</h3><p>RFC 1323定义了TCP时间戳，并不对应于系统时钟，使用随机值初始化。许多操作系统每毫秒增加一次时间戳；但RFC只规定tick应当成比例。</p>
+<p>有两个时间戳域:</p>
+<ul>
+<li>4字节的发送时间戳值</li>
+<li>4字节的响应回复时间戳值（最近收到数据的时间戳）</li>
+</ul>
+<p>TCP时间戳用于“防止序列号回绕算法”（Protection Against Wrapped Sequence numbers，PAWS），细节见RFC 1323。PAWS用于接收窗口跨序号回绕边界。这种情形下一个包可能会重传以回答问题：“是否是第一个还是第二个4 GB的序号？”时间戳可以打破这一问题。</p>
+<p>另外，Eifel检测算法(RFC 3522)使用TCP时间戳确定如果重传发生是因为丢包还是简单乱序。</p>
+<h3 id="带外数据"><a href="#带外数据" class="headerlink" title="带外数据"></a>带外数据</h3><p>带外数据（out-of-band data，OOB）是指对紧急数据，中断或放弃排队中的数据流；接收方应立即处理紧急数据。完成后，TCP通知应用程序恢复流队列的正常处理。</p>
+<p>OOB并不影响网络，“紧急”仅影响远程端的处理。这一协议很少被实现。</p>
+<h3 id="强制数据递交Forcing-data-delivery"><a href="#强制数据递交Forcing-data-delivery" class="headerlink" title="强制数据递交Forcing data delivery"></a>强制数据递交Forcing data delivery</h3><p>正常情况下，TCP等待200 ms以准备一个完整分组发出（纳格算法试图把小的信息组装为单一的包）。者产生了小的、但潜在很严重的延迟并在传递一个文件时不断重复延迟。例如，典型发送块是4 KB，典型的MSS是1460字节，在10 Mbit/s以太网上发出两个包，每个耗时约~1.2 ms，随后是剩余1176个字节的包，之后是197 ms停顿因为TCP等待装满缓冲区。</p>
+<p>对于telnet，每次用户击键的回应，如果有200 ms将会非常烦人。</p>
+<p>socket选项TCP_NODELAY能放弃默认的200 ms发送延迟。应用程序使用这个socket选项强制发出数据。</p>
+<p>RFC定义了PSH能立即发出比特。Berkeley套接字不能控制或指出这种情形，只能由协议栈控制.</p>
+<h3 id="终结通路"><a href="#终结通路" class="headerlink" title="终结通路"></a>终结通路</h3><p>连接终止使用了四路握手过程（或称四次握手，four-way handshake），在这个过程中连接的每一侧都独立地被终止。<strong>当一个端点要停止它这一侧的连接，就向对侧发送FIN，对侧回复ACK表示确认。因此，拆掉一侧的连接过程需要一对FIN和ACK，分别由两侧端点发出。</strong></p>
+<p>首先发出FIN的一侧，如果给对侧的FIN响应了ACK，那么就会超时等待2*MSL时间，然后关闭连接。在这段超时等待时间内，本地的端口不能被新连接使用；避免延时的包的到达与随后的新连接相混淆。RFC793定义了MSL为2分钟，Linux设置成了30s。参数<code>tcp_max_tw_buckets</code>控制并发的<code>TIME_WAIT</code>的数量，默认值是180000，如果超限，那么，系统会把多的<code>TIME_WAIT</code>状态的连接给destory掉，然后在日志里打一个警告（如：time wait bucket table overflow）</p>
+<p>连接可以工作在半开状态。即一侧关闭了连接，不再发送数据；但另一侧没有关闭连接，仍可以发送数据。已关闭的一侧仍然应接收数据，直至对侧也关闭了连接。</p>
+<p>也可以通过测三次握手关闭连接。主机A发出FIN，主机B回复FIN &amp; ACK，然后主机A回复ACK</p>
+<p>一些主机（如Linux或HP-UX）的TCP栈能实现半双工关闭序列。这种主机如果主动关闭一个连接但还没有读完从这个连接已经收到的数据，该主机发送RST代替FIN[14]。这使得一个TCP应用程序能确认远程应用程序已经读了所有已发送数据，并等待远程侧发出的FIN。但是远程的TCP栈不能区分Connection Aborting RST与Data Loss RST，两种原因都会导致远程的TCP栈失去所有的收到数据。</p>
+<p>一些应用协议使用TCP open/close handshaking，因为应用协议的TCP open/close handshaking可以发现主动关闭的RST问题。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = connect(remote);</span><br><span class="line">send(s, data);</span><br><span class="line">close(s);</span><br></pre></td></tr></table></figure>
+<p>TCP/IP栈采用上述方法不能保证所有数据到达对侧，如果未读数据已经到达对侧。</p>
+<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><p>用户数据包协议（英语：User Datagram Protocol，缩写为UDP），又称用户数据报文协议，是一个简单的面向数据报的传输层协议</p>
+<p>UDP 仅提供在相应应用程序之间传输数据段的基本功能，需要很少的开销和数据检查。UDP 是一种尽力传输协议。在网络环境中，尽力传输被称为不可靠传输，因为它缺乏目的设备对所收到数据的确认机制。UDP 中没有通知发送方是否成功传输的传输层流程。</p>
+<h2 id="UDP-特征"><a href="#UDP-特征" class="headerlink" title="UDP 特征"></a>UDP 特征</h2><ul>
+<li>会重新组织数据以便接受</li>
+<li>不会发送任何丢失的数据分段</li>
+<li>不会建立会话</li>
+<li>不会告诉发送者资源是否可用</li>
+</ul>
+<h2 id="UDP报头结构"><a href="#UDP报头结构" class="headerlink" title="UDP报头结构"></a>UDP报头结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fmnezenc3gj30fa075dft.jpg" alt=""></p>
+<p>UDP报头包括4个字段，每个字段占用2个字节（即16个二进制位）。在IPv4中，“来源连接端口”和“校验和”是可选字段。在IPv6中，只有来源连接端口是可选字段。</p>
+<ul>
+<li>源端口：源端口号，在需要对方回信时选用，不需要时可全 0.</li>
+<li>目的端口：目的端口号，在终点交付报文时必须要使用到。</li>
+<li>长度：UDP 用户数据报的长度，在只有首部的情况，其最小值是 8 。</li>
+<li>检验和：检测 UDP 用户数据报在传输中是否有错，有错就丢弃。该字段在IPv4中是可选的，在IPv6中则是强制的。如果不使用校验和，该字段应被填充为全0。</li>
+</ul>
+<h2 id="UDP-数据报重组"><a href="#UDP-数据报重组" class="headerlink" title="UDP 数据报重组"></a>UDP 数据报重组</h2><p>与 TCP 数据段类似，当将多个 UDP 数据报发送到目的主机时，它们通常采用不同的路径，到达顺序也可能跟发送时的顺序不同。UDP 跟踪序列号的方式与 TCP 不同。因此，UDP 仅仅是将接收到的数据按照先来后到的顺序转发到应用程序。如果数据顺序对应用程序很重要，应用程序必须确定正确的顺序并决定如何处理数据。</p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>port number</strong> - numbers that are assigned to the source and destination at Layer 4 to uniquely identify the communication</li>
+<li><strong>conversation multiplexing</strong> - the combining of many different conversations into one data stream</li>
+<li><strong>segment</strong> - a block of application data created to facilitate network transport</li>
+<li><strong>TCP</strong> - a connection-oriented reliable protocol that uses a 3-way handshake</li>
+<li><strong>UDP</strong>- a connectionless protocol that has little overhead and is used for communication data such as voice and video</li>
+<li><strong>best effort delivery</strong> - a data delivery method that has no service guarantee</li>
+<li><strong>session</strong> - a connection between systems</li>
+<li><strong>connection-oriented</strong> - used to describe the reliable nature of TCP. The connection refers to the 3-way handshake required in TCP before data transmission.</li>
+<li><strong>flow control</strong> - a mechanism that is used with TCP to control the amount of traffic that is sent from the source to the destination</li>
+<li><strong>datagrams</strong> - the name of the UDP PDU</li>
+<li><strong>source port</strong> - a value between 1024 and 65535 used to uniquely identify the source application or process on a local host</li>
+<li><strong>destination port</strong> - a port value that uniquely identifies the destination application</li>
+<li><strong>well-known ports</strong> - port numbers in the range of 1-1024 that identify network applications that are well known such as web, email, and remote login applications</li>
+<li><strong>dynamic ports</strong> - ports that are dynamically assigned to communication sessions as needed and are typically in the numerical range of 1024 to 65535</li>
+<li><strong>nestat</strong> - a utility that tracks TCP connections on network hosts</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/19/CCNA-Chapter-8-Subnetting-IP-Networks/" rel="prev" title="CCNA Chapter 8: Subnetting IP Networks">
+      <i class="fa fa-chevron-left"></i> CCNA Chapter 8: Subnetting IP Networks
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/20/Chapter-10-Application-Layer/" rel="next" title="Chapter 10: Application Layer">
+      Chapter 10: Application Layer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传输层"><span class="nav-number">1.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层的职责"><span class="nav-number">1.1.</span> <span class="nav-text">传输层的职责</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#跟踪各个会话（tracking-Individual-Conversations-）"><span class="nav-number">1.1.1.</span> <span class="nav-text">跟踪各个会话（tracking Individual Conversations ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据分段和数据段重组（Segmenting-Data-and-Reassembling-Segments）"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据分段和数据段重组（Segmenting Data and Reassembling Segments）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识应用程序（Identifying-the-Applications）"><span class="nav-number">1.1.3.</span> <span class="nav-text">标识应用程序（Identifying the Applications）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话多路复用-（Conversation-Multiplexing）"><span class="nav-number">1.1.4.</span> <span class="nav-text">会话多路复用 （Conversation Multiplexing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层可靠性（Transport-Layer-Reliability）"><span class="nav-number">1.1.5.</span> <span class="nav-text">传输层可靠性（Transport Layer Reliability）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP"><span class="nav-number">2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-功能"><span class="nav-number">2.1.</span> <span class="nav-text">TCP 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP数据包结构"><span class="nav-number">2.2.</span> <span class="nav-text">TCP数据包结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络套接字"><span class="nav-number">2.3.</span> <span class="nav-text">网络套接字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运作方式"><span class="nav-number">2.4.</span> <span class="nav-text">运作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建通路"><span class="nav-number">2.4.1.</span> <span class="nav-text">创建通路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源使用"><span class="nav-number">2.4.2.</span> <span class="nav-text">资源使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传输"><span class="nav-number">2.4.3.</span> <span class="nav-text">数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠传输"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">可靠传输</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基于重复累计确认的重传"><span class="nav-number">2.4.3.1.1.</span> <span class="nav-text">基于重复累计确认的重传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#超时重传"><span class="nav-number">2.4.3.1.2.</span> <span class="nav-text">超时重传</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据传输举例"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">数据传输举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校验和"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">校验和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量控制"><span class="nav-number">2.4.3.4.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拥塞控制"><span class="nav-number">2.4.3.5.</span> <span class="nav-text">拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大分段大小"><span class="nav-number">2.4.4.</span> <span class="nav-text">最大分段大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择确认"><span class="nav-number">2.4.5.</span> <span class="nav-text">选择确认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP窗口缩放选项"><span class="nav-number">2.4.6.</span> <span class="nav-text">TCP窗口缩放选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP时间戳"><span class="nav-number">2.4.7.</span> <span class="nav-text">TCP时间戳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带外数据"><span class="nav-number">2.4.8.</span> <span class="nav-text">带外数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制数据递交Forcing-data-delivery"><span class="nav-number">2.4.9.</span> <span class="nav-text">强制数据递交Forcing data delivery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终结通路"><span class="nav-number">2.4.10.</span> <span class="nav-text">终结通路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP"><span class="nav-number">3.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-特征"><span class="nav-number">3.1.</span> <span class="nav-text">UDP 特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP报头结构"><span class="nav-number">3.2.</span> <span class="nav-text">UDP报头结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-数据报重组"><span class="nav-number">3.3.</span> <span class="nav-text">UDP 数据报重组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">4.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

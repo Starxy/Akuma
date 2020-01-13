@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="算法爱好者&#x2F;Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Starxy&#39;s Blog">
+<meta property="og:url" content="http://starxy.cc/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="算法爱好者&#x2F;Linux初学者笔记基本随性写，欢迎戳下方联系">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="Starxy Blog">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://starxy.cc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2019/07/22/%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9C%BA%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/22/%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9C%BA%E6%99%AF/" class="post-title-link" itemprop="url">互联网中常用的密码学场景</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-22 14:49:44" itemprop="dateCreated datePublished" datetime="2019-07-22T14:49:44+08:00">2019-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><p>对称加密中，通话双方使用同一个密钥，发送消息和接收消息均使用该密钥进行加密和解密。<br>该加密方式项比与非对称加密来说加密解密速度快，但建立在双方均知道密钥的条件下，密钥在传输的过程中可能会被窃取。</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p>非对称加密是指通信双方手持密钥不同，一方为公钥一方为私钥。通信开始时，消息的接受方需要先将公钥发送给消息发送方，然后发送方使用公钥来对消息进行加密，密文发送给接收方来使用私钥解密，完成通信。</p>
+<p>在加密通信的过程中，<strong>公钥负责加密，私钥负责解密</strong>，数据即便在传输过程中被截取，因没有私钥，消息也不会被破解。</p>
+<p>RSA 为常用的非对称加密算法，其原理为：</p>
+<ul>
+<li>单向函数正向求解容易，逆向求解很难。</li>
+<li>1.对两个质数相乘容易，而将相乘结果分解很难的特征进行加密。n=p1*p2，已知 p1、p2 求 n 简单，已知 n 求 p1、p2 困难。</li>
+<li>2.(m^e) mod n=c，已知 m、e、n 求 c 简单，已知 e、n、c 求 m 很难。</li>
+</ul>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>以上所说的为消息的加密算法，是用来保证第三方不会窃取到未加密消息。</p>
+<p>而数字签名的作用主要有两个：</p>
+<ul>
+<li>证明消息来源</li>
+<li>证明消息完整</li>
+</ul>
+<p>与上述非对称加密相同，数字签名也是需要一个公钥和一个私钥，不同的是，数字签名中，私钥用来生成签名，公钥用来对签名进行校验。</p>
+<p>考虑以下场景：<br>你发布了一个公告，需要一个手段来证明该消息是由你发布的，你只需要用自己的私钥来加密一段话并且附在公告的结尾，收到通知的一方使用公钥对结尾处的密文进行解密，成功解密的话就证明消息是由你本人发送的。这样就证明了消息来源。再次基础之上，想要证明消息完整的话，只需要将公告的原文全文做一次哈希，然后将得到的哈希值用私钥加密作为结尾的签名。收到公告的一方对结尾签名解密之后得到发送时公告的哈希值，之后验证收到的公告哈希是否和原文相同就能判断消息是否完整。</p>
+<p>因此，数字签名是利用了<strong>私钥来生成签名，公钥来进行校验</strong>。</p>
+<h2 id="SSL-TLS"><a href="#SSL-TLS" class="headerlink" title="SSL/TLS"></a>SSL/TLS</h2><p>SSL/TLS 就是综合利用了非对称加密，对称加密，数字签名来保证消息在互联网上传播的保密性。最终目的：</p>
+<ul>
+<li>所有消息<strong>加密传播</strong>，第三方无法窃听</li>
+<li>具有<strong>校验机制</strong>，一旦被修改，通信方立刻会发现</li>
+<li>配备<strong>身份证书</strong>，防止身份被冒充</li>
+</ul>
+<p>SSL/TLS 基本过程：</p>
+<ul>
+<li>客户端向服务器端索要并验证公钥。</li>
+<li>双方协商生成”对话密钥”。</li>
+<li>双方采用”对话密钥”进行加密通信。</li>
+</ul>
+<p>上述过程中前两部分称为握手阶段，通过非对称加密来交换信息从而生成密钥来实现对称加密通信。</p>
+<p>SSL/TLS 握手过程：</p>
+<ol>
+<li>首先客户端给出协议版本号，一个客户端生成的随机数 (Client random)，以及客户端支持的加密方法。</li>
+<li>服务端确认双方使用的加密方法，并给出数字证书，以及一个服务端生成的随机数 (Server random)。</li>
+<li>客户端确认证书有效，然后生成一个新的随机数 (Premaster secret)，并使用证书中的公钥进行加密，发送给服务端。</li>
+<li>服务端使用私钥解密获取客户端发来的随机数 (Premaster secret)。</li>
+<li>客户端和服务端根据约定的加密方式，使用 Client random、Premaster secret、Premaster secret 三种随机数生成会话密钥 (session key)，来加密接下来的通信完成握手阶段。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">使用 Git 进行有效的项目管理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-14 10:34:29" itemprop="dateCreated datePublished" datetime="2018-12-14T10:34:29+08:00">2018-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h1><blockquote>
+<p>首先理解以下概念对之后的版本和分支管理有很大的帮助<br>该部分内容来自 <a href="https://git-scm.com/book/zh" target="_blank" rel="noopener">git-scm 中文手册</a></p>
+</blockquote>
+<h2 id="直接记录快照，而非差异比较"><a href="#直接记录快照，而非差异比较" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h2><p>Git 与其他版本管理软件相比，Git 始终在记录快照，而非记录文件的差异。<br>除了 Git 之外的大部分版本控制系统，都是以文件变更列表的方式来存储信息。这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。</p>
+<p><img src="http://app.starxy.cc:8877/ea/2a1199be85c89f8a86cfd733ee3d34860a4f08.png" alt="deltas"></p>
+<p>Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 Git 对待数据更像是一个<strong>快照流</strong>。</p>
+<p><img src="http://app.starxy.cc:8877/76/3aba1b1a7a2c99593984efcefa583d36d22f34.png" alt="snapshots"></p>
+<p>在之后讨论分支管理的时候，就能体会到这种管理方式带来的益处</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/14/%E4%BD%BF%E7%94%A8-Git-%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/12/12/APScheduler-User-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/12/APScheduler-User-guide/" class="post-title-link" itemprop="url">APScheduler 用户指南</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-12 09:07:53" itemprop="dateCreated datePublished" datetime="2018-12-12T09:07:53+08:00">2018-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>全文译自 APScheduler 官方文档<br>原文地址：<a href="https://apscheduler.readthedocs.io/en/latest/userguide.html" target="_blank" rel="noopener">https://apscheduler.readthedocs.io/en/latest/userguide.html</a></p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首选安装方式为通过 <code>pip</code> 安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install apscheduler</span><br></pre></td></tr></table></figure>
+<p>你可以下载并运行 <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">get-pip.py</a> 来轻易的安装 <code>pip</code></p>
+<p>某些原因下，<code>pip</code> 不能工作，你可以从 PypI 手动下载 <a href="https://pypi.python.org/pypi/APScheduler/" target="_blank" rel="noopener">APScheduler 包文件</a>，然后完成安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>包文件中包含了名为 <code>example</code> 的文件夹，可以在该文件夹下找到 APScheduler 的多种使用样例。样例同样也可以 <a href="https://github.com/agronholm/apscheduler/tree/master/examples/?at=master" target="_blank" rel="noopener">在线浏览</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>APSchedule 有四种基本的组件</p>
+<ul>
+<li>触发器（triggers）</li>
+<li>作业存储器（job stores）</li>
+<li>执行器（executors）</li>
+<li>调度器（schedulers）</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/12/APScheduler-User-guide/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/11/27/%E5%BC%B1%E7%B1%BB%E5%9E%8B-%E5%BC%BA%E7%B1%BB%E5%9E%8B-%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/27/%E5%BC%B1%E7%B1%BB%E5%9E%8B-%E5%BC%BA%E7%B1%BB%E5%9E%8B-%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">弱类型 强类型 动态类型 静态类型 之间的区别</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-27 10:35:24" itemprop="dateCreated datePublished" datetime="2018-11-27T10:35:24+08:00">2018-11-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h1><ul>
+<li><strong>编译时知道变量类型的是静态类型，反之为动态类型。</strong></li>
+<li>静态类型在处理类型错误时是运行错误，而动态类型为运行时错误</li>
+<li><p>比如 JavaScript 中 <code>var a = b.getName()</code> 是动态类型的，运行时才能根据 <code>getName()</code> 的返回值确定<code>a</code>的变量类型</p>
+</li>
+<li><p><strong>不允许隐式类型转换的为强类型，反之为弱类型</strong></p>
+</li>
+<li>比如 C++ 中 int 可以和 double 之间进行隐式的类型转换，haskell 的 int 就不能变成 double</li>
+</ul>
+<p>但是根据这两种定义我们会发现有这种情况的产生：<br>一般来说我们认为：Python 为强类型语言，C/C++为弱类型语言，但是 Python 中同样支持 int 与 double 之间的隐式类型转换，根据定义 Python 反而为弱类型语言。<br>在这种情况下引入下一节的定义更为的妥善。而对 Python 语言类型的解释可以参看下面的链接</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/20224705" target="_blank" rel="noopener">如何理解编程语言（例如 Python）的强类型和动态连编？</a></li>
+<li><a href="https://www.zhihu.com/question/43498005" target="_blank" rel="noopener">为什么说 Python 是强类型语言？</a></li>
+</ul>
+<h1 id="与编译器行为有关的定义"><a href="#与编译器行为有关的定义" class="headerlink" title="与编译器行为有关的定义"></a>与编译器行为有关的定义</h1><p>在描述更为科学的类型顶一下让我们先引入这些概念</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li><strong>Program Errors</strong><ul>
+<li><strong>trapped errors</strong> ： 导致程序终止执行。如除 0、Java 中数组越界访问</li>
+<li><strong>untrapped errors</strong>： 出错后继续执行，但可能出现任意行为。如 C 里的缓冲区溢出、Jump 到错误地址</li>
+</ul>
+</li>
+<li><strong>Forbidden Behaviors</strong>： 语言设计时，可以定义一组 forbidden behaviors. 必须包括所有 untrapped errors, 可能包含 trapped errors.</li>
+<li><strong>Well behaved</strong>： 如果程序执行不可能出现 forbidden behaviors, 则为 well behaved。</li>
+<li><strong>ill behaved</strong>：否则为 ill behaved</li>
+</ul>
+<p>这几个概念之间的关系如下：<br><img src="http://app.starxy.cc:8877/41/2d22e1622866e2acfc6f0fdee8b540cd2cb6df.jpg" alt="基本概念关系"></p>
+<h2 id="具体定义"><a href="#具体定义" class="headerlink" title="具体定义"></a>具体定义</h2><ul>
+<li><strong>强、弱类型</strong></li>
+<li>如果一个语言的所有程序都为 well behaved，即不可能出现 forbidden behaviors，则该语言为强类型</li>
+<li><p>如果一个语言出现了 ill behaved，比如 C 语言的缓冲区溢出，属于 trapped errors，则该语言为弱类型</p>
+</li>
+<li><p><strong>静态、动态类型</strong></p>
+</li>
+<li>如果在编译期间拒绝了 ill behaved 程序，则为静态类型</li>
+<li>如果在运行期间拒绝 ill behaved 程序，则为动态类型</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，目前在网络上能查到的相关定义大体来说就是如上所说，当然显而易见的是，如果存在一个程序有 untrapeed errors 行为，那么也就是说编译器没有阻止这种行为的发生，也就是没有在编译期间拒绝ill behaved程序，所以弱类型静态语言是怎么产生的呢。<br>这个问题之后再看吧。</p>
+<p>常见的语言类型划分</p>
+<p><img src="http://app.starxy.cc:8877/e6/2463fe3f45ade40ae6ddc52a9b1113e778cb20.jpg" alt="常见语言类型划分"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">图像处理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-26 13:56:58" itemprop="dateCreated datePublished" datetime="2018-09-26T13:56:58+08:00">2018-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 15:41:07" itemprop="dateModified" datetime="2020-01-13T15:41:07+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>该文章为计算机图形图像处理选修课笔记</p>
+</blockquote>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
+<li>数字图像处理为使用<strong>像素</strong>作为基本构成单位</li>
+<li>图像处理可以分为三个层级<ul>
+<li>低级处理：输入输出均为图像；比如图像降噪，对比度增强，锐化等</li>
+<li>中级处理：输入为图像但输出为图像的特征；比如图像边缘提取，使计算机更方便的对图像进行处理</li>
+<li>高级处理：对图像内容的理解：人脸识别，指纹识别</li>
+</ul>
+</li>
+<li>各类图像都是由<strong>照射源</strong>和形成图像的<strong>场景</strong>元素 对光能的反射或吸收相结合而产生</li>
+<li>数字图像以像素对应的灰度值，反应对应像素的颜色， 一个数值表示一个颜色</li>
+<li>灰度值的典型取值范围是 2 的整数次幂，目前最常用的值是 256 即 0-255</li>
+<li>黑白图像采用单通道即可描述，而彩色图像需要三通道构成，最常见的为 RGB 图，即图像三原色</li>
+</ul>
+<h2 id="BMP-文件格式"><a href="#BMP-文件格式" class="headerlink" title="BMP 文件格式"></a>BMP 文件格式</h2><ul>
+<li>BMP 文件由文件头和数据区域构成，其中文件头保存文件信息，图像信息，调色板数据。数据区域保存图像数据</li>
+<li>文件信息<ul>
+<li>WORD BMPid BMP 文件标志，其固定值为 0x4d42 即 BM</li>
+<li>DWORD FileSize 文件大小，以字节为单位。</li>
+<li>WORD Reserved1； BMP 文件保留字，必须为 0</li>
+<li>WORD Reserved2； BMP 文件保留字，必须为 0</li>
+<li>DWORD ImageOﬀset； 图像数据的起始位置相对于 文件开头的偏移量</li>
+</ul>
+</li>
+<li>图像信息<ul>
+<li>DWORD HeaderSize； BMP 图像信息大小 (40 或 12)， 以字节为单位</li>
+<li>DWORD ImageWidth； BMP 图像宽度，以像素为单位</li>
+<li>DWORD ImageHeight； BMP 图像高度，以像素为单位</li>
+<li>WORD EquipLevel； 目标设备的级别 (色彩平面数)， 固定为 1</li>
+<li>WORD BitsPerPixel； 每个像素所需要的位数，1，4， 8，24</li>
+<li>DWORD EncodeType； 压 缩 类 型， 0(不 压 缩)， 1(BI RLE8)，2(BI RLE4)</li>
+<li>DWORD ImageSize； BMP 位图大小，以字节为单位</li>
+</ul>
+</li>
+<li>调色板数据<ul>
+<li>BYTE rgbBlue； 蓝色的亮度值，此值 0-255</li>
+<li>BYTE rgbGreen； 绿色的亮度值。此值 0-255</li>
+<li>BYTE rgbRed； 红色的亮度值。此值 0-255</li>
+<li>BYTE rgbReserved； 此值必须 0</li>
+</ul>
+</li>
+<li>调色板数据紧跟在图像信息之后，用于说明位图颜色，每个结构体是由四个域组成</li>
+<li>若不是真彩色图像，表项的个数与图像使用的颜色个数相同。每一项代表了一个颜色</li>
+<li>若图像为真彩色，每个像素所占的位数 BitPerPixel=24 则图像数据每三个字节代表了一个像素，这三个字节分别定义了 RGB 的亮度，所以省去了调色板</li>
+<li>图像数据<ul>
+<li>当 biBitCount=1 时，图像数据中的每个字节代表 8 个 像素</li>
+<li>当 biBitCount=4 时，图像数据中的每个字节代表 2 个 像素</li>
+<li>当 biBitCount=8 时，图像数据中的每个字节代表 1 个 像素</li>
+<li>当 biBitCount=24 时，图像数据中的每 3 个字节代 表 1 个像素</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Spark 学习笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-15 21:23:44" itemprop="dateCreated datePublished" datetime="2018-05-15T21:23:44+08:00">2018-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Spark-概述"><a href="#Spark-概述" class="headerlink" title="Spark 概述"></a>Spark 概述</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h2 id="Spark-与-Scala"><a href="#Spark-与-Scala" class="headerlink" title="Spark 与 Scala"></a>Spark 与 Scala</h2><p>Spark 为一门用 Scala 开发的大数据框架，成名类似于 Hadoop，Spark 在 2014 年刷新了 Hadoop 之前保持的 1TB 数据基准排序的记录，到现在成为了一个基于内存计算的大数据并行计算框架，可用于构建大型的、低延迟的数据分析应用。</p>
+<p>Spark 特点</p>
+<ul>
+<li>运行速度快：使用 DAG 执行引擎来进行作业调度，效率要比 MapReduce 高效的多</li>
+<li>容易使用：支持多种编程方式</li>
+<li>通用性：Spark 提供了完整而强大的技术栈<ul>
+<li>内存计算 Spark Core</li>
+<li>包括 SQL 查询分析 Spark SQL</li>
+<li>流式计算 Spark Streaming</li>
+<li>机器学习 Spark MLib</li>
+<li>图算法 GraphX</li>
+</ul>
+</li>
+<li>运行模式多样</li>
+</ul>
+<p>Scala 语言是一门现代的多范式编程语言（比如函数式、面向对象、过程式），平滑的集成了面向对象和函数式编程两种风格可以运行于 Java 平台（JVM）之上。</p>
+<p>Scala 特性</p>
+<ul>
+<li>强大的并发性，支持函数式编程，支持分布式系统</li>
+<li>语法简洁，提供优雅 API</li>
+<li>Scala 兼容 Java，且能融入到 Hadoop 生态圈</li>
+<li>提供 REPL（交互式解释器），提高开发效率</li>
+</ul>
+<h2 id="Spark-与-Hadoop-的对比"><a href="#Spark-与-Hadoop-的对比" class="headerlink" title="Spark 与 Hadoop 的对比"></a>Spark 与 Hadoop 的对比</h2><p>Hadoop 的缺点</p>
+<ul>
+<li>表达能力有限：不是所有应用都能用 Map 和 Reduce 表达</li>
+<li>磁盘 IO 开销较大</li>
+<li>延迟高</li>
+<li>任务之间衔接涉及到 IO 开销</li>
+<li>前一个任务完成前其他任务无法开始。难以胜任复杂、多阶段的任务计算</li>
+</ul>
+<p>Spark 相比 Hadoop MapReduce 的优点</p>
+<ul>
+<li>计算模式属于 MapReduce 但提供多种数据集操作类型是编程模型更灵活</li>
+<li>Spark 提供内存计算，迭代计算不需要读写磁盘</li>
+<li>Spark 基于 DAG 任务调度机制</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/05/15/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/15/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">大数据相关学习笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-15 16:01:50" itemprop="dateCreated datePublished" datetime="2018-05-15T16:01:50+08:00">2018-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="大数据技术原理与应用学习笔记"><a href="#大数据技术原理与应用学习笔记" class="headerlink" title="大数据技术原理与应用学习笔记"></a>大数据技术原理与应用学习笔记</h1><blockquote>
+<p>本文为在学习厦门大学 MOOC 课程《大数据技术原理与应用》时所记重点笔记，顺序按照课程顺序<br>文章内大部分图片和文字描述均来自该课程，侵删</p>
+</blockquote>
+<h1 id="大数据概述"><a href="#大数据概述" class="headerlink" title="大数据概述"></a>大数据概述</h1><h2 id="大数据时代"><a href="#大数据时代" class="headerlink" title="大数据时代"></a>大数据时代</h2><p>第三次信息浪潮是大数据、物联网、云计算三种新技术为代表的<br>这次信息浪潮的基础技术支撑是：存储、计算、网络<br>数据产生方式也经历了三个阶段的发展：</p>
+<ul>
+<li>运营师系统阶段——由运营式系统生成</li>
+<li>用户原创内容阶段——博客微博</li>
+<li>感知式系统阶段——物联网时代各种传感器设备</li>
+</ul>
+<h2 id="大数据概念"><a href="#大数据概念" class="headerlink" title="大数据概念"></a>大数据概念</h2><p>大数据的 4V：</p>
+<ul>
+<li>Volume 大量化：数据爆炸</li>
+<li>Veloity 多样化：结构化数据（关系数据库）10%、非结构化数据（图形图像）90%</li>
+<li>Variety 快速化：从数据生成到消耗，时间窗口非常小，可用于生成决策的时间非常短</li>
+<li>Value 价值密度低</li>
+</ul>
+<p>到现在科学理论的四种范式：实验、理论、计算、数据驱动<br>思维方式发生了三种改变：全样而非抽样、效率而非精确（因为全样分析误差不会被放大导致不需要追求精度、追求时效性）、相关而非因果</p>
+<h2 id="大数据的关键技术"><a href="#大数据的关键技术" class="headerlink" title="大数据的关键技术"></a>大数据的关键技术</h2><p>大数据的技术层次：数据采集、数据存储与管理、数据处理与分析、数据隐私与安全<br>数据存储与管理、数据处理与分析代表了最核心的两大技术：分布式存储和分布式处理</p>
+<p>分布式数据库：BigTable<br>分布式文件系统：GFS<br>分布式并行处理技术：MapReduce </p>
+<p>计算模式：</p>
+<ul>
+<li>批处理计算：同时处理大量数据进行批量处理，不可能实现秒级相应与交互式计算——MapReduce（典型代表）、Spark（实时性比 MapReduce 更好，能更好的执行迭代运算)</li>
+<li>流计算：专门对流数据进行的计算，实现秒级响应——S4、Storm、Flume</li>
+<li>图计算：高效处理图结构——Google Pregel</li>
+<li>查询分析计算：交互式查询分析高时效性——Dremel、Hive、Cassandra </li>
+</ul>
+<h2 id="大数据与云计算、物联网"><a href="#大数据与云计算、物联网" class="headerlink" title="大数据与云计算、物联网"></a>大数据与云计算、物联网</h2><p>一切云计算解决了两个问题：分布式存储和分布式处理<br>云计算典型特征：虚拟化、多租户<br>云计算分类：共有云、混合云、私有云<br>IaaS：基础设施即服务、PaaS：平台即服务、SaaS：软件即服务</p>
+<p>物联网（IoT：The Internet of Things）万物互联</p>
+<ul>
+<li>应用层：物联网应用</li>
+<li>处理层：业务支撑平台。数据处理</li>
+<li>网络层：电信网、互联网等等，起到了信息传输的作用</li>
+<li>感知层：传感器、RFID网络。数据收集</li>
+</ul>
+<p>关键技术：</p>
+<ul>
+<li>识别技术</li>
+<li>感知技术</li>
+</ul>
+<h1 id="大数据处理架构"><a href="#大数据处理架构" class="headerlink" title="大数据处理架构"></a>大数据处理架构</h1><h2 id="Hadoop-概述"><a href="#Hadoop-概述" class="headerlink" title="Hadoop 概述"></a>Hadoop 概述</h2><p>HDFS 是 GFS 的开源实现。<br>Hadoop 把谷歌提出的两大框架融入到自己平台.<br>具有高可靠性，部分机器故障可继续提供服务（冗余副本机制）<br>高效型<br>可扩展性,可不断在集群中添加机器<br>成本低</p>
+<h2 id="Hadoop-项目结构"><a href="#Hadoop-项目结构" class="headerlink" title="Hadoop 项目结构"></a>Hadoop 项目结构</h2><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEly1frc3rl031sj30xv0l3tf5.jpg" alt="Hadoop2.0 项目结构"><br>HDFS：分布式文件系统<br>YARN：资源管理和调度框架。负责调度内存 CPU 带宽等计算资源<br>MapReduce：2.0 以前做实时计算，2.0 以后做离线计算和批处理<br>Tez：运行在 YARN 之上的下一代 Hadoop 查询处理框架。把很多 MapReduce 作业进行分析优化，构成 DAG（保证获得最好的处理效率，分清先后顺序）<br>Sprak：类似于 MapReduce 的通用并行框架。但是 Spark 是基于内存的运算，而 MapReduce 是基于磁盘的<br>Hive：Hadoop 上的数据仓库，专门用于企业决策分析，可以把大量的历史数据存在数据仓库中来进行多维度分析。用 SQL 语句书写，但是会转换成 MapReduce 作业来执行<br>Pig：流数据处理，轻量级分析、基于 Hadoop 的大规模数据分析平台，提供类似 SQL 的查询语言 Pig Latin<br>Oozie：作业调度系统<br>ZooKeeper：分布式协调一致性服务，提供分布式锁机群管理<br>HBase：分关系型分布式数据库，面向列存储，执行随即读写和实时应用<br>Flume：日志收集分析框架<br>Sqoop：用于在 Hadoop 与传统数据库之间进行数据传递完成数据导入和导出</p>
+<h2 id="Hadoop-集群的部署和使用"><a href="#Hadoop-集群的部署和使用" class="headerlink" title="Hadoop 集群的部署和使用"></a>Hadoop 集群的部署和使用</h2><p>HDFS 两大组件：</p>
+<ul>
+<li>集群节点：NameNode</li>
+<li>数据节点：DataNode</li>
+</ul>
+<p>一个 NameNode 和多个 DataNode 构成一个分布式文件系统</p>
+<p>MapReduce 计算框架两大组件（2.0 以后改用为 YARN，不存在两种 Tracker）：</p>
+<ul>
+<li>JobTracker：负责对 MapReduce 作业进行管理，将一个作业拆分成多个小作业分发</li>
+<li>TaskTracker：部署在不同的机器上，负责跟踪执行部分小作业</li>
+</ul>
+<p>SecondaryNameNode 冷备份</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/05/15/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/31/ESAIP-Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/31/ESAIP-Linux/" class="post-title-link" itemprop="url">ESAIP Linux</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-31 12:49:47" itemprop="dateCreated datePublished" datetime="2017-12-31T12:49:47+08:00">2017-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本篇文章主要为 1 月 4 号的 linux 考试所准备的。因为内容不多，打算一个页面写完整个课程内容</p>
+</blockquote>
+<h1 id="Linux-Basis"><a href="#Linux-Basis" class="headerlink" title="Linux Basis"></a>Linux Basis</h1><!-- - basic command
+    - `passwd`
+    - `su`
+    - sudo
+    - id
+    - nano
+    - vim
+    - gedit
+    - whatis
+    - --help
+    - man
+
+
+
+# File System
+
+- personal
+    - /home/username
+- user executables
+    - /bin
+    - /usr/bin
+    - /usr/local/bin
+- system executables
+    - /sbin
+    - /usr/sbin
+    - /usr/local/sbin
+- configuration
+    - /etc
+- temporary files
+    - /tmp
+- core
+    - /boot
+- server data
+    - /var
+    - /srv
+- server information
+    - /proc
+    - /sys
+- shared libraries
+    - /lib
+    - /usr/lib
+    - /usr/local/lib -->
+<h2 id="Structure-of-Disk"><a href="#Structure-of-Disk" class="headerlink" title="Structure of Disk"></a>Structure of Disk</h2><p><code>硬盘的物理结构一般由磁头与碟片、电动机、主控芯片与排线等部件组成；当主电动机带动碟片旋转时，副电动机带动一组磁头到相对应的碟片上并确定读取正面还是反面的碟面，磁头悬浮在碟面上画出一个与碟片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容；</code></p>
+<p>A hard disk drive platter (or disk) is the circular disk on which magnetic data is stored in a hard disk drive. Platter is the most important thing on HDD.</p>
+<ul>
+<li>Sector<ul>
+<li>a sector is a subdivision of a track on a magnetic disk or optical disc. Each sector stores a fixed amount of user-accessible data, traditionally 512 bytes for hard disk drives (HDDs) and 2048 bytes for CD-ROMs and DVD-ROMs. Newer HDDs use 4096-byte (4 KiB) sectors, which are known as the Advanced Format (AF).The sector is the minimum storage unit of a hard drive.</li>
+</ul>
+</li>
+<li>Track<ul>
+<li>The tracks are the thin concentric circular strips of sectors. At least one head is required to read a single track. With respect to disk geometries the terms track and cylinder are closely related. For a single or double sided floppy disk track is the common term; and for more than two heads cylinder is the common term. Strictly speaking a track is a given <code>CH</code> combination consisting of <code>SPT</code> sectors, while a cylinder consists of <code>SPT×H</code> sectors. Tracks are subdivided into blocks (or sectors, pages)</li>
+</ul>
+</li>
+<li>Cylinders<ul>
+<li>The concept is concentric, hollow, cylindrical slices through the physical disks (platters), collecting the respective circular tracks aligned through the stack of platters. As usually, cylinder is the minmum unit for File System.</li>
+</ul>
+</li>
+</ul>
+<p>In a word, Sector is the minmum unit, many sectors on the same circular make up a track, and many track on different radius make up a platter. Cylinder is a set of Tracks which on different platters but has the same radius.</p>
+<h3 id="Partition-table"><a href="#Partition-table" class="headerlink" title="Partition table"></a>Partition table</h3><p>In fact, A new HDD is seems like a Log, you need to cut the log into different section to do next job, and you also remember which section is used for what. Partition table is the same reasion.</p>
+<p>A partition is a fixed-size subset of a disk drive which is treated as a unit by the operating system.[1] A partition table is a table maintained on disk by the operating system describing the partitions on that disk.</p>
+<p>The terms partition table and partition map are most commonly associated with the MBR partition table of a Master Boot Record (MBR) in IBM PC compatibles, but it may be used generically to refer to other “formats” that divide a disk drive into partitions, such as: GUID Partition Table (GPT)</p>
+<p>Partitions can be created, resized, or deleted. This is called disk partitioning. It is usually done during the installation of an operating system, however it is sometimes possible to make changes to the partitions even after the operating system has been installed.</p>
+<p>The organization of the partition table in the MBR limits the maximum addressable storage space of a disk to 2 TiB (232 × 512 bytes).</p>
+<h4 id="MBR-Master-Boot-Record"><a href="#MBR-Master-Boot-Record" class="headerlink" title="MBR, Master Boot Record"></a>MBR, Master Boot Record</h4><p>A master boot record is a special type of boot sector at the very beginning of partitioned computer mass storage devices with IBM PC-compatible systems and beyond.</p>
+<p>The MBR holds the information on how the logical partitions, containing filesystems, are organized on that medium.The MBR also contains executable code to function as a loader for the installed operating system—usually by passing control over to the loader’s second stage, or in conjunction with each partition’s volume boot record (VBR). This MBR code is usually referred to as a boot loader.</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fn2tt4vzh5j30fa0not9b.jpg" alt=""></p>
+<p>For one disk :</p>
+<ul>
+<li>Only four Priamry partition.</li>
+<li>Support one Extended partition, a special primary partition type used as a container to hold other partitions</li>
+<li>Extended partition can create unlimited logical partition.</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/12/31/ESAIP-Linux/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/" class="post-title-link" itemprop="url">CCNA Chapter 11: Build a Small Network</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-20 15:59:44" itemprop="dateCreated datePublished" datetime="2017-12-20T15:59:44+08:00">2017-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本课程到目前为止，已经介绍了数据网络为以人为本的网络提供的服务，阐明了 OSI 模型各层的功能和 TCP/IP 协议的工作原理，并深入研究了常用 LAN 技术 — 以太网。接下来，我们要介绍如何将这些要素组合成能够正常运行的网络。</p>
+<ul>
+<li>Each application or network service uses protocols, which define the standards and data formats to be used. Without protocols, the data network would not have a common way to format and direct data.</li>
+<li>To scale a network, several elements are required:<ul>
+<li>Network documentation - physical and logical topology</li>
+<li>Device Inventory - list of devices that use or make up the network </li>
+<li>Budget - Itemized IT budget, including fiscal year equipment purchasing budget</li>
+<li>Traffic analysis - protocols, applications, and services and their respective traffic requirements should be documented</li>
+</ul>
+</li>
+<li>Executive timeouts allow the Cisco device to automatically disconnect users after they have been idle for the specified time. Console, vty, and aux ports can be configured with executive timeouts.</li>
+<li><code>ipconfig /displaydns</code> show any cached DNS entries for this web page</li>
+<li>Traceroute uses the ICMP (Internet Control Message Protocol) to send and receive echo-request and echo-reply messages.</li>
+<li>A firewall is one of the most effective security tools for protecting internal network users from external threats.  A firewall resides between two or more networks, controls the traffic between them, and helps prevent unauthorized access. A host intrusion prevention system can help prevent outside intruders and should be used on all systems.</li>
+<li>The <code>show file systems</code> command displays all of the available file systems on the device. If usbflash0: appears then the router recognizes the USB drive as a valid storage device. The <code>pwd</code> command shows the current directory being navigated, and the <code>cd</code> command is used to change the current directory. The <code>dir flash0:</code> command will show the contents of flash memory, not the USB drive.</li>
+<li>When a Windows computer cannot communicate with an IPv4 DHCP server, the computer automatically assigns itself an IP address in the169.254.0.0/16 range. Linux and Apple computers do not automatically assign an IP address.​</li>
+<li>Capturing traffic during low utilization time will not give a good representation of the different traffic types. Because some traffic could be local to a particular segment, the  capture must be done on different network segments.</li>
+<li>Not all traffic should receive the same treatment or priority through a network. Some types of traffic, such as voice and video, require the highest priority because they are very sensitive to network latency and delay. Other types of traffic, such as FTP, which is not sensitive to latency and delay, should be given the lowest level of priority so that the higher priority traffic can get through.</li>
+<li>The <code>tracert</code> command is used to initiate a trace from the command prompt on a Windows PC. The <code>traceroute</code>command is used to initiate a trace from a Cisco router or switch. Some other PC operating systems, such as Linux and Mac OS also use the traceroute command. The <code>ping</code> command does not display the network path to the remote host.</li>
+<li>The most common indicators of a ping issued from the Cisco IOS are “!”, “.”, and “U”. The “!” indicates that the ping completed successfully, verifying connectivity at Layer 3. The “.” may indicate that a connectivity problem, routing problem, or device security issue exists along the path and that an ICMP destination unreachable message was not provided. The “U” indicates that a router along the path may not have had a route to the destination address, and that it responded with an ICMP unreachable message.</li>
+<li>The correct syntax is RouterA(config)# <code>login block-for (number of seconds) attempts (number of attempts) within (number of seconds)</code>command will block login attempts on RouterA for a period .</li>
+<li>Small networks generally have only one link to an ISP to establish a connection to the Internet. Problems can occur in the network, which can cause the disruption of this service. In order to keep connectivity, redundancy has to be provided. If the problem is in the router interface that is connected to the ISP, another interface can be activated on the router, so if one interface fails, traffic may be redirected toward the other interface. However, if the router itself fails, a second router that is connected to another ISP can be used as a backup.</li>
+<li>Because worms take advantage of vulnerabilities in the system itself, the most effective way to mitigate worm attacks is to download security updates from the operating system vendor and patch all vulnerable systems.  </li>
+<li>Whenever an administrator connects to the console port, the configuration applied under the line con 0 interface determines how the user is authenticated. The console port configuration has the login command with local as the keyword. That means the username and password are required before the administrator is even allowed to see the enable mode prompt. Because the correct username and password was typed, the administrator will be presented with the enable mode prompt.</li>
+<li>Physical threats can be classified into four categories:<ul>
+<li>Environmental threats -Temperature extremes (too hot or too cold) or humidity extremes (too wet or too dry)</li>
+<li>Hardware threats - Physical damage to servers, routers, switches, cabling plant, and workstations</li>
+<li>Electrical threats - Voltage spikes, insufficient supply voltage (brownouts), unconditioned power (noise), and total power loss</li>
+<li>Maintenance threats - Poor handling of key electrical components (electrostatic discharge), lack of critical spare parts, poor cabling, and poor labeling</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/20/Chapter-10-Application-Layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/20/Chapter-10-Application-Layer/" class="post-title-link" itemprop="url">Chapter 10: Application Layer</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-20 12:56:02" itemprop="dateCreated datePublished" datetime="2017-12-20T12:56:02+08:00">2017-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>应用程序（例如 Web 浏览器、在线游戏、与朋友聊天和邮件往来）使我们发送和接收数据变得相对容易。通常我们可以访问和使用这些应用程序，而不必了解其工作原理。但是，对于网络工程师而言，就必须了解应用程序如何对网络中收发的信息进行格式化、传输和解释。</p>
+<p>通过 OSI 模型的分层结构，我们可以更容易地理解网络通信原理。</p>
+<p>在本章中，我们将探讨应用层的作用，以及应用层中的应用程序、服务和协议如何实现强大的数据网络通信。</p>
+<p>对于TCP/IP模型来说，应用层就为一层。而对于OSI模型来说。分为三层，分别为应用层，表示层，会话层</p>
+<h1 id="应用层，表示层，会话层"><a href="#应用层，表示层，会话层" class="headerlink" title="应用层，表示层，会话层"></a>应用层，表示层，会话层</h1><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>应用层最接近最终用户。该层为用于通信的应用程序和用于消息传输的底层网络提供接口。应用层协议用于在源主机和目的主机上运行的程序之间进行数据交换。</p>
+<p>目前已有很多种应用层协议，而且人们还在不断开发新的协议。某些最广为人知的应用层协议包括超文本传输协议(HTTP)、文件传输协议 (FTP)，简单文件传输协议 (TFTP)，互联网邮件访问协议 (IMAP) 和域名系统 (DNS) 协议。</p>
+<h2 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h2><p>表示层具有三个主要功能：</p>
+<ul>
+<li>将来自源设备的数据格式化或表示成兼容形式，以便目的设备接收</li>
+<li>采用可被目的设备解压缩的方式对数据进行压缩</li>
+<li>加密数据以便传输，并在接收时解密。</li>
+</ul>
+<p>表示层为应用层格式化数据并制定文件格式标准。常见的视频标准包括 QuickTime 和活动图像专家组 (MPEG)。网络中使用的常见图形图像格式为图形交换格式 (GIF)、联合图像专家组 (JPEG) 和便携式网络图像 (PNG) 格式。</p>
+<h2 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h2><p>顾名思义，会话层的功能就是创建并维护源应用程序和目的应用程序之间的对话。会话层用于处理信息交换，发起对话并使其处于活动状态，并在对话中断或长时间处于空闲状态时重启会话。</p>
+<h1 id="应用程序交互"><a href="#应用程序交互" class="headerlink" title="应用程序交互"></a>应用程序交互</h1><h2 id="客户端-服务器模型"><a href="#客户端-服务器模型" class="headerlink" title="客户端-服务器模型"></a>客户端-服务器模型</h2><p>在客户端-服务器模型中，请求信息的设备称为客户端，而响应请求的设备称为服务器。<strong>客户端进程和服务器进程都处于应用层</strong>。客户端首先向服务器发送数据请求，服务器通过发送一个或多个数据流来响应客户端。应用层协议规定了客户端和服务器之间请求和响应的格式。除了实际数据传输外，数据交换过程还要求用户身份验证以及要传输的数据文件的标识。</p>
+<p>客户端-服务器网络的一个示例是使用 ISP 的电子邮件服务发送、接收和存储电子邮件。家用计算机的电子邮件客户端向 ISP 的电子邮件服务器请求所有未读邮件。随后服务器向客户端发送被请求的邮件以示响应。</p>
+<h2 id="对等网络"><a href="#对等网络" class="headerlink" title="对等网络"></a>对等网络</h2><p>在对等 (P2P) 网络模式中，可以从对等设备访问数据，而无需使用专用服务器。</p>
+<p>P2P 网络模型包含两个部分：P2P 网络和 P2P 应用程序。这两个部分具有相似的特征，但实际工作过程却大不相同。</p>
+<p>在 P2P 网络中，两台或多台计算机通过网络互连，它们共享资源(如打印机和文件)时可以不借助专用服务器。每台接入的终端设备（称为“对等点”）既可以作为服务器，也可以作为客户端。在某项事务中，作为服务器的计算机也可以同时成为其他服务器的客户端。于是，计算机的角色根据请求的不同在客户端和服务器之间切换。</p>
+<h3 id="对等应用程序"><a href="#对等应用程序" class="headerlink" title="对等应用程序"></a>对等应用程序</h3><p>对等 (P2P) 应用程序允许设备在同一通信中同时充当客户端和服务器。在该模型中，每台客户端都是服务器，而每台服务器也同时是客户端。P2P <strong>应用程序要求每台终端设备提供用户界面并运行后台服务</strong>。</p>
+<p>某些 P2P 应用程序中采用混合系统，即共享的资源是分散的，但指向资源位置的索引存储在集中目录中。在混合系统中，每台对等设备通过访问索引服务器获取存储在另一台对等设备中的资源位置。</p>
+<h3 id="常见-P2P-应用程序"><a href="#常见-P2P-应用程序" class="headerlink" title="常见 P2P 应用程序"></a>常见 P2P 应用程序</h3><p>使用 P2P 应用程序时，网络中运行该应用程序的每台计算机都可以充当在网络中运行该应用程序的其他计算机的客户端或服务器。常见 P2P 网络包括:</p>
+<ul>
+<li>eDonkey</li>
+<li>G2</li>
+<li>BitTorrent</li>
+<li>Bitcoin</li>
+</ul>
+<p>某些 <strong>P2P 应用程序基于 Gnutella 协议，允许每个用户与他人共享整个文件</strong>。如图所示，通过与 Gnutella 协议兼容的客户端软件，用户可以在 Internet 上连接 Gnutella 服务，然后定位并访问由其他 Gnutella 对等设备共享的资源。很多 Gnutella 客户端应用程序可用，包括 gtk-gnutella、WireShare、Shareaza 和 Bearshare。</p>
+<p>许多 P2P 应用程序允许用户同时相互分享许多文件片段。客户端使用一个称作 torrent 文件的小型文件查找其他拥有其所需片段的用户，以便可以直接连接到他们。此文件也包含有关跟踪哪些用户有哪些文件的跟踪计算机的信息。客户端同时需要多个用户的文件片段，这被称为集群。该技术称为 BitTorrent。有许多 BitTorren 客户端，包括 BitTorrent、uTorrent、Frostwire 和 qBittorrent。</p>
+<h1 id="常用应用层协议"><a href="#常用应用层协议" class="headerlink" title="常用应用层协议"></a>常用应用层协议</h1><h2 id="超文本传输协议和超文本标记语言"><a href="#超文本传输协议和超文本标记语言" class="headerlink" title="超文本传输协议和超文本标记语言"></a>超文本传输协议和超文本标记语言</h2><p>当在 Web 浏览器中输入一个 Web 地址或统一资源定位符 (URL) 时，Web 浏览器将通过 HTTP 协议建立与服务器上的 Web 服务之间的连接。一提到 Web 地址，大多数人往往想到 URL 以及统一资源标识符 (URI)。</p>
+<p>为了更好地理解 Web 浏览器和 Web 客户端的交互原理，我们可以研究一下浏览器是如何打开网页的。例如<code>http://www.cisco.com/index.html</code> URL。</p>
+<p>首先，浏览器对 URL 地址的三个组成部分进行分析：</p>
+<ol>
+<li><p>http（协议或方案）</p>
+</li>
+<li><p>www.cisco.com（服务器名称）</p>
+</li>
+<li><p>index.html（所要请求的文件名称）</p>
+</li>
+</ol>
+<p>然后，浏览器将通过域名服务器将 www.cisco.com 转换成数字 IP 地址，用它连接到该服务器。根据 HTTP 协议的要求，浏览器向该服务器发送 GET 请求并请求 index.html 文件。服务器，将该网页的 HTML 代码发送到浏览器。最后，浏览器解密 HTML 代码并为浏览器窗口格式化页面。</p>
+<h2 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h2><p>HTTP 是一种请求/响应协议。当客户端，尤其是 Web 浏览器，发送请求到 Web 服务器时，HTTP 将指定用于该通信的消息类型。常用的三种消息类型包括 GET、POST 和 PUT（如图所示）。</p>
+<ul>
+<li>GET - 一种客户端数据请求消息。客户端（Web 浏览器）向 Web 服务器发送 GET 消息以请求 HTML 页面。</li>
+<li>POST - 上传数据文件到 Web 服务器，例如表单数据。</li>
+<li>PUT - 用于向 Web 服务器上传资源或内容，例如图像。</li>
+</ul>
+<p>尽管 HTTP 灵活性相当高，但它不是一个安全协议。由于请求消息以明文形式向服务器发送信息，它非常容易被拦截和解读。服务器的响应（尤其是 HTML 页面）也不加密。</p>
+<p>为了在 Internet 中进行安全通信，人们使用 HTTP 安全（HTTP Secure，HTTPS）协议。HTTPS 借助身份验证和加密来保护数据，使数据得以安全地在客户端与服务器之间传输。HTTPS 使用的客户端请求服务器响应过程与 HTTP 相同，但在数据流通过网络传输以前会使用安全套接字层 (Secure Socket Layer ，SSL) 加密。</p>
+<h2 id="电子邮件协议"><a href="#电子邮件协议" class="headerlink" title="电子邮件协议"></a>电子邮件协议</h2><p>电子邮件客户端通过与邮件服务器通信来收发电子邮件。邮件服务器之间也会互相通信，以便将邮件从一个域发到另一个域中。也就是说，发送电子邮件时，电子邮件客户端并不会直接与另外一个电子邮件客户端通信。而是双方客户端均依靠邮件服务器来传输邮件。</p>
+<p>电子邮件支持三种单独的协议以实现操作：简单邮件传输协议 (SMTP)、邮局协议 (POP) 和 Internet 邮件访问协议 (IMAP)。发送邮件的应用层进程会使用 SMTP。但是，客户端会使用以下两种应用层协议之一来检索电子邮件：POP 或 IMAP。</p>
+<h3 id="SMTP-工作原理"><a href="#SMTP-工作原理" class="headerlink" title="SMTP 工作原理"></a>SMTP 工作原理</h3><p>SMTP 邮件格式要求邮件具有报头和正文。邮件正文没有长度限制，但邮件报头必须具有格式正确的收件人电子邮件地址和发件人地址。</p>
+<p>当客户端发送电子邮件时，客户端 SMTP 进程会连接<strong>公认端口 25</strong>上的服务器 SMTP 进程。连接建立后，客户端将尝试通过此连接发送电子邮件到服务器。</p>
+<p>发出电子邮件时，目的电子邮件服务器可能并不在线，或者正忙。因此，SMTP 将邮件转到后台处理，稍后再发送。服务器会定期检查邮件队列，然后尝试再次发送。经过预定义的过期时间后，如果仍然无法发送邮件，则会将其作为无法投递的邮件退回给发件人。</p>
+<p>SMTP is used to send mail from the client to the server but POP3 is used to download mail from the server to the client</p>
+<h3 id="POP-工作原理"><a href="#POP-工作原理" class="headerlink" title="POP 工作原理"></a>POP 工作原理</h3><p>应用程序使用 POP 从邮件服务器中检索邮件。根据 POP 的规定，邮件将从服务器下载到客户端，然后从服务器上删除。这就是默认情况下 POP 的运行方式。</p>
+<p>服务器通过在 TCP <strong>端口 110</strong> 上被动侦听客户端连接请求来启动 POP 服务。当客户端要使用此服务时，它会发送一个请求来建立与服务器的 TCP 连接。一旦建立连接，POP 服务器即会发送问候语。然后客户端和 POP 服务器会交换命令和响应，直到连接关闭或中止。</p>
+<p>根据 POP，<strong>由于电子邮件会下载到客户端并从服务器删除，因此电子邮件不会集中保存在某一特定的位置</strong>。因为 POP 不会存储邮件，因此不适于需要集中备份解决方案的小型企业。</p>
+<h3 id="IMAP-工作原理"><a href="#IMAP-工作原理" class="headerlink" title="IMAP 工作原理"></a>IMAP 工作原理</h3><p>IMAP 是另外一种用于检索电子邮件消息的协议。与 POP 不同的是，当用户连接使用 IMAP 的服务器时，<strong>邮件的副本会下载到客户端应用程序。同时原始邮件会一直保留在服务器上，直到用户将它们手动删除</strong>。用户在自己的电子邮件客户端软件中查看邮件副本。</p>
+<p>用户可以在服务器上创建文件层次结构来组织和保存邮件。该文件结构会照搬到电子邮件客户端。当用户决定删除邮件时，服务器会同步该操作，从服务器上删除对应的邮件。</p>
+<h2 id="IP编址服务"><a href="#IP编址服务" class="headerlink" title="IP编址服务"></a>IP编址服务</h2><h3 id="域名服务"><a href="#域名服务" class="headerlink" title="域名服务"></a>域名服务</h3><p>在数据网络中，使用数字 IP 地址标记设备以便通过网络发送和接收数据。人们创建了可以将数字地址转换为简单易记名称的域名系统。</p>
+<p>在 Internet 上，更便于人们记忆的是 <a href="http://www.cisco.com" target="_blank" rel="noopener">http://www.cisco.com</a> 这样的域名，而不是该服务器的实际数字地址 198.133.219.25。如果思科决定更改 www.cisco.com 的数字地址，那么更改对用户是透明的，因为域名将保持不变。公司只需要将新地址与现有域名链接起来即可保证连通性。</p>
+<p>DNS 协议定义了一套自动化服务，该服务将资源名称与所需的数字网络地址匹配。协议涵盖了查询格式、响应格式及数据格式。DNS 协议通信采用单一格式，即消息格式。该格式用于所有类型的客户端查询和服务器响应、报错消息、以及服务器间的资源记录信息的传输。<br>DNS 服务器中存储不同类型的资源记录，用来解析域名。这些记录中包含域名、地址以及记录的类型。这些记录中有以下类型：</p>
+<ul>
+<li>A - 终端设备 IPv4 地址</li>
+<li>NS - 权威域名服务器</li>
+<li>AAAA - 终端设备 IPv6 地址（读作“四 A”）</li>
+<li>MX - 邮件交换记录。</li>
+</ul>
+<h3 id="DHCP-工作原理"><a href="#DHCP-工作原理" class="headerlink" title="DHCP 工作原理"></a>DHCP 工作原理</h3><p>，配置了 DHCP 的 IPv4 设备在启动或连接到网络时，客户端将<strong>广播</strong>一条 DHCP 发现 (DHCPDISCOVER) 消息以确定网络上是否有可用 DHCP 服务器。DHCP 服务器回复 DHCP 服务 (DHCPOFFER) 消息，为客户端提供租赁服务。<strong>该服务消息包含为其分配的 IPv4 地址和子网掩码、DNS 服务器的 IPv4 地址和默认网关的 IPv4 地址。租赁服务还包括租用期限。</strong></p>
+<p>如果本地网络中有超过一台 DHCP 服务器，客户端可能会收到多条 DHCPOFFER 消息。此时，客户端必须在这些服务器中进行选择，并且将包含服务器标识信息及客户端所接受的租赁服务的 DHCP 请求 (DHCPREQUEST) 消息发送出去。客户端还可选择向服务器请求分配以前分配过的地址。</p>
+<p>如果客户端请求的 IPv4 地址（或者服务器提供的 IPv4 地址）仍然可用，服务器将返回 DHCP 确认 (DHCPACK) 消息，向客户端确认地址租赁。如果请求的地址不再有效，则所选服务器将回复一条 DHCP 否定确认 (DHCPNAK) 消息。一旦返回 DHCP NAK 消息，应重新启动选择进程，并重新发送新的 DHCP 发现消息。客户端租赁到地址后，应在租期结束前发送 DHCPREQUEST 消息进行续期。</p>
+<p>DHCP 服务器确保每个 IP 地址都是唯一的（一个 IP 地址不能同时分配到不同的网络设备上）。因此，大多数 Internet 提供商往往使用 DHCP 为其客户分配地址。</p>
+<p>DHCPv6 消息是 SOLICIT、ADVERTISE、INFORMATION REQUEST 和 REPLY</p>
+<h2 id="文件共享服务"><a href="#文件共享服务" class="headerlink" title="文件共享服务"></a>文件共享服务</h2><h3 id="文件传输协议"><a href="#文件传输协议" class="headerlink" title="文件传输协议"></a>文件传输协议</h3><p>文件传输协议 (FTP) 也是一种常用的应用层协议。FTP 用于客户端和服务器之间的数据传输。FTP 客户端是一种在计算机上运行的应用，用于从 FTP 服务器中收发数据。</p>
+<p>为了成功传输数据，FTP 要求客户端和服务器之间建立两个连接，一个用于命令和应答，另一个用于实际文件传输：</p>
+<ul>
+<li>客户端使用 <strong>TCP 端口 21</strong> 与服务器建立第一个连接用于控制流量，包含客户端命令和服务器应答。</li>
+<li>客户端使用 <strong>TCP 端口 20</strong> 与服务器建立第二个连接用于实际数据传输。每当有数据需要传输时都会建立此连接。</li>
+</ul>
+<p>数据传输可以在任何一个方向进行。客户端可以从服务器下载（取）数据，也可以向服务器上传（放）数据。</p>
+<h3 id="服务器消息块"><a href="#服务器消息块" class="headerlink" title="服务器消息块"></a>服务器消息块</h3><p>服务器消息块 (SMB) 是一种<strong>客户端/服务器文件共享协议</strong>，用于规范共享网络资源（如目录、文件、打印机以及串行端口）结构。这是一种请求-响应协议。所有的 SMB 消息都采用一种常用格式。该格式采用固定大小的文件头，后跟可变大小的参数以及数据组件。<br><strong>Microsoft 网络配置中主要采用 SMB 形式实现文件共享和打印服务。</strong></p>
+<p>SMB 消息可以：</p>
+<ul>
+<li>启动、身份验证以及终止会话</li>
+<li>控制文件和打印机的访问</li>
+<li>允许应用程序向任何设备收发消息</li>
+</ul>
+<p>与 FTP 协议支持的文件共享不同，<strong>SMB 协议中的客户端要与服务器建立长期连接。</strong>一旦建立连接，客户端用户就可以访问服务器上的资源，就如同资源位于客户端主机上一样。</p>
+<p>在 LINUX 和 UNIX 操作系统中，通过 SAMBA（SMB 的一个版本）可以实现与 Microsoft 网络的资源共享。在 Apple Macintosh 操作系统中，通过 SMB 协议也可以实现资源共享。</p>
+<ul>
+<li><strong>presentation layer</strong> - the layer in the OSI model that is responsible for formatting, compressing, and encrypting data</li>
+<li><strong>peer-to-peer network</strong> - consists of peer machines that exchange data with each other without a dedicated server</li>
+<li><strong>application layer</strong> - provides data exchange and the interface between the system and the network</li>
+<li><strong>domain name</strong> - the name that is used to uniquely identify a website and is used instead of the IP address</li>
+<li><strong>URL</strong> - Uniform Resource Locator - the “friendly” address that is used in a web browser bar and that corresponds to the IP address of the site</li>
+<li><strong>nslookup</strong> - a tool used to query the DNS system to find the IP addresses for domain names, and vice versa</li>
+<li><strong>session layer</strong> - used to arrange the communication between source and destination applications and responsible for the state of the conversation</li>
+<li><strong>client-server network</strong> - an architecture that allows network clients to request services directly from network servers</li>
+<li><strong>HTTP</strong> - Hypertext Transfer Protocol - used to request and transfer hypertext data between clients and servers</li>
+<li><strong>POP</strong> - a protocol that is used to retrieve email from a server It deletes messages from the server by default.</li>
+<li><strong>IMAP</strong> - a protocol that is used in email retrieval It leaves copy of messages on the server.</li>
+<li><strong>SMTP</strong> - the protocol responsible for sending email</li>
+<li><strong>DHCP</strong> - a service that is used in networks to automatically configure IP addresses on devices</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

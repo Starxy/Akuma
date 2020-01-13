@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="该文章为计算机图形图像处理选修课笔记  基本概念 数字图像处理为使用像素作为基本构成单位 图像处理可以分为三个层级 低级处理：输入输出均为图像；比如图像降噪，对比度增强，锐化等 中级处理：输入为图像但输出为图像的特征；比如图像边缘提取，使计算机更方便的对图像进行处理 高级处理：对图像内容的理解：人脸识别，指纹识别   各类图像都是由照射源和形成图像的场景元素 对光能的反射或吸收相结合而产生 数字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像处理">
+<meta property="og:url" content="http://starxy.cc/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="该文章为计算机图形图像处理选修课笔记  基本概念 数字图像处理为使用像素作为基本构成单位 图像处理可以分为三个层级 低级处理：输入输出均为图像；比如图像降噪，对比度增强，锐化等 中级处理：输入为图像但输出为图像的特征；比如图像边缘提取，使计算机更方便的对图像进行处理 高级处理：对图像内容的理解：人脸识别，指纹识别   各类图像都是由照射源和形成图像的场景元素 对光能的反射或吸收相结合而产生 数字">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://app.starxy.cc:8877/6a/cb07c4fea5deded0b5416d9be47c7cd8689d93.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/1c/41138970a1eb06ccfe553fdd901815c3773501.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/e4/c25a21b7072201bfdda47f6fbbe192595f6f52.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/69/110a969f0f69d4ef7d74559ed8d37898f5246e.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/de/c400d07b880bb0dc5bbe3bd79ae882b2666acf.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/ef/1845ba6532b6d4f9b5f3c0b09259f6dc5fd34c.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/b2/514307db8c38c1966488e33b4eaea385f6c424.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/aa/6622d44bf3eaf1bf14b602e387cb1760ff02ec.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/0e/e7fde362ea2353047ad67f19097177113062a6.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/4e/e7fa435fba52e62da194799f0c413fdce702f6.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/66/d7702dc56988ab87c18278b8db13a8c9c05b7a.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/91/f704eaa4f5c16b3abbb26c08613e08361a5a35.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/4e/72de017c0243c13301fddeb738a5abda7fe27b.png">
+<meta property="og:image" content="http://app.starxy.cc:8877/fd/683ed5a12d71e8db5c75d2d713784fc541a6fc.png">
+<meta property="article:published_time" content="2018-09-26T05:56:58.000Z">
+<meta property="article:modified_time" content="2020-01-13T07:41:07.964Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="图像处理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://app.starxy.cc:8877/6a/cb07c4fea5deded0b5416d9be47c7cd8689d93.png">
+
+<link rel="canonical" href="http://starxy.cc/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>图像处理 | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2018/09/26/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图像处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-26 13:56:58" itemprop="dateCreated datePublished" datetime="2018-09-26T13:56:58+08:00">2018-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 15:41:07" itemprop="dateModified" datetime="2020-01-13T15:41:07+08:00">2020-01-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>该文章为计算机图形图像处理选修课笔记</p>
+</blockquote>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
+<li>数字图像处理为使用<strong>像素</strong>作为基本构成单位</li>
+<li>图像处理可以分为三个层级<ul>
+<li>低级处理：输入输出均为图像；比如图像降噪，对比度增强，锐化等</li>
+<li>中级处理：输入为图像但输出为图像的特征；比如图像边缘提取，使计算机更方便的对图像进行处理</li>
+<li>高级处理：对图像内容的理解：人脸识别，指纹识别</li>
+</ul>
+</li>
+<li>各类图像都是由<strong>照射源</strong>和形成图像的<strong>场景</strong>元素 对光能的反射或吸收相结合而产生</li>
+<li>数字图像以像素对应的灰度值，反应对应像素的颜色， 一个数值表示一个颜色</li>
+<li>灰度值的典型取值范围是 2 的整数次幂，目前最常用的值是 256 即 0-255</li>
+<li>黑白图像采用单通道即可描述，而彩色图像需要三通道构成，最常见的为 RGB 图，即图像三原色</li>
+</ul>
+<h2 id="BMP-文件格式"><a href="#BMP-文件格式" class="headerlink" title="BMP 文件格式"></a>BMP 文件格式</h2><ul>
+<li>BMP 文件由文件头和数据区域构成，其中文件头保存文件信息，图像信息，调色板数据。数据区域保存图像数据</li>
+<li>文件信息<ul>
+<li>WORD BMPid BMP 文件标志，其固定值为 0x4d42 即 BM</li>
+<li>DWORD FileSize 文件大小，以字节为单位。</li>
+<li>WORD Reserved1； BMP 文件保留字，必须为 0</li>
+<li>WORD Reserved2； BMP 文件保留字，必须为 0</li>
+<li>DWORD ImageOﬀset； 图像数据的起始位置相对于 文件开头的偏移量</li>
+</ul>
+</li>
+<li>图像信息<ul>
+<li>DWORD HeaderSize； BMP 图像信息大小 (40 或 12)， 以字节为单位</li>
+<li>DWORD ImageWidth； BMP 图像宽度，以像素为单位</li>
+<li>DWORD ImageHeight； BMP 图像高度，以像素为单位</li>
+<li>WORD EquipLevel； 目标设备的级别 (色彩平面数)， 固定为 1</li>
+<li>WORD BitsPerPixel； 每个像素所需要的位数，1，4， 8，24</li>
+<li>DWORD EncodeType； 压 缩 类 型， 0(不 压 缩)， 1(BI RLE8)，2(BI RLE4)</li>
+<li>DWORD ImageSize； BMP 位图大小，以字节为单位</li>
+</ul>
+</li>
+<li>调色板数据<ul>
+<li>BYTE rgbBlue； 蓝色的亮度值，此值 0-255</li>
+<li>BYTE rgbGreen； 绿色的亮度值。此值 0-255</li>
+<li>BYTE rgbRed； 红色的亮度值。此值 0-255</li>
+<li>BYTE rgbReserved； 此值必须 0</li>
+</ul>
+</li>
+<li>调色板数据紧跟在图像信息之后，用于说明位图颜色，每个结构体是由四个域组成</li>
+<li>若不是真彩色图像，表项的个数与图像使用的颜色个数相同。每一项代表了一个颜色</li>
+<li>若图像为真彩色，每个像素所占的位数 BitPerPixel=24 则图像数据每三个字节代表了一个像素，这三个字节分别定义了 RGB 的亮度，所以省去了调色板</li>
+<li>图像数据<ul>
+<li>当 biBitCount=1 时，图像数据中的每个字节代表 8 个 像素</li>
+<li>当 biBitCount=4 时，图像数据中的每个字节代表 2 个 像素</li>
+<li>当 biBitCount=8 时，图像数据中的每个字节代表 1 个 像素</li>
+<li>当 biBitCount=24 时，图像数据中的每 3 个字节代 表 1 个像素</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="图像增强"><a href="#图像增强" class="headerlink" title="图像增强"></a>图像增强</h1><ul>
+<li>图像增强技术分为两大类：<strong>频域处理法</strong>和<strong>空域处理法</strong><ul>
+<li>频域处理采用修改<strong>傅里叶变换</strong>的方式来实现对图像的增强</li>
+<li>空域处理法是直接对<strong>图像中的像素</strong>进行处理，基本上是以灰度映射变换为基础的</li>
+</ul>
+</li>
+</ul>
+<h2 id="空域处理法"><a href="#空域处理法" class="headerlink" title="空域处理法"></a>空域处理法</h2><h3 id="用图像对比度处理方法增强图像"><a href="#用图像对比度处理方法增强图像" class="headerlink" title="用图像对比度处理方法增强图像"></a>用图像对比度处理方法增强图像</h3><p>由于图像的亮度不足或者非线性会造成的图像对比度不足。可以用重新分配像素幅值的方法来改善图像的对比度<br>基本思想是，输入图像 $f(x)$ 与输出图像 $g(x)$ 对应像素点坐标不变，但是灰度值是 $f(x,y)$ 按照某一个函数 $Φ(x,y)$ 所做的映射<br>根据 Φ(x,y) 的类型我们可以进行讨论：</p>
+<ul>
+<li>线性变化： $Φ(f) = αf+β$：可以将某个区间的灰度值进行处理。可以进行二值化处理（非 0 即 255）。或单独拉伸高（低）灰度区。或进行反色</li>
+<li>分段线性变换</li>
+<li>非线性变换：大部分像素处于低灰度区时进行对数变换；大部分像素处于高灰度区时进行指数变换</li>
+<li>灰度切分</li>
+</ul>
+<p>总的来说可以将 $Φ(x,y)$ 归为一个幂次变换 $y=cx^{r}+b$</p>
+<ul>
+<li>当 r = 1 时函数为线性变换</li>
+<li>当 r &lt; 1 时变换曲线在正比函数上方。此时扩展低灰度级，压缩高灰度级，使图像变亮。这一点与对数变换十分相似。</li>
+<li>当 r &gt; 0 时，变换函数曲线在正比函数下方。此时扩展高灰度级，压缩低灰度级，使图像变暗。</li>
+</ul>
+<h3 id="用直方图修改技术进行图像增强"><a href="#用直方图修改技术进行图像增强" class="headerlink" title="用直方图修改技术进行图像增强"></a>用直方图修改技术进行图像增强</h3><h4 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h4><ul>
+<li><p>直方图（Histogram） ：灰度直方图是灰度级的函数，它表示图像中具有某种灰度级的像素的个数，反映了图像中每种灰度出现的频率， 灰度直方图的横坐标是灰度级，纵坐标是该灰度级出现的频度，它是图像最基本的统计特征。</p>
+</li>
+<li><p>直方图的性质：</p>
+<ul>
+<li>直方图仅保留了图像中各个像素灰度的出现次数，而未反应某一像素灰度所在的位置，只包含了某一灰度的出现概率而丢失了位置信息</li>
+<li>任一幅图像，都能惟一地确定出一幅与它对应的直方图</li>
+<li>一张图的子分割图直方图之和等于总的直方图</li>
+</ul>
+</li>
+<li>直方图的计算：设图像中某种灰度 $f<em>{j}$ 的像素数为 $n</em>{j}$，$n$ 是图像中像素的总数，则灰度级 $f_{j}$ 所对应的频数为：</li>
+</ul>
+<script type="math/tex; mode=display">P_{f}(f_{j}) = \frac{n_{j}}{n}, j = 0,1,2,...,l-1</script><ul>
+<li>具体算法<ol>
+<li>建立一个数组具有 l(如，256) 个元素，每个元素的初始值为 0</li>
+<li>从图像中逐点取灰度值 $f(x,y)$ 若 $f(x,y) = k$ 则令 <code>l[k] += 1</code></li>
+<li>求频数，<code>b[k] = (float)l[k]/像素总数</code></li>
+<li>画出直方图</li>
+</ol>
+</li>
+</ul>
+<p>用横坐标表示灰度级，纵坐标表示频数，就可以看出图像中灰度的分布情况</p>
+<h4 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h4><p>直方图反映了图像中各灰度的含量，它并不反映图像的空间位置信息，只展示具有一定灰度级的像素的数目或频数，通过对图像对应的直方图进行改变可以改善图像的质量</p>
+<ul>
+<li>直方图均衡化的基本算法<ol>
+<li>求出图像中所包含的灰度级 $f_{j}$ ,可以定为 0 ~ L-1,(0 ~ 255)</li>
+<li>统计各灰度级的像素数目 $n_{j} (j=0,1,2,…L-1)$</li>
+<li>计算图像直方图 $ P<em>{f}(f</em>{j}) = \frac{n_{j}}{n}$</li>
+<li>计算累计分布函数 $C(f) = \sum<em>{j=0}^{k} p</em>{f}(f_{i}), j=0,1,2,..,L-1$</li>
+<li>用转换函数计算映射后输出的灰度级 $g_{i} ( i=0,1,2,…P-1)$<ul>
+<li>要进行直方图均衡化处理的转换函数为：$g = [g<em>{max} - g</em>{min}]C(f) +g<em>{min} $。 $g</em>{max}$ , $g_{min}$ 分别为输出图像的最大和最小灰度级， $C(f)$为输入图像的累积分布函数。</li>
+</ul>
+</li>
+<li>统计映射后各灰度级的像素数目 $n_{i} (i=0,1,..,P-1)$</li>
+<li>计算输出图像的直方图 $P<em>{g}(g</em>{i}) = \frac{n_{i}}{n} (i=0,1,2,..,P-1)$</li>
+<li>用 $f<em>{i}$ 和 $g</em>{i}$ 的映射关系，修改原始图像的灰度级，获得新的输出图像</li>
+</ol>
+</li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/6a/cb07c4fea5deded0b5416d9be47c7cd8689d93.png" alt="直方图均衡化"></p>
+<h4 id="直方图规定化"><a href="#直方图规定化" class="headerlink" title="直方图规定化"></a>直方图规定化</h4><p>变换直方图使之具有特定图像。也称作直方图匹配<br>基本思想：选择性的增强某个范围内的对比度<br>关键步骤：建立新旧直方图/灰度概率密度函数 p(s) 和 p(u) 之间的联系</p>
+<h3 id="图像平滑处理-——-消除高频噪声的增强算法"><a href="#图像平滑处理-——-消除高频噪声的增强算法" class="headerlink" title="图像平滑处理 —— 消除高频噪声的增强算法"></a>图像平滑处理 —— 消除高频噪声的增强算法</h3><h4 id="图像间运算"><a href="#图像间运算" class="headerlink" title="图像间运算"></a>图像间运算</h4><p>有些图像增强技术是靠对多幅图进行图像间的运算而实现的。图像间可以进行算术运算和逻辑运算，逻辑运算只用于二值图像，所以，我们只讨论算术运算，常用的算术运算有：</p>
+<ul>
+<li>加法：主要用于图像平均以减少噪声；</li>
+<li>减法：主要用于医学图像中的成像；</li>
+<li>乘法和除法：主要用于校正由于照明或传感器的非均匀性造成的图像灰度阴影。</li>
+</ul>
+<p>在图像处理中，图像运算最经常的应用是图像平均，一般用于图像采集中去除噪声。<br>设有 1 幅含有噪声的图 $g(x,y)$ ，它由原图像信息 $f(x,y)$ 和噪声信息 $e(x,y)$ 叠加而成，即：</p>
+<script type="math/tex; mode=display">g(x,y) = f(x,y)+e(x,y)</script><p>如果各点的噪声是互不相关的 (随机的)，且均值为 0，我们就可以对相同的目标采集多幅图像 $ {g_{i}(x,y), i=1,2,3…M } $ ，并将它们相加来消除噪声，即</p>
+<script type="math/tex; mode=display">\bar g(x,y) = \frac{1}{M} \sum_{i=1}^{M}g_{i}(x,y)</script><p>则可以证明它的期望值为：</p>
+<script type="math/tex; mode=display">E (\bar g(x,y))  = f(x,y)</script><h4 id="邻域平均法"><a href="#邻域平均法" class="headerlink" title="邻域平均法"></a>邻域平均法</h4><p>邻域平均法是简单的<strong>空域</strong>处理方法。这种方法的基本思想是用几个像素灰度的平均来代替一个像素原来的灰度值，实现图像的平滑。<br>常见的方法有</p>
+<h5 id="简单平均法"><a href="#简单平均法" class="headerlink" title="简单平均法"></a>简单平均法</h5><p>设图像像素的灰度值为 f(x,y) 取其为中心的 M*N 大小的窗口，用窗口各像素灰度平均值代替 f(x,y)<br>此种方法 M N 值要求不能过大，一个是影响速度，一个是过大后影响图像清晰度</p>
+<h5 id="阈值平均法"><a href="#阈值平均法" class="headerlink" title="阈值平均法"></a>阈值平均法</h5><p>对图像像素点 f(x,y) 同样取其为中心的 M*N 大小的窗口计算平均值，但是根据计算的平均值与原像素点值进行对比，超过一定阈值再进行替换</p>
+<h5 id="K——近邻平均法"><a href="#K——近邻平均法" class="headerlink" title="K——近邻平均法"></a>K——近邻平均法</h5><p>在一个 M*N 的窗口中，属于同一物体的像素，它们的灰度变化应是渐变的或者说是相关的。因此，窗口中心像素的灰度值可用窗口内与中心点灰度最接近的 K 个邻点的平均灰度来代替。工作步骤如下：</p>
+<ol>
+<li>读取窗口内各对应像素的灰度值；</li>
+<li>从这些灰度值中挑出与中心点灰度最接近的 K 个邻点 (不包括中心点)；</li>
+<li>求出这 K 个邻点的均值，并代替原中心点的值；</li>
+</ol>
+<h5 id="邻域加权平均法"><a href="#邻域加权平均法" class="headerlink" title="邻域加权平均法"></a>邻域加权平均法</h5><p>邻域加权平均法和前面几种平均法一样，都属于空域滤波增强算法，它是利用模板卷积的方法实现对原图的滤波，可表示为：</p>
+<p>$g(x,y) = W \dot f(u,v) $ 其中，$W$ 称为模板</p>
+<script type="math/tex; mode=display">
+W  = \frac{1}{21}
+ \\begin{bmatrix}
+   1 & 4 & 1 \\\\
+   4 & 1 & 4 \\\\
+   1 & 4 & 1
+  \\end{bmatrix}</script><p>基本步骤：</p>
+<ol>
+<li>将模板在图中漫游，并将模板中心与图中某像素点重合</li>
+<li>将模板上系数与模板下对应像素的灰度值相乘；</li>
+<li>将所有乘积相加，并除以系数总和</li>
+<li>用所得结果代替原中心点的值</li>
+</ol>
+<h5 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h5><p>以上使用的邻域平均法属于低通滤波 (模板系数都为正数) 的处理方法，它在抑制噪声的同时使图像变得模糊，即图像的细节 (例如边缘信息) 被削弱，<strong>如果既要抑制噪声又要保持细节可以使用中值滤波</strong>，工作步骤如下：</p>
+<ol>
+<li>将窗口在图中移动；</li>
+<li>读取窗口内各对应像素的灰度值；</li>
+<li>将这些灰度值从小到大排成 1 列；</li>
+<li>找出这些值里排在中间的 1 个；</li>
+<li>将这个中间值赋给对应窗口中心位置的像素。</li>
+</ol>
+<h3 id="图像锐化处理——消除低频噪声的增强算法"><a href="#图像锐化处理——消除低频噪声的增强算法" class="headerlink" title="图像锐化处理——消除低频噪声的增强算法"></a>图像锐化处理——消除低频噪声的增强算法</h3><p>与平滑处理类似，锐化处理也可以利用模板卷积的方法实现。所不同的是滤波器模板的中心系数应为正数，而周围的系数为负，例如</p>
+<script type="math/tex; mode=display">
+W  = \frac{1}{21}
+ \\begin{bmatrix}
+   -1 & -1 & -1 \\\\
+   -1 & 8 & -1 \\\\
+   -1 & -1 & -1
+  \\end{bmatrix}</script><p>这样，所有的系数之和为 0，当这样的模板与图像中灰度值不变或变化很小的区域时，其输出为 0 或很小，即原图像中变化小 (低频) 的分量被去除了。<br>经过卷积运算后，输出图中的灰度值有正有负，而在图像处理中我们只考虑正的灰度值，所以还需将输出图像的灰度值变换到正常范围 <code>[0,L-1]</code> 之内。</p>
+<h3 id="锐化滤波"><a href="#锐化滤波" class="headerlink" title="锐化滤波"></a>锐化滤波</h3><p>锐化滤波的目的是：突出图像中的细节或增强被模糊了的细节<br><img src="http://app.starxy.cc:8877/1c/41138970a1eb06ccfe553fdd901815c3773501.png" alt="梯度.png"><br><img src="http://app.starxy.cc:8877/e4/c25a21b7072201bfdda47f6fbbe192595f6f52.png" alt="梯度（二维离散）.png"></p>
+<p>锐化算子是基于图像微分/梯度定义的模板，通过与图像的模板卷积运算实现对图像边缘的增强或提取（因此也称为边缘检测算子）<br>不同的锐化算子使用了<strong>不同的近似梯度计算</strong>方法</p>
+<ul>
+<li>Prewitt 算子</li>
+<li>Sobel 算子</li>
+<li>Roberts 算子</li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/69/110a969f0f69d4ef7d74559ed8d37898f5246e.png" alt="Prewitt.png"><br><img src="http://app.starxy.cc:8877/de/c400d07b880bb0dc5bbe3bd79ae882b2666acf.png" alt="sobel.png"></p>
+<p>拉普拉斯算子</p>
+<ul>
+<li>二阶差分算子</li>
+<li>模版元素和等于 1 ： 能保留原能保留原图中平滑区域的灰度，适合于去噪、保留原图低频部分的增强</li>
+<li>模板元素和等于 0 ：原图中的平滑区域灰度在滤波后接近 0，边缘等⾼频部分则被突出，适合边缘提取、抑制原图低频部分的增强</li>
+</ul>
+<h2 id="频域变换"><a href="#频域变换" class="headerlink" title="频域变换"></a>频域变换</h2><h3 id="图像频率的基本概念"><a href="#图像频率的基本概念" class="headerlink" title="图像频率的基本概念"></a>图像频率的基本概念</h3><p>灰度或色彩的空间分布形成的<strong>边缘、轮廓、结构</strong>使我们能够感知到图像中的物体<br><strong>灰度变化较大</strong>的地方会生成边缘<br>图像的空间频率反映了图象的灰度或色彩随着空间坐标变化而变化的快慢</p>
+<ul>
+<li>变化平缓的图像频带窄、变化剧烈的图像频带宽</li>
+<li>图像中的高频部分：边缘和细节部分</li>
+<li>图像中的低频部分：背景和缓慢变化的部分</li>
+</ul>
+<p>通过频域变换可以将图像中的不同对象按照高频和低频分量进行分别处理</p>
+<ul>
+<li>比如通过增强高频分量来提取图像的边缘信息</li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/ef/1845ba6532b6d4f9b5f3c0b09259f6dc5fd34c.png" alt="图像频域变化的一般形式"></p>
+<p>在频率/变换域中进行图像处理的优势</p>
+<ul>
+<li>可以使某些特征更突出，便于分析和识别</li>
+<li>可以更有效地表示图像，实现压缩和编码</li>
+<li>可以简化计算，如通过频率域的乘积实现空间域的卷积</li>
+</ul>
+<h3 id="图像的滤波与卷积"><a href="#图像的滤波与卷积" class="headerlink" title="图像的滤波与卷积"></a>图像的滤波与卷积</h3><blockquote>
+<p>关于图像与波的关系可以看 <a href="http://www.ruanyifeng.com/blog/2017/12/image-and-wave-filters.html" target="_blank" rel="noopener">阮一峰大大的文章</a></p>
+</blockquote>
+<p>所谓图像滤波在频域就是仅保留指定频段的信号，而去除其余信号；低通、高通、带通滤波</p>
+<p>根据线性系统理论，用一个二维函数对另一个二维函数（图像）进行滤波的结果是这两个二维函数的卷积</p>
+<h3 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h3><p>Fourier 变换频谱图上的每个点和空间域的原始空间图像之间没有一一对应的关系<br>Fourier 变换具有如下性质：</p>
+<ul>
+<li>平移不变性</li>
+<li>旋转不变性</li>
+<li>卷积定理<ul>
+<li>f 与 g 的乘积等于 F 与 G 的卷积</li>
+<li>f 与 g 的卷积等于 F 与 G 的乘积</li>
+<li>时域卷积 = 频域相乘</li>
+</ul>
+</li>
+</ul>
+<p>快速傅里叶变换：空间域的卷积可以通过傅里叶频率域的乘积实现，从而降低计算的复杂度</p>
+<h3 id="离散余弦变换"><a href="#离散余弦变换" class="headerlink" title="离散余弦变换"></a>离散余弦变换</h3><ul>
+<li>离散余弦变换 (Discrete Cosine Transform-简称 DCT) 是 Fourier 变换的一种特殊情况</li>
+<li>其变换核是为实数的余弦函数，因而 DCT 的计算速度比 DFT 快得多</li>
+<li>DCT 计算复杂性适中，又具有可分离特性，还有快速算法，所以被广泛地用在图象数据压缩编码算法中，如 JPEG、MPEG-1、MPEG-2 及 H.261 等压缩编码国际标准都采用了离散余弦变换编码算法</li>
+</ul>
+<p>傅里叶变换中间亮四周暗。DCT 变换左上亮右下黑</p>
+<h3 id="频域增强"><a href="#频域增强" class="headerlink" title="频域增强"></a>频域增强</h3><p>频域滤波的基本步骤</p>
+<ol>
+<li>计算所需增强图的傅立叶变换</li>
+<li>将其与根据需要设计的转移函数相乘</li>
+<li>再将结果傅立叶反变换，以得到增强的图</li>
+</ol>
+<p>频域增强方法：低通高通带通</p>
+<h4 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h4><p>用于减弱图像中高频的部分：部分图像的边缘和噪声</p>
+<p>理想低通滤波器</p>
+<ul>
+<li>以截止频率 $D_{0}$ 为半径的圆内的所有频率都能无损通过，而在截频之外的频率分量完全被衰减</li>
+<li>理想低通滤波器平滑处理过程中会产生较严重的模糊和振铃现象 (Ringing Artifacts)。 $D_{0}$ 越小，这种现象越严重</li>
+</ul>
+<p>巴特沃兹低通滤波器（最大平坦滤波器）</p>
+<ul>
+<li>通带和阻带之间有一个平滑的过渡带（把 $H(u,v)$ 下降到某一值的那点定为截止频率 $D_{0}$）</li>
+<li>图像模糊程度减少，没有振铃现象。同样的指数低通滤波器、梯形低通滤波器也没有振铃现象</li>
+</ul>
+<h4 id="高通滤波"><a href="#高通滤波" class="headerlink" title="高通滤波"></a>高通滤波</h4><p>理想高通滤波器</p>
+<ul>
+<li>理想高通滤波把以 $D_{0}$ 为半径的圆内的频率成分衰减掉</li>
+</ul>
+<p>巴特沃斯高通滤波处理的结果比用理想高通滤波处理的结果要平滑</p>
+<h4 id="带通滤波"><a href="#带通滤波" class="headerlink" title="带通滤波"></a>带通滤波</h4><ul>
+<li>带通滤波器允许一定频率范围内的信号通过而阻止其它频率范围内的信号通过</li>
+<li>带阻滤波器阻止一定频率范围内的信号通过而允许其它频率范围内的信号通过</li>
+</ul>
+<h4 id="同态滤波"><a href="#同态滤波" class="headerlink" title="同态滤波"></a>同态滤波</h4><p>同态滤波的基本思想是将入射光（照明分量）和反射光（反射分量）分开，然后分别对它们施加不同的影响，从而使反映物体性质的反射光得到增强，而压缩不必要的入射光成分</p>
+<h2 id="彩色图像增强"><a href="#彩色图像增强" class="headerlink" title="彩色图像增强"></a>彩色图像增强</h2><p>伪彩色增强的基本方法：</p>
+<ul>
+<li>实质是一个着色的过程</li>
+<li>典型方法：亮度划分；将灰度值分割成不同区间，每个区间赋予不同的颜色</li>
+</ul>
+<p>HSI：色调、饱和度、亮度</p>
+<p>真彩色增强的基本方法：</p>
+<ul>
+<li>将 R、G、B 分量图转化为 H、S、I 分量图</li>
+<li>利用对灰度图增强的方法增强 I 分量</li>
+<li>再将结果转换为 RGB 图</li>
+</ul>
+<h1 id="数字图像的几何变换"><a href="#数字图像的几何变换" class="headerlink" title="数字图像的几何变换"></a>数字图像的几何变换</h1><p>数字图像的数学表示：</p>
+<ul>
+<li>定义域 $\Omega$ 定义了像素点的空间位置，又称为空间域</li>
+<li>值域 $G$ 定义了像素的灰度值，又称为灰度域</li>
+</ul>
+<p>图像的几何变换在空间域上进行计算，可以看成将物体在图像内进行移动、变形。可以改变图像中各物体之间的空间关系<br>图像的几何变换包括两部分。</p>
+<ul>
+<li>空间变换<ul>
+<li>描述每个像素如何从其初始位置移动到终止位置</li>
+<li>$g(x,y) = f(x’,y’) = f[a(x,y), b(x,y)]$</li>
+</ul>
+</li>
+<li>灰度插值<ul>
+<li>应对非整数坐标系。用来处理当输入像素坐标为某值，进行几何变换后像素的坐标值可能为非整数。灰度插值的目的就是要计算这些像素的灰度值</li>
+</ul>
+</li>
+</ul>
+<p>几何变换不改变像素值，而是改变像素所在的位置</p>
+<h2 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h2><p>假设 $X$ 和 $Y$ 方向上的平移量分别为 $x<em>{0}$ $y</em>{0}$ 则</p>
+<script type="math/tex; mode=display">a(x,y) = x + x_{0}, b(x,y) = y+y_{0}</script><h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>假设 $X$ 和 $Y$ 方向上的缩放比例分别为 $c$ $d$ 则</p>
+<script type="math/tex; mode=display">a(x,y) = \frac{x}{c} , b(x,y) = \frac{y}{d}</script><p>由于放大 $c,d &lt; 1$ 算子运算不是一一映射，只是简单的重复放大。因此将产生所谓的方块效应。为了改善这种可视效果，需要进行插值运算。</p>
+<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><p>图像大小为 M<em>N 的<em>*水平镜像</em></em>公式：</p>
+<script type="math/tex; mode=display">
+\\begin{cases}
+    x' = x \\\\
+    y' = -y
+\\end{cases}</script><p>平移使坐标为正</p>
+<script type="math/tex; mode=display">
+\\begin{cases}
+    x'' = x' = x \\\\
+    y'' = y'+N+1 = N+1-y
+\\end{cases}</script><p>图像大小为 M<em>N 的<em>*垂直镜像</em></em>公式：</p>
+<script type="math/tex; mode=display">
+\\begin{cases}
+    x' = -x \\\\
+    y' = y
+\\end{cases}</script><p>平移使坐标为正</p>
+<script type="math/tex; mode=display">
+\\begin{cases}
+    x'' = x' +M +1 =M+1-x \\\\
+    y'' = y = y
+\\end{cases}</script><h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>假设图像绕原坐标旋转 顺时针旋转 $\theta$ 角度</p>
+<script type="math/tex; mode=display">a(x,y) = xcos(\theta) - ysin(\theta)</script><script type="math/tex; mode=display">b(x,y) = xsin(\theta) + ycos(\theta)</script><p>但是经过旋转后的图像会出现两种问题：</p>
+<ul>
+<li>像素的排列不是完全按照原有的相邻关系</li>
+<li>会出现空洞点</li>
+</ul>
+<p>出现这两种问题的本质是因为：<strong>像素的填充是不连续的</strong>。这种问题可以用<strong>插值</strong>来解决</p>
+<h2 id="灰度插值"><a href="#灰度插值" class="headerlink" title="灰度插值"></a>灰度插值</h2><script type="math/tex; mode=display">g(x,y) = f(x',y') = f[a(x,y), b(x,y)]</script><p>$g(x,y)$ 的值一般由<strong>非整数坐标</strong>上的 $f(x,y)$ 的值确定。<br>输入图像中，灰度值仅在整数位置处被定义<br>灰度插值就是要根据 f 中整数位置的灰度值来估算 g 中像素的灰度值<br>如果把几何变换看成是一个从 f 到 g 的映射，则 f 中的一个像素会映射到 g 中的几个像素之间的位置</p>
+<h3 id="最近邻插值"><a href="#最近邻插值" class="headerlink" title="最近邻插值"></a>最近邻插值</h3><ul>
+<li>最简单的插值方法</li>
+<li>选择距离它所映射的位置最近的输入像素的灰度值作为结果</li>
+</ul>
+<h3 id="双线性插值"><a href="#双线性插值" class="headerlink" title="双线性插值"></a>双线性插值</h3><ul>
+<li>对最近邻插值的改进</li>
+<li>用线性内插方法，根据点的四个相邻点的灰度值，分别在 $x$ 和 $y$ 方向上进行两次插值，计算出插值点的值</li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/b2/514307db8c38c1966488e33b4eaea385f6c424.png" alt="双线性插值 1"><br><img src="http://app.starxy.cc:8877/aa/6622d44bf3eaf1bf14b602e387cb1760ff02ec.png" alt="双线性插值 2"><br><img src="http://app.starxy.cc:8877/0e/e7fde362ea2353047ad67f19097177113062a6.png" alt="双线性插值 3"></p>
+<h3 id="双三次插值"><a href="#双三次插值" class="headerlink" title="双三次插值"></a>双三次插值</h3><h1 id="图像压缩"><a href="#图像压缩" class="headerlink" title="图像压缩"></a>图像压缩</h1><p>图像压缩的可能性：数据中存在冗余或不相干的信息</p>
+<p>数据冗余的不同类型：</p>
+<ul>
+<li>编码冗余</li>
+<li>空间和时间冗余</li>
+<li>心理视觉冗余（即不相关信息）</li>
+</ul>
+<h2 id="编码冗余"><a href="#编码冗余" class="headerlink" title="编码冗余"></a>编码冗余</h2><p>码本：用来表达一定量的信息或一组事件所需的一系列符号（如字母、数字等）<br>码字：对每个信息或事件所赋的码符号序列；每个码字里的符号个数，称为码字的长度（码长）<br>编码：建立码本以及表达数据的过程<br>自然码：对单个信息（如灰度级）赋的码是从 $2^{m}$ 个 $m$ 比特的<strong>二元码</strong>中选出的一个；对出现概率不同的各灰度级都赋予<strong>相同长度（定长）</strong>的比特数<br>图像中灰度级出现的概率:</p>
+<script type="math/tex; mode=display">p_{s}(s_{k}) = \frac{n_{k}}{n},k=0,1,2,...,L-1</script><p>其中 $n<em>{k}$ 为灰度等级 $s</em>{k}$ 出现的次数， $n$ 为像素总数<br>图像编码的平均比特数：</p>
+<script type="math/tex; mode=display">\bar L = \sum_{k=0}^{L-1}l(s_{k})p_{s}(s_{k})</script><p>其中 $l(s<em>{k})$ 表示灰度级 $s</em>{k}$ 使用的比特数<br>如何编码才能减小平均比特数：</p>
+<ul>
+<li>用较少的比特数表示出现概率较大的灰度级</li>
+<li>用较多的比特数表示出现概率较小的灰度级</li>
+</ul>
+<p>自然码的平均比特数一般高于上述编码方案，所以存在编码冗余</p>
+<h2 id="空间、时间和心理冗余"><a href="#空间、时间和心理冗余" class="headerlink" title="空间、时间和心理冗余"></a>空间、时间和心理冗余</h2><p>空间冗余：一幅图像的像素间存在相关性，相关性越强空间冗余度越高<br>时间冗余：视频（图像序列）中连续帧之间的相关性很强<br>心理视觉冗余：因人而异，与人类观察图像的方式有关，消除非重点信息；消除心理视觉冗余的损失是不可逆的</p>
+<h2 id="压缩图像质量的评价"><a href="#压缩图像质量的评价" class="headerlink" title="压缩图像质量的评价"></a>压缩图像质量的评价</h2><ul>
+<li>图像保真度<ul>
+<li>描述解码图像相对于原始图像的偏离程度</li>
+<li>对信息损失的测度</li>
+</ul>
+</li>
+<li>客观保真度准则<ul>
+<li>用编码输入图与解码输出图的某个确定函数表示损失的信息量，便于计算或测量</li>
+</ul>
+</li>
+<li>主管保真度准则<ul>
+<li>主观测量图像的质量，因人而异，应用不方便</li>
+</ul>
+</li>
+</ul>
+<p>图像熵：<br>设图像像素灰度级的集合为 $\{r<em>{1},r</em>{2},…,r<em>{N} \}$ 其对应的概率分别为 $P</em>{1},P<em>{2},…,P</em>{N}$ 则图像熵的定义为：</p>
+<script type="math/tex; mode=display">H = - \sum_{i=1}^{N}P_{i}\log_{2}P_{i}</script><p>单位为 比特/字符</p>
+<ul>
+<li>反映了图像的<strong>平均自信息量</strong></li>
+<li>单值（全黑全白）图像的熵为 0</li>
+<li>一半黑一半白的图像熵为 1</li>
+</ul>
+<p>平均码字长度</p>
+<script type="math/tex; mode=display">\bar N = \sum_{i=1}^{N}\beta_{i}P_{i}</script><p>其中 $\beta<em>{i}$ 为灰度级 $r</em>{i}$ 所对应的码字长度</p>
+<ul>
+<li>度量某种特定的编码性能</li>
+<li>单位为 比特/字符 越小说明效率越高</li>
+</ul>
+<h2 id="图像压缩的分类"><a href="#图像压缩的分类" class="headerlink" title="图像压缩的分类"></a>图像压缩的分类</h2><p>根据解压缩后图像和原始图像是否有偏差进行分类：</p>
+<ul>
+<li>无损压缩<ul>
+<li>霍夫曼编码</li>
+<li>行程编码</li>
+<li>算术编码</li>
+</ul>
+</li>
+<li>有损编码<ul>
+<li>预测编码</li>
+<li>变换编码</li>
+<li>其他编码</li>
+</ul>
+</li>
+</ul>
+<p>依据压缩过程中编码是否利用信息的语义进行分类：</p>
+<ul>
+<li>熵编码<ul>
+<li>泛指那些不考虑被压缩信息的性质的无损编码</li>
+<li>基于平均信息量的技术把所有的数据当作比特序列，而不根据压缩信息的类型优化压缩</li>
+<li>包括霍夫曼编码、行程编码等</li>
+</ul>
+</li>
+<li>源编码<ul>
+<li>利用信号原数据在时间域和频率域中的相关性和冗余进行压缩的有语义编码</li>
+<li>源编码比严格的平均信息量编码的压缩率更高</li>
+<li>包括预测编码、变换编码等</li>
+</ul>
+</li>
+<li>混合编码<ul>
+<li>即“熵编码 + 源编码”</li>
+<li>大多数压缩标准都采用混合编码的方法进行数据压缩，一般是先利用源编码进行有损压缩，再利用熵编码做进一步的无损压缩</li>
+</ul>
+</li>
+</ul>
+<h3 id="霍夫曼编码"><a href="#霍夫曼编码" class="headerlink" title="霍夫曼编码"></a>霍夫曼编码</h3><p>基础理论：变长最佳编码原理：出现概率大的给短码字，出现概率小的给长码字；这样的话平均码字会最小<br>步骤：</p>
+<ol>
+<li>首先求出图像中灰度分布的灰度直方图</li>
+<li>根据该直方图，对其按照分布概率从大到小的顺序进行排列</li>
+<li>每一次从中选择出两个概率为最小的节点相加，形成一个新的节点，重复这一步骤，直到只有一个节点，构造一个称为“Huffman 树”的二叉树</li>
+<li>对这个二叉树进行编码，就获得了 Huffman 编码码字</li>
+</ol>
+<p>相应的可以发现：<br>对全局进行求灰度直方图求霍夫曼编码会因为灰度过多导致编码越来越长；<br>对全局进行分块然后对每块进行处理会更好；<br>考虑到传输和存储编码的代价需要在分块和压缩效率之间找到一个平衡</p>
+<h3 id="行程编码"><a href="#行程编码" class="headerlink" title="行程编码"></a>行程编码</h3><p>形成编码（Run-Length Coding，RLC）是通过<strong>改变图片的描述方式</strong>实现图像的压缩<br>基本思想是将图像中灰度值相同的相邻像素用一个计数值（行程长度）和该灰度值来代替<br>应用：适用于二值化的图像；传真件中白色较多而黑色较少<br>二维转一维扫描方法：逐行逐列或者蛇形扫描<br>对于有大面积色块的图像，压缩效果很好；<br>对于复杂的图像，压缩效果不好，最坏情况下 （图像中每两个相邻点的颜色都不同），会使数据量加倍，所以现在单纯采用行程编码的压缩算法用得并不多</p>
+<h3 id="预测编码"><a href="#预测编码" class="headerlink" title="预测编码"></a>预测编码</h3><p>基本思想：图像相邻像素间存在很强的相关性，通过观察其相邻像素取值，可预测一像素的大概情况；</p>
+<p>无损预测：不对误差进行处理，无损传输<br>有损预测：对误差进行再量化用更少的位数来表达误差达到压缩的目的</p>
+<h3 id="变换编码"><a href="#变换编码" class="headerlink" title="变换编码"></a>变换编码</h3><p>基本原理：利用正交变换的能量集中性,即图像经正交变换后能量集中在低频部分,高频部分能量较少,可以用较少的位数来表达.对变换系数进行再量化,可以达到压缩目的<br>常用的正交变换：DFT、DCT、小波变换</p>
+<h2 id="静止图像压缩标准"><a href="#静止图像压缩标准" class="headerlink" title="静止图像压缩标准"></a>静止图像压缩标准</h2><h3 id="JPEG"><a href="#JPEG" class="headerlink" title="JPEG"></a>JPEG</h3><p>适用于静止灰度图或彩色图的压缩<br>包含了三种编码系统：</p>
+<ul>
+<li>基于 DCT 的有损压缩编码基本系统，可用于绝大多数压缩应用场合</li>
+<li>用于高压缩比、高精度或渐进重建应用的扩展编码系统</li>
+<li>基于预测编码中 DPCM 方法的无损系统，用于无失真应用场合</li>
+</ul>
+<p>JPEG 编码步骤：分块；DCT；量化；Z 形扫描（DCT 后左上角较大右下角较小）；行程编码；霍夫曼编码</p>
+<h3 id="JPEG2000"><a href="#JPEG2000" class="headerlink" title="JPEG2000"></a>JPEG2000</h3><p>采用小波子带编码作为核心编码方案</p>
+<p>相对于 JPEG：</p>
+<ul>
+<li>能提高对图像的压缩质量，尤其是低码率时的压缩质量</li>
+<li>根据图像质量、视觉感受和分辨率进行渐进传输</li>
+<li>对码流的随机存取和处理</li>
+<li>开放结构、向下兼容等</li>
+</ul>
+<h2 id="序列图像压缩标准"><a href="#序列图像压缩标准" class="headerlink" title="序列图像压缩标准"></a>序列图像压缩标准</h2><ul>
+<li>H.26X 系列<ul>
+<li>H.261 最初标准</li>
+<li>H.263:比 H.261 有重大改进</li>
+<li>H.264:目前编码最复杂但效果最好的标准</li>
+</ul>
+</li>
+<li>MPEG-X 系列<ul>
+<li>MPEG1:最初的 VCD 标准</li>
+<li>MPEG2:DVD 和数字电视</li>
+<li>MPEG4:低码率活动图像压缩</li>
+<li>MPEG7:高效活动图像压缩</li>
+</ul>
+</li>
+<li>VAS<ul>
+<li>中国的音视频编解码标准</li>
+</ul>
+</li>
+</ul>
+<h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h1><p>将图像分成各具特色的区域，并提取出感兴趣的目标的技术和过程</p>
+<ul>
+<li>特性：灰度、颜色、纹理等</li>
+<li>目标：对应单个或者多个区域，反映了感兴趣对象在图像中的位置和范围</li>
+</ul>
+<p>基本策略：利用图像中像素灰度值（色彩/纹理）的两个特征：相似性、不连续性</p>
+<p>像素的相似性：</p>
+<ul>
+<li>空间上相邻</li>
+<li>灰度（色彩/纹理）接近</li>
+<li>相似像素构成的区域轮廓就是对象的边</li>
+</ul>
+<p>像素的不连续性：</p>
+<ul>
+<li>空间上相邻</li>
+<li>灰度（色彩/纹理）相差明显</li>
+<li>检测图像的不连续像素，找到点、线、边、再根据边确定区域</li>
+</ul>
+<p>图像分隔方法的分类：</p>
+<ul>
+<li>基于阈值的分割<ul>
+<li>通过合适的灰度（色彩/纹理）阈值对不同物体进行分割</li>
+</ul>
+</li>
+<li>基于边缘的分割<br>  – 先确定边缘像素，并把它们连接在一起，以构成所需的边界</li>
+<li>基于区域的分割<ul>
+<li>把各像素划归到各个物体或区域中</li>
+</ul>
+</li>
+<li>基于运动的分割<ul>
+<li>通过视频物体运动进行分割</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于阈值的分割"><a href="#基于阈值的分割" class="headerlink" title="基于阈值的分割"></a>基于阈值的分割</h2><p>假设：图像由目标和背景两部分组成；目标和背景有不同的灰度级<br>步骤：确定合适的分割阈值；将像素值和分割阈值进行比较以划分像素为目的目标或背景<br>阈值分割的关键是选取<strong>合适的阈值</strong></p>
+<p>直方图阈值分割法：</p>
+<ul>
+<li>基于如下的图像模型：<ul>
+<li>图像中的背景和目标均为单峰灰度分布</li>
+<li>目标或背景内部相邻像素的灰度值高度相关</li>
+<li>目标和背景交界处两边的像素灰度值相差很大</li>
+</ul>
+</li>
+<li>上世纪 60 年代中期，Prewitt 提出直方图双峰法<ul>
+<li>如果灰度级直方图呈明显的双峰状，则选取两峰之间的谷底所对应的灰度级作为阈值</li>
+<li>直方图双峰法不适合直方图中双峰差别很大或双峰间的谷比较宽广而平坦的图像，以及单峰直方图的情况</li>
+</ul>
+</li>
+<li>可以通过直方图变换改善图像的直方图以方便阈值分割</li>
+</ul>
+<p>类间方差阈值分割法：</p>
+<ul>
+<li>又称作最大类间方差法</li>
+<li>基本思想：一幅图像被一个阈值分为目标与背景两部分，当两部分之间的方差最大时，分割效果最好</li>
+</ul>
+<p>全局阈值 vs.自适应阈值：</p>
+<ul>
+<li>全局阈值<ul>
+<li>整幅图像使用同一个固定阈值</li>
+<li>不能合理地处理目标和背景在不同区域的变化</li>
+</ul>
+</li>
+<li>自适应阈值<ul>
+<li>根据图像的局部特征分别采用不同的阈值进行分割</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于边缘的分割"><a href="#基于边缘的分割" class="headerlink" title="基于边缘的分割"></a>基于边缘的分割</h2><p>边缘可定义为在局部区域内图象的差别，表现为图象上的不连续性 (如灰度级的突变、纹理结构的突变、颜色的变化)</p>
+<p>不连续性检测的类型：</p>
+<ul>
+<li>点检测</li>
+<li>线检测</li>
+<li>边缘检测</li>
+</ul>
+<p>边界的确定：可以通过先检测不连续的点，然后再将这些点连城边界<br>不连续的检测可以通过模板卷积来实现</p>
+<p>线检测：</p>
+<p>四种在水平垂直 45 度方向上的模板同时对同一图像进行卷积<br>最终结果是四种相应结果中的最大值</p>
+<h3 id="Hough-变换直线检测"><a href="#Hough-变换直线检测" class="headerlink" title="Hough 变换直线检测"></a>Hough 变换直线检测</h3><p>直线的数学模型：点线对偶性模型</p>
+<p>参数空间（斜率-截距）中的一条直线对应的是图像空间中的一个点<br>图像空间中共线的一组点对应参数空间中的是一簇相交于同一点的直线</p>
+<p>基本思想：</p>
+<ul>
+<li>给定图像空间中的一些边缘点，连接这些点的直线（如果存在的话）在参数（斜率-截距）空间中将形成一簇直线的交点</li>
+<li>参数空间中，过某个交点的直线越多，表明图像空间中越多的边缘点位于该交点所对应的直线上</li>
+</ul>
+<p>Hough（哈夫）变换就是把在图像空间中的线检测问题转换到参数空间中对峰值点的检测问题，通过在参数空间中进行简单的累加统计完成检测任务</p>
+<h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>由图像增强中锐化一节可以得知，图像的边缘存在于不同灰度值的相邻区域之间。<br>边缘是灰度值不连续的体现</p>
+<p>边缘的导数特征，在图像的边缘处：</p>
+<ul>
+<li>一阶导数的幅值取得局部最大值</li>
+<li>二阶导数过零点附近的符号反映了边缘附近的像素在明区域还是暗区域</li>
+<li>利用一阶二阶导数特点可以检测边缘</li>
+</ul>
+<p>边缘检测所用的是图像的梯度算子，梯度的计算方法在图像增强锐化一节中已经给出<br>常用的梯度算子为 Roberts 算子、Prewitt 算子、Sobel 算子<br>Sobel 算子比较常用，它先进行加权然后再计算分差，其效果比其他两种算子要好</p>
+<p>图像的拉普拉斯算子为图像的二阶导数<br>该算子是一个标量而非矢量，具有旋转不变性即各向同性的性质</p>
+<ul>
+<li>优点<ul>
+<li>无方向性算子，只需一个模板，计算量小</li>
+<li>过零点可以对边缘进行精确定位</li>
+<li>过零点两侧的符号可以辅助判断像素在边缘的暗侧还是亮侧</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>卷积结果的幅值产生双边缘</li>
+<li>不能检测边缘的方向</li>
+<li>对噪音非常敏感（如对孤立点响应很强）</li>
+</ul>
+</li>
+</ul>
+<p>如何降低拉普拉斯算法对噪音的敏感性：</p>
+<ul>
+<li>先对图像进行平滑处理然后再计算二阶导数</li>
+<li>LoG:Laplacian of Gaussian</li>
+</ul>
+<h2 id="二值图像的形态学处理"><a href="#二值图像的形态学处理" class="headerlink" title="二值图像的形态学处理"></a>二值图像的形态学处理</h2><p>分割后的结果常常以二值图像给出，即前景目标像素为 1 而背景像素用 0 表示<br>对这类二值图像可以通过<strong>数学形态学</strong>的方法进行后处理</p>
+<ul>
+<li>数学形态学是分析几何形状和结构的数学方法，是建立在集合代数基础上，用集合论方法定量描述几何结构的科学</li>
+<li>一般以 A 表示二值图像，B 表示结构元素</li>
+<li>基本形态学算子包括<strong>膨胀和腐蚀</strong></li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/4e/e7fa435fba52e62da194799f0c413fdce702f6.png" alt="腐蚀.png"><br><img src="http://app.starxy.cc:8877/66/d7702dc56988ab87c18278b8db13a8c9c05b7a.png" alt="膨胀.png"><br><img src="http://app.starxy.cc:8877/91/f704eaa4f5c16b3abbb26c08613e08361a5a35.png" alt="组合运算"></p>
+<h1 id="图像分析"><a href="#图像分析" class="headerlink" title="图像分析"></a>图像分析</h1><p>图像分析的主要任务：</p>
+<ul>
+<li>图像分割将目标从图像中分割出来，而分析的主要任务则是根据分割结果进一步<strong>从图像中获得目标特征的量值</strong></li>
+<li>图像分割之后，为了进一步对图像作分析和识别，就必须通过对图像中的物体 (目标) 作<strong>定性或定量的分析</strong>来作出正确的结论</li>
+</ul>
+<p>图像分析建立在图像物体（目标）描述的基础上<br>图像描述即是指用一组数量或符号 (描述子) 来表征图像中被描述物体的某些特征<br>图像分析的两个关键问题：</p>
+<ul>
+<li>选用什么特征来描述目标</li>
+<li>如何精确地测量这些特征</li>
+</ul>
+<p>图像的特征用于区分图像的最基本属性：</p>
+<ul>
+<li>自然特征：颜色亮度等</li>
+<li>人工特征：通知直方图等</li>
+</ul>
+<p>图像特征一般具有以下几个特点</p>
+<ul>
+<li>可区分性</li>
+<li>可靠性</li>
+<li>独立性</li>
+<li>数量要少</li>
+</ul>
+<p>图像中的区域（目标）可以用其内部像素的特征或者其边界像素的特征表示</p>
+<ul>
+<li><strong>内部像素特征</strong>刻画区域的反射性质，如灰度、颜 色、纹理等</li>
+<li><strong>边界像素特征</strong>刻画区域的形状等</li>
+</ul>
+<p>选定了表达方法，还需要对目标进行描述，使计算机能充分利用所能获得的分割结果</p>
+<ul>
+<li>表达是<strong>直接具体地</strong>表示目标。好的表达方法应具有节省存储空间、易于特征计算等优点</li>
+<li>描述是<strong>较抽象地</strong>表示目标。好的描述应在尽可能区别不同目标的基础上对目标的尺度、平移、旋转等不敏感</li>
+</ul>
+<h2 id="图像的表达方法"><a href="#图像的表达方法" class="headerlink" title="图像的表达方法"></a>图像的表达方法</h2><ul>
+<li>图像<strong>边界</strong>的表达<ul>
+<li>链码（Chain Code）</li>
+<li>边界段</li>
+<li>多边形</li>
+<li>标记</li>
+</ul>
+</li>
+<li>图像<strong>区域</strong>的表达<ul>
+<li>骨架</li>
+</ul>
+</li>
+</ul>
+<h3 id="链码"><a href="#链码" class="headerlink" title="链码"></a>链码</h3><p>链码是对<strong>边界点</strong>的一种表示方法<br>链码对边界的表达式<strong>逐点</strong>进行的<br>利用一系列具有特定长度和方向的相连的直线段来表示目标的边界</p>
+<ul>
+<li>每个线段的长度固定，而方向数目取为有限<ul>
+<li>只有四个方向的为 4-链码，八个方向的为 8-链码</li>
+</ul>
+</li>
+<li>边界的起点用（绝对）坐标表示，而其余点只用方向来代表偏移量</li>
+</ul>
+<p>链码的计算方法：</p>
+<ul>
+<li>给边界上的每一个线段一个方向编码</li>
+<li>从起点开始，沿边界按 4-链码或 8-链码编码，直到起点被重新碰到，结束一个对象的编码</li>
+</ul>
+<p><img src="http://app.starxy.cc:8877/4e/72de017c0243c13301fddeb738a5abda7fe27b.png" alt="链码编码"></p>
+<p>链码表达可以大大减少边界表示所需的数据量</p>
+<ul>
+<li>表示 1 个方向数比表示 1 个坐标值所需的比特数少</li>
+<li>对每 1 个点又只需 1 个方向数就可以代替 2 个坐标值</li>
+</ul>
+<p>直接对分割所得的目标边界进行链码编码存在两个潜在问题</p>
+<ul>
+<li>链码相当长</li>
+<li>噪声等干扰会导致小的边界变化，而使链码发生与目标整体形状无关的较大变动</li>
+</ul>
+<p>改进方案</p>
+<ul>
+<li>对原边界以较大的网格重新采样，并把与原边界点最接近的大网格点定为新的边界点</li>
+<li>这样获得的新边界具有较少的边界点，而且其形状受噪声等干扰的影响也较小</li>
+</ul>
+<p>起点归一化：对于相同的边界，选择不同的起点会产生不同的编码结果。为此需要同一个起点</p>
+<ul>
+<li>给定一个从任意点开始而产生的链码，把它看作一个由各个方向数构成的自然数</li>
+<li>将这些方向数依一个方向循环以使它们所构成的自然数的值最小，将这样转换后所对应的链码起点作为这个边界的归一化链码的起点</li>
+</ul>
+<p>旋转归一化：边界旋转后编码也会不同</p>
+<ul>
+<li>用链码的一阶差分来重新构造一个新序列</li>
+<li>首先将最右一个方向数循环到左边<ul>
+<li>然后用后一个元素减去前一个元素，如果结果是负数，则按 4 或者 8 取模（分别对应 4-链码或 8-链码）</li>
+<li>新序列表示原链码各段之间的方向变化</li>
+</ul>
+</li>
+<li>该序列称为<strong>差分码</strong>，不会因目标旋转而改变</li>
+</ul>
+<h3 id="边界段"><a href="#边界段" class="headerlink" title="边界段"></a>边界段</h3><p>边界段（Boundary Segments）方法把<strong>边界分解成若干段</strong>分别表示。可减少边界的复杂度，并简化描述过程</p>
+<p>一般借助<strong>凸包</strong>的概念将边界分为若干段<br><img src="http://app.starxy.cc:8877/fd/683ed5a12d71e8db5c75d2d713784fc541a6fc.png" alt="凸包"></p>
+<ul>
+<li>跟踪 H 的边界，每个进入 D 或从 D 出去的点就是一个分段点</li>
+<li>当把 S 的边界分解为边界段时，能分开 D 的各部分的点就是合适的边界分段点</li>
+<li>这些分段点可借助 D 来唯一确定，且不受目标区域的尺度和方向影响</li>
+</ul>
+<h3 id="多边形近似"><a href="#多边形近似" class="headerlink" title="多边形近似"></a>多边形近似</h3><p>目标区域的边界很容易受噪音、采样等的影响，而产生很多较小的不规则处<br>这些不规则处常对链码和边界段表达产生较明显得干扰<br>多边形近似（PolygonApproximations）就是用多边形去近似逼近边界，以提高抗干扰性、节省表达所需数据量</p>
+<p>常用的多边形表达方法</p>
+<ul>
+<li>基于收缩的最小周长多边形法</li>
+<li>基于聚合 (Merge) 的最小均方差线段逼近法</li>
+<li>基于分裂 (Split) 的最小均方差线段逼近法</li>
+</ul>
+<h3 id="标记法"><a href="#标记法" class="headerlink" title="标记法"></a>标记法</h3><p>标记（Signature）法的基本思想是把2-D的边界用1-D的较易描述的函数形式来表达</p>
+<h3 id="区域的骨架表达"><a href="#区域的骨架表达" class="headerlink" title="区域的骨架表达"></a>区域的骨架表达</h3><h2 id="图像的描述方法"><a href="#图像的描述方法" class="headerlink" title="图像的描述方法"></a>图像的描述方法</h2><ul>
+<li>边界描述：<ul>
+<li>简单描述</li>
+<li>形状数</li>
+<li>傅立叶描述</li>
+</ul>
+</li>
+<li>区域描述：<ul>
+<li>简单描述</li>
+<li>拓扑描述</li>
+<li>纹理描述</li>
+<li>不变矩</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"># 图像处理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/15/Spark%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Spark 学习笔记">
+      <i class="fa fa-chevron-left"></i> Spark 学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/27/%E5%BC%B1%E7%B1%BB%E5%9E%8B-%E5%BC%BA%E7%B1%BB%E5%9E%8B-%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="弱类型 强类型 动态类型 静态类型 之间的区别">
+      弱类型 强类型 动态类型 静态类型 之间的区别 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BMP-文件格式"><span class="nav-number">1.1.</span> <span class="nav-text">BMP 文件格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像增强"><span class="nav-number">2.</span> <span class="nav-text">图像增强</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#空域处理法"><span class="nav-number">2.1.</span> <span class="nav-text">空域处理法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用图像对比度处理方法增强图像"><span class="nav-number">2.1.1.</span> <span class="nav-text">用图像对比度处理方法增强图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用直方图修改技术进行图像增强"><span class="nav-number">2.1.2.</span> <span class="nav-text">用直方图修改技术进行图像增强</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直方图"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">直方图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直方图均衡化"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">直方图均衡化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直方图规定化"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">直方图规定化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像平滑处理-——-消除高频噪声的增强算法"><span class="nav-number">2.1.3.</span> <span class="nav-text">图像平滑处理 —— 消除高频噪声的增强算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图像间运算"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">图像间运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邻域平均法"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">邻域平均法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单平均法"><span class="nav-number">2.1.3.2.1.</span> <span class="nav-text">简单平均法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#阈值平均法"><span class="nav-number">2.1.3.2.2.</span> <span class="nav-text">阈值平均法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#K——近邻平均法"><span class="nav-number">2.1.3.2.3.</span> <span class="nav-text">K——近邻平均法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#邻域加权平均法"><span class="nav-number">2.1.3.2.4.</span> <span class="nav-text">邻域加权平均法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#中值滤波"><span class="nav-number">2.1.3.2.5.</span> <span class="nav-text">中值滤波</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像锐化处理——消除低频噪声的增强算法"><span class="nav-number">2.1.4.</span> <span class="nav-text">图像锐化处理——消除低频噪声的增强算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锐化滤波"><span class="nav-number">2.1.5.</span> <span class="nav-text">锐化滤波</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#频域变换"><span class="nav-number">2.2.</span> <span class="nav-text">频域变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图像频率的基本概念"><span class="nav-number">2.2.1.</span> <span class="nav-text">图像频率的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像的滤波与卷积"><span class="nav-number">2.2.2.</span> <span class="nav-text">图像的滤波与卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#傅里叶变换"><span class="nav-number">2.2.3.</span> <span class="nav-text">傅里叶变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离散余弦变换"><span class="nav-number">2.2.4.</span> <span class="nav-text">离散余弦变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#频域增强"><span class="nav-number">2.2.5.</span> <span class="nav-text">频域增强</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#低通滤波"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">低通滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高通滤波"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">高通滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带通滤波"><span class="nav-number">2.2.5.3.</span> <span class="nav-text">带通滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同态滤波"><span class="nav-number">2.2.5.4.</span> <span class="nav-text">同态滤波</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#彩色图像增强"><span class="nav-number">2.3.</span> <span class="nav-text">彩色图像增强</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字图像的几何变换"><span class="nav-number">3.</span> <span class="nav-text">数字图像的几何变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#平移"><span class="nav-number">3.1.</span> <span class="nav-text">平移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩放"><span class="nav-number">3.2.</span> <span class="nav-text">缩放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像"><span class="nav-number">3.3.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转"><span class="nav-number">3.4.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度插值"><span class="nav-number">3.5.</span> <span class="nav-text">灰度插值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最近邻插值"><span class="nav-number">3.5.1.</span> <span class="nav-text">最近邻插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双线性插值"><span class="nav-number">3.5.2.</span> <span class="nav-text">双线性插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双三次插值"><span class="nav-number">3.5.3.</span> <span class="nav-text">双三次插值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像压缩"><span class="nav-number">4.</span> <span class="nav-text">图像压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码冗余"><span class="nav-number">4.1.</span> <span class="nav-text">编码冗余</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间、时间和心理冗余"><span class="nav-number">4.2.</span> <span class="nav-text">空间、时间和心理冗余</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩图像质量的评价"><span class="nav-number">4.3.</span> <span class="nav-text">压缩图像质量的评价</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像压缩的分类"><span class="nav-number">4.4.</span> <span class="nav-text">图像压缩的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#霍夫曼编码"><span class="nav-number">4.4.1.</span> <span class="nav-text">霍夫曼编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行程编码"><span class="nav-number">4.4.2.</span> <span class="nav-text">行程编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测编码"><span class="nav-number">4.4.3.</span> <span class="nav-text">预测编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变换编码"><span class="nav-number">4.4.4.</span> <span class="nav-text">变换编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静止图像压缩标准"><span class="nav-number">4.5.</span> <span class="nav-text">静止图像压缩标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPEG"><span class="nav-number">4.5.1.</span> <span class="nav-text">JPEG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPEG2000"><span class="nav-number">4.5.2.</span> <span class="nav-text">JPEG2000</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列图像压缩标准"><span class="nav-number">4.6.</span> <span class="nav-text">序列图像压缩标准</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像分割"><span class="nav-number">5.</span> <span class="nav-text">图像分割</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于阈值的分割"><span class="nav-number">5.1.</span> <span class="nav-text">基于阈值的分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于边缘的分割"><span class="nav-number">5.2.</span> <span class="nav-text">基于边缘的分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hough-变换直线检测"><span class="nav-number">5.2.1.</span> <span class="nav-text">Hough 变换直线检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边缘检测"><span class="nav-number">5.2.2.</span> <span class="nav-text">边缘检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二值图像的形态学处理"><span class="nav-number">5.3.</span> <span class="nav-text">二值图像的形态学处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像分析"><span class="nav-number">6.</span> <span class="nav-text">图像分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图像的表达方法"><span class="nav-number">6.1.</span> <span class="nav-text">图像的表达方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链码"><span class="nav-number">6.1.1.</span> <span class="nav-text">链码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边界段"><span class="nav-number">6.1.2.</span> <span class="nav-text">边界段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多边形近似"><span class="nav-number">6.1.3.</span> <span class="nav-text">多边形近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记法"><span class="nav-number">6.1.4.</span> <span class="nav-text">标记法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区域的骨架表达"><span class="nav-number">6.1.5.</span> <span class="nav-text">区域的骨架表达</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像的描述方法"><span class="nav-number">6.2.</span> <span class="nav-text">图像的描述方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

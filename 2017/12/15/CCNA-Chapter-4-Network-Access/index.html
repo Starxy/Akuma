@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="接下来主要分为四大部分来介绍网络协议，分别是网络接入层（物理层和数据链路层），互联网层（网络层），传输层，应用层（会话层，表示层，应用层）。 本章主要介绍网络接入层，在发送设备上，数据链路层的作用是准备数据以供传输，并控制该数据访问物理介质的方式。物理层通过将代表数据的二进制数字编码成信号来控制数据传送到物理介质的方式。在接收端，物理层通过连接介质接收信号。在将信号解码为数据后，物理层会将帧传递到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 4: Network Access">
+<meta property="og:url" content="http://starxy.cc/2017/12/15/CCNA-Chapter-4-Network-Access/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="接下来主要分为四大部分来介绍网络协议，分别是网络接入层（物理层和数据链路层），互联网层（网络层），传输层，应用层（会话层，表示层，应用层）。 本章主要介绍网络接入层，在发送设备上，数据链路层的作用是准备数据以供传输，并控制该数据访问物理介质的方式。物理层通过将代表数据的二进制数字编码成信号来控制数据传送到物理介质的方式。在接收端，物理层通过连接介质接收信号。在将信号解码为数据后，物理层会将帧传递到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkoidn76bj30h60bdq45.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkordhtiij30gm047mxd.jpg">
+<meta property="article:published_time" content="2017-12-15T15:11:54.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.181Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkoidn76bj30h60bdq45.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2017/12/15/CCNA-Chapter-4-Network-Access/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CCNA Chapter 4: Network Access | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/15/CCNA-Chapter-4-Network-Access/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CCNA Chapter 4: Network Access
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-15 23:11:54" itemprop="dateCreated datePublished" datetime="2017-12-15T23:11:54+08:00">2017-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>接下来主要分为四大部分来介绍网络协议，分别是网络接入层（物理层和数据链路层），互联网层（网络层），传输层，应用层（会话层，表示层，应用层）。</p>
+<p>本章主要介绍网络接入层，在发送设备上，数据链路层的作用是准备数据以供传输，并控制该数据访问物理介质的方式。物理层通过将代表数据的二进制数字编码成信号来控制数据传送到物理介质的方式。在接收端，物理层通过连接介质接收信号。在将信号解码为数据后，物理层会将帧传递到数据链路层以便接受和处理。</p>
+<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><p>在进行网络通信之前，都必须在本地网络上建立一个物理连接。物理连接可以通过电缆进行有线连接，也可以通过无线电波进行无线连接。在进行无线连接之前，设备必须连接到一个无线接入点（wireless access point，AP）。</p>
+<p>网络接口卡（Network Interface Cards， NICs） 将设备连接到网络。以太网（Ethernet）网卡用于有线连接，而 WLAN 网卡用于无线连接。</p>
+<p>OSI 物理层通过网络介质传输构成数据链路层帧的位。该层从数据链路层接收完整的帧，并将这些帧编码为一系列信号，传输到本地介质上。经过编码的位构成了帧，这些位可以被终端设备或中间设备接收。</p>
+<p>数据从源节点向目的节点传输的过程如下：</p>
+<ol>
+<li>用户数据在传输层进行分段，由网络层放入数据包，再由数据链路层封装成帧。</li>
+<li>在物理层编码，并创建电子、光纤或无线电波信号来代表每个帧中的位。</li>
+<li>然后，将这些信号逐个发送到介质上。</li>
+<li>目的节点物理层从介质上检索每个信号，将其还原为位表示方式，然后将这些位作为一个完整的帧向上传递到数据链路层。</li>
+</ol>
+<p>应用数据 -&gt; 消息片段（segments） -&gt; 数据包（Packet） -&gt; 帧（Farme） -&gt; 位（Bits） -&gt; 信号（Signal）</p>
+<p>常见的物理层设备</p>
+<ul>
+<li>网卡</li>
+<li>光纤</li>
+<li>CAT-5线</li>
+<li>RJ-45接头</li>
+<li>集线器有整波作用。</li>
+<li>Repeater加强信号。</li>
+<li>串口</li>
+<li>并口</li>
+</ul>
+<a id="more"></a>
+<h2 id="物理层功能"><a href="#物理层功能" class="headerlink" title="物理层功能"></a>物理层功能</h2><ul>
+<li>管理物理组件（Physical Components）： 这里说所说物理组件表示用于物理传输、承载信号的电子硬件设备、介质和其他连接器，物理层规定相关硬件的接口和连接器引脚的标准</li>
+<li>编码（Encoding）：编码或线路编码是一种将数据位流转换为预定义“代码”的方法。这些代码就是位组，用于提供一种可预测模式，以便发送者和接收者均能识别。在网络中，编码是用于代表位（即 0 和 1）的一种电压或电流形式。<ul>
+<li>例如，曼彻斯特编码的 0 位表示为从高到低的电压转换，而 1 位表示为从低到高的电压转换。转换在每个位周期的中间进行。这种类型的编码用于 10 b/s 的以太网。更快的数据速率需要更复杂的编码。</li>
+</ul>
+</li>
+<li>信令 (Signaling)：物理层必须在介质上生成代表“1”和“0”的电信号、光信号或无线信号。表示位的方法称为信令方法。物理层标准必须定义哪种类型的信号代表“1”，而哪种类型的信号代表“0”。这可以简单到只是改变电信号或光脉冲的级别。例如，长脉冲可能代表 1，而短脉冲代表 0。</li>
+</ul>
+<h2 id="物理层特征"><a href="#物理层特征" class="headerlink" title="物理层特征"></a>物理层特征</h2><p>不同的物理介质所支持的位传输速率不同。数据传输的讨论通常都会提及<strong>带宽 (Bandwidth)</strong>和<strong>吞吐量 (throughput)</strong></p>
+<h3 id="带宽（Bandwidth）"><a href="#带宽（Bandwidth）" class="headerlink" title="带宽（Bandwidth）"></a>带宽（Bandwidth）</h3><p>带宽是介质承载数据的能力，可以测量在给定时间内一端流向另一端的数据流量，但是不是位传输的物理速度，在以太网中，物理速度是确定的，即电子的速度。带宽是一种物理属性，在网络建立起的时候就已经确定的。</p>
+<p>多种因素的结合，决定了网络的实际带宽：</p>
+<ul>
+<li>物理介质的属性</li>
+<li>信令和检测网络信号所选用的技术</li>
+</ul>
+<h3 id="吞吐量（throughput）"><a href="#吞吐量（throughput）" class="headerlink" title="吞吐量（throughput）"></a>吞吐量（throughput）</h3><p>由于各种因素的影响，吞吐量经常与物理层实施中指定的带宽不符，这是一种实时的度量。</p>
+<p>许多因素会影响吞吐量，包括：</p>
+<ul>
+<li>流量大小</li>
+<li>流量类型</li>
+<li>从源通往目的地的过程中遇到的网络设备数所产生的延时（Latency ）。</li>
+</ul>
+<p>延时（Latency ）是指数据从一个给定点传送到另一给定点所用的时间，包括延迟。</p>
+<p>值得注意的是，在一个流量的传输过程中，吞吐量会受到最低链路速度的那一段路径影响，即短板效应</p>
+<p>用于评估可用数据传输的第三个测量标准，称为<strong>实际吞吐量（goodput）</strong>。实际吞吐量是在给定时间段内传输的有用数据的衡量标准。</p>
+<h2 id="物理层介质（Physical-Layer-Media）"><a href="#物理层介质（Physical-Layer-Media）" class="headerlink" title="物理层介质（Physical Layer Media）"></a>物理层介质（Physical Layer Media）</h2><p>网络介质有三种基本形式。物理层为每种介质制定的位的表示方式及分组如下：</p>
+<ul>
+<li><strong>铜缆 (Copper cable)</strong>：信号为电脉冲模式。</li>
+<li><strong>光缆 (Fiber-optic cable)</strong>：信号为光模式。</li>
+<li><strong>无线 (Wireless)</strong>：信号为微波传输模式。</li>
+</ul>
+<p>对于不同的物理层介质的使用都有不同的标准要求，例如铜介质要求综合考量，使用铜缆的类型，通信的带宽，使用连接器类型，介质传送的最大距离</p>
+<h3 id="铜缆-Copper-cable"><a href="#铜缆-Copper-cable" class="headerlink" title="铜缆 (Copper cable)"></a>铜缆 (Copper cable)</h3><p>铜介质具有<strong>价格低廉、易于安装、对电流的电阻低</strong>的特点。但是，铜介质受到<strong>距离和信号干扰</strong>的限制。主要的信号干扰源有以下两种：</p>
+<ul>
+<li><strong>电磁干扰 (Electromagnetic interference, EMI) 或射频干扰 (radio frequency interference, RFI)</strong> - EMI 和 RFI 干扰信号会扭曲和损坏通过铜介质承载的数据信号。</li>
+<li><strong>串扰 (Crosstalk )</strong> - 串扰是一根电线中信号的电场或磁场对邻近电线中的信号造成的干扰。在电话线上，串扰会由相邻电路中另一语音会话的接听部分引起。具体而言，当电流流经电线时，会在电线周围产生一个较小的环形磁场，而相邻电线可能接收到该磁场。</li>
+</ul>
+<p>为了应对 EMI 和 RFI 的负面影响，某些类型的铜缆会<strong>用金属屏蔽套包裹，并要求适当的接地连接</strong>。<br>为了应对串扰的负面影响，某些类型的铜缆将<strong>相反电路线对绞合</strong>在一起以有效消除串扰。  </p>
+<p>以下方式也可以限制电子噪音对铜缆的影响：</p>
+<ul>
+<li>选择的电缆类型或类别要适合特定的网络环境。</li>
+<li>设计电缆基础设施来规避建筑结构中已知和潜在的干扰源。</li>
+<li>使用包括正确处理和端接电缆的电缆技术。</li>
+</ul>
+<p>现阶段网络中常用的铜介质的线缆有三种类型：</p>
+<ul>
+<li><strong>非屏蔽双绞线 (Unshielded Twisted-Pair, UTP)</strong>：是最常用的网络介质。通过 RJ-45 连接器（俗称水晶头）端接的 UTP 布线用于网络主机与中间网络设备的互连，例如交换机和路由器。电线的绞合有助于防止其他电线的信号干扰。</li>
+<li><strong>屏蔽双绞线 (Shielded Twisted-Pair, STP)</strong>：STP 电缆结合屏蔽技术来应对 EMI 和 RFI，使用电线绞合技术来应对串扰。但是，与 UTP 电缆相比，STP 电缆更加昂贵而且不易安装。也使用 RJ-45 连接器</li>
+<li><strong>同轴电缆 (Coaxial)</strong> 同轴电缆，或简称同轴，由于它的两根导线分享同一个轴而得名。同轴电缆包括：<ul>
+<li>一根用于传输电子信号的铜导线。</li>
+<li>包裹着铜导线的柔软的塑料绝缘层。</li>
+<li>绝缘材料的表皮是铜线编织或金属箔，作用相当于电路中的第二条电线，而且还可作为内部导体的屏蔽层。该第二层或屏蔽层还可减少许多外部电磁干扰。</li>
+<li>整个电缆由一层电缆表皮覆盖，使其免于较小的物理损坏。</li>
+</ul>
+</li>
+</ul>
+<h4 id="UTP-布线"><a href="#UTP-布线" class="headerlink" title="UTP 布线"></a>UTP 布线</h4><p>在用作网络介质时，非屏蔽双绞线 (UTP) 由四对有彩色标记的铜线组成。这些铜线绞合在一起，并用软塑料套包裹。在安装过程中，它尺寸较小是有利的。</p>
+<p>UTP 电缆并不使用屏蔽层来对抗 EMI 和 RFI 的影响。相反，电缆设计者发现他们可以通过以下方式来减少串扰的负面影响：</p>
+<ul>
+<li><strong>抵消</strong>：当电路中的两根电线紧密排列时，彼此的磁场正好相反。因此，这两个磁场相互抵消，也抵消了所有的外部 EMI 和 RFI 干扰信号。</li>
+<li><strong>变化每个线对中的绞合数量</strong>：为了进一步增强配对电线的抵消效果，设计者会变化电缆中每个线对的绞合数量。UTP 电缆必须遵守精确的规定来管理每米（3.28 英尺）电缆所允许的绞合数或编织数。请注意，橙色/橙白色线对比蓝色/蓝白色线对的绞合要少。每个彩色线对绞合的次数不同。</li>
+</ul>
+<p>UTP 电缆<em>仅通过绞合线</em>对的抵消效果来减小信号衰减，并为网络介质中的线对提供有效的自屏蔽。</p>
+<h5 id="UTP-布线标准"><a href="#UTP-布线标准" class="headerlink" title="UTP 布线标准"></a>UTP 布线标准</h5><p>电气电子工程师协会 (IEEE) 定义了铜缆的电特征。IEEE 按照它的性能对 UTP 布线划分等级。电缆分类的依据是它们承载更高速率带宽的能力。例如，5 (Cat5) 类电缆通常用于 100BASE-TX 快速以太网安装。其他类别包括增强型 5 (Cat5e) 类电缆、6 (Cat6) 类电缆 和 6a 类电缆。随着新的千兆位以太网技术的开发和运用，如今已经很少采用 5e 类电缆，新建筑安装推荐使用 6 类电缆。</p>
+<ul>
+<li>3 类电缆：用于语音，最常用语电话线路</li>
+<li>5 类和 5e 类电缆：用于数据传输，支持 100Mb/s 和 1000Mb/s，但不推荐后者。5e 类电缆支持 1000Mb/s</li>
+<li>6 类电缆：用于数据传输，已在每对线之间加入分隔物来增加传输速度，支持 1000Mb/s - 10Gb/s 但不推荐 10Gb/s</li>
+</ul>
+<h5 id="UTP-电缆类型"><a href="#UTP-电缆类型" class="headerlink" title="UTP 电缆类型"></a>UTP 电缆类型</h5><p>以下是通过使用指定的布线约定得到的主要电缆类型：<strong>以太网直通电缆 (Ethernet Straight-through)</strong>、<strong>以太网交叉电缆 (Ethernet Crossover)</strong>、<strong>全反电缆 (Rollover)</strong></p>
+<ul>
+<li>以太网直通电缆：最常见的网络电缆类型。它通常用于主机到交换机和交换机到路由器的互连。</li>
+<li>以太网交叉电缆：用于互连相似设备的电缆。例如，交换机到交换机、主机到主机或路由器到路由器的连接。</li>
+<li>全反电缆：思科专有电缆，用于工作站到路由器或交换机控制台端口的连接。</li>
+</ul>
+<p>图中显示了这些电缆的 UTP 电缆类型、相关标准以及典型应用。而且还标识了 TIA-568A 和 TIA-568B 标准的各个线对。<br><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkoidn76bj30h60bdq45.jpg" alt=""></p>
+<h3 id="光缆-Fiber-optic-cable"><a href="#光缆-Fiber-optic-cable" class="headerlink" title="光缆 (Fiber-optic cable)"></a>光缆 (Fiber-optic cable)</h3><p>光缆能够以更远的距离和更高的带宽传输数据，并且完全不受 EMI 和 RFI 影响。<br>光纤是一种由非常纯的玻璃制成的极细透明的弹性线束。通过光缆传输时，位会被编码成光脉冲。光缆用作波导管或“光导管”，以最少的信号丢失来传输两端之间的光.<br>目前光纤布线用于四类行业：</p>
+<ul>
+<li>企业网络：用于主干布线和基础设施设备互连。</li>
+<li>光纤到户 (FTTH)：用于为家庭和小型企业提供不间断宽带服务。</li>
+<li>长距离传输网络：由服务提供商用于连接国家/地区与城市。</li>
+<li>水下有线网络：用于提供可靠高速、高容量的网络解决方案，使其在深度与横跨海洋的距离相当的严酷海下环境中仍能生存。单击 <a href="http://www.submarinecablemap.com/" target="_blank" rel="noopener">此处</a> 查看描绘海底电缆位置的电信地理地图。</li>
+</ul>
+<h4 id="光纤介质的类型"><a href="#光纤介质的类型" class="headerlink" title="光纤介质的类型"></a>光纤介质的类型</h4><p>在介质中把被传输的数据表示为位的光脉冲是由以下物质产生的：</p>
+<ul>
+<li>激光 (Lasers)</li>
+<li>发光二极管 (Light emitting diodes, LEDs)</li>
+</ul>
+<p>电子半导体设备（称为光电二极管）检测光脉冲并将其转换为电压。</p>
+<p>光缆通常分为两种类型：</p>
+<ul>
+<li><strong>单模光纤 (Single-mode fiber, SMF)</strong>：包含一个极小的芯，使用昂贵的激光技术来发送单束光。普遍用于跨越数百千米的长距离传输，例如应用于长途电话和有线电视中的光纤。核心小，散射小，适合长距离应用，千米范围</li>
+<li><strong>多模光纤 (Multimode fiber, MMF)</strong>：包含一个更大的芯，使用 LED 发射器发送光脉冲。具体而言，LED 发出的光从不同角度进入多模光纤。普遍用于 LAN 中，因为它们可以由低成本的 LED 提供支持。它可以通过长达 550 米的链路提供高达 10 Gb/s 的带宽。允许更大的色散，会导致信号丢失。适合长距离但是比单模较近，百米范围。</li>
+</ul>
+<p>多模和单模光纤之间的主要区别之一就是色散 (dispersion) 的数量。色散是指光脉冲在时间上的分布。色散越多，信号强度的减弱就越快。</p>
+<h4 id="光纤与铜缆"><a href="#光纤与铜缆" class="headerlink" title="光纤与铜缆"></a>光纤与铜缆</h4><p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1flkordhtiij30gm047mxd.jpg" alt=""></p>
+<h3 id="无线-Wireless"><a href="#无线-Wireless" class="headerlink" title="无线 (Wireless)"></a>无线 (Wireless)</h3><p>无线介质使用无线电或微波频率来承载代表数据通信二进制数字的电磁信号。<br>关于无线网络有一些关注重点，包括：</p>
+<ul>
+<li>覆盖面积：无线数据通信技术非常适合开放环境。但是，在楼宇和建筑物中使用的某些建筑材料以及当地地形将会限制它的有效覆盖。</li>
+<li>干扰：无线电易受干扰，可能会受到家庭无绳电话、某些类型的荧光灯、微波炉和其他无线通信装置等常见设备的干扰。</li>
+<li>安全性：无线通信覆盖无需进行介质的物理接线。因此，未获得网络访问授权的设备和用户可以访问传输。所以网络安全是无线网络管理的重要组成部分。</li>
+<li>共享介质：WLAN 以半双工模式运行，意味着一台设备一次只能发送或接收。无线介质由所有无线用户共享。同时需要访问 WLAN 的用户越多，分配给每位用户的带宽越少。</li>
+</ul>
+<h4 id="无线介质的类型"><a href="#无线介质的类型" class="headerlink" title="无线介质的类型"></a>无线介质的类型</h4><p>无线数据通信的 IEEE 和电信行业标准包括数据链路层和物理层。</p>
+<ul>
+<li>Wi-Fi：标准 IEEE 802.11：无线 LAN (WLAN) 技术，通常称为 Wi-Fi。WLAN 使用一种称为“载波侦听多路访问/冲突避免 (CSMA/CA)”的争用协议。无线 NIC 在传输数据之前必须先侦听，以确定无线电通道是否畅通。如果其他无线设备正在传输，则 NIC 必须等待通道畅通。</li>
+<li>标准 IEEE 802.15：蓝牙：无线个域网 (WPAN) 标准，通常称为“蓝牙”，采用装置配对过程进行通信，距离为 1 到 100 米。</li>
+<li>标准 IEEE 802.16：WiMAX：通常称为微波接入全球互通 (WiMAX)，采用点到多点拓扑结构，提供无线带宽接入。</li>
+</ul>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><p>数据链路层（Data Link Layer）是OSI参考模型第二层，位于物理层与网络层之间。在广播式多路访问链路中（局域网），由于可能存在介质争用，它还可以细分成介质访问控制（MAC）子层和逻辑链路控制（LLC）子层，介质访问控制（MAC）子层专职处理介质访问的争用与冲突问题。</p>
+<p>在第 2 层中连接到公共介质的网络设备称为节点。节点将生成并转发帧。OSI 数据链路层负责帧在物理网络介质中源节点和目的节点之间的交换。</p>
+<p>局域网与广域网皆属第1,2层。</p>
+<h2 id="数据链路子层"><a href="#数据链路子层" class="headerlink" title="数据链路子层"></a>数据链路子层</h2><p>数据链路层可以拆分成两个子层：</p>
+<ul>
+<li><strong>逻辑链路控制 (Logical Link Control，LLC)</strong> - 这一较高子层与网络层通信。它放入帧中的信息用于确定帧所使用的网络层协议。此信息允许多个第 3 层协议（如 IPv4 和 IPv6）使用相同的网络接口和介质。用户的数据链路服务通过LLC子层为网络层提供统一的接口。</li>
+<li><strong>介质访问控制 (Media Access Control，MAC)</strong> - 是局域网中数据链路层的下层部分，提供定址及媒体访问的控制方式，使得不同设备或网络上的节点可以在多点的网络上通信，而不会互相冲突，上述的特性在局域网或者城域网中格外重要。</li>
+</ul>
+<h2 id="介质访问控制"><a href="#介质访问控制" class="headerlink" title="介质访问控制"></a>介质访问控制</h2><p>第 2 层协议指定了将数据包封装成帧的过程，以及用于将已封装数据包放置到各介质上和从各介质获取已封装数据包的技术。用于将帧放置到介质上和从介质获取帧的技术称为介质访问控制方法。</p>
+<p><strong>当数据包从源主机到目的主机传输时，它们通常会经过不同的物理网络。这些物理网络可由不同类型的物理介质组成</strong>，如铜线、光纤、由电磁信号、无线电和微波频率组成的无线介质，以及卫星链路。</p>
+<p>如果没有数据链路层，则网络层协议（如 IP）必须提供连接到传送路径中可能存在的各种类型介质所需的连接。而且，每当系统开发出一种新的网络技术或介质时，IP 必须做出相应调整。此过程会妨碍协议和网络介质的创新和发展。这是采用分层式方法进行联网的主要原因。</p>
+<p>实际使用的介质访问控制方法取决于：</p>
+<ul>
+<li>拓扑（Topology） - 节点之间的连接如何显示在数据链路层中。</li>
+<li>介质共享（Media sharing） - 节点如何共享介质。介质共享可以是点对点（例如 WAN 连接中的共享）或者例如 LAN 网络中的共享。</li>
+</ul>
+<h3 id="常见的物理WAN拓扑"><a href="#常见的物理WAN拓扑" class="headerlink" title="常见的物理WAN拓扑"></a>常见的物理WAN拓扑</h3><p><strong>- 点对点(Point-to-Point)</strong> - 这是最简单的拓扑，由两个端点间的永久链路组成。因此，这是一种非常普遍的 WAN 拓扑。<br><strong>- 集中星型(Hub and Spoke)</strong> - 星型拓扑的 WAN 版本，在该拓扑中一个中心站点使用点对点链路互连分支站点。<br><strong>- 网状(Mesh )</strong> - 该拓扑可用性高，但要求每个终端系统都与其他各个系统互连。因此管理成本和物理成本都会非常高。每条链路实质上是另一节点的点对点链路。</p>
+<h3 id="物理-LAN-拓扑"><a href="#物理-LAN-拓扑" class="headerlink" title="物理 LAN 拓扑"></a>物理 LAN 拓扑</h3><p>物理拓扑定义了终端系统的物理互连方式。在共享介质 LAN 上，终端设备可以使用以下物理拓扑互连：</p>
+<ul>
+<li>星型（Star） - 将终端设备连接到中心中间设备。早期的星型拓扑使用以太网集线器互连终端设备。但现在，星型拓扑使用以太网交换机。星型拓扑安装简易、扩展性好（易于添加和删除终端设备），而且故障排除容易。</li>
+<li>扩展星型（Extended Star） - 在扩展星型拓扑中，额外的以太网交换机与其他星型拓扑互连。扩展星型是一种混合拓扑。</li>
+<li>总线（Bus） - 所有终端系统都相互连接，并在两端以某种形式端接。终端设备互连时不需要基础设施设备（例如交换机）。因为总线拓扑价格低廉而且安装简易，所以传统的以太网络中会使用采用同轴电缆的总线拓扑。</li>
+<li>环（Ring） - 终端系统与其各自的邻居相连，形成一个环状。与总线拓扑不同，环拓扑不需要端接。环拓扑用于传统的光纤分布式数据接口 (FDDI) 和令牌环网络。</li>
+</ul>
+<h2 id="提供介质访问"><a href="#提供介质访问" class="headerlink" title="提供介质访问"></a>提供介质访问</h2><p>在每个通信中可能需要不同的介质访问控制方法。在数据包从本地主机传送到远程主机的过程中，其遇到的各种网络环境可能具有不同的特性。例如，以太网 LAN 由许多竞争访问网络介质的主机组成。串行链路由仅两个设备之间的直接连接组成。</p>
+<p>路由器接口将数据包封装为适当的帧，并使用适当的介质访问控制方法来访问每条链路。在任意指定的网络层数据包交换过程中，可能存在多次数据链路层和介质的转换。</p>
+<p>在路径沿途的每一跳，路由器：从介质接受帧 -&gt; 解封帧 -&gt; 将数据包重新封装到新帧中 -&gt; 从适合该物理网络网段的介质转发新帧</p>
+<p>例如路由器具有连接到 LAN 的一个以太网接口和连接到 WAN 的一个串行接口。在处理帧的过程中，路由器将使用数据链路层服务从某个介质接收帧，再将它解封到第 3 层 PDU，然后将 PDU 重新封装到新帧中，再将帧放到网络下一链路的介质中。</p>
+<h2 id="全双工和半双工（Half-and-Full-Duplex）"><a href="#全双工和半双工（Half-and-Full-Duplex）" class="headerlink" title="全双工和半双工（Half and Full Duplex）"></a>全双工和半双工（Half and Full Duplex）</h2><p>双工通信是指两台设备之间数据传输的方向。半双工通信会将每次的数据交换限制为一个方向，而全双工允许同时发送和接收数据。</p>
+<ul>
+<li>半双工通信 - 两台设备都可以通过该介质发送和接收，但无法同时执行这两个操作。半双工模式在传统总线拓扑中与以太网集线器配合使用。WLAN 也在半双工模式下运行。半双工每次只允许一台设备通过共享介质发送或接收，而且会与争用访问方法结合使用。</li>
+<li>全双工通信 - 两台设备均可同时通过介质进行发送和接收。数据链路层假定介质随时可供两个节点实现传输。默认情况下，以太网交换机在全双工模式下运行，但是如果与以太网集线器等设备连接，则可以在半双工模式下运行。</li>
+</ul>
+<p><strong>两个互连设备，比如一个主机网卡和以太网交换机上的一个接口，必须采用同一双工模式运行</strong>。否则，将会出现双工不匹配，导致链路上效率低下和延时。</p>
+<h2 id="介质访问控制方法"><a href="#介质访问控制方法" class="headerlink" title="介质访问控制方法"></a>介质访问控制方法</h2><p>在某些网络拓扑中，多个节点共享一个公共介质。这些称为多路访问网络。以太网 LAN 和 WLAN 都是多路访问网络的示例。在某一时刻，可能有多个设备尝试通过同一网络介质发送和接收数据。</p>
+<p>某些多路访问网络需要使用规则来管理设备共享物理介质的方式。对于共享介质，有两种基本的访问控制方法：</p>
+<ul>
+<li>争用访问（Contention-based access） - 在半双工模式下运行的所有节点争用介质，但一次只有一台设备可以发送。但是，当多台设备同时传输时，会使用一个进程。使用集线器的以太网 LAN 和 WLAN 都是这种访问控制类型的示例。</li>
+<li>受控访问（Controlled access） - 每个节点都有各自使用介质的时间。这种确定性的网络类型效率很低，因为设备必须等到轮到自己才能访问介质。传统令牌环 LAN 就是这种访问控制类型的示例。</li>
+</ul>
+<p>默认情况下，以太网交换机在全双工模式下运行。这允许交换机和全双工连接的设备同时发送和接收。</p>
+<h3 id="争用访问-–-CSMA-CD"><a href="#争用访问-–-CSMA-CD" class="headerlink" title="争用访问 – CSMA/CD"></a>争用访问 – CSMA/CD</h3><p>WLAN、使用集线器的以太网 LAN 和传统以太网总线网络都是争用访问网络的示例。所有这些网络都在半双工模式下运行。这需要有一个进程来管理设备何时可以发送以及当多台设备同时发送时会发生什么情况。</p>
+<p>载波侦听多路访问/冲突检测 (The Carrier Sense Multiple Access/Collision Detection，CSMA/CD) 进程可用于半双工以太网 LAN。CSMA 进程如下：</p>
+<ol>
+<li>PC1 有一个以太网帧要发送给 PC3。</li>
+<li>PC1 的网卡需要确定是否有人通过介质传输。如果它没有检测到载波信号，也就是说，它没有收到来自其他设备的传输，则假定网络可用于发送。</li>
+<li>PC1 的网卡发送以太网帧</li>
+<li>以太网集线器接收帧。以太网集线器也称为多端口中继器。传入端口上收到的任何位都会重新生成，并通过所有其他端口发送出去</li>
+<li>如果另一台设备，比如 PC2，想要传输，但当前正在接收一个帧，则它必须等待通道畅通。</li>
+<li>与集线器连接的所有设备都将收到该帧。由于帧拥有 PC3 的目的数据链路地址，只有该设备会接受并复制整个帧。所有其他设备的网卡都将忽略该帧</li>
+</ol>
+<p>如果两台设备同时传输，则会发生冲突。两台设备都将检测到网络上的冲突，这就是冲突检测 (Collision Detection，CD)。这一过程可通过网卡比较传输的数据与接收的数据，或通过识别出介质中的信号振幅高于正常状况来实现。两台设备发送的数据会损坏且需重新发送。</p>
+<h3 id="争用访问-–-CSMA-CA"><a href="#争用访问-–-CSMA-CA" class="headerlink" title="争用访问 – CSMA/CA"></a>争用访问 – CSMA/CA</h3><p>IEEE 802.11 WLAN 所使用的另一种 CSMA 形式为载波侦听多路访问/冲突避免 ( Carrier Sense Multiple Access/Collision Avoidance，CSMA/CA)。CMSA/CA 采用一种与 CSMA/CD 类似的方法来检测介质是否畅通。CMSA/CA 还采用其他技术。CMSA/CA 不会检测冲突，但会通过在传输之前等待来尝试避免冲突。要进行传输的每台设备都包含传输所需的持续时间。所有其他无线设备都会收到此信息，知道介质将有多长时间不可用，如图所示。当无线设备发送 802.11 帧后，接收方会返回确认，以使发送方知道帧已到达。</p>
+<p>不管是使用集线器的以太网 LAN，还是 WLAN，争用系统在介质使用率高的情况下都无法很好地扩展。一定要注意，使用交换机的以太网 LAN 不使用争用系统，因为交换机和主机网卡在全双工模式下运行。</p>
+<h2 id="帧字段"><a href="#帧字段" class="headerlink" title="帧字段"></a>帧字段</h2><p>成帧技术将位流拆分成可破解的多个分组，且将控制信息作为不同字段值插入帧头和帧尾中。此格式使物理信号具备能被节点接收且可在目的地解码成数据包的一种结构。</p>
+<p>通用帧字段类型包括：</p>
+<ul>
+<li>帧开始和停止指示标志（Frame start and stop indicator flags） - 用于标识帧的开始和结束位置的限制。</li>
+<li>编址（Addressing） - 表示介质上的源节点和目的节点。</li>
+<li>类型（Type） - 用于标识数据字段中的第 3 层协议。</li>
+<li>控制（control） - 用于标识特殊流量控制服务，比如服务质量 (QoS)。QoS 用于为某些类型的消息提供转发优先权。传送 IP 语音 (VoIP) 数据包的数据链路帧通常会获得优先权，因为它们对延迟敏感。</li>
+<li>数据（Data） - 包含帧负载（即数据包报头、数据段报头和数据）。</li>
+<li>错误检测（Error detectioni） - 这些帧字段用于进行错误检测并包含在数据之后形成帧尾。</li>
+</ul>
+<p>并非所有协议均包含全部此类字段。特定数据链路协议的标准定义了实际帧格式。</p>
+<p>数据链路层协议将帧尾添加到各帧结尾处。帧尾的作用是确定帧是否无错到达。此过程称为错误检测，通过将组成帧的各个位的逻辑或数学摘要放入帧尾中来实现。因为介质中的信号可能遭受干扰、失真或丢失，从而大幅更改这些信号所代表的位值，所以要将错误检测添加到数据链路层。</p>
+<p>发送节点会创建帧内容的逻辑摘要，称为循环冗余校验 (cyclic redundancy check，CRC) 值。此值将放入帧校验序列 (FCS) 字段中以代表帧内容。在以太网尾部，FCS 为接收节点提供一种方法，用于确定帧是否出现传输错误。</p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>bandwith</strong> - the maximum rate at which data can be carried over a specific medium</li>
+<li><strong>throughput</strong> - the actual amount of data, in bits, that crosses a given point in a network over a certain period of time</li>
+<li><strong>goodput</strong> - the amount of usable data that crosses a given point in a network over a certain period of time</li>
+<li><strong>electromagnetic interference</strong> - interference that is caused when the electromagnetic field of one device affects the electromagnetic field of other devices</li>
+<li><strong>radio frequency interference</strong> - electromagnetic interference that is in the radio frequency range</li>
+<li><strong>crosstalk</strong> - occurs when the signals of one wire affect the signals on an adjacent wire</li>
+<li><strong>cancellation</strong> - the twisting of opposing wires to effectively eliminate crosstalk</li>
+<li><strong>Header</strong> - information that is added before the data field in a frame</li>
+<li><strong>trailer</strong> - information that is added after the data field in a frame</li>
+<li><strong>physical topology</strong> - the actual connections and layout of devices in a network</li>
+<li><strong>logical topology</strong> - the way that the data travels through the network</li>
+<li><strong>contention-based access</strong> - nodes compete to be able to use the network medium</li>
+<li><strong>controlled access</strong> - when each node has an orderly opportunity to access the medium</li>
+<li><strong>frame check sequence</strong> - value of the field in a frame that is computed from the contents of the frame and determines if the frame has been damaged</li>
+<li><strong>full-deplex</strong> - devices are able to send and receive data simultaneously</li>
+<li><strong>half-deplex</strong> - devices are able to send and receive information, but only one direction at a time.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/14/CCNA-Chapter-3-Network-Protocols-and-Communications/" rel="prev" title="CCNA Chapter 3: Network Protocols and Communications">
+      <i class="fa fa-chevron-left"></i> CCNA Chapter 3: Network Protocols and Communications
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/17/CCNA-Chapter-5-Ethernet/" rel="next" title="CCNA Chapter 5: Ethernet">
+      CCNA Chapter 5: Ethernet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#物理层"><span class="nav-number">1.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层功能"><span class="nav-number">1.1.</span> <span class="nav-text">物理层功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层特征"><span class="nav-number">1.2.</span> <span class="nav-text">物理层特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#带宽（Bandwidth）"><span class="nav-number">1.2.1.</span> <span class="nav-text">带宽（Bandwidth）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#吞吐量（throughput）"><span class="nav-number">1.2.2.</span> <span class="nav-text">吞吐量（throughput）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层介质（Physical-Layer-Media）"><span class="nav-number">1.3.</span> <span class="nav-text">物理层介质（Physical Layer Media）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#铜缆-Copper-cable"><span class="nav-number">1.3.1.</span> <span class="nav-text">铜缆 (Copper cable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UTP-布线"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">UTP 布线</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UTP-布线标准"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">UTP 布线标准</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UTP-电缆类型"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">UTP 电缆类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#光缆-Fiber-optic-cable"><span class="nav-number">1.3.2.</span> <span class="nav-text">光缆 (Fiber-optic cable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#光纤介质的类型"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">光纤介质的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#光纤与铜缆"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">光纤与铜缆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线-Wireless"><span class="nav-number">1.3.3.</span> <span class="nav-text">无线 (Wireless)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无线介质的类型"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">无线介质的类型</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路层"><span class="nav-number">2.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路子层"><span class="nav-number">2.1.</span> <span class="nav-text">数据链路子层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介质访问控制"><span class="nav-number">2.2.</span> <span class="nav-text">介质访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的物理WAN拓扑"><span class="nav-number">2.2.1.</span> <span class="nav-text">常见的物理WAN拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理-LAN-拓扑"><span class="nav-number">2.2.2.</span> <span class="nav-text">物理 LAN 拓扑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供介质访问"><span class="nav-number">2.3.</span> <span class="nav-text">提供介质访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全双工和半双工（Half-and-Full-Duplex）"><span class="nav-number">2.4.</span> <span class="nav-text">全双工和半双工（Half and Full Duplex）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介质访问控制方法"><span class="nav-number">2.5.</span> <span class="nav-text">介质访问控制方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#争用访问-–-CSMA-CD"><span class="nav-number">2.5.1.</span> <span class="nav-text">争用访问 – CSMA&#x2F;CD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#争用访问-–-CSMA-CA"><span class="nav-number">2.5.2.</span> <span class="nav-text">争用访问 – CSMA&#x2F;CA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帧字段"><span class="nav-number">2.6.</span> <span class="nav-text">帧字段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">3.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

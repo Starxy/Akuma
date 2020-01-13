@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本篇文章主要为 1 月 4 号的 linux 考试所准备的。因为内容不多，打算一个页面写完整个课程内容  Linux Basis Structure of Disk硬盘的物理结构一般由磁头与碟片、电动机、主控芯片与排线等部件组成；当主电动机带动碟片旋转时，副电动机带动一组磁头到相对应的碟片上并确定读取正面还是反面的碟面，磁头悬浮在碟面上画出一个与碟片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESAIP Linux">
+<meta property="og:url" content="http://starxy.cc/2017/12/31/ESAIP-Linux/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="本篇文章主要为 1 月 4 号的 linux 考试所准备的。因为内容不多，打算一个页面写完整个课程内容  Linux Basis Structure of Disk硬盘的物理结构一般由磁头与碟片、电动机、主控芯片与排线等部件组成；当主电动机带动碟片旋转时，副电动机带动一组磁头到相对应的碟片上并确定读取正面还是反面的碟面，磁头悬浮在碟面上画出一个与碟片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fn2tt4vzh5j30fa0not9b.jpg">
+<meta property="article:published_time" content="2017-12-31T04:49:47.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.183Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006Ka4GEgy1fn2tt4vzh5j30fa0not9b.jpg">
+
+<link rel="canonical" href="http://starxy.cc/2017/12/31/ESAIP-Linux/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ESAIP Linux | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/31/ESAIP-Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ESAIP Linux
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-31 12:49:47" itemprop="dateCreated datePublished" datetime="2017-12-31T12:49:47+08:00">2017-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本篇文章主要为 1 月 4 号的 linux 考试所准备的。因为内容不多，打算一个页面写完整个课程内容</p>
+</blockquote>
+<h1 id="Linux-Basis"><a href="#Linux-Basis" class="headerlink" title="Linux Basis"></a>Linux Basis</h1><!-- - basic command
+    - `passwd`
+    - `su`
+    - sudo
+    - id
+    - nano
+    - vim
+    - gedit
+    - whatis
+    - --help
+    - man
+
+
+
+# File System
+
+- personal
+    - /home/username
+- user executables
+    - /bin
+    - /usr/bin
+    - /usr/local/bin
+- system executables
+    - /sbin
+    - /usr/sbin
+    - /usr/local/sbin
+- configuration
+    - /etc
+- temporary files
+    - /tmp
+- core
+    - /boot
+- server data
+    - /var
+    - /srv
+- server information
+    - /proc
+    - /sys
+- shared libraries
+    - /lib
+    - /usr/lib
+    - /usr/local/lib -->
+<h2 id="Structure-of-Disk"><a href="#Structure-of-Disk" class="headerlink" title="Structure of Disk"></a>Structure of Disk</h2><p><code>硬盘的物理结构一般由磁头与碟片、电动机、主控芯片与排线等部件组成；当主电动机带动碟片旋转时，副电动机带动一组磁头到相对应的碟片上并确定读取正面还是反面的碟面，磁头悬浮在碟面上画出一个与碟片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容；</code></p>
+<p>A hard disk drive platter (or disk) is the circular disk on which magnetic data is stored in a hard disk drive. Platter is the most important thing on HDD.</p>
+<ul>
+<li>Sector<ul>
+<li>a sector is a subdivision of a track on a magnetic disk or optical disc. Each sector stores a fixed amount of user-accessible data, traditionally 512 bytes for hard disk drives (HDDs) and 2048 bytes for CD-ROMs and DVD-ROMs. Newer HDDs use 4096-byte (4 KiB) sectors, which are known as the Advanced Format (AF).The sector is the minimum storage unit of a hard drive.</li>
+</ul>
+</li>
+<li>Track<ul>
+<li>The tracks are the thin concentric circular strips of sectors. At least one head is required to read a single track. With respect to disk geometries the terms track and cylinder are closely related. For a single or double sided floppy disk track is the common term; and for more than two heads cylinder is the common term. Strictly speaking a track is a given <code>CH</code> combination consisting of <code>SPT</code> sectors, while a cylinder consists of <code>SPT×H</code> sectors. Tracks are subdivided into blocks (or sectors, pages)</li>
+</ul>
+</li>
+<li>Cylinders<ul>
+<li>The concept is concentric, hollow, cylindrical slices through the physical disks (platters), collecting the respective circular tracks aligned through the stack of platters. As usually, cylinder is the minmum unit for File System.</li>
+</ul>
+</li>
+</ul>
+<p>In a word, Sector is the minmum unit, many sectors on the same circular make up a track, and many track on different radius make up a platter. Cylinder is a set of Tracks which on different platters but has the same radius.</p>
+<h3 id="Partition-table"><a href="#Partition-table" class="headerlink" title="Partition table"></a>Partition table</h3><p>In fact, A new HDD is seems like a Log, you need to cut the log into different section to do next job, and you also remember which section is used for what. Partition table is the same reasion.</p>
+<p>A partition is a fixed-size subset of a disk drive which is treated as a unit by the operating system.[1] A partition table is a table maintained on disk by the operating system describing the partitions on that disk.</p>
+<p>The terms partition table and partition map are most commonly associated with the MBR partition table of a Master Boot Record (MBR) in IBM PC compatibles, but it may be used generically to refer to other “formats” that divide a disk drive into partitions, such as: GUID Partition Table (GPT)</p>
+<p>Partitions can be created, resized, or deleted. This is called disk partitioning. It is usually done during the installation of an operating system, however it is sometimes possible to make changes to the partitions even after the operating system has been installed.</p>
+<p>The organization of the partition table in the MBR limits the maximum addressable storage space of a disk to 2 TiB (232 × 512 bytes).</p>
+<h4 id="MBR-Master-Boot-Record"><a href="#MBR-Master-Boot-Record" class="headerlink" title="MBR, Master Boot Record"></a>MBR, Master Boot Record</h4><p>A master boot record is a special type of boot sector at the very beginning of partitioned computer mass storage devices with IBM PC-compatible systems and beyond.</p>
+<p>The MBR holds the information on how the logical partitions, containing filesystems, are organized on that medium.The MBR also contains executable code to function as a loader for the installed operating system—usually by passing control over to the loader’s second stage, or in conjunction with each partition’s volume boot record (VBR). This MBR code is usually referred to as a boot loader.</p>
+<p><img src="http://ww1.sinaimg.cn/large/006Ka4GEgy1fn2tt4vzh5j30fa0not9b.jpg" alt=""></p>
+<p>For one disk :</p>
+<ul>
+<li>Only four Priamry partition.</li>
+<li>Support one Extended partition, a special primary partition type used as a container to hold other partitions</li>
+<li>Extended partition can create unlimited logical partition.</li>
+</ul>
+<a id="more"></a>
+<h2 id="File-Nomenclature"><a href="#File-Nomenclature" class="headerlink" title="File Nomenclature"></a>File Nomenclature</h2><p>When using the default Ext2/Ext3 filesystem, the file name length limt is:</p>
+<ul>
+<li>For single file or directory, the maximum allowable file name is 255 characters.</li>
+<li>For the full name, contains the full path name and directory, is 4096 characters.</li>
+</ul>
+<p>file name restrictions:</p>
+<ul>
+<li>the rule state that can use any character except <code>/</code></li>
+<li>but, As a result of Linux in the text interface under some instruction operation, in general, it is best to avoid some special characters better! For example below these: <code>` * ? &gt; &lt; ; &amp; ! [ ] | \ &#39; &quot; ( ) { }</code>.</li>
+</ul>
+<p>Especially, if the file name begin with<code>.</code>means it’s a <strong>hidden file or hidden directory</strong>, which do not display by default when showing a directory listing.They are commonly used for storing user preferences or preserving the state of a utility, and are frequently created implicitly by using various utilities.</p>
+<h2 id="PATHS-location-within-the-FS"><a href="#PATHS-location-within-the-FS" class="headerlink" title="PATHS, location within the FS"></a>PATHS, location within the FS</h2><ul>
+<li>delimited by <code>/</code><ul>
+<li><code>.</code> rep current directory</li>
+<li><code>..</code> rep lower level directory</li>
+<li><code>~</code> rep personal directory (<code>cd ~</code>)</li>
+<li>Absolute and relative paths<ul>
+<li>Absolute: <code>/usr/sbin/executable.bin</code></li>
+<li>Relative: <code>../usr/sbin/executable.bin</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>hidden file begins with <code>.</code></li>
+<li><code>$PATH</code> is an file location related environment variable. <ul>
+<li><code>echo $PATH</code></li>
+</ul>
+</li>
+<li><code>pwd</code> , show the current absolute path.</li>
+<li><code>cd</code> , move command.</li>
+</ul>
+<h2 id="Different-File-System"><a href="#Different-File-System" class="headerlink" title="Different File System"></a>Different File System</h2><ul>
+<li>ext 2<ul>
+<li>Fast and requires less writing</li>
+<li>No logging</li>
+<li>File size: 2TB - score: 32TB</li>
+</ul>
+</li>
+<li>ext 3<ul>
+<li>Sucessor and ext 2 compatible</li>
+<li>Logged</li>
+<li>File size: 2TB - score: 32TB</li>
+</ul>
+</li>
+<li>ext 4<ul>
+<li>Sucessor and ext compatible 3</li>
+<li>Pre-allocation of a contiguous zone for a file: minimizes fragmentation</li>
+<li>Readable from Windows</li>
+<li>Size - volume: 1,024 pbbytes</li>
+</ul>
+</li>
+</ul>
+<h2 id="File-System-Feature"><a href="#File-System-Feature" class="headerlink" title="File System Feature"></a>File System Feature</h2><p>At first, wee need to talk about some terms,</p>
+<ul>
+<li>Block<ul>
+<li>basic unit of filesystem.</li>
+<li>store the real file.</li>
+<li>file alaways occupies an integer block<ul>
+<li>this will cause a problem called Slack space. </li>
+</ul>
+</li>
+<li>e.x.<ul>
+<li>A file of 1000 byte.</li>
+<li>if the block size is 4096byte, so the file occupies a block but 3096 byte didn’t used.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>superblock<ul>
+<li>A segment of metadata describing the filesystem on a block device.</li>
+<li>include type, size, state of the filesystem and position of other superblock.</li>
+</ul>
+</li>
+<li>inode<ul>
+<li>inode, means index node, is a data structure in a Unix-style filesystem that describes a filesystem object such as a file or a directory.</li>
+<li>Each inode stores the attributes and disk block location(s) of the object’s data.Filesystem object attributes may include metadata (times of last change, access, modification), as well as owner and permission data.</li>
+</ul>
+</li>
+</ul>
+<p>So, as we know now, each inode and block has the NUMBER, the location(s) in disk, and each file occupy an inode, inode has the metadata and the number of the file’s block. Therefore, if we can find the inode of the file, we will naturally konw the block number of the data in which the file placed, and of course, we can read the actual data of the file.</p>
+<h2 id="SWAP"><a href="#SWAP" class="headerlink" title="SWAP"></a>SWAP</h2><h2 id="the-tools-of-handling-File-Systems"><a href="#the-tools-of-handling-File-Systems" class="headerlink" title="the tools of handling File Systems"></a>the tools of handling File Systems</h2><h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><h4 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a>fdisk</h4><p>Start fdisk against your drive as root. In this example we are using <code>/dev/sda</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># fdisk &#x2F;dev&#x2F;sda</span><br><span class="line"></span><br><span class="line">Welcome to fdisk (util-linux 2.27.1).</span><br><span class="line">Changes will remain in memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write command.</span><br><span class="line"></span><br><span class="line">Device does not contain a recognized partition table.</span><br><span class="line">Created a new DOS disklabel with disk identifier 0x32f3d418.</span><br><span class="line"></span><br><span class="line">Command (m for help):</span><br></pre></td></tr></table></figure>
+<p>This opens the <em>fdisk</em> dialogue where you can type in commands.</p>
+<ul>
+<li>Generic<ul>
+<li>d   delete a partition</li>
+<li>F   list free unpartitioned space</li>
+<li>l   list known partition types</li>
+<li>n   add a new partition</li>
+<li>p   print the partition table</li>
+<li>t   change a partition type</li>
+<li>v   verify the partition table</li>
+<li>i   print information about a partition</li>
+</ul>
+</li>
+<li>Save &amp; Exit<ul>
+<li>w   write table to disk and exit</li>
+<li>q   quit without saving changes</li>
+</ul>
+</li>
+<li>Create a new label<ul>
+<li>g   create a new empty GPT partition table</li>
+<li>G   create a new empty SGI (IRIX) partition table</li>
+<li>o   create a new empty DOS partition table</li>
+<li>s   create a new empty Sun partition table</li>
+</ul>
+</li>
+</ul>
+<h4 id="parted"><a href="#parted" class="headerlink" title="parted"></a>parted</h4><p>Parted has two modes: command line and interactive. Parted should always be started with:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># parted device</span><br><span class="line"></span><br><span class="line">GNU Parted 3.2</span><br><span class="line">Using &#x2F;dev&#x2F;sda</span><br><span class="line">Welcome to GNU Parted! Type &#39;help&#39; to view a list of commands.</span><br><span class="line">(parted) help</span><br><span class="line">  align-check TYPE N                        check partition N for TYPE(min|opt) alignment</span><br><span class="line">  help [COMMAND]                           print general help, or help on COMMAND</span><br><span class="line">  mklabel,mktable LABEL-TYPE               create a new disklabel (partition table)</span><br><span class="line">  mkpart PART-TYPE [FS-TYPE] START END     make a partition</span><br><span class="line">  name NUMBER NAME                         name partition NUMBER as NAME</span><br><span class="line">  print [devices|free|list,all|NUMBER]     display the partition table, available devices, free space, all found partitions, or a particular partition</span><br><span class="line">  quit                                     exit program</span><br><span class="line">  rescue START END                         rescue a lost partition near START and END</span><br><span class="line">  resizepart NUMBER END                    resize partition NUMBER</span><br><span class="line">  rm NUMBER                                delete partition NUMBER</span><br><span class="line">  select DEVICE                            choose the device to edit</span><br><span class="line">  disk_set FLAG STATE                      change the FLAG on selected device</span><br><span class="line">  disk_toggle [FLAG]                       toggle the state of FLAG on selected device</span><br><span class="line">  set NUMBER FLAG STATE                    change the FLAG on partition NUMBER</span><br><span class="line">  toggle [NUMBER [FLAG]]                   toggle the state of FLAG on partition NUMBER</span><br><span class="line">  unit UNIT                                set the default unit to UNIT</span><br><span class="line">  version                                  display the version number and copyright information of GNU Parted</span><br><span class="line">(parted)</span><br></pre></td></tr></table></figure>
+<h3 id="Create-filesystem-mkfs"><a href="#Create-filesystem-mkfs" class="headerlink" title="Create filesystem - mkfs"></a>Create filesystem - mkfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line"> mkfs [options] [-t &lt;type&gt;] [fs-options] &lt;device&gt; [&lt;size&gt;]</span><br><span class="line"></span><br><span class="line">Make a Linux filesystem.</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"> -t, --type&#x3D;&lt;type&gt;  filesystem type; when unspecified, ext2 is used</span><br><span class="line">     fs-options     parameters for the real filesystem builder</span><br><span class="line">     &lt;device&gt;       path to the device to be used</span><br><span class="line">     &lt;size&gt;         number of blocks to be used on the device</span><br><span class="line"> -V, --verbose      explain what is being done;</span><br><span class="line">                      specifying -V more than once will cause a dry-run</span><br><span class="line"> -V, --version      display version information and exit;</span><br><span class="line">                      -V as --version must be the only option</span><br><span class="line"> -h, --help         display this help text and exit</span><br></pre></td></tr></table></figure>
+<h3 id="Access-the-filesystem"><a href="#Access-the-filesystem" class="headerlink" title="Access the filesystem"></a>Access the filesystem</h3><h4 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h4><ul>
+<li>NAME<ul>
+<li><code>mount</code> - mount a filesystem</li>
+</ul>
+</li>
+<li>SYNOPSIS<ul>
+<li><code>mount [-l|-h|-V]</code></li>
+<li><code>mount -a [-fFnrsvw] [-t fstype] [-O optlist]</code></li>
+<li><code>mount [-fnrsvw] [-o options] device|dir</code></li>
+<li><code>mount [-fnrsvw] [-t fstype] [-o options] device dir</code></li>
+</ul>
+</li>
+<li>OPTONS<ul>
+<li>-V, —version<ul>
+<li>output version information and exit</li>
+</ul>
+</li>
+<li>-l, —show-labels<ul>
+<li>show also filesystem labels</li>
+</ul>
+</li>
+<li>-h, —help<ul>
+<li>display this help and exit</li>
+</ul>
+</li>
+<li>-v, —verbose<ul>
+<li>say what is being done</li>
+</ul>
+</li>
+<li>-n, —no-mtab<ul>
+<li>don’t write to /etc/mtab</li>
+</ul>
+</li>
+<li>-r, —read-only<ul>
+<li>mount the filesystem read-only (same as -o ro)</li>
+</ul>
+</li>
+<li>-a, —all<ul>
+<li>mount all filesystems mentioned in fstab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>EXAMPLE</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount -t udf &#x2F;dev&#x2F;sr0 &#x2F;media&#x2F;dvd        # mount dvd</span><br><span class="line"></span><br><span class="line">mount -o loop -t iso9660 image.iso &#x2F;mnt&#x2F;iso     # mount iso</span><br></pre></td></tr></table></figure>
+<h4 id="unmount"><a href="#unmount" class="headerlink" title="unmount"></a>unmount</h4><h4 id="fstab"><a href="#fstab" class="headerlink" title="fstab"></a>fstab</h4><p>A simple /etc/fstab, using kernel name descriptors:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># &lt;file system&gt;        &lt;dir&gt;         &lt;type&gt;    &lt;options&gt;             &lt;dump&gt; &lt;pass&gt;</span><br><span class="line">tmpfs                  &#x2F;tmp          tmpfs     nodev,nosuid          0      0</span><br><span class="line">&#x2F;dev&#x2F;sda1              &#x2F;             ext4      defaults,noatime      0      1</span><br><span class="line">&#x2F;dev&#x2F;sda2              none          swap      defaults              0      0</span><br><span class="line">&#x2F;dev&#x2F;sda3              &#x2F;home         ext4      defaults,noatime      0      2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>a system configuration file</li>
+<li>the fstab file can be used to define how disk partitions, various other block devices, or remote filesystems should be mounted into the filesystem.</li>
+<li><code>mount</code> command will use fstab</li>
+<li>contains six fields.<ul>
+<li><code>&lt;file system&gt;</code>: describes the block special device or remote filesystem to be mounted;</li>
+<li><code>&lt;dir&gt;</code>: describes the mount directory.</li>
+<li><code>&lt;type&gt;</code>: the filesystem type</li>
+<li><code>&lt;options&gt;</code>: the associated mount options<ul>
+<li><code>auto</code> Can be mounted with the <code>mount -a</code> option.</li>
+<li><code>noauto</code> Can only be mounted explicitly (i.e., the -a option will not cause the filesystem to be mounted).</li>
+<li><code>exec</code> Permit execution of binaries.</li>
+<li><code>noexec</code> Do not permit direct execution of any binaries on the mounted filesystem.</li>
+<li><code>ro</code> Mount the filesystem read-only.</li>
+<li><code>rw</code> Mount the filesystem read-write.</li>
+<li><code>user</code> Allow an ordinary user to mount the filesystem. The name of the mounting user is written to the mtab file so that this same user can unmount the filesystem again. This option implies the options <code>noexec</code>, <code>nosuid</code>, and <code>nodev</code> .</li>
+<li><code>nouser</code> Forbid an ordinary user to mount the filesystem.Only root user can mount the filesystem This is the default; it does not imply any other options.</li>
+<li><code>users</code> Allow any user to mount and to unmount the filesystem, even when some other ordinary user mounted it. This option implies the options <code>noexec</code>, <code>nosuid</code>, and <code>nodev</code>.</li>
+<li><code>owner</code> Allow an ordinary user to mount the filesystem if that user is the owner of the device. This option implies the options <code>nosuid</code> and <code>nodev</code></li>
+<li><code>async</code> All I/O to the filesystem should be done asynchronously.</li>
+<li><code>sync</code> All I/O to the filesystem should be done synchronously. In the case of media with a limited number of write cycles (e.g. some flash drives), sync may cause life-cycle shortening.</li>
+<li><code>dev</code> Interpret character or block special devices on the filesystem.</li>
+<li><code>nodev</code> Do not interpret character or block special devices on the file system.</li>
+<li><code>suid</code> Allow set-user-ID or set-group-ID bits to take effect. this option can let an ordinary user elevated privileges temporarily</li>
+<li><code>nosuid</code> Do not allow set-user-ID or set-group-ID bits to take effect.</li>
+<li><code>atime</code> Do not use the <code>noatime</code> feature, so the inode access time is controlled by kernel defaults.</li>
+<li><code>noatime</code> Do not update inode access times on this filesystem . This works for all inode types (directories too), so it implies <code>nodiratime</code>. can improve performance.</li>
+<li><code>diratime</code> Update directory inode access times on this filesystem. This is the default. (This option is ignored when noatime is set.)</li>
+<li><code>nodiratime</code> Do not update directory inode access times on this filesystem. (This option is implied when noatime is set.) can improve performance</li>
+<li><code>relatime</code> Update inode access times relative to modify or change time. Access time is only updated if the previous access time was earlier than the current modify or change time. (Similar to noatime, but it doesn’t break mutt or other applications that need to know if a file has been read since the last time it was modified.) can improve performance</li>
+<li><code>defaults</code> Use the default options: <code>rw</code>, <code>suid</code>, <code>dev</code>, <code>exec</code>, <code>auto</code>, <code>nouser</code>, and <code>async</code></li>
+</ul>
+</li>
+<li><code>&lt;dump&gt;</code> is checked by the <code>dump</code> utility. This field is usually set to 0 becaus most users didn’t install the dump utility, which disables the check. Set to 1 means backup.</li>
+<li><code>&lt;pass&gt;</code> sets the order for filesystem checks at boot time, use <code>fsck</code>. For the root device it should be 1. For other partitions it should be 2, or 0 to disable checking.</li>
+</ul>
+</li>
+</ul>
+<h4 id="File-Link"><a href="#File-Link" class="headerlink" title="File Link"></a>File Link</h4><h5 id="Hard-links"><a href="#Hard-links" class="headerlink" title="Hard links"></a>Hard links</h5><ul>
+<li><code>ln test1 test2</code><ul>
+<li>create a hard link to test1 called test2</li>
+</ul>
+</li>
+<li>shares the same inode</li>
+<li>point to same physical file(data block)</li>
+<li>delete test1, test2 will be the physical file</li>
+</ul>
+<h5 id="Symbolic-links"><a href="#Symbolic-links" class="headerlink" title="Symbolic links"></a>Symbolic links</h5><h1 id="Pakcage-amp-install"><a href="#Pakcage-amp-install" class="headerlink" title="Pakcage &amp; install"></a>Pakcage &amp; install</h1><h1 id="Linux-Command"><a href="#Linux-Command" class="headerlink" title="Linux Command"></a>Linux Command</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/" rel="prev" title="CCNA Chapter 11: Build a Small Network">
+      <i class="fa fa-chevron-left"></i> CCNA Chapter 11: Build a Small Network
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/05/15/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="大数据相关学习笔记">
+      大数据相关学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Basis"><span class="nav-number">1.</span> <span class="nav-text">Linux Basis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure-of-Disk"><span class="nav-number">1.1.</span> <span class="nav-text">Structure of Disk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-table"><span class="nav-number">1.1.1.</span> <span class="nav-text">Partition table</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MBR-Master-Boot-Record"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">MBR, Master Boot Record</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-Nomenclature"><span class="nav-number">1.2.</span> <span class="nav-text">File Nomenclature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PATHS-location-within-the-FS"><span class="nav-number">1.3.</span> <span class="nav-text">PATHS, location within the FS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-File-System"><span class="nav-number">1.4.</span> <span class="nav-text">Different File System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-System-Feature"><span class="nav-number">1.5.</span> <span class="nav-text">File System Feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SWAP"><span class="nav-number">1.6.</span> <span class="nav-text">SWAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-tools-of-handling-File-Systems"><span class="nav-number">1.7.</span> <span class="nav-text">the tools of handling File Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Partitioning"><span class="nav-number">1.7.1.</span> <span class="nav-text">Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fdisk"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">fdisk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parted"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">parted</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-filesystem-mkfs"><span class="nav-number">1.7.2.</span> <span class="nav-text">Create filesystem - mkfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-the-filesystem"><span class="nav-number">1.7.3.</span> <span class="nav-text">Access the filesystem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mount"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">mount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unmount"><span class="nav-number">1.7.3.2.</span> <span class="nav-text">unmount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fstab"><span class="nav-number">1.7.3.3.</span> <span class="nav-text">fstab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#File-Link"><span class="nav-number">1.7.3.4.</span> <span class="nav-text">File Link</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hard-links"><span class="nav-number">1.7.3.4.1.</span> <span class="nav-text">Hard links</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Symbolic-links"><span class="nav-number">1.7.3.4.2.</span> <span class="nav-text">Symbolic links</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pakcage-amp-install"><span class="nav-number">2.</span> <span class="nav-text">Pakcage &amp; install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Command"><span class="nav-number">3.</span> <span class="nav-text">Linux Command</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本课程到目前为止，已经介绍了数据网络为以人为本的网络提供的服务，阐明了 OSI 模型各层的功能和 TCP&#x2F;IP 协议的工作原理，并深入研究了常用 LAN 技术 — 以太网。接下来，我们要介绍如何将这些要素组合成能够正常运行的网络。  Each application or network service uses protocols, which define the standards and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCNA Chapter 11: Build a Small Network">
+<meta property="og:url" content="http://starxy.cc/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/index.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="本课程到目前为止，已经介绍了数据网络为以人为本的网络提供的服务，阐明了 OSI 模型各层的功能和 TCP&#x2F;IP 协议的工作原理，并深入研究了常用 LAN 技术 — 以太网。接下来，我们要介绍如何将这些要素组合成能够正常运行的网络。  Each application or network service uses protocols, which define the standards and">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-12-20T07:59:44.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.180Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://starxy.cc/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CCNA Chapter 11: Build a Small Network | Starxy's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://starxy.cc/2017/12/20/CCNA-Chapter-11-Build-a-Small-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starxy">
+      <meta itemprop="description" content="算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starxy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CCNA Chapter 11: Build a Small Network
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-20 15:59:44" itemprop="dateCreated datePublished" datetime="2017-12-20T15:59:44+08:00">2017-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-13 10:56:10" itemprop="dateModified" datetime="2020-01-13T10:56:10+08:00">2020-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/" itemprop="url" rel="index">
+                    <span itemprop="name">ESAIP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ESAIP/CCNA/" itemprop="url" rel="index">
+                    <span itemprop="name">CCNA</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本课程到目前为止，已经介绍了数据网络为以人为本的网络提供的服务，阐明了 OSI 模型各层的功能和 TCP/IP 协议的工作原理，并深入研究了常用 LAN 技术 — 以太网。接下来，我们要介绍如何将这些要素组合成能够正常运行的网络。</p>
+<ul>
+<li>Each application or network service uses protocols, which define the standards and data formats to be used. Without protocols, the data network would not have a common way to format and direct data.</li>
+<li>To scale a network, several elements are required:<ul>
+<li>Network documentation - physical and logical topology</li>
+<li>Device Inventory - list of devices that use or make up the network </li>
+<li>Budget - Itemized IT budget, including fiscal year equipment purchasing budget</li>
+<li>Traffic analysis - protocols, applications, and services and their respective traffic requirements should be documented</li>
+</ul>
+</li>
+<li>Executive timeouts allow the Cisco device to automatically disconnect users after they have been idle for the specified time. Console, vty, and aux ports can be configured with executive timeouts.</li>
+<li><code>ipconfig /displaydns</code> show any cached DNS entries for this web page</li>
+<li>Traceroute uses the ICMP (Internet Control Message Protocol) to send and receive echo-request and echo-reply messages.</li>
+<li>A firewall is one of the most effective security tools for protecting internal network users from external threats.  A firewall resides between two or more networks, controls the traffic between them, and helps prevent unauthorized access. A host intrusion prevention system can help prevent outside intruders and should be used on all systems.</li>
+<li>The <code>show file systems</code> command displays all of the available file systems on the device. If usbflash0: appears then the router recognizes the USB drive as a valid storage device. The <code>pwd</code> command shows the current directory being navigated, and the <code>cd</code> command is used to change the current directory. The <code>dir flash0:</code> command will show the contents of flash memory, not the USB drive.</li>
+<li>When a Windows computer cannot communicate with an IPv4 DHCP server, the computer automatically assigns itself an IP address in the169.254.0.0/16 range. Linux and Apple computers do not automatically assign an IP address.​</li>
+<li>Capturing traffic during low utilization time will not give a good representation of the different traffic types. Because some traffic could be local to a particular segment, the  capture must be done on different network segments.</li>
+<li>Not all traffic should receive the same treatment or priority through a network. Some types of traffic, such as voice and video, require the highest priority because they are very sensitive to network latency and delay. Other types of traffic, such as FTP, which is not sensitive to latency and delay, should be given the lowest level of priority so that the higher priority traffic can get through.</li>
+<li>The <code>tracert</code> command is used to initiate a trace from the command prompt on a Windows PC. The <code>traceroute</code>command is used to initiate a trace from a Cisco router or switch. Some other PC operating systems, such as Linux and Mac OS also use the traceroute command. The <code>ping</code> command does not display the network path to the remote host.</li>
+<li>The most common indicators of a ping issued from the Cisco IOS are “!”, “.”, and “U”. The “!” indicates that the ping completed successfully, verifying connectivity at Layer 3. The “.” may indicate that a connectivity problem, routing problem, or device security issue exists along the path and that an ICMP destination unreachable message was not provided. The “U” indicates that a router along the path may not have had a route to the destination address, and that it responded with an ICMP unreachable message.</li>
+<li>The correct syntax is RouterA(config)# <code>login block-for (number of seconds) attempts (number of attempts) within (number of seconds)</code>command will block login attempts on RouterA for a period .</li>
+<li>Small networks generally have only one link to an ISP to establish a connection to the Internet. Problems can occur in the network, which can cause the disruption of this service. In order to keep connectivity, redundancy has to be provided. If the problem is in the router interface that is connected to the ISP, another interface can be activated on the router, so if one interface fails, traffic may be redirected toward the other interface. However, if the router itself fails, a second router that is connected to another ISP can be used as a backup.</li>
+<li>Because worms take advantage of vulnerabilities in the system itself, the most effective way to mitigate worm attacks is to download security updates from the operating system vendor and patch all vulnerable systems.  </li>
+<li>Whenever an administrator connects to the console port, the configuration applied under the line con 0 interface determines how the user is authenticated. The console port configuration has the login command with local as the keyword. That means the username and password are required before the administrator is even allowed to see the enable mode prompt. Because the correct username and password was typed, the administrator will be presented with the enable mode prompt.</li>
+<li>Physical threats can be classified into four categories:<ul>
+<li>Environmental threats -Temperature extremes (too hot or too cold) or humidity extremes (too wet or too dry)</li>
+<li>Hardware threats - Physical damage to servers, routers, switches, cabling plant, and workstations</li>
+<li>Electrical threats - Voltage spikes, insufficient supply voltage (brownouts), unconditioned power (noise), and total power loss</li>
+<li>Maintenance threats - Poor handling of key electrical components (electrostatic discharge), lack of critical spare parts, poor cabling, and poor labeling</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><strong>device capacity</strong> - the port density, processing, and memory capacity of a device</li>
+<li><strong>redundancy</strong> - the duplication of devices, links, or technologies to increase high availability</li>
+<li><strong>modular</strong> - a feature that allows add-in capabilities/technologies to a device without the need to purchase a whole new device</li>
+<li><strong>vulnerability</strong> - a weakness or flaw that can allow an attacker to gain access to a system</li>
+<li><strong>malware</strong> - unwanted malicious software that can harm or disrupt a system operation</li>
+<li><strong>virus</strong> - a type of malicious software that requires a user to spread the software through the network</li>
+<li><strong>worm</strong> - a type of malicious software that uses the network to spread the software and infect vulnerable systems</li>
+<li><strong>Trojan horse</strong> - hidden or disguised software that installs with another software package that a user requested</li>
+<li><strong>AAA</strong> a framework that is used to implement authentication, authorization, and accounting functions into network operations</li>
+<li><strong>packet filtering</strong> - the ability to perform packet inspection at Layer 3 based on the source and destination IP addresses and source and destination port numbers</li>
+<li><strong>application filtering</strong> - the ability to filter traffic based on destination port numbers</li>
+<li><strong>URL filtering</strong> - the ability to filter traffic based on a web address</li>
+<li><strong>stateful packet inspection</strong> - the ability of a device to track TCP connections and only allow returning data to the inside connection</li>
+</ul>
+<!--
+# 网络设计
+
+## 小型网络的设备选择
+
+为了满足用户需求，小型网络也要求规划和设计。规划可以确保所有要求、成本因素和部署选项得到适当考虑。
+
+在实施小型网络时，最初设计的注意事项之一就是用于支持网络的中间设备类型。如图所示，在选择中间设备类型时，需要考虑诸多因素。
+
+- 成本：交换机或路由器的购买成本取决于其性能和功能。设备的性能包括可用的端口数量和类型以及背板速度。影响成本的其他因素包括网络管理功能、内嵌的安全技术、可选的高级交换技术。还需要考虑连接网络中每台设备所需的电缆布线费用。影响成本考量的另一个关键因素是网络整合的冗余量。
+
+- 端口/接口的速度和类型：路由器或交换机上端口数量和类型的选择是至关重要的。较新版本的计算机有内置的 1 Gb/s 网卡。一些工作站和服务器已经包含 10 Gb/s 端口。虽然比较昂贵，但是选用能够适应速度增长的第 2 层设备使网络能够进行扩展，而无需更换中心设备。
+
+- 可扩展性：网络设备的物理配置有固定式和模块化两种。固定式配置具有固定的端口或接口数量和类型。模块化设备具有扩展槽，可以随着需求的提高而新增模块。交换机上有附加端口，供高速上行链路使用。路由器可用于连接不同类型的网络。必须慎重选择每种介质适用的相应模块和接口。
+
+- 操作系统的功能和服务：根据操作系统的版本，网络设备可以支持特定的功能和服务，例如：安全、服务质量 (QoS)、IP 语音 VoIP)、第 3 层交换、网络地址转换 (NAT)、动态主机配置协议 (DHCP)
+
+## 小型网络的 IP 编址
+
+在实施小型网络时，需要规划 IP 编址空间。网际网络中的所有主机都必须有一个唯一地址。应当根据接收地址的设备类型规划、记录和维护 IP 编址方案。
+
+影响 IP 设计的不同类型设备的示例如下：
+
+- 用户使用的终端设备
+- 服务器和外围设备
+- 可以从 Internet 访问的主机
+- 中间设备
+
+IP 编址方案的规划和记录可以帮助管理员跟踪设备类型。例如，如果为所有服务器分配的主机地址范围为 50-100，则很容易通过 IP 地址来识别服务器流量。这在使用协议分析器对网络流量问题进行故障排除时非常有用。
+
+此外，当使用确定性 IP 编址方案时，管理员可以根据 IP 地址更好地控制对网络资源的访问。这对于同时向内部网络和外部网络提供资源的主机尤为重要。Web 服务器或电子商务服务器扮演这样的角色。如果不规划和记录这些资源的地址，就不容易控制设备的安全和访问。如果一台服务器的地址是随机分配的，就难以阻止对此地址的访问，客户端可能也就无法定位此资源。
+
+## 小型网络中的冗余
+
+网络设计的另一个重要部分是可靠性。即使是小型企业，也常常非常依赖其网络以进行企业运营。网络故障的代价是非常大的。为了保持高可靠度，网络设计中要求冗余。冗余有助于避免单点故障。在网络中实现冗余有许多方法。可以通过安装重复设备实现冗余，但也可以通过为关键区域提供重复的网络链路来实现
+
+小型网络通常通过一个或多个默认网关提供单个 Internet 出口点。如果路由器发生故障，则整个网络都会失去与 Internet 的连接。因此，建议小型企业通过另一个服务提供商购买备份产品。
+
+## 小型网络的增长
+
+不断扩展是许多小型企业必经的过程，而其网络也必须相应地扩展。理想情况是网络管理员有足够的时间根据公司发展做出关于网络发展的明智决策。
+
+要扩展网络，要求有以下几个要素：
+
+- 网络文档 - 物理和逻辑拓扑
+- 设备清单 - 使用或构成网络的设备列表
+- 预算 - 逐项记录的 IT 预算，包括财年设备的采购预算
+- 流量分析 - 应当记录协议、应用程序和服务以及它们各自的流量要求
+
+这些要素用于为有关小型网络扩展的决策提供信息。
+
+-->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/20/Chapter-10-Application-Layer/" rel="prev" title="Chapter 10: Application Layer">
+      <i class="fa fa-chevron-left"></i> Chapter 10: Application Layer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/31/ESAIP-Linux/" rel="next" title="ESAIP Linux">
+      ESAIP Linux <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

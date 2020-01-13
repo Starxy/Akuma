@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://starxy.cc').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过程。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="使用 J1800 工控板搭建家用服务器">
+<meta property="og:url" content="http://starxy.cc/bakup/%E4%BD%BF%E7%94%A8-J1800-%E5%B7%A5%E6%8E%A7%E6%9D%BF%E6%90%AD%E5%BB%BA%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8.html">
+<meta property="og:site_name" content="Starxy&#39;s Blog">
+<meta property="og:description" content="之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-11T07:47:30.000Z">
+<meta property="article:modified_time" content="2020-01-13T02:56:10.193Z">
+<meta property="article:author" content="Starxy">
+<meta property="article:tag" content="Starxy Blog">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://starxy.cc/bakup/%E4%BD%BF%E7%94%A8-J1800-%E5%B7%A5%E6%8E%A7%E6%9D%BF%E6%90%AD%E5%BB%BA%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false
+  };
+</script>
+
+  <title>使用 J1800 工控板搭建家用服务器 | Starxy's Blog
+  </title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109694055-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109694055-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starxy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-todolist">
+
+    <a href="/todo" rel="section"><i class="fa fa-fw fa-check-square-o"></i>ToDoList</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">使用 J1800 工控板搭建家用服务器
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>之前发现家里联通宽带有公网 ip 感觉有点搞头就买了个 j1800 的工控板子扔家里做了服务器，每天耗电大概在 10W 左右，主要负载了一个 nextcloud 做家用网盘，一个 TeamSpeak3 服务器用来玩游戏开语音，一个用于局域网联机的 VPN 网络， 目前运行稳定，基本没有出现过服务器宕机的情况。以下用来记录部署使用过程中遇到的一些问题和解决办法。有时间的话可以介绍各个服务的搭建过程。</p>
+<h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><ul>
+<li>网盘：Nextcloud</li>
+<li>媒体系统：Emby</li>
+<li>图床：Elimage</li>
+<li>团队交流：TeamSpeak3、Mattermost</li>
+<li>数据库系统：mariadb、redis、mongodb</li>
+<li>游戏服务器：dst、csgo、minecraft、terraria</li>
+<li>VPN：Tinc</li>
+</ul>
+<h2 id="使用-Certbot-对动态解析域名开启-HTTPS"><a href="#使用-Certbot-对动态解析域名开启-HTTPS" class="headerlink" title="使用 Certbot 对动态解析域名开启 HTTPS"></a>使用 Certbot 对动态解析域名开启 HTTPS</h2><p>动态域名的解决方案就很随意了，现在有很多成熟的动态 ip 解析办法，我手里自有一个域名，所以只需要检测 ip 地址变更的时候向 dnspod 提交变更解析的申请即可。详细文档可以参考 <a href="https://www.dnspod.cn/docs/index.html" target="_blank" rel="noopener">dnspod api</a>。</p>
+<p>对于家用的宽带，普遍的情况是运营商禁用了常用的低位端口，22、80、443 这些端口不用考虑根本不可能开放的。而 Certbot 默认情况验证方式为：</p>
+<ul>
+<li>certbot 程序在 web 目录的根目录下放置一个文件。</li>
+<li>letsencrypt 的服务器通过域名来访问这个文件，来验证你申请的域名是属于你的</li>
+</ul>
+<p>然而默认是通过 80/443 端口来访问，所以在家庭带宽情况下该验证方法就失效了。我们可以通过修改域名 DNS 的 TXT 记录来验证域名</p>
+<p>运行 <code>sudo certbot --manual --preferred-challenges dns certonly</code> 会要求你输入需要启用 HTTPS 的域名然后同意记录本机 ip 后弹出以下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.example.com with the following value:</span><br><span class="line"></span><br><span class="line">z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</span><br><span class="line"></span><br><span class="line">Once this is deployed,</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
+<p>根据上述提示，修改为于域名添加一个 <code>TXT</code> 记录，主机记录为 <code>_acme-challenge</code>，记录值为上述提示的字符串 <code>z5NOLEpGmoL7MZiOYVaD0H-195uIVZstnHmEsI1ZakI</code>。等到域名生效之后在命令行中按回车继续。等待 letsencrypt 验证成功即可。</p>
+<p>该中方法不支持 <code>cerbot renew</code>，请等到域名快过期后（三个月）手动再次执行上述操作，或者手动编写脚本来对 dns 值进行自动修改。</p>
+<a id="more"></a>
+<h2 id="各应用的数据备份与恢复"><a href="#各应用的数据备份与恢复" class="headerlink" title="各应用的数据备份与恢复"></a>各应用的数据备份与恢复</h2><p>目前来说需要备份的系统有：Nextcloud、Elimage、TeamSpeak3、Mattermost、mariadb</p>
+<h3 id="Nextcloud-的数据备份与恢复"><a href="#Nextcloud-的数据备份与恢复" class="headerlink" title="Nextcloud 的数据备份与恢复"></a>Nextcloud 的数据备份与恢复</h3><p>对于 Nextcloud 来说，需要备份的文件由四部分</p>
+<ul>
+<li>主配置文件</li>
+<li>数据文件</li>
+<li>主题文件</li>
+<li>数据库文件</li>
+</ul>
+<p>进行备份操作时，首先确保 Nextcloud 进入维护模式来保证文件的一致性。在命令行下使用 HTTP 用户运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u www-data php occ maintenance:mode --on</span><br></pre></td></tr></table></figure>
+<h2 id="Netdata-错误处理"><a href="#Netdata-错误处理" class="headerlink" title="Netdata 错误处理"></a>Netdata 错误处理</h2><h3 id="10min-netdev-budget-ran-outs"><a href="#10min-netdev-budget-ran-outs" class="headerlink" title="10min netdev budget ran outs"></a>10min netdev budget ran outs</h3><p>这是一个与数据包接收与处理有关的问题。根据 softnet 图表描述，该图表有三个值</p>
+<ul>
+<li>processed 代表 cpu 处理的数据包</li>
+<li>dropped 代表丢弃的包计数，该出丢包是由于内核缓存队列满了，可以通过增加 <code>net.core.netdev_max_backlog</code> 的值修复</li>
+<li>squeezed 代表在从 ring buffer 运输到内核网络缓存队列时, 由于“运输小车”没能装下,而导致丢包。可以通过增大内核参数 <code>net.core.netdev_budget</code> 和 <code>net.core.netdev_budget_usecs</code> 的值来修复</li>
+</ul>
+<p>我在此处应用的值为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net.core.netdev_budget &#x3D; 3000</span><br><span class="line">net.core.netdev_budget_usecs &#x3D; 6000</span><br><span class="line">net.core.netdev_max_backlog &#x3D; 100000</span><br></pre></td></tr></table></figure>
+<p>注意，该处值够用即可，如果太大，可能会造成软中断占用太长 cpu 时间，而引起其他性能问题。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://github.com/netdata/netdata/issues/1076" target="_blank" rel="noopener">Github issue 1076</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/52397230" target="_blank" rel="noopener">Linux TCP 收包内容总结——-学习笔记</a></li>
+</ul>
+<h3 id="inbound-packets-dropped-ratio"><a href="#inbound-packets-dropped-ratio" class="headerlink" title="inbound packets dropped ratio"></a>inbound packets dropped ratio</h3><p>该值为网卡丢包与接受包之比，该值在 0.1% 以上就会报告警告，在 2% 以上就会严重警告。</p>
+<p>根据图表描述可知影响该值的有：</p>
+<ul>
+<li>softnet 的 backlog 满载</li>
+<li>错误的虚拟局域网标签</li>
+<li>错误的协议类型</li>
+<li>IPv6 的数据帧发送到了不支持 IPv6 的服务器上</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig &lt;interface&gt; promisc</span><br></pre></td></tr></table></figure>
+<p>参考 <a href="https://www.suse.com/support/kb/doc/?id=7007165" target="_blank" rel="noopener">文档</a> 执行上述命令后丢包率不下降，初步判断丢包不为上述原因造成。</p>
+<p>注意到我目前的网卡为 <code>RTL8111/8168/8411</code> 应当使用 r8168 的驱动，但是服务器上使用的是 r8169 的驱动，一直没有影响，但是应当尽早解决。</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署服务"><span class="nav-number">1.</span> <span class="nav-text">部署服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Certbot-对动态解析域名开启-HTTPS"><span class="nav-number">2.</span> <span class="nav-text">使用 Certbot 对动态解析域名开启 HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各应用的数据备份与恢复"><span class="nav-number">3.</span> <span class="nav-text">各应用的数据备份与恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nextcloud-的数据备份与恢复"><span class="nav-number">3.1.</span> <span class="nav-text">Nextcloud 的数据备份与恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netdata-错误处理"><span class="nav-number">4.</span> <span class="nav-text">Netdata 错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10min-netdev-budget-ran-outs"><span class="nav-number">4.1.</span> <span class="nav-text">10min netdev budget ran outs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inbound-packets-dropped-ratio"><span class="nav-number">4.2.</span> <span class="nav-text">inbound packets dropped ratio</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starxy</p>
+  <div class="site-description" itemprop="description">算法爱好者/Linux初学者<br>笔记基本随性写，欢迎戳下方联系</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:Galaxy_djx@hotmail.com" title="E-Mail → mailto:Galaxy_djx@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/starxing-ye" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;starxing-ye" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://coding.net/u/Starxy" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-git"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/Starxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Starxy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://steamcommunity.com/profiles/76561198208117763/" title="Steam → http:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198208117763&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam-square"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备17036724号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starxy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">183k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
